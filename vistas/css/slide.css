@@ -1,0 +1,155 @@
+/*=============================================
+SLIDE
+=============================================*/
+.carousel {
+    margin-bottom: 0;
+    padding: -1px 40px 30px 40px;
+}
+/* Idicadores del Slider Principal */
+.carousel-control {
+	left: 8px;
+    height: 00px;
+	width: 40px;
+	margin-top: 200px;
+	font-size: 26px;
+}
+.carousel-control.right {
+	right: 35px;
+}
+/* Idicador de slide principal */
+.carousel-indicators {
+	right: 50%;
+	top: auto;
+	bottom: 20px;
+	margin-right: -19px;
+}
+/* The colour of the indicators */
+.carousel-indicators li {
+	background: #cecece;
+}
+
+.carousel-caption {
+    right: 20%;
+    left: 20%;
+    padding-bottom: 60px;
+}
+
+/* Idicador de ofertas */
+.carousel-indicators-oferta {
+	right: 50%;
+	top: auto;
+	bottom: -10px;
+	margin-right: -19px;
+}
+.carousel-indicators-oferta li {
+	background: #cecece;
+}
+.carousel-indicators-oferta .active {
+	background: #428bca;
+}
+
+.carousel-indicators .active {
+    background-color:  #f0ba10;
+}
+/*Estilos del texto y botones */
+.header-text-centro {
+    position: absolute;
+    top: 20%;
+    left: auto;
+    right: auto;
+    width: 100%;
+    color:#fff;
+}
+.header-text-derecha {
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    right: auto;
+    width: 90%;
+    color: rgb(253, 249, 249);
+}
+.header-text-izquierda {
+    position: absolute;
+    top: 20%;
+    left: auto;
+    right: 0px;
+    width: 90%;
+    color: rgb(253, 249, 249);
+}
+.header-text-derecha h2 strong, .header-text-izquierda h2 strong  {
+   color: #f0ba10;
+}
+.header-text-centro h2 strong {
+    color: #0d5f5f;
+ }
+.header-text-centro h2, .header-text-derecha h2 {
+    font-size: 40px;
+}
+.header-text-centro h2 span {
+    background-color: #f0ba10;
+    padding: 10px;
+    border-radius: 5px;
+}
+.header-text-centro h3 span {
+	background-color: #0d5f5f;
+    padding: 15px;
+    border-radius: 5px;
+}
+.btn-min-block {
+    min-width: 170px;
+    line-height: 26px;
+}
+
+.btn-theme {
+    color:  #fff;
+    background-color: transparent;
+    border: 2px solid #f0ba10;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.btn-theme:hover {
+    color: #050505;
+    background-color:#fff;
+    border-color: #f0ba10;
+}
+
+
+/*Estilos para la ubicacion dentro del slider*/
+/*search box css start here
+.search-sec{
+    padding: 2rem;
+}
+.search-slt{
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}
+.wrn-btn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}
+@media (min-width: 992px){
+    .search-sec{
+        position: relative;
+        top: -114px;
+        background: rgba(26, 70, 104, 0.51);
+    }
+}
+
+@media (max-width: 992px){
+    .search-sec{
+        background: #1A4668;
+    }
+}*/

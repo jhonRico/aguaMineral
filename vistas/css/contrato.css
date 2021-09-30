@@ -1,0 +1,45 @@
+
+.imagencontrato{
+    width:270px;
+    height:400px;
+}
+.tituloContratos{
+    font-size: 25px;
+    color:#394ECF;
+    font-family:monaco;
+}
+.botonContrato{
+   background-color: #2E8FE6;
+}
+.marcarDiv{
+    border-style: solid; border-width: 1px;
+    background-color: #EBEBEB;
+}
+.estiloDiv{
+    position:relative;
+    top:0;
+    width:620px;
+    left:150px;
+}
+
+.justificadoTotal{
+    text-align: justify;
+    text-align-last: center;
+    /*texto-justify: inter-palabra;*/
+    font-weight: normal;
+    font-size: 13px;
+
+
+}
+.titulo{
+position:relative;
+   font-size: 15px;
+   font-weight:bold ;
+   text-align: center;
+}
+.alineadoDerecha{
+   text-align: right;
+}
+
+/*    left:10px;
+    width:50px;*/

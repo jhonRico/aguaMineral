@@ -20,7 +20,7 @@ SLIDESHOW
                      
                        <div class="col-md-12 text-center">
                             <h2>
-                                <img src="http://localhost/unet/vistas/img/slide/default/agua3.jpg" >
+                                <img src="http://localhost/aguaMineral/vistas/img/slide/default/agua3.jpg" >
                             </h2>
 
                         </div>
@@ -33,7 +33,7 @@ SLIDESHOW
                         <div class="col-md-12 text-center">
                            
                            <h2>
-                                <img src="http://localhost/unet/vistas/img/slide/default/agua1.png" >
+                                <img src="http://localhost/aguaMineral/vistas/img/slide/default/agua1.png" >
                             </h2>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ SLIDESHOW
                            <div class="col-md-12 text-center">
                            
                            <h2>
-                                <img src="http://localhost/unet/vistas/img/slide/default/agua2.jpg"  >
+                                <img src="http://localhost/aguaMineral/vistas/img/slide/default/agua2.jpg"  >
                             </h2>
                         </div>
                         </div>

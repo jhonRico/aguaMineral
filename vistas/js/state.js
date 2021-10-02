@@ -66,12 +66,8 @@ var auxPorcionesReceta = false;
       });
  });
 
-
   /*------Metodo que valida la data del formulario de agregar estados y luego registra*/
-function validarDataFormularioAddState(){  
-alert("Entra");
-       RegistrarState();              
-}
+ 
 
  /*------Metodo que registra en base de datos el estado*/
  function RegistrarState(){

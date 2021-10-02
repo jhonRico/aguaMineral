@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.instagram.com" target="_blank"
+                        <a href="https://www.instagram.com" target="_blank">
                         <i class="fa fa-instagram  redSocial facebookBlanco" aria-hidden="true"></i>
                         </a>
                     </li>
@@ -34,6 +34,7 @@
             </div>
 
             <!--- REGISTRO -->
+
             <diV class="col-lg-9 col-md-4 col-sm-12 col-xs-12 registro">
                 <ul>
                 <?php 
@@ -59,12 +60,10 @@
                     }else {
                         echo '
 
-                        <li><a href="#modalIngreso" data-toggle="modal"><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</a></li>
+                        <li><a href="//localhost/aguaMineral/login" data-toggle="modal"><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</a></li>
                         <li>|</li>
-                        <li><a href="#modalRegistro" data-toggle="modal"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear cuenta</a></li>
-    
+                        <li><a href="//localhost/aguaMineral/registro" data-toggle="modal"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear cuenta</a></li>
                         ';
-
                     }
                 ?>
                 </ul>
@@ -83,7 +82,7 @@
             =============================-->
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
                 <a href="<?php echo $url ?>">
-                    <img src="http://localhost/unet/vistas/img/logoPrincipal/logo.png" class="img-responsive">
+                    <img src="<?php echo $url ?>vistas/img/logoPrincipal/logo.png" class="img-responsive">
                 </a>
                
             </div>
@@ -120,41 +119,6 @@
                 }
                     
                 ?>
-                    <ul  class="pull-right">
-                        <a href="<?php echo $url;?>listas">
-                            <span  data-toggle="tooltip" title="Listas">
-                                <img src="http://localhost/AdminComparador/vistas/img/iconos/lista32.png" class="img-responsive ">
-                            </span>
-                           <!-- <h5>Listas</h5> -->
-                        </a>
-                    </ul>
-                    
-
-                    <ul class="pull-right">
-                        <a href="<?php echo $url;?>blog">
-                            <span data-toggle="tooltip" title="Blog">
-                                <img src="http://localhost/AdminComparador/vistas/img/iconos/blogs32.png" class="img-responsive ">
-                            </span>
-                           <!-- <h5>Blogs</h5> -->
-                        </a>
-                    </ul>
-
-                    <ul class="pull-right">
-                        <a href="<?php echo $url;?>tiendas">
-                            <span data-toggle="tooltip" title="Tiendas">
-                                <img src="http://localhost/AdminComparador/vistas/img/iconos/tienda32.png" class="img-responsive ">
-                            </span>
-                          <!--  <h5>Tiendas</h5> -->
-                        </a>
-                    </ul>
-                            <ul class="pull-right">
-                        <a href="<?php echo $url;?>recetas">
-                            <span data-toggle="tooltip" title="Recetas">
-                                <img src="http://localhost/AdminComparador/vistas/img/iconos/receta32.png" class="img-responsive ">
-                            </span>
-                            <!-- <h5>Recetas</h5>-->
-                        </a>
-                    </ul>
                     
                 </li>
             </div>

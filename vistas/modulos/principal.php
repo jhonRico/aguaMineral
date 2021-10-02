@@ -2,7 +2,21 @@
 BANNER
 -->
 <?php
-    $url2 = Ruta::ctrlRuta();     
+    
+    $url2 = Ruta::ctrlRuta(); 
+
+    /*$usuario =  $_SESSION['username'];
+    if (!isset($usuario)) 
+    {
+       header("location: http://localhost/aguaMineral/");
+    }
+    if (isset($_POST['cerrar'])) 
+    {
+        session_start();
+        session_destroy();
+        header("location: http://localhost/aguaMineral/");
+        exit();   
+    }*/
 ?>
 
 
@@ -26,7 +40,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
                      <div class="single-blog">
                           <div class="single-blog-img">
-                              <a href="<?php echo $url2?>contratoEstante"  ><img src="<?php echo $url2?>vistas/img/general/contrato.jpg" alt="Blog Image"></a>
+                              <a href="<?php echo $url2?>contratoEstante"><img src="<?php echo $url2?>vistas/img/general/contrato.jpg" alt="Blog Image"></a>
                           </div>
                           <div class="blog-content-box">
                          <div class="blog-content">
@@ -85,6 +99,9 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
                               </div>
                           </div>
                       </div>
+                      <form action="" method="post">
+                        <button class="btn btn-primary" name="cerrar">Cerrar Sesion</button>
+                      </form>
              </div>
 
      </ul>  

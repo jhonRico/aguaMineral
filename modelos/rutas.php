@@ -3,7 +3,7 @@ class Ruta{
 
     /**ruta lado del cliente */
     public function ctrlRuta(){
-        return "http://localhost/unet/";
+        return "http://localhost/aguaMineral/";
     }
 
     /**ruta lado del Servidor */

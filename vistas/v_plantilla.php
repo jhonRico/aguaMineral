@@ -22,10 +22,19 @@
     ?>
 
     <!---   PLUGINS DE CSS-->
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/bootstrap.min.css">
+    
+
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
+
+    <!--<link rel="stylesheet" href="<?php /*echo $url*/ ?>vistas/css/plugins/bootstrap.min.css">-->
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
+   
     
     <!--  Hojas de Estilos personalizadas-->
 
@@ -43,9 +52,6 @@
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/contrato.css">
 
 
-      
-
- 
     <script src="<?php echo $url ?>vistas/js/plugins/jquery.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/bootstrap.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/sweetalert.min.js"></script>
@@ -68,8 +74,8 @@
             $valor = $_GET["ruta"];
                 
                 if($rutas[0] == "verificar"|| $rutas[0] == "salir"   || $rutas[0] == "blog" || $rutas[0] == "tiendas" ||
-                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] == "principal" || $rutas[0] == "contratoEstante" || $rutas[0] =="adminState"){
-                   
+                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] == "principal" || $rutas[0] == "contratoEstante" || $rutas[0] =="adminState" || $rutas[0] == "registro" || $rutas[0] == "login"){
+                          
                     include "modulos/cabezotesesion.php";
                     include "modulos/".$rutas[0].".php";
                 }else{
@@ -81,9 +87,9 @@
             
            // include "modulos/footer.php";
         }else{
-              include "modulos/cabezote.php";            
+             include "modulos/cabezote.php";            
             include "modulos/slide.php";
-            include "modulos/footer.php";
+           // include "modulos/footer.php";
             
         }
 
@@ -94,9 +100,10 @@
 <!--=====================================
 JAVASCRIPT PERSONALIZADO
 ======================================--> 
-<script src="<?php echo $url ?>vistas/js/ofertas.js"></script> 
+
+<script src="<?php echo $url ?>vistas/js/usuario.js"></script>
+<script src ="<?php echo$url ?>vistas/js/ofertas.js"></script> 
 <script src="<?php echo $url ?>vistas/js/herramienta.js"></script> 
-<script src="<?php echo $url ?>vistas/js/usuario.js"></script> 
 <script src="<?php echo $url ?>vistas/js/registroFacebook.js"></script> 
 <script src="<?php echo $url ?>vistas/js/listas.js"></script> 
 <script src="<?php echo $url ?>vistas/js/recetas.js"></script> 

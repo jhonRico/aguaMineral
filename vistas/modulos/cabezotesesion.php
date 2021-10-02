@@ -10,8 +10,8 @@
             <!--- AVISO INFORMATIVO -->
             <diV class="col-lg-3 col-md-8 col-sm-12 col-xs-12 social">
                 <ul>  
-                <a href="<?php echo $url ?>principal">
-                      <img src="http://localhost/unet/vistas/img/logoPrincipal/logop.png" class="img-responsive imagenLogo">                   
+                <a href="<?php echo $url ?>">
+                      <img src="<?php echo $url ?>vistas/img/logoPrincipal/logop.png" class="img-responsive imagenLogo">                   
                 </a>
                 </ul>
             </div>
@@ -77,7 +77,7 @@
         </div>
     </div>
 </div>
-<hr align="left" noshade="noshade" size="2" width="80%" color: "#0056b2"/>
+<hr align="left" noshade="noshade" size="2" width="80%" color= "#0056b2"/>
 
 
 <!-- HEADER -->
@@ -132,7 +132,7 @@ VENTANA MODAL PARA EL INICIO DE SESÍON
                                 <span  class="input-group-addon">
                                     <i class="glyphicon glyphicon-envelope"></i>
                                 </span>
-                                <input type="password" id="ingresoPassword"  name="ingresoPassword" class="form-control" autocomplete="on" placeholder="Password" required="">
+                                <input type="password" id="ingresoPassword"  name="ingresoPassword" class="form-control" autocomplete="off" placeholder="Password" required="">
                             </div>
                         </div>
                         <?php  
@@ -141,7 +141,7 @@ VENTANA MODAL PARA EL INICIO DE SESÍON
                         ?>
                         <div>
 
-                        <a href="#modalPassword" data-dismiss="modal" data-toggle="modal" >¿Olvidaste tu contraseña?</a>
+                        <a href="inicio" data-dismiss="modal" data-toggle="modal" >¿Olvidaste tu contraseña?</a>
 
                         </div>
                         <br>
@@ -154,7 +154,7 @@ VENTANA MODAL PARA EL INICIO DE SESÍON
         </div>
         </div>
       <div class="modal-footer">
-      ¿No tienes una cuenta registrada? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
+      ¿No tienes una cuenta registrada? | <strong><a href="registro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
       </div>
 
 
@@ -200,7 +200,7 @@ VENTANA MODAL PARA RECUPERAR LA CONTRASEÑA
         </div>
         </div>
         <div class="modal-footer">
-        ¿No tienes una cuenta registrada? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
+        ¿No tienes una cuenta registrada? | <strong><a href="registro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
         </div>
     </div>
   </div>
@@ -251,7 +251,7 @@ VENTANA MODAL PARA EL REGISTRO
                                                 <span  class="input-group-addon">
                                                     <i class="glyphicon glyphicon-user"></i>
                                                 </span>
-                                                <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Direccion de correo" autocomplete="on" required="" autofocus="">
+                                                <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Direccion de correo" autocomplete="off" required="" autofocus="">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -259,7 +259,7 @@ VENTANA MODAL PARA EL REGISTRO
                                                 <span  class="input-group-addon">
                                                     <i class="glyphicon glyphicon-envelope"></i>
                                                 </span>
-                                                <input type="password" id="inputPassword"  name="inputPassword" class="form-control" autocomplete="on" placeholder="Password" required="">
+                                                <input type="password" id="inputPassword"  name="inputPassword" class="form-control" autocomplete="off" placeholder="Password" required="">
                                             </div>
                                         </div>
                                         <div class="form-group form-check">

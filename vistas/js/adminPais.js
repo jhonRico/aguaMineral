@@ -7,8 +7,23 @@
 
 $(function(){
      $("#guardarPais").click(function(){
-      var nombre = $('#nombrePais').val();
-     // alert(nombre);
+      Swal.fire({
+        title: 'Registrar Pais',
+        input: 'text',
+        inputPlaceholder: "Por favor ingrese un pais",
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Registrar',
+        }).then((result) => {
+        if (result.isConfirmed) 
+        {
+           var valor = result.value;
+           registrarPais(valor);
+        }
+})
+    /*  var nombre = $('#nombrePais').val();
       if (nombre == "") 
       {
         Swal.fire({
@@ -32,9 +47,9 @@ $(function(){
         return false;
       }
 
-      registrarPais();
+      //
 
-      return true;
+      return true;*/
 
       });
  });
@@ -42,11 +57,11 @@ $(function(){
 
 
 
-function registrarPais()
+function registrarPais(valor)
 {
   var datos = new FormData();
 
-      datos.append("nombrePais", $("#nombrePais").val());
+      datos.append("nombrePais", valor);
    
             $.ajax({
                     url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",

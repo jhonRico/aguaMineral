@@ -12,8 +12,8 @@
         $url = Ruta::ctrlRuta();
 
         /** se crea la lista */
-        
         if(isset( $_POST["nombreLista"])){
+        
             //365 * 24 * 60 * 60 para qeu dure un año
             setcookie("lista-compra", $_POST["nombreLista"], time() + 3600); 
         }
@@ -74,7 +74,7 @@
             $valor = $_GET["ruta"];
                 
                 if($rutas[0] == "verificar"|| $rutas[0] == "salir"   || $rutas[0] == "blog" || $rutas[0] == "tiendas" ||
-                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] == "principal" || $rutas[0] == "contratoEstante" || $rutas[0] =="adminState" || $rutas[0] == "registro" || $rutas[0] == "login" || $rutas[0] == "adminPais"){
+                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] == "principal" || $rutas[0] == "contratoEstante" || $rutas[0] =="adminState" || $rutas[0] == "registro" || $rutas[0] == "login" || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "adminPais"){
                           
                     include "modulos/cabezotesesion.php";
                     include "modulos/".$rutas[0].".php";
@@ -100,7 +100,7 @@
 <!--=====================================
 JAVASCRIPT PERSONALIZADO
 ======================================--> 
-<script src="<?php echo $url ?>vistas/js/adminPais.js"></script>
+
 <script src="<?php echo $url ?>vistas/js/usuario.js"></script>
 <script src ="<?php echo$url ?>vistas/js/ofertas.js"></script> 
 <script src="<?php echo $url ?>vistas/js/herramienta.js"></script> 

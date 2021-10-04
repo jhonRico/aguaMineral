@@ -1,4 +1,4 @@
-/*------Cuando carga la pagina de recetas consulta las recetas registradas*/
+/*------Cuando carga la pagina de estados consulta las erstados registradas*/
 $(document).ready(function(){ 
      rutaActual = window.location.toString();
      if(rutaActual.includes("adminState")){    

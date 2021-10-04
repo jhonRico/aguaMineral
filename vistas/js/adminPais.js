@@ -41,7 +41,7 @@ $(document).ready(function(){
                                                   plantilla2 +='                        '                   
                                                   plantilla2 +='                     '
                                                 
-                                                  plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<button class="bi bi-trash"></button><button class="btn btn-primary modificar">Editar</button></h3>'
+                                                  plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<button class="btn btn-danger">Eliminar</button><button class="btn btn-primary modificar">Editar</button></h3>'
                                   
                                                   plantilla2 +='                     '
                                                   plantilla2 +='                '
@@ -62,7 +62,8 @@ $(document).ready(function(){
 
 $(function(){
      $("#guardarPais").click(function(){
-      Swal.fire({
+      alert('Hola');
+      /*Swal.fire({
         title: 'Registrar Pais',
         input: 'text',
         inputPlaceholder: "Por favor ingrese un pais",
@@ -77,7 +78,7 @@ $(function(){
            var valor = result.value;
            registrarPais(valor);
            consultarTodosPaises();
-        }
+        }*/
 })
     /*  var nombre = $('#nombrePais').val();
       if (nombre == "") 

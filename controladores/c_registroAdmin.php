@@ -6,7 +6,7 @@ class ControladorRegistroAdmin
 
     static public function consultarPais()
     {
-        $tabla = 'pais';
+        $tabla = "pais";
         $respuesta = ModeloRegistroAdmin::mdlConsultarPais($tabla);
         return $respuesta;
 	}

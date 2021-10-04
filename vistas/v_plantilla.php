@@ -22,15 +22,13 @@
     ?>
 
     <!---   PLUGINS DE CSS-->
-    <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.min.css">
     
-
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
 
-    <!--<link rel="stylesheet" href="<?php /*echo $url*/ ?>vistas/css/plugins/bootstrap.min.css">-->
+
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
@@ -38,6 +36,7 @@
     
     <!--  Hojas de Estilos personalizadas-->
 
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/administracion.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/cabecera.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plantilla.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/servicios.css">

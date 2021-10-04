@@ -5,7 +5,8 @@ require_once "conexion.php";
  class ModeloRegistroAdmin
  {
 
-    static public function mdlRegistroAdmin($tabla , $datos){
+    static public function mdlRegistroAdmin($tabla, $datos)
+    {
 
         $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(descripcion)
                  VALUES  (:descripPais)");
@@ -16,6 +17,24 @@ require_once "conexion.php";
         if($stmt->execute()){
             return "ok";
         }else{
+            return"Error";
+        }
+        $stmt->close();
+        $stmt=null;
+    }
+     static public function mdlEliminarPais($tabla, $datos)
+     {
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idPais = :idPais");
+        
+        $stmt->bindParam(":idPais", $datos["idPais"], PDO::PARAM_INT);
+  
+
+        if($stmt->execute())
+        {
+            return "ok";
+        }else
+        {
             return"Error";
         }
         $stmt->close();
@@ -32,7 +51,7 @@ require_once "conexion.php";
 	}
 
     //Consultar Usuario
-    static public function mdlConsultarAllUsers($tabla, $datos)
+   /* static public function mdlConsultarAllUsers($tabla, $datos)
     {
 
         //session_start();
@@ -51,7 +70,7 @@ require_once "conexion.php";
         //$_SESSION['username'] = $datos['usuario'];
 
 
-    }
+    }*/
 
     /**************************************************
      * Actualizar campo verificar de la tabla usuario *

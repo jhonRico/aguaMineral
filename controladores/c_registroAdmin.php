@@ -11,6 +11,17 @@ class ControladorRegistroAdmin
         return $respuesta;
 	}
 
+      static public function eliminarPais($id)
+    {
+        $tabla = "pais";
+        $datos = array(
+             "idPais"=>$id,
+         );
+
+        $respuesta = ModeloRegistroAdmin::mdlEliminarPais($tabla,$datos);
+        return $respuesta;
+    }
+
     static public function ctrlAddPais($nombrePais){
 
     $tabla = "pais";

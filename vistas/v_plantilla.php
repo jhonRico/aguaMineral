@@ -24,12 +24,9 @@
     <!---   PLUGINS DE CSS-->
     <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.min.css">
     
-    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
 
-
-    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
    
@@ -51,6 +48,7 @@
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/contrato.css">
 
 
+    <script src="https://kit.fontawesome.com/0bfd04ed5e.js" crossorigin="anonymous"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/jquery.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/bootstrap.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/sweetalert.min.js"></script>
@@ -100,6 +98,7 @@
 JAVASCRIPT PERSONALIZADO
 ======================================--> 
 
+<script src="<?php echo $url ?>vistas/js/adminPais.js"></script>
 <script src="<?php echo $url ?>vistas/js/usuario.js"></script>
 <script src ="<?php echo$url ?>vistas/js/ofertas.js"></script> 
 <script src="<?php echo $url ?>vistas/js/herramienta.js"></script> 

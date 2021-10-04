@@ -17,6 +17,11 @@ class   AjaxRegistroAdmin{
         $respuesta = ControladorRegistroAdmin::consultarPais();
         echo  json_encode ($respuesta);
     }
+     public function ajaxEliminarPais($id)
+    {
+        $respuesta = ControladorRegistroAdmin::eliminarPais($id);
+        echo  json_encode ($respuesta);
+    }
 
 }
 
@@ -33,6 +38,13 @@ if(isset($_POST["paises"]))
     $allStates->ajaxConsultaTodosPaises();
 }
 
+if(isset($_POST["idPais"]))
+{  
+  
+    $allStates = new AjaxRegistroAdmin();
+    $id = $_POST['idPais'];
+    $allStates->ajaxEliminarPais($id);
+}
 
 
 ?>

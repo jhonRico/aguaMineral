@@ -16,7 +16,7 @@
           <div class="me-5">
             <div class="me-5">
               <div class="me-5">
-                <button class="mb-2 ms-0 mt-2 btn btn-warning me-3 text-white" type="button" id="guardarPais">Agregar</button>  
+                <button class="mb-2 ms-0 mt-2 btn btn-warning me-2 text-white" type="button" id="guardarPais">Agregar</button>  
                 <div id="aqui"></div>
                 <!--<button class="btn btn-danger" type="button" >Eliminar</button>-->
               </div>

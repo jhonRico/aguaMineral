@@ -40,6 +40,25 @@ require_once "conexion.php";
         $stmt->close();
         $stmt=null;
     }
+    static public function mdlModificarPais($tabla, $datos)
+     {
+
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET descripcion = :descripcion WHERE idPais = :idPais");
+        
+        $stmt->bindParam(":idPais", $datos["idPais"], PDO::PARAM_INT);
+        $stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+  
+
+        if($stmt->execute())
+        {
+            return "ok";
+        }else
+        {
+            return"Error";
+        }
+        $stmt->close();
+        $stmt=null;
+    }
 
     static public function mdlConsultarPais($tabla)
     {
@@ -50,47 +69,18 @@ require_once "conexion.php";
        
 	}
 
-    //Consultar Usuario
-   /* static public function mdlConsultarAllUsers($tabla, $datos)
+    static public function mdlConsultarRegistroPais($tabla,$datos)
     {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE descripcion = :registroPais");
 
-        //session_start();
-
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE TipoUsuario_idTipoUsuario  = :tipoUsuario AND usuario = :usuario AND contrasena = :contrasena");
-
-
-        $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
-        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-        $stmt->bindParam(":contrasena", $datos["contrasena"], PDO::PARAM_STR);
+        $stmt->bindParam(":registroPais", $datos["registroPais"], PDO::PARAM_STR);
 
         $stmt -> execute();
-        return  $stmt ->fetch(); 
+        return  $stmt ->fetch();
+    }
 
+}
 
-        //$_SESSION['username'] = $datos['usuario'];
+?>
 
-
-    }*/
-
-    /**************************************************
-     * Actualizar campo verificar de la tabla usuario *
-     * ************************************************/
-    /*static public function mdlActualizarUsuario($tabla, $id, $item, $valor){
-        
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE idUsuario = :idUsuario");
-
-        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-        $stmt -> bindParam(":idUsuario", $id, PDO::PARAM_INT);
-        
-        if($stmt -> execute()){
-            return "ok";
-        }else{
-            return"Error";
-        }
-
-        $stmt -> close();
-        $stmt = null;
-
-
-    }*/
- }
+   

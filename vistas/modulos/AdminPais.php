@@ -1,8 +1,6 @@
 <body class="bg-light">
 <form method="post" id="formulario" autocomplete="off" class="m-5 fp-5">
-  <h1 class="text-center me-3 mt-3">Administracion Pais</h1>
   <div class="m-5 p-5">
-
     <table class="table m-3 p-3">
     <thead>
     <tr>

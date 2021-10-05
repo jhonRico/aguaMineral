@@ -6,7 +6,7 @@
     <meta  name="title" content="comparador">
     <meta  name="description" content="describir la pagina">
     <meta  name="keyword" content="todas las palabras claves separadas con  comas ,">
-    <title>Comparador</title>
+    <title>Agua Mineral Ureña</title>
     <?php
         /** Mantener la ruta fija del proyecto*/
         $url = Ruta::ctrlRuta();
@@ -49,8 +49,9 @@
 
 
     <script src="https://kit.fontawesome.com/0bfd04ed5e.js" crossorigin="anonymous"></script>
+    <script src="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/js/bootstrap.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/jquery.min.js"></script>
-    <script src="<?php echo $url ?>vistas/js/plugins/bootstrap.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/sweetalert.min.js"></script>
 
 </head>

@@ -22,7 +22,7 @@
     ?>
 
     <!---   PLUGINS DE CSS-->
-    <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.css">
     
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />

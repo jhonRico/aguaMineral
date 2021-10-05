@@ -26,191 +26,201 @@ $(function(){
 
       if (nombre == "") 
       {
-        Swal.fire({
-            title: 'Error',
-            text: 'Por favor ingrese un nombre',
-            icon: 'error',
-            showCloseButton: true,
-            confirmButtonText:'Aceptar'
-        })
+         Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese un nombre',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
       if (!expresiones.nombre.test(nombre)) 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'El nombre tiene que contener de 3 a 16 dígitos y solo puede tener letras y tildes.',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese un nombre válido',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
 
       if (apellido == '') 
       {
-        Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese un apellido',
+       Swal.fire({
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese un apellido',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
 
       if (!expresiones.nombre.test(apellido)) 
       {
-        Swal.fire({
-          title: 'Error',
-          text: 'El apellido tiene que contener de 3 a 16 dígitos y solo puede tener letras y tildes.',
+         Swal.fire({
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
-        return false;
-      }
-      if (direccion == '') 
-      {
-        Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese una dirección',
-          icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
-        return false;
-      }
-      if (cedula == '') 
-      {
-        Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese una cédula',
-          icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
-        return false;
-      }
-      if (!expresiones.telefono.test(cedula)) 
-      {
-        Swal.fire({
-          title: 'Error',
-          text: 'la cédula debe tener de 7 a 14 digitos y solo puede contener números',
-          icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
-        return false;
-      }
-      if (telefono == '') 
-      {
-        Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese un telefono',
-          icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
-        return false;
-      }
-      if (!expresiones.telefono.test(telefono)) 
-      {
-        Swal.fire({
-          title: 'Error',
-          text: 'Ingrese un telefono válido',
-          icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese un apellido válido',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
       if (correo == '') 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese un correo',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese un correo',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
       if (!expresiones.correo.test(correo)) 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'Ingrese un correo válido',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese un correo válido',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
-      if (usuario == '') 
+       if (telefono == '') 
+      {
+         Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese un telefono',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;
+      }
+      if (!expresiones.telefono.test(telefono)) 
+      {
+         Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese un teléfono válido',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;
+      }
+      if (direccion == '') 
+      {
+         Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese una dirección',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;
+      }
+      if (cedula == '') 
+      {
+         Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese una cédula',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;
+      }
+      if (!expresiones.telefono.test(cedula)) 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese un usuario',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese una cedula válida',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
-      if (!expresiones.usuario.test(usuario)) 
-      {
-        Swal.fire({
-          title: 'Error',
-          text: 'Ingrese un usuario válido',
-          icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        });
-        return false;
-      }
+     
+      
       if (contrasena == '') 
       {
-        Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese una contraseña',
+       Swal.fire({
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese una contraseña',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
       if (!expresiones.password.test(contrasena)) 
       {
           Swal.fire({
-          title: 'Error',
-          text: 'La Contraseña debe tener de 4 a 12 digitos',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
-        return false;
+          toast: true,
+          title: 'Ingrese una contraseña válida',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;;
       }
       if (repiteContrasena == '') 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'Por favor repita la contraseña',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Repita la cotraseña',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
       if (repiteContrasena != contrasena) 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'Las contraseñas deben ser iguales',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Las contraseñas deben ser iguales',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
  
@@ -225,41 +235,48 @@ $(function(){
 
 $(function(){
      $("#ingresar").click(function(){
-      var usuario = $('#user').val();
+      var usuario = $('#correo').val();
       var contrasena = $('#password').val();
 
       if (usuario == "") 
       {
         Swal.fire({
-            title: 'Error',
-            text: 'Por favor ingrese un usuario',
-            icon: 'error',
-            showCloseButton: true,
-            confirmButtonText:'Aceptar'
-        })
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese un correo',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
+
       }
-      if (!expresiones.usuario.test(usuario)) 
+      if (!expresiones.correo.test(usuario)) 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'El usuario solo puede llevar letras, números y guiones.',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese un correo válido',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
 
       if (contrasena == '') 
       {
         Swal.fire({
-          title: 'Error',
-          text: 'Por favor ingrese una contraseña',
+          position: 'top-end',
           icon: 'error',
-          showCloseButton: true,
-          confirmButtonText:'Aceptar'
-        })
+          toast: true,
+          title: 'Ingrese una contraseña',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
         return false;
       }
       
@@ -275,7 +292,7 @@ function IniciarSesion()
   var datos = new FormData();
 
       datos.append("tipoDeUsuario", $("#tipoDeUsuario").val());
-      datos.append("user", $("#user").val());
+      datos.append("user", $("#correo").val());
       datos.append("password", $("#password").val());
 
      
@@ -296,12 +313,15 @@ function IniciarSesion()
                           }else
                           {
                             Swal.fire({
-                                title: 'Error',
-                                text: 'Error al iniciar sesión',
-                                icon: 'error',
-                                showCloseButton: true,
-                                confirmButtonText:'Aceptar'
-                              });
+                              position: 'top-end',
+                              icon: 'error',
+                              toast: true,
+                              title: 'Correo y/o contraseña incorrectos',
+                              showConfirmButton: false,
+                              timerProgressBar: true,
+                              timer: 1500
+                            })        
+                            return false;
                           }
 
                      }                 
@@ -322,7 +342,6 @@ function RegistrarUsuario()
       datos.append("correo", $("#correo").val());
       datos.append("sector", $("#sector").val());
       datos.append("tipoUsuario", $("#tipoUsuario").val());
-      datos.append("usuario", $("#usuario").val());
       datos.append("contrasena", $("#contrasena").val());
      
             $.ajax({

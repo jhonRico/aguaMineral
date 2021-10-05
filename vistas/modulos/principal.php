@@ -28,17 +28,14 @@ BANNER
 MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 ===========================================-->
 <div class="container-fluid blogs">
-    <div class="container">
-	    <div class="row">
 
     <!---========================================  
     BLOG EN CUADRICULA
     ===========================================-->
-    
     <ul class="grid0" id="">
-            <div class="col-sm-4 col-xs-12">
-
-                     <div class="single-blog">
+            <div class="container mt-5">
+              <div class="row">
+                 <div class="single-blog col">
                           <div class="single-blog-img">
                               <a href="<?php echo $url2?>contratoEstante"><img src="<?php echo $url2?>vistas/img/general/contrato.jpg" alt="Blog Image"></a>
                           </div>
@@ -56,12 +53,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
                               </div>
                           </div>
                      </div>
-             </div>
-
-
-             <div class="col-sm-4 col-xs-12">
-
-                     <div class="single-blog">
+                     <div class="single-blog col">
                           <div class="single-blog-img">
                               <a href="#" ><img src="<?php echo $url2;?>vistas/img/general/reporte.jpg" alt="Blog Image"></a>
                           </div>
@@ -77,13 +69,8 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
                               </div>
                           </div>
                       </div>
-             </div>
 
-
-
-             <div class="col-sm-4 col-xs-12">
-
-                     <div class="single-blog">
+                     <div class="single-blog col">
                           <div class="single-blog-img">
                               <a href="#"  ><img src="<?php echo $url2;?>vistas/img/general/zonas.jpg" alt="Blog Image"></a>
                           </div>
@@ -99,8 +86,17 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
                               </div>
                           </div>
                       </div>
+
+
+
+
+              </div>
+
+                    
+
+                     
                       <form action="" method="post">
-                        <button class="btn btn-primary" name="cerrar">Cerrar Sesion</button>
+                        <button class="btn btn-primary ms-5" name="cerrar">Cerrar Sesion</button>
                       </form>
              </div>
 
@@ -108,8 +104,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
 
            
-         </div>
-    </div>
 </div>
+
 
 

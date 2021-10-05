@@ -11,9 +11,9 @@ class   AjaxUser{
         echo  json_encode ($respuesta);
 	}
     
-    public function ajaxAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$usuario,$contrasena)
+    public function ajaxAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena)
     {
-        $respuesta = ControladorRegistro::ctrlAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$usuario,$contrasena);
+        $respuesta = ControladorRegistro::ctrlAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena);
         echo  json_encode ($respuesta);
 	}
 
@@ -32,9 +32,8 @@ if(isset($_POST["nombre"]))
     $correo = $_POST["correo"]; 
     $sector = $_POST["sector"];
     $tipoUsuario = $_POST["tipoUsuario"];
-    $usuario = $_POST["usuario"];
     $contrasena = $_POST["contrasena"];
-    $allStates->ajaxAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$usuario,$contrasena);
+    $allStates->ajaxAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena);
 }
 if(isset($_POST["tipoDeUsuario"]))
 {  

@@ -20,6 +20,7 @@ class ControladorRegistro
 	}
     static public function ctrlAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena){
 
+    date_default_timezone_set("America/Bogota");
     $tabla = "persona";
     $tabla2 = "usuario";
     $datos = array(
@@ -32,7 +33,7 @@ class ControladorRegistro
              "sector"=>$sector,
              "tipoUsuario"=>$tipoUsuario,
              "contrasena"=>$contrasena,
-             "vacio" => " "
+             "vacio" => date("Y-m-d H:i:s", strtotime($date))
          );
 
         $respuesta = ModeloRegistro::mdlRegistroUsuario($tabla,$datos,$tabla2);

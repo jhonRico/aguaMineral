@@ -104,45 +104,6 @@ $(function(){
         })        
         return false;
       }
-       if (telefono == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un telefono',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (!expresiones.telefono.test(telefono)) 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un teléfono válido',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (direccion == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una dirección',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
       if (cedula == '') 
       {
          Swal.fire({
@@ -354,6 +315,7 @@ function RegistrarUsuario()
                     async:false,
                     success: function(respuesta)
                     {
+                      alert(respuesta);
                           if(!respuesta.includes("ok"))
                           {
                               Swal.fire({

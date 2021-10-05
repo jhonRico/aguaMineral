@@ -4,7 +4,7 @@
     session_start();
 ?>
 <!-- TOP -->
-<div  class="container-fluid barraSuperior" id="top">  
+<div  class="container-fluid p-2 barra" id="top">  
     <div class="container">
         <div class="row">
             <!--- AVISO INFORMATIVO -->
@@ -12,22 +12,22 @@
                 <ul>
                     <li>
                         <a href="http://facebook.com" target="_blank">
-                        <i class="fa fa-facebook redSocial facebookBlanco" aria-hidden="true"></i>
+                        <i class="fa fa-facebook redSocial text-white" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.instagram.com" target="_blank">
-                        <i class="fa fa-instagram  redSocial facebookBlanco" aria-hidden="true"></i>
+                        <i class="fa fa-instagram  redSocial text-white" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://twitter.com/" target="_blank">
-                        <i class="fa fa-twitter redSocial facebookBlanco" aria-hidden="true"></i>
+                        <i class="fa fa-twitter redSocial text-white" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.youtube.com/" target="_blank">
-                        <i class="fa fa-youtube redSocial facebookBlanco" aria-hidden="true"></i>
+                        <i class="fa fa-youtube redSocial text-white" aria-hidden="true"></i>
                         </a>
                     </li>
                 </ul>
@@ -60,9 +60,9 @@
                     }else {
                         echo '
 
-                        <li><a href="//localhost/aguaMineral/login" data-toggle="modal"><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</a></li>
+                        <li><a href="//localhost/aguaMineral/login" data-toggle="modal" class="text-white registroIncio"><i class="fa fa-sign-in text-white" aria-hidden="true"></i> Ingresar</a></li>
                         <li>|</li>
-                        <li><a href="//localhost/aguaMineral/registro" data-toggle="modal"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear cuenta</a></li>
+                        <li><a href="//localhost/aguaMineral/registro" data-toggle="modal" class="text-white registroIncio"><i class="fa fa-user-plus text-white" aria-hidden="true"></i> Crear cuenta</a></li>
                         ';
                     }
                 ?>

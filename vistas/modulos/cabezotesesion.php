@@ -4,84 +4,17 @@
     session_start();
 ?>
 <!-- TOP -->
-<div  class="container-fluid barraSuperior" id="top">  
-    <div class="container">
-        <div class="row">
-            <!--- AVISO INFORMATIVO -->
-            <diV class="col-lg-3 col-md-8 col-sm-12 col-xs-12 social">
-                <ul>  
-                <a href="<?php echo $url ?>">
-                      <img src="<?php echo $url ?>vistas/img/logoPrincipal/logop.png" class="img-responsive imagenLogo">                   
-                </a>
-                </ul>
-            </div>
-
-            <!--- REGISTRO -->
-            <diV class="col-lg-9 col-md-4 col-sm-12 col-xs-12 registro">
-                <ul>
-                <?php 
-                    
-                    if(isset($_SESSION["validarSesion"])){
-
-                        if($_SESSION["validarSesion"] == "ok"){
-
-                            if($_SESSION["modoAcceso"] == "directo" || $_SESSION["modoAcceso"] == "facebook"){
-                                echo '
-                                    <li>
-                                        <img class="img-circle" src="'.$servidor.'/vistas/img/usuarios/default/anonymous.png" width="4%">
-                                    </li>
-                                
-                                    <li>|</li>
-                                    <li><a href="'.$url.'perfil">Ver perfil</a></li>
-                                    <li>|</li>
-                                    <li><a href="'.$url.'salir" class="salida">Salir</a></li>
-                                ';
-
-                            }
-                        }
-                    }else {
-                        echo '
-
-
-                        <div class="btn-group izquierda ">
-                            <li data-toggle="dropdown" class = "dropdown-toggle"><a href="" ><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos</a></li>
-                                <ul class="dropdown-menu dropdown-menu-left izquierda sangria" role="menu">
-                                        <li class="textoalineado"><a href="" ><h class="textostilo">Consultar</h></a></li>
-                                        <li class="textoalineado"><a href=""><h class="textostilo">Generar</h></a></li>                                        
-                                  </ul>
-                        </div>
-
-                        <li>|</li>
-                        <li><a href="#modalRegistro" data-toggle="modal"><i class="fa fa-bar-chart" aria-hidden="true"></i> Reportes</a></li>   
-
-                        <li>|</li>
-                        <li><a href="#modalRegistro" data-toggle="modal"><i class="fa fa-map-signs" aria-hidden="true"></i> Zona de clientes</a></li>   
-
-                        <li>|</li>
-                        <div class="btn-group izquierda ">
-                                <button type="button" class="btn btn-default dropdown-toggle boton " data-toggle="dropdown"><i class="fa fa-cog administracionTuerca " aria-hidden="true" ></i></button>
-
-                                      <ul class="dropdown-menu dropdown-menu-left izquierda sangria" role="menu">
-                                       <li class="textoalineado"><a href=""><h class="textostilo">Administración de Usuarios</h></a></li>
-                                        <li class="textoalineado"><a href=""><h class="textostilo">Estantería</h></a></li>
-                                        <li class="textoalineado"><a href=""><h class="textostilo">General</h></a></li>                                        
-                                      </ul>
-                        </div>
-
-                        ';
-
-                    }
-                ?>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div  class="container-fluid p-2 barra" id="top"> 
+    <a href="<?php echo $url ?>" >
+        <i class="fas fa-home home text-white"></i>
+    </a> 
+    <img src="<?php echo $url ?>vistas/img/logoPrincipal/logop.png" class="img-responsive imagenLogo">                                                                               
 </div>
 <hr align="left" noshade="noshade" size="2" width="80%" color= "#0056b2"/>
 
 
 <!-- HEADER -->
-<header class="container-fluid">
+<header class="container-fluid p-2 barra">
     <div class="container">
         <div class="row" id="cabezote">
             <!-- ===========================  

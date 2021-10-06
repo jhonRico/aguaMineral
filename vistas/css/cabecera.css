@@ -9,10 +9,35 @@
     text-align: right;
     font-size: 10px;
 }
-
+.barra
+{
+    background: #0046CA;
+}
 /*===================================================== 
 Cabecera 
 =======================================================*/
+.registroIncio
+{
+        font-size: 15px;
+        margin: 0px;
+        padding: 0px;
+}
+
+.home
+{
+    font-size: 35px;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.logo{
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    float: right;
+}
 
 header #btnCategorias{
     margin: 20px 0;
@@ -300,8 +325,11 @@ Cabecera de las paginas principales despues de iniciar sesión
     color: white
 }
 .imagenLogo{
-    width:65px;
-    height:40px;
+    width:160px;
+    height:100px;
+    float: right;
+    margin-top: 0px;
+    margin-right: 25px;
 }
 .boton{
     background-color: #2E8FE6;

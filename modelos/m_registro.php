@@ -24,7 +24,7 @@ require_once "conexion.php";
         $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_INT);
         $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
         $stmt2->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
-        $stmt2->bindParam(":contrasena", $datos["contrasena"], PDO::PARAM_STR);
+        $stmt2->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
         $stmt2->bindParam(":vacio", $datos["vacio"], PDO::PARAM_STR);
 
 
@@ -58,7 +58,7 @@ require_once "conexion.php";
 
         $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
         $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-        $stmt->bindParam(":contrasena", $datos["contrasena"], PDO::PARAM_STR);
+        $stmt->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
 
         $stmt -> execute();
         return  $stmt ->fetch(); 

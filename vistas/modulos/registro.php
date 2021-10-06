@@ -19,7 +19,7 @@ $url2 = Ruta::ctrlRuta();
 <form method="post" id="formulario" autocomplete="off" novalidate="">
 	<div class="container">
 		<div class="col">
-			<h2 class="text-center mt-3 mb-4">Crea una Cuenta</h2>							
+			<h2 class="text-center mt-3 mb-5 me-5">Crea una Cuenta</h2>							
 			<div class="row">
 				<div class="form-group col-md-6 ">
 					<label for="" class="ms-5 mt-3 form-label">Nombre</label>

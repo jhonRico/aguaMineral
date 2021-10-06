@@ -33,7 +33,7 @@ class ControladorRegistro
              "sector"=>$sector,
              "tipoUsuario"=>$tipoUsuario,
              "contrasena"=>$contrasena,
-             "vacio" => date("Y-m-d H:i:s", strtotime($date))
+             "vacio" => date("Y-m-d H:i:s")
          );
 
         $respuesta = ModeloRegistro::mdlRegistroUsuario($tabla,$datos,$tabla2);

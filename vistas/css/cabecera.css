@@ -25,10 +25,10 @@ Cabecera
 
 .home
 {
-    font-size: 35px;
+    font-size: 30px;
     margin: 0px;
     padding: 0px;
-    margin-top: 25px;
+    margin-top: 18px;
     margin-left: 25px;
 }
 
@@ -325,8 +325,8 @@ Cabecera de las paginas principales despues de iniciar sesión
     color: white
 }
 .imagenLogo{
-    width:160px;
-    height:100px;
+    width:90px;
+    height:60px;
     float: right;
     margin-top: 0px;
     margin-right: 25px;

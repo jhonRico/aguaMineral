@@ -4,38 +4,13 @@
     session_start();
 ?>
 <!-- TOP -->
-<div  class="container-fluid p-2 barra" id="top"> 
+<div  class="container-fluid p-3 barra border" id="top"> 
     <a href="<?php echo $url ?>" >
         <i class="fas fa-home home text-white"></i>
     </a> 
     <img src="<?php echo $url ?>vistas/img/logoPrincipal/logop.png" class="img-responsive imagenLogo">                                                                               
 </div>
 <hr align="left" noshade="noshade" size="2" width="80%" color= "#0056b2"/>
-
-
-<!-- HEADER -->
-<header class="container-fluid p-2 barra">
-    <div class="container">
-        <div class="row" id="cabezote">
-            <!-- ===========================  
-                lOGOTIPO
-            =============================-->
-</br>
-       
-            <!-- =======================
-            BLOQUE CATEGORIAS Y BUSCADOR
-            ==========================-->
-        
-
-            <!-- ====================
-            MENU DE SERVICIOS
-            ========================-->
-         
-            
-        </div>
-    </div>
-</header>
-
 
 <!-- ==================================
 VENTANA MODAL PARA EL INICIO DE SESÍON

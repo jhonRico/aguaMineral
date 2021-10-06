@@ -315,7 +315,6 @@ function RegistrarUsuario()
                     async:false,
                     success: function(respuesta)
                     {
-                      alert(respuesta);
                           if(!respuesta.includes("ok"))
                           {
                               Swal.fire({

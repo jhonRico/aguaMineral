@@ -78,7 +78,7 @@ function consultarTodosPaises(){
 					var aux = "'"+res2.descripcion+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminar('+res2.idPais+')" class=""><button class="btn eliminarPais eliminar text-danger"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModal('+res2.idPais+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminar('+res2.idPais+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModal('+res2.idPais+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -358,7 +358,7 @@ function modificar(id)
  					position: 'top-end',
  					icon: 'error',
  					toast: true,
- 					title: 'Ingrese un pais valido',
+ 					title: 'Ingrese un pais válido',
  					showConfirmButton: false,
  					timerProgressBar: true,
  					timer: 1500

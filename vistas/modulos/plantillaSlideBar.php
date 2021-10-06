@@ -9,90 +9,67 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
+<?php  
+  
+
+?>
 <body>
   <div class="sidebar">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus icon'></i>
-        <div class="logo_name">CodingLab</div>
+      <i class="fas fa-tint icon"></i>
+        <div class="logo_name">Agua Mineral Ureña</div>
         <i class='bx bx-menu' id="btn" ></i>
     </div>
     <ul class="nav-list">
       <li>
-          <i class='bx bx-search' ></i>
-         <input type="text" placeholder="Search...">
-         <span class="tooltip">Search</span>
-      </li>
+       <a href="http://localhost/aguaMineral/principal">
+         <i class="fas fa-home text-white"></i>
+         <span class="links_name">Principal</span>
+       </a>
+       <span class="tooltip">Principal</span>
+     </li>
       <li>
         <a href="#">
-          <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Dashboard</span>
+          <i class="fas fa-user-alt"></i>
+          <span class="links_name">Clientes</span>
         </a>
-         <span class="tooltip">Dashboard</span>
+         <span class="tooltip">Clientes</span>
       </li>
       <li>
-       <a href="#">
-         <i class='bx bx-user' ></i>
-         <span class="links_name">User</span>
+       <a href="http://localhost/aguaMineral/contratoEstante">
+         <i class="fas fa-file-signature"></i>
+         <span class="links_name">Contratos</span>       
        </a>
-       <span class="tooltip">User</span>
+       <span class="tooltip">Contratos</span>
      </li>
      <li>
        <a href="#">
-         <i class='bx bx-chat' ></i>
-         <span class="links_name">Messages</span>
+         <i class="fas fa-file-alt"></i>
+         <span class="links_name">Reportes</span>
        </a>
-       <span class="tooltip">Messages</span>
+       <span class="tooltip">Reportes</span>
      </li>
-     <li>
-       <a href="#">
-         <i class='bx bx-pie-chart-alt-2' ></i>
-         <span class="links_name">Analytics</span>
-       </a>
-       <span class="tooltip">Analytics</span>
-     </li>
-     <li>
-       <a href="#">
-         <i class='bx bx-folder' ></i>
-         <span class="links_name">File Manager</span>
-       </a>
-       <span class="tooltip">Files</span>
-     </li>
-     <li>
-       <a href="#">
-         <i class='bx bx-cart-alt' ></i>
-         <span class="links_name">Order</span>
-       </a>
-       <span class="tooltip">Order</span>
-     </li>
-     <li>
-       <a href="#">
-         <i class='bx bx-heart' ></i>
-         <span class="links_name">Saved</span>
-       </a>
-       <span class="tooltip">Saved</span>
-     </li>
-     <li>
-       <a href="#">
-         <i class='bx bx-cog' ></i>
-         <span class="links_name">Setting</span>
-       </a>
-       <span class="tooltip">Setting</span>
-     </li>
+     <?php 
+       if($usuario == 1) 
+       {
+         ?>
+             <li>
+               <a href="http://localhost/aguaMineral/administracion">
+                 <i class="fas fa-users-cog"></i>
+                 <span class="links_name">Administración</span>
+               </a>
+               <span class="tooltip">Administración</span>
+             </li>
+         <?php  
+        } 
+     ?>
      <li class="profile">
-         <div class="profile-details">
-           <img src="profile.jpg" alt="profileImg">
-           <div class="name_job">
-             <div class="name">Prem Shahi</div>
-             <div class="job">Web designer</div>
-           </div>
-         </div>
-         <i class='bx bx-log-out' id="log_out" ></i>
+        <form action="" method="post">
+         <button name="cerrar"><i class='bx bx-log-out' id="log_out"></i></button>
+        </form>
      </li>
     </ul>
   </div>
-  <section class="home-section">
-      <div class="text">Dashboard</div>
-  </section>
   <script>
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");

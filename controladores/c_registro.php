@@ -4,17 +4,20 @@
 class ControladorRegistro
 { 
   
-    static public function ctrlConsultarAllUsers($tipoUsuario,$usuario,$contrasena)
+    static public function ctrlConsultarAllUsers($usuario,$contrasena)
     {
         
     $tabla = "usuario";
     $datos = array(
-             "tipoUsuario"=>$tipoUsuario,
              "usuario"=>$usuario,
              "contrasena"=>$contrasena
          );
 
         $respuesta = ModeloRegistro::mdlConsultarAllUsers($tabla,$datos);
+
+        session_start();
+
+        $_SESSION['username'] = $respuesta[1];
         return $respuesta;
 
 	}

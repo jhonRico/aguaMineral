@@ -14,7 +14,7 @@
           <div class="me-5">
             <div class="me-5">
               <div class="me-5">
-                <button class="mb-2 ms-0 mt-2 btn btn-primary me-4 text-white mostrarModal" type="button" id="" dataToggle="modal">Agregar</button>  
+                <button class="mb-2 ms-0 mt-2 btn btn-primary me-3 text-white mostrarModal" type="button" id="" dataToggle="modal">Agregar</button>  
                 <div id="aqui"></div>
                 <!--<button class="btn btn-danger" type="button" >Eliminar</button>-->
               </div>
@@ -42,7 +42,7 @@
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
                                               <h5  id="staticBackdropLabel"> Agregar Pa&iacute;s</h5>
-                                              <a class="text-white"><i class="fas fa-times cerrar"></i></a>
+                                              <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrar text-white"></i></button></a>
                                         </div>
                                       
                                       <div class="modal-body mx-3">
@@ -53,8 +53,8 @@
 
                                        <div class="form-group">  
                                                <div class="modal-footer">         
-                                                     <button type="submit" class="btn btn-secondary " style ="width:48%;"data-dismiss="modal">Cancelar</button>                                                                 
-                                                     <a onclick="return validarDataFormularioAddState();" style ="width:48%;" id = "agregarPais"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Agregar</span></a>
+                                                     <button type="button" class="btn btn-secondary cerrar" style ="width:48%;">Cancelar</button>                                                                 
+                                                     <a style ="width:48%;" id = "agregarPais"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Agregar</span></a>
                                                 </div>
                                          </div>
                             </div>
@@ -69,7 +69,7 @@
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
                                               <h5  id="staticBackdropLabel"> Modificar Pa&iacute;s</h5>
-                                              <a class="text-white"><i class="fas fa-times cerrar"></i></a>
+                                              <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrar text-white"></i></button></a>
                                         </div>
                                       
                                       <div class="modal-body mx-3">
@@ -80,7 +80,7 @@
 
                                        <div class="form-group">  
                                                <div class="modal-footer">         
-                                                     <button type="submit" class="btn btn-secondary " style ="width:48%;"data-dismiss="modal">Cancelar</button>                                                                 
+                                                     <button type="button" class="btn btn-secondary cerrar" style ="width:48%;">Cancelar</button>                                                                 
                                                      <a style ="width:48%;" id = "editarPais"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
                                                 </div>
                                          </div>

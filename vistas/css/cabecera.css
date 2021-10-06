@@ -11,7 +11,7 @@
 }
 .barra
 {
-    background: #0046CA;
+    background: #003FA5;
 }
 /*===================================================== 
 Cabecera 
@@ -19,7 +19,8 @@ Cabecera
 .registroIncio
 {
         font-size: 15px;
-        margin: 0px;
+        float: left;
+        margin: 25px;
         padding: 0px;
 }
 
@@ -325,8 +326,8 @@ Cabecera de las paginas principales despues de iniciar sesión
     color: white
 }
 .imagenLogo{
-    width:90px;
-    height:60px;
+    width:100px;
+    height:55px;
     float: right;
     margin-top: 0px;
     margin-right: 25px;

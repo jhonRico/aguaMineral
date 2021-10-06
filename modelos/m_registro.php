@@ -51,24 +51,29 @@ require_once "conexion.php";
     static public function mdlConsultarAllUsers($tabla, $datos)
     {
 
-        //session_start();
+        //Consultar Para Iniciar Sesions
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE TipoUsuario_idTipoUsuario  = :tipoUsuario AND correoUsuario = :usuario AND clave = :contrasena");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE correoUsuario = :usuario AND clave = :contrasena");
 
 
-        $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
         $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
         $stmt->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
+          
+        $stmt -> execute();  
+        $respuesta = $stmt ->fetch(); 
 
-        $stmt -> execute();
-        return  $stmt ->fetch(); 
 
-
-        //$_SESSION['username'] = $datos['usuario'];
-
+        return $respuesta;
 
     }
+   /* consultarUsuarioActual()
+    {
+         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE correoUsuario = :usuario");
 
+        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+        $stmt->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
+    }
+*/
     /**************************************************
      * Actualizar campo verificar de la tabla usuario *
      * ************************************************/

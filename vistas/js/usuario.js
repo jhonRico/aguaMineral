@@ -252,7 +252,6 @@ function IniciarSesion()
 {
   var datos = new FormData();
 
-      datos.append("tipoDeUsuario", $("#tipoDeUsuario").val());
       datos.append("user", $("#correo").val());
       datos.append("password", $("#password").val());
 
@@ -269,6 +268,7 @@ function IniciarSesion()
                     {
                           if(!respuesta.includes("false"))
                           {
+
                               window.location.replace('http://localhost/aguaMineral/principal');
                              
                           }else
@@ -289,6 +289,7 @@ function IniciarSesion()
 
               })
 }
+
 
 
 function RegistrarUsuario()

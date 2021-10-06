@@ -33,6 +33,7 @@
     
     <!--  Hojas de Estilos personalizadas-->
 
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/slideBar.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/administracion.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/cabecera.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plantilla.css">
@@ -72,15 +73,19 @@
             $valor = $_GET["ruta"];
                 
                 if($rutas[0] == "verificar"|| $rutas[0] == "salir"   || $rutas[0] == "blog" || $rutas[0] == "tiendas" ||
-                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] == "principal" || $rutas[0] == "contratoEstante" || $rutas[0] =="adminState" || $rutas[0] == "registro" || $rutas[0] == "login" || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "adminPais"){
+                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] =="adminState" || $rutas[0] == "registro" || $rutas[0] == "login" || $rutas[0] == "adminTipoUsuario" ){
                           
                     include "modulos/cabezotesesion.php";
                     include "modulos/".$rutas[0].".php";
-                }else{
+                }else if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos")
+                {
+                    include "modulos/cabezaLogueado.php";
+                    include "modulos/plantillaSlideBar.php";
+                    include "modulos/".$rutas[0].".php";
 
-                    include "modulos/error404.php";
-                    
-
+                }else
+                {
+                    include "modulos/error404.php";     
                 }
             
            // include "modulos/footer.php";

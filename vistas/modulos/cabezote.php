@@ -7,33 +7,6 @@
 <div  class="container-fluid p-2 barra" id="top">  
     <div class="container">
         <div class="row">
-            <!--- AVISO INFORMATIVO -->
-            <diV class="col-lg-3 col-md-8 col-sm-12 col-xs-12 social">
-                <ul>
-                    <li>
-                        <a href="http://facebook.com" target="_blank">
-                        <i class="fa fa-facebook redSocial text-white" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com" target="_blank">
-                        <i class="fa fa-instagram  redSocial text-white" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/" target="_blank">
-                        <i class="fa fa-twitter redSocial text-white" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.youtube.com/" target="_blank">
-                        <i class="fa fa-youtube redSocial text-white" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!--- REGISTRO -->
 
             <diV class="col-lg-9 col-md-4 col-sm-12 col-xs-12 registro">
                 <ul>

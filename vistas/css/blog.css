@@ -11,15 +11,18 @@
     transition: .3s;
 }
 
-.single-blog:hover .single-blog-img a img {
-    -webkit-transform: scale(1.09);
-    -moz-transform: scale(1.09);
-    -ms-transform: scale(1.09);
-    -o-transform: scale(1.09);
-    transform: scale(1.09);
+.single-blog:hover{
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+    transition: 0.5s;
 }
 .single-blog-img img {
     width: 100%;
+    height: 280px;
+
 }
 
 .blog-content-box {
@@ -72,6 +75,9 @@
 }
 .blog-content h4 a:hover {
     color: #FFCA00;
+}
+.link:hover{
+    color: #009EB7;
 }
 .meta-post {
     margin: 10px 0 13px;

@@ -1,7 +1,6 @@
 <!--  
 BANNER
 -->
-
 <?php
 $url = Ruta::ctrlRuta();    
 if(isset($_SESSION["id"])){
@@ -12,7 +11,7 @@ if(isset($_SESSION["id"])){
 }
 
 $variable = '</br></br>
-<div class="ms-5 me-5 mb-3 text-justify">
+<div class="ms-5 me-5 mb-3 text-end fst-italic">
 <h class="justificadoTotal">
 <img src="http://localhost/aguaMineral/vistas/img/general/logoTransparente.JPG" class="h-25 w-25">
 <p class="titulo">CONTRATO DE ESTANTERIA</p>
@@ -97,81 +96,78 @@ COMODATARIO               &nbsp;&nbsp;&nbsp;&nbsp;         DPTO DE VENTAS
 </h> 
 </div>';
 ?>
-<div class="Home"></div>
+
+<div class="Home ms-5"></div>
   <div class="container-fluid well well-sm barraProductos p-5 text-center col-md-10">
-    <h1 class="tituloContratos text-dark me-4">Crear contrato estante</h1>
+    <h1 class="tituloContratos text-dark me-5">Crear contrato estante</h1>
   </div>
-  <div class="container-fluid p-5 m-5" >
-    <div class="container">
+  <div class="container-fluid p-3 ms-5" >
+    <div class="container ms-5">
 
-
-
-
-
-     <ul class="listasfullC" >
+     <ul class="listasfullC ms-5 p-5" >
       <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 text-center" > 
-       <form>
+       <form class="ms-5">
         <!-- inicio datos del cliente -->
 
-        <div class="form-row">
+        <div class="row">
           <div class="form-group col-md-6">
             <label for="inputEmail4">Nombre del cliente</label>
-            <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre">
+            <input type="text" class="form-control mt-3" id="nombreCliente" placeholder="Nombre">
           </div>
           <div class="form-group col-md-6">
             <label for="inputPassword">Apellido del cliente</label>
-            <input type="text" class="form-control" id="apellidoCliente" placeholder="Apellido">
+            <input type="text" class="form-control mt-3" id="apellidoCliente" placeholder="Apellido">
           </div>
         </div>
 
-        <div class="form-row">
+        <div class="row">
           <div class="form-group col-md-6">
-            <label for="inputEmail4">Cedula del cliente</label>
-            <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre">
+            <label for="inputEmail4" class="mt-3">Cedula del cliente</label>
+            <input type="text" class="form-control mt-3" id="nombreCliente" placeholder="Nombre">
           </div>
           <div class="form-group col-md-6">
-            <label for="inputState">Municipio de recidencia</label>
-            <select id="inputState" class="form-control">
+            <label for="inputState" class="mt-3">Municipio de residencia</label>
+            <select id="inputState" class="form-select mt-3">
               <option selected>Cardenas</option>
               <option selected>San cristobal</option>                                        
             </select>
           </div>
         </div>
 
-        <div class="form-row">
+        <div class="row">
          <div class="form-group col-md-12">
-          <label for="inputAddress">Direcci&oacute;n del cliente</label>
-          <input type="text" class="form-control" id="direccion" placeholder="Direcci&oacute;n del cliente">
+          <label for="inputAddress" class="mt-3">Direcci&oacute;n del cliente</label>
+          <input type="text" class="form-control mt-3" id="direccion" placeholder="Direcci&oacute;n del cliente">
         </div>
       </div>
 
       <!-- Fin datos del cliente -->
 
-      <div class="form-row">
+      <div class="row">
         <div class="form-group col-md-6">
-          <label for="inputPassword">Nombre del comercio</label>
-          <input type="text" class="form-control" id="nobreComercio" placeholder="Nombre del comercio">
+          <label for="inputPassword" class="mt-3">Nombre del comercio</label>
+          <input type="text" class="form-control mt-3" id="nobreComercio" placeholder="Nombre del comercio">
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword">T&eacute;lefono del comercio</label>
-          <input type="text" class="form-control" id="telefono" placeholder="T&eacute;lefono del comercio">
+          <input type="text" class="form-control mt-3" id="telefono" placeholder="T&eacute;lefono del comercio">
         </div>
 
         <div class="form-group col-md-12">
-          <label for="inputAddress">Direcci&oacute;n del comercio</label>
-          <input type="text" class="form-control" id="direccionComercio" placeholder="Direcci&oacute;n del comercio">
+          <label for="inputAddress" class=" mt-3">Direcci&oacute;n del comercio</label>
+          <input type="text" class="form-control mt-3" id="direccionComercio" placeholder="Direcci&oacute;n del comercio">
         </div>
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <div class="form-group col-md-6">
-          <label for="inputCity">Cantidad de estantes</label>
-          <input type="text" class="form-control" id="inputCity" placeholder="Cantidad de estantes">
+          <label for="inputCity" class="mt-3">Cantidad de estantes</label>
+          <input type="text" class="form-control mt-3" id="inputCity" placeholder="Cantidad de estantes">
         </div>
 
         <div class="form-group col-md-6">
-          <label for="inputState">Descripci&oacute;n</label>
-          <select id="inputState" class="form-control">
+          <label for="inputState" class=" mt-3">Descripci&oacute;n</label>
+          <select id="inputState" class="form-select mt-3">
             <option selected>Estante de 6 botellones</option>
             <option selected>Estante de 8 botellones</option>                                
           </select>
@@ -179,7 +175,7 @@ COMODATARIO               &nbsp;&nbsp;&nbsp;&nbsp;         DPTO DE VENTAS
 
       </div>
 
-      <button type="button" class="btn btn-primary botonContrato boton1 mb-5" data-toggle="modal"  id="boton1">
+      <button type="button" class="btn btn-primary botonContrato boton1 mb-5 mt-3" data-toggle="modal"  id="boton1">
         Generar
       </button>
       <br>
@@ -228,7 +224,7 @@ VENTANA MODAL PARA EL REGISTRO
       }
       ?>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
         <button type="button" class="btn btn-primary">Generar</button>
         <button type="button" class="btn btn-primary">Imprimir</button>
       </div>

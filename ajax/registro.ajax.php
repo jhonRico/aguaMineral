@@ -5,9 +5,9 @@ require_once "../modelos/m_registro.php";
 
 class   AjaxUser{
     
-    public function ajaxConsultUser($tipoUsuario,$usuario,$contrasena)
+    public function ajaxConsultUser($usuario,$contrasena)
     {
-        $respuesta = ControladorRegistro::ctrlConsultarAllUsers($tipoUsuario,$usuario,$contrasena);
+        $respuesta = ControladorRegistro::ctrlConsultarAllUsers($usuario,$contrasena);
         echo  json_encode ($respuesta);
 	}
     
@@ -35,13 +35,12 @@ if(isset($_POST["nombre"]))
     $contrasena = $_POST["contrasena"];
     $allStates->ajaxAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena);
 }
-if(isset($_POST["tipoDeUsuario"]))
+if(isset($_POST["user"]))
 {  
     $allStates = new AjaxUser();
-    $tipoUsuario = $_POST["tipoDeUsuario"];
     $usuario = $_POST["user"];
     $contrasena = $_POST["password"];
-    $allStates->ajaxConsultUser($tipoUsuario,$usuario,$contrasena);
+    $allStates->ajaxConsultUser($usuario,$contrasena);
 }
 
 

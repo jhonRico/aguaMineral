@@ -1,4 +1,3 @@
-<body class="bg-light">
 <form method="post" id="formulario" autocomplete="off" class="m-5 fp-5">
   <div class="m-5 p-5">
     <table class="table m-3 p-3">
@@ -25,7 +24,7 @@
     </tr>
    </thead>
 </table> 
-<div class="bg-light ms-5">
+<div class="ms-5">
   <div class="ms-5">
     <div class=" w-100 rounded ms-5">
        <div class="text-dark m-3 p-2 mb-1 rounded ms-5" id="respuestaCons"></div>
@@ -37,7 +36,6 @@
   <!-- Modal para agregar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="moddaddCountry" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
                   <div class="modal-dialog">
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
@@ -50,7 +48,6 @@
                                                    <input   type="text" class="form-control" id="namePais" name ="nameEstado" placeholder="Por favor ingrese el nombre del pais" required>  
                                              </div>
                                       </div>
-
                                        <div class="form-group">  
                                                <div class="modal-footer">         
                                                      <button type="button" class="btn btn-secondary cerrar" style ="width:48%;">Cancelar</button>                                                                 
@@ -64,7 +61,6 @@
     <!-- Modal para editar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="editCountry" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
                   <div class="modal-dialog">
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
@@ -77,7 +73,6 @@
                                                    <input   type="text" class="form-control" id="namePais2" name ="nameEstado" placeholder="Por favor ingrese el nombre del pais" required>  
                                              </div>
                                       </div>
-
                                        <div class="form-group">  
                                                <div class="modal-footer">         
                                                      <button type="button" class="btn btn-secondary cerrar" style ="width:48%;">Cancelar</button>                                                                 
@@ -88,4 +83,3 @@
                   </div>   
         </div>
   </form>
-</body>

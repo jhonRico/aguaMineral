@@ -1,10 +1,12 @@
+.barraPrincipal{
+    background: #003FA5;
+    padding: 0px;
+    margin: 0px;
+}
 #top ul{
-    padding-top: 8px;
+    padding-top: 0px;
 }
-.social ul li a i{
-    font-size: 18px;
-    margin: 0 1px;
-}
+
 .registro ul{
     text-align: right;
     font-size: 10px;
@@ -22,6 +24,7 @@ Cabecera
         float: left;
         margin: 25px;
         padding: 0px;
+        margin-left: 0px;
 }
 
 .home
@@ -84,11 +87,13 @@ header #buscador{
     margin: 20px 0;
 }
 header #buscador input{
-    padding: 19px;
+    padding: 15px;
     border-radius: 0px;
 }
 header #buscador button{
-    padding: 9px 15px;
+    padding: 9px 10px;
+    top: 0px;
+    font-size: 15px;
     border: 1px solid silver;
     border-radius: 0;
 }
@@ -327,10 +332,12 @@ Cabecera de las paginas principales despues de iniciar sesión
 }
 .imagenLogo{
     width:100px;
-    height:55px;
+    height:45px;
     float: right;
     margin-top: 0px;
+    margin-bottom: 50px;
     margin-right: 25px;
+    top: 20px;
 }
 .boton{
     background-color: #2E8FE6;

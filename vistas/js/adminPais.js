@@ -16,19 +16,22 @@ $(function(){
 })
 
 //Mostrar el modal editar
-function mostrarModal(id, descripcion)
+function mostrarModalEdit(id, descripcion)
 {
-
-		$("#namePais2").attr('value',descripcion);
-		$("#editCountry").modal("show");
-		descripcion = $("#namePais2").val();
-		$(function(){
-		$("#editarPais").click(function(){
-			 modificar(id);
-		})
-	}) 
-
+	idPais = id;
+	$("#editCountry").modal("show");
+	$("#namePais2").attr('value', descripcion);
+	$("#editarPais").click(function(){
+		modificar(idPais);
+	})
+	 
 }
+
+/*
+function validarFormularioDeEditar(id)
+{
+	alert(id);
+}*/
 //cerrar modal editar
 
 $(function(){
@@ -41,6 +44,7 @@ $(function(){
 
 $(function(){
 	$(".cerrar").click(function(){
+		$("#namePais").val('');
 		$("#moddaddCountry").modal("hide");
 	})
 })
@@ -64,7 +68,8 @@ function consultarTodosPaises(){
 		contentType: false,
 		processData: false,
 		success: function(respuesta3){
-			if(respuesta3){
+			
+			 if(respuesta3.length >10 ){
 				respuesta3 =respuesta3.replace("[","");
 				respuesta3 =respuesta3.replace("]","");
 				var auxSplit2 = respuesta3.split("},");
@@ -78,7 +83,7 @@ function consultarTodosPaises(){
 					var aux = "'"+res2.descripcion+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminar('+res2.idPais+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModal('+res2.idPais+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminar('+res2.idPais+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEdit('+res2.idPais+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -86,7 +91,11 @@ function consultarTodosPaises(){
 				plantilla2 +='</div>'
 				$("#respuestaCons").html(plantilla2);  
 				$('#respuestaCons').show();
+			}else{
+				$("#respuestaCons").hide(); 
+					
 			}
+			
 
 		}
 	})
@@ -129,6 +138,7 @@ function registrarPais(valor)
 				{
 					if (result.isConfirmed)
 					{
+						$("#namePais").val('');
 						$("#moddaddCountry").modal("hide");
 					}
 
@@ -203,6 +213,7 @@ function registrarPais(valor)
  		async:false,
  		success: function(respuesta)
  		{
+
  			if(!respuesta.includes("ok"))
  			{
  				Swal.fire({
@@ -215,7 +226,6 @@ function registrarPais(valor)
 
  			}else
  			{
-
  				Swal.fire({
  					title: 'Pais Modificado',
  					icon: 'success',
@@ -225,6 +235,7 @@ function registrarPais(valor)
 				{
 					if (result.isConfirmed)
 					{
+						$("#namePais2").attr('value', null);
 						$("#editCountry").modal("hide");
 					}
 				})
@@ -235,7 +246,7 @@ function registrarPais(valor)
  	})
  }
 
- function validarRegistroExistenteDeModificar(id, descripcion)
+/* function validarRegistroExistenteDeModificar(id, descripcion)
 {
 	var datos = new FormData();
 
@@ -253,8 +264,7 @@ function registrarPais(valor)
 		{
 			if(respuesta.includes("false"))
 			{
-				modificarPais(id,descripcion);
-				consultarTodosPaises();
+				
 			}else
 			{
 				Swal.fire({
@@ -271,7 +281,7 @@ function registrarPais(valor)
 		}                 
 
 	})
-}
+}*/
 //Funcion Ajax que valida pais existente en BD 
 
 function validarRegistroExistente(valor)
@@ -335,10 +345,10 @@ function eliminar(id){
 }
 
 //Validar Modificacion de Pais
- 
+
 function modificar(id)
  {
-			var descripcion = $("#namePais2").val();
+		var descripcion = $("#namePais2").val();
   		if (descripcion == "") 
  			{
  				Swal.fire({
@@ -365,8 +375,11 @@ function modificar(id)
  				})
  				return false;
  			}
- 			
- 			validarModificacionPais(id);
+
+ 			var descripcion = $("#namePais2").val();
+			modificarPais(id,descripcion);
+			consultarTodosPaises();
+ 			//validarModificacionPais(id);
 
  			return true;
  	}
@@ -419,12 +432,10 @@ function validarRegistroPais()
 }
 
 //Capturar valor del campo de texto de modificar Pais
-function validarModificacionPais(id)
+/*function validarModificacionPais(id)
 {
-	var descripcion = $("#namePais2").val();
-	const ejecutar =  validarRegistroExistenteDeModificar(id,descripcion);
- 	consultarTodosPaises();
+	
+	//const ejecutar =  validarRegistroExistenteDeModificar(id,descripcion);
+ 	//consultarTodosPaises();
 
-}
-
-
+}*/

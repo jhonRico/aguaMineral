@@ -1,3 +1,26 @@
+.iconosAdmin{
+	font-size: 70px;
+	margin-right: 0px;
+}
+.titulosAdmin{
+	float: right;
+	margin-right: 230px;
+	margin-left: 50px;
+
+}
+.returnAdmin
+{
+	font-size: 35px;
+	margin-left: 105px;
+}
+.titulosAdmin:hover
+{
+	color: #009EB7;
+}
+.link-dark:hover
+{
+	color: #009EB7;
+}
 .div-pais
 {
     background: #ECECEC;
@@ -16,4 +39,10 @@
 {
     float: right;
     margin-right: 8px;
+}
+
+.div-admin:hover
+{
+	transform: scale(1.05);
+    transition: 0.5s;
 }

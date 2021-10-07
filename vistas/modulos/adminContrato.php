@@ -14,7 +14,7 @@
 MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 ===========================================-->
 <div class="container-fluid blogs text-center">
-	<h1 class="mt-5 mb-5">Administración</h1>
+	<h1 class="mt-5 mb-5">Administración de Contratos</h1>
 
     <!---========================================  
     BLOG EN CUADRICULA
@@ -22,26 +22,25 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
     <ul class="grid0" id="">
 
     <div class="row">
-     <div class="single-blog col">
-      <div class="single-blog-img">
-        <a href="#" ><img src="<?php echo $url2;?>vistas/img/general/contratos1.png" alt="Blog Image"></a>
-      </div>
-      <div class="blog-content-box">
-        <div class="blog-content">
-          <h4><a href="#">Formato Contrato</a></h4>
+     <div class="col">
+      <a href="#" class="link-dark">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+          <i class="fas fa-file-signature iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Formato</h3>
+          <p class="mb-5 mt-0">Administre el formato de los contratos</p>
         </div>
+      </a>
      </div>
-   </div>     <div class="single-blog col">
-      <div class="single-blog-img">
-        <a href="#" ><img src="<?php echo $url2;?>vistas/img/general/contrato2.jpeg" alt="Blog Image"></a>
-      </div>
-      <div class="blog-content-box">
-        <div class="blog-content">
-          <h4><a href="#">Contratos</a></h4>
+     <div class="col">
+      <a href="#" class="link-dark">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+          <i class="fas fa-file-contract iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Contratos</h3>
+          <p class="mb-5 mt-0">Administre los contratos ya existentes</p>
         </div>
+      </a>
      </div>
-   </div>
-  </div>
+    </div>
 </ul>  
 
 

@@ -14,35 +14,34 @@
 MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 ===========================================-->
 <div class="container-fluid blogs text-center">
-	<h1 class="mt-5 mb-5">Administración</h1>
+	<h1 class="mt-5 mb-5">Administración de Productos</h1>
 
     <!---========================================  
     BLOG EN CUADRICULA
     ===========================================-->
-    <ul class="grid0" id="">
+      <ul class="grid0" id="">
 
     <div class="row">
-     <div class="single-blog col">
-      <div class="single-blog-img">
-        <a href="#" ><img src="<?php echo $url2;?>vistas/img/general/tipoProductos.jpg" alt="Blog Image"></a>
-      </div>
-      <div class="blog-content-box">
-        <div class="blog-content">
-          <h4><a href="#">Tipo de Productos</a></h4>
+     <div class="col">
+      <a href="#" class="link-dark">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+          <i class="fas fa-hand-holding-water iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Tipo producto</h3>
+          <p class="mb-5 mt-0">Administre los tipos de productos</p>
         </div>
+      </a>
      </div>
-   </div>     <div class="single-blog col">
-      <div class="single-blog-img">
-        <a href="#" ><img src="<?php echo $url2;?>vistas/img/general/producto.jpg" alt="Blog Image"></a>
-      </div>
-      <div class="blog-content-box">
-        <div class="blog-content">
-          <h4><a href="#">Productos</a></h4>
+     <div class="col">
+      <a href="#" class="link-dark">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+           <i class="fas fa-tint iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Productos</h3>
+          <p class="mb-5 mt-0">Administre los productos de la empresa</p>
         </div>
+      </a>
      </div>
-   </div>
-  </div>
-</ul>  
+    </div>
+</ul> 
 
 
 

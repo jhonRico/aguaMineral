@@ -4,7 +4,7 @@
     session_start();
 ?>
 <!-- TOP -->
-<div  class="container-fluid p-2 barra" id="top">  
+<div  class="container-fluid barraPrincipal" id="top">  
     <div class="container">
         <div class="row">
 

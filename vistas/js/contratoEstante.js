@@ -1,3 +1,15 @@
+
+$("#cedulaCliente").keyup(function(){
+  consultarClienteEnBd();
+});
+
+
+
+
+
+
+
+
 $(function(){
      $(".boton1").click(function(){
       var nombre = $('#nombreCliente').val();
@@ -180,13 +192,17 @@ $(function(){
         })        
         return false;
       }
-      */mostrarModal();
+      consultarClienteEnBd();
+      */
+      //mostrarModal();
       //RegistrarUsuario();
-
-      return true;
+   
+      //return true;
 
       });
  });
+
+//$(selector).keydown()
 
 function mostrarModal(){
 
@@ -201,6 +217,70 @@ $(function(){
 		$("#modal2").modal("hide");
 	})
 })
+
+function consultarClienteEnBd()
+{
+
+  var nombre = $('#cedulaCliente').val();
+  var datos = new FormData();
+  datos.append("nombreCliente", nombre);
+
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+      if(!respuesta3.includes("false"))
+                          {
+                            respuesta3 =respuesta3.replace("[","");
+                            respuesta3 =respuesta3.replace("]","");
+                            var auxSplit2 = respuesta3.split("},");
+
+                           for(var i=0;i<auxSplit2.length;i++){
+                              if(!auxSplit2[i].includes("}")){
+                                auxSplit2[i] = auxSplit2[i]+"}";
+                              }
+                              var res2 = JSON.parse(auxSplit2[i]);
+                            }
+                             Swal.fire({
+                              icon: 'success',
+                              title: res2.nombrePersona+' '+res2.apellidoPersona,
+                              text: 'El cliente ya existe',
+                              showConfirmButton: true,
+                              confirmButtonText: "Rellenar Campos",
+                              showCancelButton: true
+                            }).then((result) => {
+                            if (result.isConfirmed) 
+                                {
+                                    $('#nombreCliente').val(res2.nombrePersona);
+                                    $('#apellidoCliente').attr('value', res2.apellidoPersona);
+                                    $('#direccion').val(res2.direccionPersona);
+                                    $('#cedulaCliente').val(res2.cedulaPersona);
+                                    $('#telefono').val(re2.telefonoPersona);
+                                }                                
+                            });        
+                            return false;
+                             
+                          }else
+                          {
+                            Swal.fire({
+                              position: 'top-end',
+                              icon: 'error',
+                              toast: true,
+                              title: 'El cliente no existe por favor registrelo',
+                              showConfirmButton: false,
+                              timerProgressBar: true,
+                              timer: 3500
+                            })        
+                            return false;
+                          }
+    }
+  })
+}
 
 function consultarFormatoContrato()
 {
@@ -246,4 +326,9 @@ function consultarFormatoContrato()
 
     }
   })
+}
+
+function rellenarCampos()
+{
+
 }

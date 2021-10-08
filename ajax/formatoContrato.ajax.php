@@ -8,7 +8,12 @@ class   AjaxFormatoContrato
     
     public function ajaxConsultarFormatoContrato($tabla)
     {
-        $respuesta = ControladorFormatoContrato::consultarFormatoContrato($tabla);
+        $respuesta = ControladorFormatoContrato::ctrlConsultarFormatoContrato($tabla);
+        echo  json_encode ($respuesta);
+    }
+    public function ajaxConsultarClientesEnBd($tabla,$tipoUsuario,$nombreCliente)
+    {
+        $respuesta = ControladorFormatoContrato::ctrlConsultarClientesEnBd($tabla,$tipoUsuario,$nombreCliente);
         echo  json_encode ($respuesta);
     }
 }
@@ -19,6 +24,15 @@ if(isset($_POST["valor"]))
     $tabla = "formatocontrato";
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxConsultarFormatoContrato($tabla);
+}
+
+if(isset($_POST["nombreCliente"]))
+{  
+    $tabla = "persona";
+    $tipoUsuario = "4";
+    $nombreCliente = $_POST['nombreCliente'];
+    $allStates = new AjaxFormatoContrato();
+    $allStates->ajaxConsultarClientesEnBd($tabla,$tipoUsuario,$nombreCliente);
 }
 
 ?>

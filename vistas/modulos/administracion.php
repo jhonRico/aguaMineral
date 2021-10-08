@@ -24,11 +24,11 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
     <div class="row">
      <div class="single-blog col">
       <div class="single-blog-img">
-        <a href="" ><img src="<?php echo $url2;?>vistas/img/general/persona.jpg" alt="Blog Image"></a>
+        <a href="http://localhost/aguaMineral/adminPersonas" ><img src="<?php echo $url2;?>vistas/img/general/persona.jpg" alt="Blog Image"></a>
       </div>
       <div class="blog-content-box">
         <div class="blog-content">
-          <h4><a href="#">Personas</a></h4>
+          <h4><a href="">Personas</a></h4>
         </div>
      </div>
    </div>     <div class="single-blog col">

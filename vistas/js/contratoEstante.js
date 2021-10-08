@@ -225,7 +225,7 @@ function consultarFormatoContrato()
         respuesta3 =respuesta3.replace("]","");
         var auxSplit2 = respuesta3.split("},");
 
-        plantilla2 +='<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 m-2" id="">'
+        plantilla2 +='<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-2" id="">'
         for(var i=0;i<auxSplit2.length;i++)
         {
           if(!auxSplit2[i].includes("}"))
@@ -236,11 +236,11 @@ function consultarFormatoContrato()
           plantilla2 += res2.descripcion;
         }
         plantilla2 +='</div>'
-        $("#cuerpoContratoEstante").html(plantilla2);  
-        $('#cuerpoContratoEstante').show();
+        $("#cuerpoContrato").html(plantilla2);  
+        $('#cuerpoContrato').show();
       }else
       {
-        $("#cuerpoContratoEstante").hide();     
+        $("#cuerpoContrato").hide();     
       }
       
 

@@ -15,7 +15,7 @@ if(isset($_SESSION["id"])){
 
 <div class="Home ms-5"></div>
   <div class="container-fluid well well-sm barraProductos p-5 text-center col-md-12 ms-5">
-        <h1 class="tituloContratos text-dark ms-1">Crear contrato estante</h1>
+        <h1 class="tituloContratos text-dark ms-4">Crear contrato estante</h1>
   </div>
   <div class="container-fluid p-3 ms-5" >
     <div class="container ms-5">
@@ -122,7 +122,7 @@ VENTANA MODAL PARA EL REGISTRO
       date_default_timezone_set("America/Argentina/Buenos_Aires");
                           //Dia-Mes-Año Hora:Minutos:Segundos
       $fecha = date("d-m-Y H:i:s");
-      echo '<div id="cuerpoContratoEstante"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div>';
+      echo '<div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div>';
 
       function fechaCastellano ($fecha) {
         $fecha = substr($fecha, 0, 10);

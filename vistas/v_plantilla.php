@@ -77,7 +77,7 @@
                           
                     include "modulos/cabezotesesion.php";
                     include "modulos/".$rutas[0].".php";
-                }else if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos")
+                }else if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos" || $rutas[0] == "adminPersonas")
                 {
                     include "modulos/cabezaLogueado.php";
                     include "modulos/plantillaSlideBar.php";

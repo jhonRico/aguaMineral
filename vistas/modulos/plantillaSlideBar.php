@@ -65,7 +65,7 @@
      ?>
      <li class="profile">
         <form action="" method="post">
-         <button name="cerrar"><i class='bx bx-log-out' id="log_out"></i></button>
+         <span title="Cerrar Sesión"><button name="cerrar"><i class='bx bx-log-out' id="log_out"></i></button></span>
         </form>
      </li>
     </ul>

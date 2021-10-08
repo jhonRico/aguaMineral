@@ -9,7 +9,7 @@ $(function(){
       var direccionComercio = $('#direccionComercio').val();
       var cantidadEstantes = $('#inputCity').val();
 
-      if (nombre == "") 
+     /* if (nombre == "") 
       {
          Swal.fire({
           position: 'top-end',
@@ -180,7 +180,7 @@ $(function(){
         })        
         return false;
       }
-      mostrarModal();
+      */mostrarModal();
       //RegistrarUsuario();
 
       return true;
@@ -190,6 +190,9 @@ $(function(){
 
 function mostrarModal(){
 
+   //$("#cuerpoContratoEstante").html(contrato);  
+   //$('#cuerpoContratoEstante').show();
+   consultarFormatoContrato();
    $("#modal2").modal("show");
 }
 
@@ -198,3 +201,49 @@ $(function(){
 		$("#modal2").modal("hide");
 	})
 })
+
+function consultarFormatoContrato()
+{
+
+  var datos = new FormData();
+  datos.append("valor", "nulo");
+
+  let plantilla2 = " ";
+  let obj
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+       if(respuesta3.length >10 )
+       {
+        respuesta3 =respuesta3.replace("[","");
+        respuesta3 =respuesta3.replace("]","");
+        var auxSplit2 = respuesta3.split("},");
+
+        plantilla2 +='<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 m-2" id="">'
+        for(var i=0;i<auxSplit2.length;i++)
+        {
+          if(!auxSplit2[i].includes("}"))
+          {
+            auxSplit2[i] = auxSplit2[i]+"}";
+          }
+          var res2 = JSON.parse(auxSplit2[i]);
+          plantilla2 += res2.descripcion;
+        }
+        plantilla2 +='</div>'
+        $("#cuerpoContratoEstante").html(plantilla2);  
+        $('#cuerpoContratoEstante').show();
+      }else
+      {
+        $("#cuerpoContratoEstante").hide();     
+      }
+      
+
+    }
+  })
+}

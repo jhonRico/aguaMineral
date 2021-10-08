@@ -90,8 +90,9 @@
             
            // include "modulos/footer.php";
         }else{
+            //include "modulos/cabezotesesion.php";
              include "modulos/cabezote.php";            
-            include "modulos/slide.php";
+             // include "modulos/slide.php";
            // include "modulos/footer.php";
             
         }

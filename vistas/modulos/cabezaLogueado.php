@@ -31,20 +31,18 @@ $rutas = explode("/", $_GET["ruta"]);
         {
        
             ?>
-                <div  class="container-fluid p-3 barra"> 
-                    <a href="http://localhost/aguaMineral/administracion" class="returnAdmin"><i class="fas fa-users-cog text-white"></i></a>
-                    <img src="<?php echo $url ?>vistas/img/logoPrincipal/logop.png" class="img-responsive imagenLogo">                                                                               
-                </div
+                <div  class="container-fluid p-1 barra"> 
+                    <span title="Regresar a administración"><a href="http://localhost/aguaMineral/administracion" class="home"><i class="fas fa-users-cog text-white"></i></a></span>
+                </div>
             <?php
         }
     if ($usuario == 2)
         {
        
             ?>
-                <div  class="container-fluid p-3 barra"> 
-                    <a href="http://localhost/aguaMineral/principal" class="returnAdmin"><i class="fas fa-home text-white"></i></a>
-                    <img src="<?php echo $url ?>vistas/img/logoPrincipal/logop.png" class="img-responsive imagenLogo">                                                                               
-                </div
+                <div  class="container-fluid p-1 barra"> 
+                    <span title="Regresar a pagina principal"><a href="http://localhost/aguaMineral/principal" class="home"><i class="fas fa-home text-white"></i></a></span>            
+                </div>
             <?php
         }
     ?>

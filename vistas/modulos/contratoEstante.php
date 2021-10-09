@@ -27,19 +27,20 @@ if(isset($_SESSION["id"])){
 
         <div class="row">
           <div class="form-group col-md-6">
+            <label for="inputEmail4" class="mb-3">C&eacute;dula del cliente</label>
+            <input type="text" class="form-control mb-3" id="cedulaCliente" placeholder="C&eacute;dula">
+          </div>
+          <div class="form-group col-md-6">
             <label for="inputEmail4">Nombre del cliente</label>
             <input type="text" class="form-control mt-3" id="nombreCliente" placeholder="Nombre">
           </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword">Apellido del cliente</label>
-            <input type="text" class="form-control mt-3" id="apellidoCliente" placeholder="Apellido">
-          </div>
+          
         </div>
 
         <div class="row">
           <div class="form-group col-md-6">
-            <label for="inputEmail4" class="mt-3">C&eacute;dula del cliente</label>
-            <input type="text" class="form-control mt-3" id="cedulaCliente" placeholder="C&eacute;dula">
+            <label for="inputPassword" class="mt-3">Apellido del cliente</label>
+            <input type="text" class="form-control mt-3" id="apellidoCliente" placeholder="Apellido">
           </div>
           <div class="form-group col-md-6">
             <label for="inputState" class="mt-3">Municipio de residencia</label>
@@ -83,7 +84,7 @@ if(isset($_SESSION["id"])){
 
         <div class="form-group col-md-6">
           <label for="inputState" class=" mt-3">Descripci&oacute;n</label>
-          <select id="inputState" class="form-select mt-3">
+          <select id="cantidadBotellones" class="form-select mt-3">
             <option selected>Estante de 6 botellones</option>
             <option selected>Estante de 8 botellones</option>                                
           </select>
@@ -139,7 +140,7 @@ VENTANA MODAL PARA EL REGISTRO
         return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
       }
       ?>
-      <div class="modal-footer bg-dark">
+      <div class="modal-footer">
         <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
         <button type="button" class="btn btn-primary">Generar</button>
         <button type="button" class="btn btn-primary">Imprimir</button>

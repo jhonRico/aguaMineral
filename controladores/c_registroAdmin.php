@@ -56,3 +56,5 @@ class ControladorRegistroAdmin
         return $respuesta;
     }
 }
+
+?>

@@ -23,7 +23,5 @@ require_once "modelos/m_state.php";
 require_once "modelos/m_registro.php";
 require_once "modelos/m_registroAdmin.php";
 
-require_once "PHPMailer/PHPMailerAutoload.php";
-
 $plantilla = new ControladorPlantilla();
 $plantilla ->plantilla();

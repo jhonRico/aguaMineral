@@ -1,3 +1,4 @@
+/*LLamar a la funcion cada vez que se oprime una tecla*/
 
 $("#cedulaCliente").keyup(function(){
   consultarClienteEnBd();

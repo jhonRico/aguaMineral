@@ -235,7 +235,24 @@ function mostrarModal(){
           }
           var res2 = JSON.parse(auxSplit2[i]);
         }
+        consultarCamposDeTienda(res2.idPersona);
+        $('#nombreCliente').val(res2.nombrePersona);
+        $('#apellidoCliente').val(res2.apellidoPersona);
+        $('#direccion').val(res2.direccionPersona);
+        $('#cedulaCliente').val(res2.cedulaPersona);
+
+
         Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          title: 'El cliente ya existe',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        
+       /* Swal.fire({
           icon: 'success',
           title: res2.nombrePersona+' '+res2.apellidoPersona,
           text: 'El cliente ya existe',
@@ -245,27 +262,18 @@ function mostrarModal(){
         }).then((result) => {
           if (result.isConfirmed) 
           {
-            consultarCamposDeTienda(res2.idPersona);
-            $('#nombreCliente').val(res2.nombrePersona);
-            $('#apellidoCliente').attr('value', res2.apellidoPersona);
-            $('#direccion').val(res2.direccionPersona);
-            $('#cedulaCliente').val(res2.cedulaPersona);
+            
           }                                
-        });        
-        return false;
+        });       **/ 
 
       }else
       {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'El cliente no existe por favor registrelo',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 3500
-        })        
-        return false;
+            $('#nombreCliente').val('');
+            $('#apellidoCliente').val('');
+            $('#direccion').val('');
+            $("#nobreComercio").val('');
+            $('#direccionComercio').val('');
+            $('#telefono').val('');
       }
     }
   })
@@ -340,7 +348,7 @@ function consultarFormatoContrato()
         {
           result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
           result = result.replace("cedulaCliente",$('#cedulaCliente').val());
-          result = result.replace("nombreComercio ",$("#nobreComercio").val());
+          result = result.replace("nombreComercio",$('#nobreComercio').val());
           result = result.replace("MunicipioCliente",$('#inputState').val());
           result = result.replace("municipioCliente",$('#inputState').val());
           result = result.replace("telefonoComercio",$('#telefono').val());

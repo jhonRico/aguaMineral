@@ -34,32 +34,49 @@ if(isset($_SESSION["id"])){
             <label for="inputEmail4">Nombre del cliente</label>
             <input type="text" class="form-control mt-3" id="nombreCliente" placeholder="Nombre">
           </div>
-          
         </div>
 
         <div class="row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-12">
             <label for="inputPassword" class="mt-3">Apellido del cliente</label>
             <input type="text" class="form-control mt-3" id="apellidoCliente" placeholder="Apellido">
           </div>
-          <div class="form-group col-md-6">
-            <label for="inputState" class="mt-3">Municipio de residencia</label>
+        </div>
+
+        <div class="row">
+         
+          <div class="form-group col-md-4">
+            <label for="inputAddress" class="mt-3">Estado del cliente</label>
             <select id="inputState" class="form-select mt-3">
+              <option selected>T&aacute;chira</option>
+              <option selected>M&eacute;rida</option> 
+              <option selected>Barinas</option>                                          
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState" class="mt-3">Municipio de residencia</label>
+            <select id="municipio" class="form-select mt-3">
               <option selected>Cardenas</option>
               <option selected>San cristobal</option>                                        
             </select>
           </div>
-        </div>
+          <div class="form-group col-md-4">
+            <label for="inputState" class="mt-3">Ciudad de residencia</label>
+            <select id="ciudad" class="form-select mt-3">
+              <option selected>San Cristobal</option>                                     
+            </select>
+          </div>
 
-        <div class="row">
-         <div class="form-group col-md-12">
-          <label for="inputAddress" class="mt-3">Direcci&oacute;n del cliente</label>
-          <input type="text" class="form-control mt-3" id="direccion" placeholder="Direcci&oacute;n del cliente">
-        </div>
       </div>
 
       <!-- Fin datos del cliente -->
 
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="inputAddress" class="mt-3">Direcci&oacute;n del cliente</label>
+          <input type="text" class="form-control mt-3" id="direccion" placeholder="Direcci&oacute;n del cliente">
+        </div>
+      </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label for="inputPassword" class="mt-3">Nombre del comercio</label>
@@ -71,11 +88,38 @@ if(isset($_SESSION["id"])){
         </div>
 
         <div class="form-group col-md-12">
-          <label for="inputAddress" class=" mt-3">Direcci&oacute;n del comercio</label>
+          <label for="inputAddress" class=" mt-3"><b>Direcci&oacute;n del comercio</b></label>
+          <p>&iquest;La direccion del comercion es la misma de la residencia?</p>
+          <label for="">Si</label>
+          <input type="checkbox" class="form-check-input me-5" id="yes">
+          <label for="" id="ocultar">No</label>
+          <input type="checkbox" class="form-check-input" id="no" checked="true">
           <input type="text" class="form-control mt-3" id="direccionComercio" placeholder="Direcci&oacute;n del comercio">
         </div>
       </div>
-
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label for="inputAddress" class="mt-3" id="labelEstadoComercio">Estado del comercio</label>
+            <select id="estadoComercio" class="form-select mt-3">
+              <option selected>T&aacute;chira</option>
+              <option selected>M&eacute;rida</option> 
+              <option selected>Barinas</option>                                          
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState" class="mt-3" id="labelMunicipioComercio">Municipio del comercio</label>
+            <select id="municipioComercio" class="form-select mt-3">
+              <option selected>Cardenas</option>
+              <option selected>San cristobal</option>                                        
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState" class="mt-3" id="labelCiudadComercio">Ciudad del comercio</label>
+            <select id="ciudadComercio" class="form-select mt-3">
+              <option selected>San Cristobal</option>                                     
+            </select>
+          </div>
+      </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label for="inputCity" class="mt-3">Cantidad de estantes</label>

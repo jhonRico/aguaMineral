@@ -84,7 +84,7 @@ if(isset($_SESSION["id"])){
 
         <div class="form-group col-md-6">
           <label for="inputState" class=" mt-3">Descripci&oacute;n</label>
-          <select id="inputState" class="form-select mt-3">
+          <select id="cantidadBotellones" class="form-select mt-3">
             <option selected>Estante de 6 botellones</option>
             <option selected>Estante de 8 botellones</option>                                
           </select>
@@ -140,7 +140,7 @@ VENTANA MODAL PARA EL REGISTRO
         return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
       }
       ?>
-      <div class="modal-footer bg-dark">
+      <div class="modal-footer">
         <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
         <button type="button" class="btn btn-primary">Generar</button>
         <button type="button" class="btn btn-primary">Imprimir</button>

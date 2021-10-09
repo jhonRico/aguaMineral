@@ -22,6 +22,15 @@ require_once "conexion.php";
         $stmt -> execute();
         return $stmt->fetch();
     }
+    static public function mdlConsultarTiendaEnBd($tabla,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE   Persona_idPersona = :idCliente");
+
+        $stmt->bindParam(":idCliente", $datos["idCliente"], PDO::PARAM_INT);
+
+        $stmt -> execute();
+        return $stmt->fetch();
+    }
 
 }
 

@@ -3,25 +3,44 @@ $("#cedulaCliente").keyup(function(){
   consultarClienteEnBd();
 });
 
-
-
-
-
-
-
-
 $(function(){
-     $(".boton1").click(function(){
-      var nombre = $('#nombreCliente').val();
-      var apellido = $('#apellidoCliente').val();
-      var direccion = $('#direccion').val();
-      var comercio = $("#nobreComercio").val();
-      var cedula = $('#cedulaCliente').val();
-      var telefono = $('#telefono').val();
-      var direccionComercio = $('#direccionComercio').val();
-      var cantidadEstantes = $('#inputCity').val();
+ $(".boton1").click(function(){
+  var nombre = $('#nombreCliente').val();
+  var apellido = $('#apellidoCliente').val();
+  var direccion = $('#direccion').val();
+  var comercio = $("#nobreComercio").val();
+  var cedula = $('#cedulaCliente').val();
+  var telefono = $('#telefono').val();
+  var direccionComercio = $('#direccionComercio').val();
+  var cantidadEstantes = $('#inputCity').val();
 
-     /* if (nombre == "") 
+     if (cedula == '') 
+      {
+         Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese una cédula',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;
+      }
+      if (!expresiones.telefono.test(cedula)) 
+      {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese una cedula válida',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;
+      }
+     if (nombre == "") 
       {
          Swal.fire({
           position: 'top-end',
@@ -69,32 +88,6 @@ $(function(){
           icon: 'error',
           toast: true,
           title: 'Ingrese un apellido válido',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (cedula == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una cédula',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (!expresiones.telefono.test(cedula)) 
-      {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una cedula válida',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 1500
@@ -192,34 +185,29 @@ $(function(){
         })        
         return false;
       }
-      consultarClienteEnBd();
-      */
-      //mostrarModal();
-      //RegistrarUsuario();
-   
-      //return true;
 
-      });
- });
+      mostrarModal();
 
-//$(selector).keydown()
+
+      return true;
+
+    });
+});
+
 
 function mostrarModal(){
-
-   //$("#cuerpoContratoEstante").html(contrato);  
-   //$('#cuerpoContratoEstante').show();
    consultarFormatoContrato();
    $("#modal2").modal("show");
-}
+ }
 
-$(function(){
-	$(".cerrar").click(function(){
-		$("#modal2").modal("hide");
-	})
-})
+ $(function(){
+   $(".cerrar").click(function(){
+    $("#modal2").modal("hide");
+  })
+ })
 
-function consultarClienteEnBd()
-{
+ function consultarClienteEnBd()
+ {
 
   var nombre = $('#cedulaCliente').val();
   var datos = new FormData();
@@ -235,53 +223,87 @@ function consultarClienteEnBd()
     success: function(respuesta3)
     {
       if(!respuesta3.includes("false"))
-                          {
-                            respuesta3 =respuesta3.replace("[","");
-                            respuesta3 =respuesta3.replace("]","");
-                            var auxSplit2 = respuesta3.split("},");
+      {
+        respuesta3 =respuesta3.replace("[","");
+        respuesta3 =respuesta3.replace("]","");
+        var auxSplit2 = respuesta3.split("},");
 
-                           for(var i=0;i<auxSplit2.length;i++){
-                              if(!auxSplit2[i].includes("}")){
-                                auxSplit2[i] = auxSplit2[i]+"}";
-                              }
-                              var res2 = JSON.parse(auxSplit2[i]);
-                            }
-                             Swal.fire({
-                              icon: 'success',
-                              title: res2.nombrePersona+' '+res2.apellidoPersona,
-                              text: 'El cliente ya existe',
-                              showConfirmButton: true,
-                              confirmButtonText: "Rellenar Campos",
-                              showCancelButton: true
-                            }).then((result) => {
-                            if (result.isConfirmed) 
-                                {
-                                    $('#nombreCliente').val(res2.nombrePersona);
-                                    $('#apellidoCliente').attr('value', res2.apellidoPersona);
-                                    $('#direccion').val(res2.direccionPersona);
-                                    $('#cedulaCliente').val(res2.cedulaPersona);
-                                    $('#telefono').val(re2.telefonoPersona);
-                                }                                
-                            });        
-                            return false;
-                             
-                          }else
-                          {
-                            Swal.fire({
-                              position: 'top-end',
-                              icon: 'error',
-                              toast: true,
-                              title: 'El cliente no existe por favor registrelo',
-                              showConfirmButton: false,
-                              timerProgressBar: true,
-                              timer: 3500
-                            })        
-                            return false;
-                          }
+        for(var i=0;i<auxSplit2.length;i++){
+          if(!auxSplit2[i].includes("}")){
+            auxSplit2[i] = auxSplit2[i]+"}";
+          }
+          var res2 = JSON.parse(auxSplit2[i]);
+        }
+        Swal.fire({
+          icon: 'success',
+          title: res2.nombrePersona+' '+res2.apellidoPersona,
+          text: 'El cliente ya existe',
+          showConfirmButton: true,
+          confirmButtonText: "Rellenar Campos",
+          showCancelButton: true
+        }).then((result) => {
+          if (result.isConfirmed) 
+          {
+            consultarCamposDeTienda(res2.idPersona);
+            $('#nombreCliente').val(res2.nombrePersona);
+            $('#apellidoCliente').attr('value', res2.apellidoPersona);
+            $('#direccion').val(res2.direccionPersona);
+            $('#cedulaCliente').val(res2.cedulaPersona);
+          }                                
+        });        
+        return false;
+
+      }else
+      {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'El cliente no existe por favor registrelo',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3500
+        })        
+        return false;
+      }
     }
   })
 }
+function consultarCamposDeTienda(id)
+{
+  var datos = new FormData();
+  datos.append("idCliente", id);
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+      if(!respuesta3.includes("false"))
+      {
+        respuesta3 =respuesta3.replace("[","");
+        respuesta3 =respuesta3.replace("]","");
+        var auxSplit2 = respuesta3.split("},");
 
+        for(var i=0;i<auxSplit2.length;i++)
+        {
+          if(!auxSplit2[i].includes("}"))
+          {
+            auxSplit2[i] = auxSplit2[i]+"}";
+          }
+          var res2 = JSON.parse(auxSplit2[i]);
+        }
+        $("#nobreComercio").val(res2.nombreTienda);
+        $('#direccionComercio').val(res2.direccionTienda);
+        $('#telefono').val(res2.telefonoTienda);
+      }
+    }
+  });    
+
+}
 function consultarFormatoContrato()
 {
 
@@ -299,33 +321,47 @@ function consultarFormatoContrato()
     processData: false,
     success: function(respuesta3)
     {
-       if(respuesta3.length >10 )
-       {
-        respuesta3 =respuesta3.replace("[","");
-        respuesta3 =respuesta3.replace("]","");
-        var auxSplit2 = respuesta3.split("},");
+     if(respuesta3.length >10 )
+     {
+      respuesta3 =respuesta3.replace("[","");
+      respuesta3 =respuesta3.replace("]","");
+      var auxSplit2 = respuesta3.split("},");
 
-        plantilla2 +='<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-2" id="">'
-        for(var i=0;i<auxSplit2.length;i++)
-        {
-          if(!auxSplit2[i].includes("}"))
-          {
-            auxSplit2[i] = auxSplit2[i]+"}";
-          }
-          var res2 = JSON.parse(auxSplit2[i]);
-          plantilla2 += res2.descripcion;
-        }
-        plantilla2 +='</div>'
-        $("#cuerpoContrato").html(plantilla2);  
-        $('#cuerpoContrato').show();
-      }else
+      plantilla2 +='<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-2" id="">'
+      for(var i=0;i<auxSplit2.length;i++)
       {
-        $("#cuerpoContrato").hide();     
-      }
-      
+        if(!auxSplit2[i].includes("}"))
+        {
+          auxSplit2[i] = auxSplit2[i]+"}";
+        }
+        var res2 = JSON.parse(auxSplit2[i]);
+        if (res2.descripcion.includes("NombreCliente")) 
+        {
+          result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
+          result = result.replace("cedulaCliente",$('#cedulaCliente').val());
+          result = result.replace("nombreComercio ",$("#nobreComercio").val());
+          result = result.replace("MunicipioCliente",$('#inputState').val());
+          result = result.replace("municipioCliente",$('#inputState').val());
+          result = result.replace("telefonoComercio",$('#telefono').val());
+          result = result.replace("direccionComercio",$('#direccionComercio').val());
+          result = result.replace("cantidadEstante",$('#inputCity').val());
+          result = result.replace("cantidadBotellones",$('#cantidadBotellones').val());
 
+
+          plantilla2 += result;
+        }
+      }
+      plantilla2 +='</div>'
+      $("#cuerpoContrato").html(plantilla2);  
+      $('#cuerpoContrato').show();
+    }else
+    {
+      $("#cuerpoContrato").hide();     
     }
-  })
+
+
+  }
+})
 }
 
 function rellenarCampos()

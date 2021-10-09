@@ -18,5 +18,13 @@ class ControladorFormatoContrato
         $respuesta = ModeloFormatoContrato::mdlConsultarClientesEnBd($tabla,$datos);
         return $respuesta;
     }
+     static public function ctrlConsultarTiendaEnBd($tabla,$idCliente)
+    {
+        $datos = array(
+             "idCliente"=>$idCliente,
+         );
+        $respuesta = ModeloFormatoContrato::mdlConsultarTiendaEnBd($tabla,$datos);
+        return $respuesta;
+    }
 
 }

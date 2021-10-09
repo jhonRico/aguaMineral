@@ -10,7 +10,6 @@ if(isset($_SESSION["id"])){
   $idUsu = 10;
 }
 
-
 ?>
 
 <div class="Home ms-5"></div>
@@ -121,7 +120,7 @@ VENTANA MODAL PARA EL REGISTRO
     <div class="modal-content">
       <?php 
       date_default_timezone_set("America/Argentina/Buenos_Aires");
-                          //Dia-Mes-Año Hora:Minutos:Segundos
+                          //Dia-Mes-Aï¿½o Hora:Minutos:Segundos
       $fecha = date("d-m-Y H:i:s");
       echo '<div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div>';
 

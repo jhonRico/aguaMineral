@@ -10,15 +10,6 @@
     <?php
         /** Mantener la ruta fija del proyecto*/
         $url = Ruta::ctrlRuta();
-
-        /** se crea la lista */
-        if(isset( $_POST["nombreLista"])){
-        
-            //365 * 24 * 60 * 60 para qeu dure un año
-            setcookie("lista-compra", $_POST["nombreLista"], time() + 3600); 
-        }
-        
-        
     ?>
 
     <!---   PLUGINS DE CSS-->
@@ -65,7 +56,6 @@
          * en el archivo htacces*/
         $rutas = array();
         $ruta =  null;
-
         if(isset($_GET["ruta"])){
             
             $rutas = explode("/", $_GET["ruta"]); /**el explode ayuda a separar la url por / */
@@ -77,7 +67,10 @@
                           
                     include "modulos/cabezotesesion.php";
                     include "modulos/".$rutas[0].".php";
-                }else if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos" || $rutas[0] == "adminPersonas")
+                }else 
+                    if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || 
+                       $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos" ||
+                       $rutas[0] == "adminPersonas" || $rutas[0] == "zonas" || $rutas[0] == "norte" || $rutas[0] == "sur" || $rutas[0] == "este" || $rutas[0] == "oeste")  
                 {
                     include "modulos/cabezaLogueado.php";
                     include "modulos/plantillaSlideBar.php";

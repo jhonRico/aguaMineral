@@ -61,7 +61,7 @@ $(function(){
   var direccionComercio = $('#direccionComercio').val();
   var cantidadEstantes = $('#inputCity').val();
 
-     /*if (cedula == '') 
+      if (cedula == '') 
       {
          Swal.fire({
           position: 'top-end',
@@ -231,7 +231,7 @@ $(function(){
           timer: 1500
         })        
         return false;
-      }*/
+      }
 
       mostrarModal();
 
@@ -401,6 +401,8 @@ function consultarFormatoContrato()
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#inputCity').val());
           result = result.replace("cantidadBotellones",$('#cantidadBotellones').val());
+          result = result.replace("codigoProducto","1652131");  
+          result = result.replace("fechaConstruccion","10/09/2021");        
 
 
           plantilla2 += result;

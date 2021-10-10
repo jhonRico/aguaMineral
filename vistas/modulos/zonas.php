@@ -4,7 +4,14 @@
 ?>
 
 <section class="home-section">
-
+    <div class="container mt-3 fs-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/principal" class="link-primary">Principal</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Clientes por zonas</li>
+          </ol>
+        </nav>
+    </div>
     <div class="container-fluid blogs text-center">
     	  <h1 class="mt-5 mb-5">Clientes por zona</h1>
         <!---========================================  

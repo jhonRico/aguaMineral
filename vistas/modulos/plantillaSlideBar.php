@@ -29,7 +29,7 @@
        <span class="tooltip">Principal</span>
      </li>
       <li>
-        <a href="#">
+        <a href="http://localhost/aguaMineral/zonas">
           <i class="fas fa-user-alt"></i>
           <span class="links_name">Clientes</span>
         </a>

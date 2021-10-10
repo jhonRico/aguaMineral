@@ -14,7 +14,7 @@
 MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 ===========================================-->
 <div class="container-fluid blogs text-center">
-	<h1 class="mt-5 mb-5">Administración de Zonas</h1>
+	<h1 class="mt-5 mb-5">Administración de Ubicación</h1>
 
     <!---========================================  
     BLOG EN CUADRICULA
@@ -73,6 +73,16 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
         </div>
       </a>
      </div>
+     <div class="col-md-6">
+      <a href="http://localhost/aguaMineral/administracionZonas" class="link-dark">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+          <i class="far fa-compass iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Zonas</h3>
+          <p class="mb-5 mt-0">Administración de zonas</p>
+        </div>
+      </a>
+     </div>
+    </div>
     </div>
 </ul>  
 

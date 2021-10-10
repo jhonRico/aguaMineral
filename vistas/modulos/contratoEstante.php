@@ -166,7 +166,7 @@ VENTANA MODAL PARA EL REGISTRO
       date_default_timezone_set("America/Argentina/Buenos_Aires");
                           //Dia-Mes-A�o Hora:Minutos:Segundos
       $fecha = date("d-m-Y H:i:s");
-      echo '<div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div>';
+      echo '<div id="contrato"><div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div></div>';
 
       function fechaCastellano ($fecha) {
         $fecha = substr($fecha, 0, 10);
@@ -184,8 +184,8 @@ VENTANA MODAL PARA EL REGISTRO
       }
       ?>
       <div class="modal-footer">
+        <button class="btn btn-danger" type="button" id="guardar">Descargar PDF</button>
         <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
-        <button type="button" class="btn btn-primary">Generar</button>
         <button type="button" class="btn btn-primary">Imprimir</button>
       </div>
     </div>

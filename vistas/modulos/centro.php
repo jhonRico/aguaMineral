@@ -7,11 +7,11 @@
 ?>
 
 <div class="container-fluid blogs text-center">
-    <div class="container mt-3">
+    <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/zonas">Zonas</a></li> 
-            <li class="breadcrumb-item active" aria-current="page">Centro</li>
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/zonas" class="link-primary">Zonas</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Centro</li>
           </ol>
         </nav>
     </div>

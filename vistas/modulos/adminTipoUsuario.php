@@ -34,7 +34,7 @@
 </div>  
 </div>
 </form>
-  <!-- Modal para agregar nuevo pais  -->
+  <!-- Modal para agregar nuevo tipo de usuario  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="moddaddTU" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
@@ -63,25 +63,25 @@
   </form>
     <!-- Modal para editar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
-        <div class="modal fade" id="editCountry" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="editTipUser" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
                   <div class="modal-dialog">
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
-                                              <h5  id="staticBackdropLabel"> Modificar Pa&iacute;s</h5>
+                                              <h5  id="staticBackdropLabel"> Modificar Tipo de Usuario</h5>
                                               <a class="text-white"><i class="fas fa-times cerrar"></i></a>
                                         </div>
                                       
                                       <div class="modal-body mx-3">
                                              <div class="modal-body">                       
-                                                   <input   type="text" class="form-control" id="namePais2" name ="nameEstado" placeholder="Por favor ingrese el nombre del pais" required>  
+                                                   <input   type="text" class="form-control" id="nameTipUserId" name ="nameEstado" value="" placeholder="Por favor ingrese el nombre del pais" required>  
                                              </div>
                                       </div>
 
                                        <div class="form-group">  
                                                <div class="modal-footer">         
                                                      <button type="submit" class="btn btn-secondary " style ="width:48%;"data-dismiss="modal">Cancelar</button>                                                                 
-                                                     <a style ="width:48%;" id = "editarPais"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
+                                                     <a style ="width:48%;" id = "editarTipUser"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
                                                 </div>
                                          </div>
                             </div>

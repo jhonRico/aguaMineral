@@ -1,6 +1,6 @@
 <?php
 
-class ControladorRegistroAdmin1
+class ControladorRegistroAdminGeneral
 
 {
 
@@ -8,26 +8,50 @@ class ControladorRegistroAdmin1
     static public function consultarTodoRegBD($tabla)
     {
         
-        $respuesta = ModeloRegistroAdmin1::mdlConsultarTodosRegBD($tabla); 
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodosRegBD($tabla); 
         return $respuesta;
 	}
 
-    static public function consultarRegistroExisteBD($registroValue,$tabla)
-    {
-        $tabla = "pais";
-        $respuesta = ModeloRegistroAdmin1::mdlConsultarRegistroAdd($registroValue,$tabla);
+    static public function consultarRegistroExisteBD($registroValue,$tabla,$atributoComparar)
+    {     
+         $datos = array(
+             "registroValue"=>$registroValue,
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarRegistroAdd($datos,$tabla,$atributoComparar);
         return $respuesta;
     }
 
-   static public function ctrlAddregistro($nombreValue,$tabla)
+   static public function ctrlAddregistroTipUser($nombreValue,$tabla)
     {
 
  
     $datos = array(
-             "nombreValue"=>$nombreValue,
+             "registroValueTipUser"=>$nombreValue,
          );
 
-        $respuesta = ModeloRegistroAdmin1::mdlRegistro($datos,$tabla);
+        $respuesta = ModeloRegistroAdminGeneral::mdlAddregistroTipUser($tabla,$datos);
+        return $respuesta;
+    }
+
+    static public function ctrleliminarTipoUser($id,$tabla,$atributoEliminar)
+    {        
+        $datos = array(
+             "idTable"=>$id,
+         );
+
+        $respuesta = ModeloRegistroAdminGeneral::mdlEliminarOfTable($tabla,$datos,$atributoEliminar);
+        return $respuesta;
+    }
+
+
+    static public function ctrlModificarOfTable($id,$valueTable,$tabla,$atributoSet,$atributoWhere)
+    {        
+        $datos = array(
+             "idTable"=>$id,
+             "descripcion"=>$valueTable
+         );
+
+        $respuesta = ModeloRegistroAdminGeneral::mdlModificarOfTable($tabla, $datos,$atributoSet,$atributoWhere);
         return $respuesta;
     }
 

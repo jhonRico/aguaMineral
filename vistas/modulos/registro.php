@@ -32,8 +32,8 @@ $url2 = Ruta::ctrlRuta();
 			</div>
 			<div class="row">
 				<div class="form-group col-md-6">
-					<label for="" class="ms-5 mt-3 form-label">Correo</label>
-					<input type="text" placeholder="Por favor Ingrese un correo" class="form-control w-75 ms-5 mt-3" id="correo" name="nombre">
+					<label for="" class="ms-5 mt-3 form-label">Nombre Usuario</label>
+					<input type="text" placeholder="Por favor Ingrese un nombre usuario" class="form-control w-75 ms-5 mt-3" id="correo" name="nombre">
 				</div>	
 				<div class="form-group col-md-6">
 					<label for="" class="ms-5 mt-3 form-label">Cédula</label>

@@ -97,8 +97,12 @@
 <!--=====================================
 JAVASCRIPT PERSONALIZADO
 ======================================--> 
+<<<<<<< HEAD
+<script src="<?php echo $url ?>vistas/js/adminTipoUsuario.js"></script>
+=======
 
 <script src="<?php echo $url ?>vistas/js/zonaClientes.js"></script>
+>>>>>>> 989cf7c44536133291848b5bf6096f6e6e170fdd
 <script src="<?php echo $url ?>vistas/js/adminPais.js"></script>
 <script src="<?php echo $url ?>vistas/js/usuario.js"></script>
 <script src ="<?php echo$url ?>vistas/js/ofertas.js"></script> 

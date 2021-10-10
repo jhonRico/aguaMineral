@@ -23,11 +23,11 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
     <div class="row">
      <div class="col">
-      <a href="" class="link-dark">
+      <a href="http://localhost/aguaMineral/registro" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-users iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Usuario</h3>
-          <p class="mb-5 mt-0">Administración de Paises</p>
+          <p class="mb-5 mt-0">Administraci&oacute;n de Usuarios del Sistema</p>
         </div>
       </a>
      </div>

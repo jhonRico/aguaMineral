@@ -1,6 +1,9 @@
 <?php  
     $consultar = "Hola";
+    $i = 0;
+    $nombreComercio = ['RicoPez','CompañiaRicossCross','RicossAvellaneda'];
     $variable = controladorZonas::ctrlconsultarCiudades($consultar);
+    $resultadoConsultaClientes = controladorZonas::ctrlconsultarClientes($consultar);
 ?>
 
 <div class="container-fluid blogs text-center">
@@ -39,23 +42,14 @@
     </tr>
   </thead>
   <tbody>
+    <?php foreach ($resultadoConsultaClientes as $value): ?>
     <tr>
-      <td>Dichell</td>
-      <td>Avellaneda</td>
-      <td>Ricopez</td>
+      <td><?php echo $value['nombrePersona'];?></td>
+      <td><?php echo $value['apellidoPersona'];?></td>
+      <td><?php echo $nombreComercio[$i]; $i++;?></td>
       <td><a href="#"><i class="fas fa-search"></i></a></td>
     </tr>
-    <tr>
-      <td>Carolina</td>
-      <td>Avellaneda</td>
-      <td>RicoAvellaneda</td>
-      <td><a href="#"><i class="fas fa-search"></i></a></td>    </tr>
-    <tr>
-      <td>Jhon</td>
-      <td>Rico</td>
-      <td>RicossCross</td>
-      <td><a href="#"><i class="fas fa-search"></i></a></td>    
-    </tr>
+    <?php endforeach ?>
   </tbody>
       </table>
   </section>

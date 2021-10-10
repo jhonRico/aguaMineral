@@ -13,4 +13,16 @@ class controladorZonas
     return $respuesta;
 
 	}
+    static public function ctrlconsultarClientes($consultar)
+    {
+        
+    $tabla = "persona";
+    $tipoUsuario = "4";
+
+    $respuesta = ModeloZonas::mdlconsultarClientes($tabla,$tipoUsuario);
+
+    return $respuesta;
+
+    }
+
 }

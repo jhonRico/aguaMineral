@@ -37,7 +37,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       </div>
       <div class="blog-content-box">
         <div class="blog-content">
-          <h4><a href="#">Zonas</a></h4>
+          <h4><a href="#">Ubicación</a></h4>
         </div>
      </div>
    </div>

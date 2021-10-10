@@ -34,7 +34,7 @@ if(isset($_POST["valor"]))
 if(isset($_POST["nombreCliente"]))
 {  
     $tabla = "persona";
-    $tipoUsuario = "4";
+    $tipoUsuario = "3";
     $nombreCliente = $_POST['nombreCliente'];
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxConsultarClientesEnBd($tabla,$tipoUsuario,$nombreCliente);

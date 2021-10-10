@@ -1,5 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function() 
+{
 	$("#tablaCentro").hide();
+	
 });
 
 
@@ -8,6 +10,9 @@ $(function(){
    	if ($("#centro").val() == "San Cristóbal") 
    	{
    		 $("#tablaCentro").show();
-   	}
+   	}else
+	{
+		$("#tablaCentro").hide();
+	}
   })
  })

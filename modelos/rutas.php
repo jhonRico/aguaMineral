@@ -10,5 +10,4 @@ class Ruta{
     public static function ctrlRutaServidor(){
         return "http://localhost/AdminComparador/";
     }
-    
 }

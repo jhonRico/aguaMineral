@@ -1,3 +1,17 @@
+.izquierda{
+  float: left;
+  margin-left: 50px;
+}
+.derecha{
+  float: right;
+  margin-right: 50px;
+}
+
+.derechaTexto{
+  float: right;
+  margin-right: 120px;
+}
+
 #cuerpoContratoEstante{
   margin: 0px;
   padding: 0px;
@@ -5,6 +19,9 @@
 
 .justify-text{
   text-align: justify;
+}
+.empezando{
+
 }
 .imagencontrato{
     width:270px;

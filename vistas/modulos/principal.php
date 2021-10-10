@@ -56,11 +56,11 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
        <div class="single-blog col">
         <div class="single-blog-img">
-          <a href="#"  ><img src="<?php echo $url2;?>vistas/img/general/zonas.jpg" alt="Blog Image"></a>
+          <a href="http://localhost/aguaMineral/zonas"  ><img src="<?php echo $url2;?>vistas/img/general/zonas.jpg" alt="Blog Image"></a>
         </div>
         <div class="blog-content-box">
           <div class="blog-content">
-            <h4><a href="#"><i class="fa fa-map-signs" aria-hidden="true"></i> ZONAS</a></h4>
+            <h4><a href="http://localhost/aguaMineral/zonas"><i class="fa fa-map-signs" aria-hidden="true"></i> ZONAS</a></h4>
           </div>
           <div>
             <div class="exerpt">

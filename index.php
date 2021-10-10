@@ -1,5 +1,6 @@
 <?php
 /**se incluyen los controladores */
+require_once 'controladores/c_zonas.php';
 require_once "controladores/c_plantilla.php";
 require_once "controladores/c_servicios.php";
 require_once "controladores/c_slider.php";
@@ -14,6 +15,7 @@ require_once "controladores/c_registroAdmin.php";
 require_once "controladores/c_adminTablas.php";
 
 /**se incluyen los Modelos */
+require_once 'modelos/m_zonas.php';
 require_once "modelos/rutas.php";
 require_once "modelos/m_productos.php";
 require_once "modelos/m_usuarios.php";
@@ -24,8 +26,6 @@ require_once "modelos/m_state.php";
 require_once "modelos/m_registro.php";
 require_once "modelos/m_registroAdmin.php";
 require_once "modelos/m_adminTablasModelo.php";
-
-require_once "PHPMailer/PHPMailerAutoload.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla ->plantilla();

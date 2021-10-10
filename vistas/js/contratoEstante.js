@@ -1,3 +1,50 @@
+/*LLamar a la funcion cada vez que se oprime una tecla*/
+
+$("#yes").click(function ocultar(){
+
+  //Ocultar Inputs
+
+  $("#direccionComercio").attr('type', 'hidden');
+  $("#estadoComercio").hide();
+  $("#ciudadComercio").hide();
+  $("#municipioComercio").hide();
+  $("#labelEstadoComercio").hide();
+  $("#labelMunicipioComercio").hide();
+  $("#labelCiudadComercio").hide();
+  $("#no").attr('type', 'hidden');
+  $("#ocultar").hide();
+
+  //Dar Valor a los inputs
+
+  $("#direccionComercio").val($("#direccion").val())
+  $("#estadoComercio").val($("#inputState").val());
+  $("#municipioComercio").val($("#municipio").val());
+  $("#ciudadComercio").val($("#ciudad").val());
+
+  $("#yes").click(function(){
+  mostrarInputs();
+
+})
+
+})
+function mostrarInputs()
+{  
+
+  $("#direccionComercio").val('');
+  $("#estadoComercio").val('Táchira');
+  $("#municipioComercio").attr('value', 'San Cristóbal');
+  $("#ciudadComercio").attr('value', 'San Cristobal');
+  $("#direccionComercio").attr('type', 'text');
+  $("#estadoComercio").show();
+  $("#ciudadComercio").show();
+  $("#municipioComercio").show();
+  $("#labelEstadoComercio").show();
+  $("#labelMunicipioComercio").show();
+  $("#labelCiudadComercio").show();
+  $("#no").attr('type', 'checkbox');
+  $("#ocultar").show();
+}
+
 
 $("#cedulaCliente").keyup(function(){
   consultarClienteEnBd();
@@ -14,7 +61,7 @@ $(function(){
   var direccionComercio = $('#direccionComercio').val();
   var cantidadEstantes = $('#inputCity').val();
 
-     if (cedula == '') 
+      if (cedula == '') 
       {
          Swal.fire({
           position: 'top-end',
@@ -234,7 +281,24 @@ function mostrarModal(){
           }
           var res2 = JSON.parse(auxSplit2[i]);
         }
+        consultarCamposDeTienda(res2.idPersona);
+        $('#nombreCliente').val(res2.nombrePersona);
+        $('#apellidoCliente').val(res2.apellidoPersona);
+        $('#direccion').val(res2.direccionPersona);
+        $('#cedulaCliente').val(res2.cedulaPersona);
+
+
         Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          title: 'El cliente ya existe',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+
+       /* Swal.fire({
           icon: 'success',
           title: res2.nombrePersona+' '+res2.apellidoPersona,
           text: 'El cliente ya existe',
@@ -244,27 +308,18 @@ function mostrarModal(){
         }).then((result) => {
           if (result.isConfirmed) 
           {
-            consultarCamposDeTienda(res2.idPersona);
-            $('#nombreCliente').val(res2.nombrePersona);
-            $('#apellidoCliente').attr('value', res2.apellidoPersona);
-            $('#direccion').val(res2.direccionPersona);
-            $('#cedulaCliente').val(res2.cedulaPersona);
+            
           }                                
-        });        
-        return false;
+        });       **/ 
 
       }else
       {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'El cliente no existe por favor registrelo',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 3500
-        })        
-        return false;
+            $('#nombreCliente').val('');
+            $('#apellidoCliente').val('');
+            $('#direccion').val('');
+            $("#nobreComercio").val('');
+            $('#direccionComercio').val('');
+            $('#telefono').val('');
       }
     }
   })
@@ -339,13 +394,15 @@ function consultarFormatoContrato()
         {
           result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
           result = result.replace("cedulaCliente",$('#cedulaCliente').val());
-          result = result.replace("nombreComercio ",$("#nobreComercio").val());
-          result = result.replace("MunicipioCliente",$('#inputState').val());
-          result = result.replace("municipioCliente",$('#inputState').val());
+          result = result.replace("nombreComercio",$('#nobreComercio').val());
+          result = result.replace("MunicipioCliente",$('#municipioComercio').val());
+          result = result.replace("municipioCliente",$('#municipioComercio').val());
           result = result.replace("telefonoComercio",$('#telefono').val());
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#inputCity').val());
           result = result.replace("cantidadBotellones",$('#cantidadBotellones').val());
+          result = result.replace("codigoProducto","1652131");  
+          result = result.replace("fechaConstruccion","10/09/2021");        
 
 
           plantilla2 += result;

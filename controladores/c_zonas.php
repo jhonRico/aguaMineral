@@ -17,7 +17,7 @@ class controladorZonas
     {
         
     $tabla = "persona";
-    $tipoUsuario = "4";
+    $tipoUsuario = "3";
 
     $respuesta = ModeloZonas::mdlconsultarClientes($tabla,$tipoUsuario);
 

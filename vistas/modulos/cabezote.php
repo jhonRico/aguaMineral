@@ -75,8 +75,8 @@
                           <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
 
                           <div class="form-floating">
-                            <input type="email" class="form-control" id="correo" placeholder="name@example.com">
-                            <label for="floatingInput">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correo" placeholder="nombre usuario">
+                            <label for="floatingInput">Nombre de usuario</label>
                           </div>
                           <div class="form-floating">
                             <input type="password" class="form-control" id="password" placeholder="Contraseña">
@@ -89,7 +89,7 @@
                             </label>
                           </div>
                           <button class="w-100 btn btn-lg btn-primary" type="button" id="ingresar">Entrar</button>
-                          <p class="mt-5 mb-3 text-white">&copy; 2017–2021</p>
+                          <p class="mt-5 mb-3 text-white">&copy; COPYRIGHT © 2021</p>
                         </form>
                       </main>
                     </div>

@@ -104,7 +104,7 @@
 <!--=====================================
 JAVASCRIPT PERSONALIZADO
 ======================================--> 
-
+<script src="<?php echo $url ?>vistas/js/adminTipoUsuario.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminPais.js"></script>
 <script src="<?php echo $url ?>vistas/js/usuario.js"></script>
 <script src ="<?php echo$url ?>vistas/js/ofertas.js"></script> 

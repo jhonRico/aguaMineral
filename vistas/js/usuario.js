@@ -1,7 +1,7 @@
 /*Expresiones Regulares*/
 const expresiones = 
 {
-  usuario: /^[a-zA-Z0-9\_\-]{3,50}$/, // Letras, numeros, guion y guion_bajo
+  usuario: /^[a-zA-Z0-9\_\-\.]{3,50}$/, // Letras, numeros, guion guion_bajo punto
   nombre: /^[a-zA-ZÀ-ÿ\s]{3,45}$/, // Letras y espacios, pueden llevar acentos.
   password: /^.{4,12}$/, // 4 a 12 digitos.
   correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -84,20 +84,20 @@ $(function(){
           position: 'top-end',
           icon: 'error',
           toast: true,
-          title: 'Ingrese un correo',
+          title: 'Ingrese un usuario',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 1500
         })        
         return false;
       }
-      if (!expresiones.correo.test(correo)) 
+      if (!expresiones.usuario.test(correo)) 
       {
         Swal.fire({
           position: 'top-end',
           icon: 'error',
           toast: true,
-          title: 'Ingrese un correo válido',
+          title: 'Ingrese un usuario válido',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 1500
@@ -205,7 +205,7 @@ $(function(){
           position: 'top-end',
           icon: 'error',
           toast: true,
-          title: 'Ingrese un correo',
+          title: 'Ingrese nombre de usuario',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 1500
@@ -213,13 +213,13 @@ $(function(){
         return false;
 
       }
-      if (!expresiones.correo.test(usuario)) 
+      if (!expresiones.usuario.test(usuario)) 
       {
         Swal.fire({
           position: 'top-end',
           icon: 'error',
           toast: true,
-          title: 'Ingrese un correo válido',
+          title: 'Ingrese un usuario válido',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 1500
@@ -268,7 +268,6 @@ function IniciarSesion()
                     {
                           if(!respuesta.includes("false"))
                           {
-
                               window.location.replace('http://localhost/aguaMineral/principal');
                              
                           }else

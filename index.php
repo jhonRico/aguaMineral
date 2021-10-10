@@ -11,6 +11,7 @@ require_once "controladores/c_blogs.php";
 require_once "controladores/c_state.php";
 require_once "controladores/c_registro.php";
 require_once "controladores/c_registroAdmin.php";
+require_once "controladores/c_adminTablas.php";
 
 /**se incluyen los Modelos */
 require_once "modelos/rutas.php";
@@ -22,6 +23,7 @@ require_once "modelos/m_blogs.php";
 require_once "modelos/m_state.php";
 require_once "modelos/m_registro.php";
 require_once "modelos/m_registroAdmin.php";
+require_once "modelos/m_adminTablasModelo.php";
 
 require_once "PHPMailer/PHPMailerAutoload.php";
 

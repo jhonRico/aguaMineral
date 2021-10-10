@@ -2,12 +2,12 @@
 class Ruta{
 
     /**ruta lado del cliente */
-    public function ctrlRuta(){
+    public static function ctrlRuta(){
         return "http://localhost/aguaMineral/";
     }
 
     /**ruta lado del Servidor */
-    public function ctrlRutaServidor(){
+    public static function ctrlRutaServidor(){
         return "http://localhost/AdminComparador/";
     }
     

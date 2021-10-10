@@ -63,14 +63,15 @@
             $valor = $_GET["ruta"];
                 
                 if($rutas[0] == "verificar"|| $rutas[0] == "salir"   || $rutas[0] == "blog" || $rutas[0] == "tiendas" ||
-                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] =="adminState" || $rutas[0] == "registro" || $rutas[0] == "login" || $rutas[0] == "adminTipoUsuario" ){
+                   $rutas[0] == "listas"   || $rutas[0] == "recetas" || $rutas[0] =="adminState" || $rutas[0] == "registro" || $rutas[0] == "login" ){
                           
                     include "modulos/cabezotesesion.php";
                     include "modulos/".$rutas[0].".php";
                 }else 
                     if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || 
                        $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos" ||
-                       $rutas[0] == "adminPersonas" || $rutas[0] == "zonas" || $rutas[0] == "norte" || $rutas[0] == "sur" || $rutas[0] == "este" || $rutas[0] == "oeste" || $rutas[0] == "centro")  
+                       $rutas[0] == "adminPersonas" || $rutas[0] == "zonas" || $rutas[0] == "norte" || $rutas[0] == "sur" || $rutas[0] == "este" || $rutas[0] == "oeste" || $rutas[0] == "centro"
+                       || $rutas[0] == "adminTipoUsuario" )  
                 {
                     include "modulos/cabezaLogueado.php";
                     include "modulos/plantillaSlideBar.php";

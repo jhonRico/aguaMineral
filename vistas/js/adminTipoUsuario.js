@@ -41,7 +41,7 @@ function consultarTodosTU(){
 					var aux = "'"+res2.descripcion+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminar('+res2.idTipoUsuario+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEdit('+res2.idTipoUsuario+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminarTipoUser('+res2.idTipoUsuario+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditTipUser('+res2.idTipoUsuario+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -117,16 +117,20 @@ $(function(){
 function validarRegistro()
 {
 	var nombre = $("#nameTU").val();
-	const ejecutar = validarRegistroExistente(nombre);
+	var ejecutar = validarRegistroExistenteTipUser(nombre);
+	if(ejecutar == "No existe"){
+	     registrarCampoTipUser(nombre);
+		 consultarTodosTU();	
+	}
 
 }
 //Funcion Ajax que valida existente en BD 
 
-function validarRegistroExistente(valor)
+function validarRegistroExistenteTipUser(valor)
 {
 	var datos = new FormData();
-
-	datos.append("registroValue", valor);
+	var returnValue = "Existe";
+	datos.append("validaExisteTipUsuInBd", valor);
 
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
@@ -140,33 +144,35 @@ function validarRegistroExistente(valor)
 		{
 			if(respuesta.includes("false"))
 			{
-				registrarCampo(valor);
-				consultarTodosTU();
-
+			   returnValue =  "No existe";
 			}else
 			{
+			  
 				Swal.fire({
 					position: 'top-end',
 					icon: 'error',
 					toast: true,
-					title: 'El registro ya existe',
+					title: 'El registro ya existe ',
 					showConfirmButton: false,
 					timerProgressBar: true,
 					timer: 1500
 				})
+				returnValue =  "Existe";
 			}
 
 		}                 
 
 	})
+
+	return returnValue;
 }
 
-/*Funcion Ajax que registra*/
-function registrarCampo(valor)
+/*Funcion Ajax que registra el tipo de usuario en BD*/
+function registrarCampoTipUser(valor)
 {
 	var datos = new FormData();
 
-	datos.append("nombreValue", valor);
+	datos.append("descripcionTipUserValue", valor);
 
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
@@ -211,3 +217,173 @@ function registrarCampo(valor)
 
 	})
 }
+
+/*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
+/*----------------------------------------------------------------------------------------------------------*/
+function eliminarTipoUser(id){
+	Swal.fire({
+		title: 'Eliminar',
+		text: "¿Seguro que desea eliminar este país?",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: 'red',
+		cancelButtonColor: 'gray',
+		confirmButtonText: 'Eliminar'
+	}).then((result) => {
+		if (result.isConfirmed){
+			eliminarTipUser(id);
+			consultarTodosTU();
+		}
+	})
+}
+//------------------Funcion que elimina un tipo de usuario-----
+ function eliminarTipUser(id)
+ {
+ 	var datos = new FormData();
+
+ 	datos.append("idTipUser", id);
+ 	$.ajax({
+ 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+ 		method:"POST",
+ 		data: datos, 
+ 		cache: false,
+ 		contentType: false,
+ 		processData: false,
+ 		async:false,
+ 		success: function(respuesta)
+ 		{
+ 			if(!respuesta.includes("ok"))
+ 			{
+ 				Swal.fire({
+ 					title: 'Error',
+ 					text: 'Error al eliminar tipo de usuario',
+ 					icon: 'error',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				}); 
+
+ 			}else
+ 			{
+ 				Swal.fire({
+ 					title: 'Tipo de usuario Eliminado',
+ 					icon: 'success',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				});
+ 			}
+
+ 		}                 
+
+ 	})
+ }
+/*------------------------------------------Finaliza el Espacio de eliminar----------------------------------*/
+
+/*------------------------------------------Inicia el Espacio de Editar tipo de usuario----------------------------------*/
+/*----------------------------------------------------------------------------------------------------------*/
+
+function mostrarModalEditTipUser(id, descripcion)
+{
+	idTipUser = id;
+	$("#editTipUser").modal("show");
+	$("#nameTipUserId").attr('value', descripcion);
+	$("#editarTipUser").click(function(){
+	        var existeInTable = validarRegistroExistenteTipUser($("#nameTipUserId").val());
+			if(existeInTable == "No existe"){
+			    modificarTipUser(idTipUser);
+			}
+		    
+	})
+	 
+}
+
+
+function modificarTipUser(id)
+ {
+		var descripcion = $("#nameTipUserId").val();
+  		if (descripcion == "") 
+ 			{
+ 				Swal.fire({
+ 					position: 'top-end',
+ 					icon: 'error',
+ 					toast: true,
+ 					title: 'El campo esta vacio',
+ 					showConfirmButton: false,
+ 					timerProgressBar: true,
+ 					timer: 1500
+ 				})
+ 				return false;
+ 			}
+ 			if (!expresiones.nombre.test(descripcion)) 
+ 			{
+ 				Swal.fire({
+ 					position: 'top-end',
+ 					icon: 'error',
+ 					toast: true,
+ 					title: 'Ingrese un Tipo de Usuario válido',
+ 					showConfirmButton: false,
+ 					timerProgressBar: true,
+ 					timer: 1500
+ 				})
+ 				return false;
+ 			}
+
+ 			var descripcion = $("#nameTipUserId").val();
+			modificarTipUserValue(id,descripcion);
+			consultarTodosTU(); 			
+
+ 			return true;
+ 	}
+
+
+function modificarTipUserValue(id,descripcion)
+ {
+ 	var datos = new FormData();
+
+ 	datos.append("idTipUserModificado", id);
+ 	datos.append("descripcion", descripcion);
+
+
+ 	$.ajax({
+ 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+ 		method:"POST",
+ 		data: datos, 
+ 		cache: false,
+ 		contentType: false,
+ 		processData: false,
+ 		async:false,
+ 		success: function(respuesta)
+ 		{  
+
+ 			if(!respuesta.includes("ok"))
+ 			{
+ 				Swal.fire({
+ 					title: 'Error',
+ 					text: 'Error al modificar Tipo de usuario ',
+ 					icon: 'error',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				}); 
+
+ 			}else
+ 			{
+ 				Swal.fire({
+ 					title: 'Tipo de usuario Modificado',
+ 					icon: 'success',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				}).then((result) => 
+				{
+					if (result.isConfirmed)
+					{
+						$("#nameTipUserId").attr('value', null);
+						$("#editTipUser").modal("hide");
+					}
+				})
+ 			}
+
+ 		}                 
+
+ 	})
+ }
+
+/*------------------------------------------Finaliza el Espacio de Editar tipo de usuario----------------------------------*/

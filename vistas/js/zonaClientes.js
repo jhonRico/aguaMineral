@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 $(function(){
    $("#centro").click(function(){
-   	if ($("#centro").val() == "San Cristobal") 
+   	if ($("#centro").val() == "San Cristóbal") 
    	{
    		 $("#tablaCentro").show();
    	}

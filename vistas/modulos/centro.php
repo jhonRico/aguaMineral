@@ -1,5 +1,10 @@
+<?php  
+    $consultar = "Hola";
+    $variable = controladorZonas::ctrlconsultarCiudades($consultar);
+?>
+
 <div class="container-fluid blogs text-center">
-    <div class="container">
+    <div class="container mt-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/zonas">Zonas</a></li> 
@@ -17,13 +22,9 @@
         </div>
         <div class="col-md-3">
           <select name="" id="centro" class="form-select w-75">
-            <option>Táriba</option>
-            <option>Rubio</option>
-            <option>Santa Ana</option>
-            <option>San Cristobal</option>
-            <option>Lobatera</option>
-            <option>La fria</option>
-            <option>San josesito</option>
+            <?php foreach ($variable as $key): ?>
+            <option value="<?php echo $key['nombreCiudad']; ?>"><?php echo $key['nombreCiudad']; ?></option>
+          <?php endforeach ?>
           </select>
         </div>
       </div>

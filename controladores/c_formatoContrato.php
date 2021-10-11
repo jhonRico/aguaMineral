@@ -4,9 +4,12 @@ class ControladorFormatoContrato
 { 
 
 
-    static public function ctrlConsultarFormatoContrato($tabla)
+    static public function ctrlConsultarFormatoContrato($tabla,$parametro)
     {
-        $respuesta = ModeloFormatoContrato::mdlConsultarFormatoContrato($tabla);
+        $datos = array(
+             "parametro"=>$parametro,
+         );
+        $respuesta = ModeloFormatoContrato::mdlConsultarFormatoContrato($tabla,$datos);
         return $respuesta;
 	}
      static public function ctrlConsultarClientesEnBd($tabla,$tipoUsuario,$nombreCliente)

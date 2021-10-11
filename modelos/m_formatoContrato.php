@@ -5,11 +5,12 @@ require_once "conexion.php";
  class ModeloFormatoContrato
  {
 
-    static public function mdlConsultarFormatoContrato($tabla)
+    static public function mdlConsultarFormatoContrato($tabla,$datos)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE parametro = :parametro");
+        $stmt->bindParam(":parametro", $datos["parametro"], PDO::PARAM_STR);
         $stmt -> execute();
-        return  $stmt ->fetchAll();
+        return  $stmt->fetch();
 	}
      static public function mdlConsultarClientesEnBd($tabla,$datos)
     {

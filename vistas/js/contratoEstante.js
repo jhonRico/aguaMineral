@@ -3,11 +3,49 @@ $(document).ready(function() {
   $('.contratoEstante').hide();
 });
 
-function mostrarContratoEstante(){
-    $('.contratoEstante').show();
+//mostrar formulario dependiendo del parametro
+function mostrarContrato(parametro){
+  $('.contratoEstante').show();
+  if (parametro == "botellones") 
+  {
     $('#cajasContrato').hide();
     $('#titulo').hide();
     $('#menuCajas').hide();
+    $('#TituloPrincipalContrato').text('Crear contrato botellon');
+    $('#cantidadBotellones').hide();
+    $('#labelDescripcion').hide();
+    $('#labelCantidadEstantes').text('Cantidad de botellones');
+    $('#inputCity').attr('placeholder', 'Por favor ingrese la cantidad de botellones');
+    $( ".boton1" ).click(function() {
+     validarCampos(parametro);
+   });
+
+  }else if (parametro == "ambos") 
+  {
+    $('#cajasContrato').hide();
+    $('#titulo').hide();
+    $('#menuCajas').hide();
+    $('#TituloPrincipalContrato').text('Crear contrato de botellon y estante');
+    var input =  `<div class="form-group col-md-6">
+    <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de Botellones</label>
+    <input type="number" min="1" class="form-control mt-3" id="cantidadBotellones" placeholder="Cantidad de botellones">
+    </div>`;
+    $('#colocarInput').html(input); 
+    $('#colocarInput').show();
+    $( ".boton1" ).click(function() {
+     validarCampos(parametro);
+   });
+
+  }else
+  {
+    $('#cajasContrato').hide();
+    $('#titulo').hide();
+    $('#menuCajas').hide();
+    $( ".boton1" ).click(function() {
+     validarCampos(parametro);
+   });
+  }
+
 }
 /*LLamar a la funcion cada vez que se oprime una tecla*/
 
@@ -18,40 +56,49 @@ $("#yes").click(function ocultar(){
   $("#direccionComercio").attr('type', 'hidden');
   $("#estadoComercio").hide();
   $("#ciudadComercio").hide();
+  $("#zonaComercio").hide();
   $("#municipioComercio").hide();
+  $("#sectorComercio").hide();
   $("#labelEstadoComercio").hide();
+  $("#labelZonaComercio").hide();
+  $("#labelSectorComercio").hide();
   $("#labelMunicipioComercio").hide();
   $("#labelCiudadComercio").hide();
+  $("#labelDireccionComercio").hide();
   $("#no").attr('type', 'hidden');
   $("#ocultar").hide();
 
   //Dar Valor a los inputs
 
-  $("#direccionComercio").val($("#direccion").val())
-  $("#estadoComercio").val($("#inputState").val());
-  $("#municipioComercio").val($("#municipio").val());
-  $("#ciudadComercio").val($("#ciudad").val());
+  $("#direccionComercio").val($("#direccionCliente").val())
+  $("#estadoComercio").val($("#estadoCliente").val());
+  $("#municipioComercio").val($("#municipioCliente").val());
+  $("#ciudadComercio").val($("#ciudadCliente").val());
+  $("#zonaComercio").val($("#zonaCliente").val());
+  $("#sectorComercio").val($("#sectorCliente").val());
 
   $("#yes").click(function(){
-  mostrarInputs();
+    mostrarInputs();
+
+  })
 
 })
-
-})
+//Vlover a mostrar inputs
 function mostrarInputs()
 {  
 
-  $("#direccionComercio").val('');
-  $("#estadoComercio").val('Táchira');
-  $("#municipioComercio").attr('value', 'San Cristóbal');
-  $("#ciudadComercio").attr('value', 'San Cristobal');
   $("#direccionComercio").attr('type', 'text');
   $("#estadoComercio").show();
   $("#ciudadComercio").show();
+  $("#zonaComercio").show();
   $("#municipioComercio").show();
+  $("#sectorComercio").show();
   $("#labelEstadoComercio").show();
+  $("#labelZonaComercio").show();
+  $("#labelSectorComercio").show();
   $("#labelMunicipioComercio").show();
   $("#labelCiudadComercio").show();
+  $("#labelDireccionComercio").show();
   $("#no").attr('type', 'checkbox');
   $("#ocultar").show();
 }
@@ -62,224 +109,278 @@ $("#cedulaCliente").keyup(function(){
 });
 
 //Validar que los campos no sean vacios y compararlos con su respectiva expresion regular
-$(function(){
- $(".boton1").click(function(){
+
+function validarCampos(parametro)
+{
   var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
+  var sectorCliente = $('#sectorCliente').val();
   var direccion = $('#direccion').val();
   var comercio = $("#nobreComercio").val();
   var cedula = $('#cedulaCliente').val();
-  var telefono = $('#telefono').val();
+  var telefono = $('#telefonoComercio').val();
   var direccionComercio = $('#direccionComercio').val();
   var cantidadEstantes = $('#inputCity').val();
+  var sectorComercio = $('#sectorComercio').val();
 
-      if (cedula == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una cédula',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (!expresiones.telefono.test(cedula)) 
-      {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una cedula válida',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-     if (nombre == "") 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un nombre',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (!expresiones.nombre.test(nombre)) 
-      {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un nombre válido',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
+  if (cedula == '') 
+  {
+   Swal.fire({
+    position: 'top-end',
+    icon: 'error',
+    toast: true,
+    title: 'Ingrese una cédula',
+    showConfirmButton: false,
+    timerProgressBar: true,
+    timer: 1500
+  })        
+   return false;
+     }
+     if (!expresiones.telefono.test(cedula)) 
+     {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        toast: true,
+        title: 'Ingrese una cedula válida',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500
+      })        
+      return false;
+    }
+    if (nombre == "") 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un nombre',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (!expresiones.nombre.test(nombre)) 
+    {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        toast: true,
+        title: 'Ingrese un nombre válido',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500
+      })        
+      return false;
+    }
 
-      if (apellido == '') 
-      {
-       Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un apellido',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
+    if (apellido == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un apellido',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
 
-      if (!expresiones.nombre.test(apellido)) 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un apellido válido',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (direccion == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un dirección',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (comercio == '') 
-      {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un comercio',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (!expresiones.nombre.test(comercio)) 
-      {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un comercio válido',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (telefono == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una telefono',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (!expresiones.telefono.test(telefono)) 
-      {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese un teléfono válido',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (direccionComercio == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese la dirección del comercio',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (cantidadEstantes == '') 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una cantidad',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
-      if (isNaN(cantidadEstantes) == true) 
-      {
-         Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          toast: true,
-          title: 'Ingrese una cantidad válida',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 1500
-        })        
-        return false;
-      }
+    if (!expresiones.nombre.test(apellido)) 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un apellido válido',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (sectorCliente == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un sector',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (!expresiones.nombre.test(sectorCliente)) 
+    {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        toast: true,
+        title: 'Ingrese un sector válido',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500
+      })        
+      return false;
+    }
+    if (direccion == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un dirección',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (comercio == '') 
+    {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        toast: true,
+        title: 'Ingrese un comercio',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500
+      })        
+      return false;
+    }
+    if (!expresiones.nombre.test(comercio)) 
+    {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        toast: true,
+        title: 'Ingrese un comercio válido',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500
+      })        
+      return false;
+    }
+    if (telefono == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese una telefono',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (!expresiones.telefono.test(telefono)) 
+    {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        toast: true,
+        title: 'Ingrese un teléfono válido',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500
+      })        
+      return false;
+    }
+    if (sectorComercio == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese el sector del comercio',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (!expresiones.nombre.test(sectorComercio)) 
+    {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        toast: true,
+        title: 'Ingrese un sector válido',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500
+      })        
+      return false;
+    }
+    if (direccionComercio == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese la dirección del comercio',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (cantidadEstantes == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese una cantidad',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (isNaN(cantidadEstantes) == true) 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese una cantidad válida',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
 
-      mostrarModal();
+    mostrarModal(parametro);
 
 
-      return true;
+    return true;
 
-    });
-});
+}
 
 
-function mostrarModal(){
-   consultarFormatoContrato();
-   $("#modal2").modal("show");
- }
+function mostrarModal(parametro){
+ consultarFormatoContrato(parametro);
+ $("#modal2").modal("show");
+}
 
- $(function(){
-   $(".cerrar").click(function(){
-    $("#modal2").modal("hide");
-  })
- })
+$(function(){
+ $(".cerrar").click(function(){
+  $("#modal2").modal("hide");
+})
+})
 
- function consultarClienteEnBd()
- {
+function consultarClienteEnBd()
+{
 
   var nombre = $('#cedulaCliente').val();
   var datos = new FormData();
@@ -322,29 +423,14 @@ function mostrarModal(){
           timerProgressBar: true,
           timer: 1500
         })        
-
-       /* Swal.fire({
-          icon: 'success',
-          title: res2.nombrePersona+' '+res2.apellidoPersona,
-          text: 'El cliente ya existe',
-          showConfirmButton: true,
-          confirmButtonText: "Rellenar Campos",
-          showCancelButton: true
-        }).then((result) => {
-          if (result.isConfirmed) 
-          {
-            
-          }                                
-        });       **/ 
-
       }else
       {
-            $('#nombreCliente').val('');
-            $('#apellidoCliente').val('');
-            $('#direccion').val('');
-            $("#nobreComercio").val('');
-            $('#direccionComercio').val('');
-            $('#telefono').val('');
+        $('#nombreCliente').val('');
+        $('#apellidoCliente').val('');
+        $('#direccion').val('');
+        $("#nobreComercio").val('');
+        $('#direccionComercio').val('');
+        $('#telefonoComercio').val('');
       }
     }
   })
@@ -377,18 +463,17 @@ function consultarCamposDeTienda(id)
           var res2 = JSON.parse(auxSplit2[i]);
         }
         $("#nobreComercio").val(res2.nombreTienda);
-        $('#direccionComercio').val(res2.direccionTienda);
-        $('#telefono').val(res2.telefonoTienda);
+        $('#direccionCliente').val(res2.direccionTienda);
+        $('#telefonoComercio').val(res2.telefonoTienda);
       }
     }
   });    
 
 }
-function consultarFormatoContrato()
+function consultarFormatoContrato(parametro)
 {
-
   var datos = new FormData();
-  datos.append("valor", "nulo");
+  datos.append("parametro", parametro);
 
   let plantilla2 = " ";
   let obj
@@ -422,7 +507,7 @@ function consultarFormatoContrato()
           result = result.replace("nombreComercio",$('#nobreComercio').val());
           result = result.replace("MunicipioCliente",$('#municipioComercio').val());
           result = result.replace("municipioCliente",$('#municipioComercio').val());
-          result = result.replace("telefonoComercio",$('#telefono').val());
+          result = result.replace("telefonoComercio",$('#telefonoComercio').val());
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#inputCity').val());
           result = result.replace("cantidadBotellones",$('#cantidadBotellones').val());
@@ -448,18 +533,18 @@ function consultarFormatoContrato()
 
 
 $('#guardar').click(function(){
-  
+
   var doc = new jsPDF();
   var specialElementHandlers = {
-      '#elementH': function (element, renderer) {
-          return true;
-      }
+    '#elementH': function (element, renderer) {
+      return true;
+    }
   };
   doc.fromHTML(result, 15, 15, {
-      'width': 170,
-      'elementHandlers': specialElementHandlers
+    'width': 170,
+    'elementHandlers': specialElementHandlers
   });
 
 // Save the PDF
-    doc.save('sample-document.pdf');
+doc.save('sample-document.pdf');
 });

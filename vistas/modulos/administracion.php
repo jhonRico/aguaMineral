@@ -97,21 +97,16 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 </div>
 <div class="row">
 
-<div class="single-blog col">
-    <div class="single-blog-img mt-5">
-      <a href="#" ><img src="<?php echo $url2;?>vistas/img/general/carrito.jpg" alt="Blog Image" class="w-50 h-25" ></a>
+<div class="single-blog col-md-4">
+    <div class="single-blog-img">
+      <a href="#"  ><img src="<?php echo $url2;?>vistas/img/general/carrito.jpg" alt="Blog Image"></a>
     </div>
-    <div class="blog-content-box tienda  me-1">
-      <div class="me-3">
-        <h4 class="me-3"><a href="#" class="me-5 link-dark link">Tienda</a></h4>
+    <div class="blog-content-box">
+      <div class="blog-content">
+        <h4><a href="#">Tienda</a></h4>
       </div>
     </div>
   </div>
-</div>
-</ul>  
-
-
-
 </div>
 
 </section>

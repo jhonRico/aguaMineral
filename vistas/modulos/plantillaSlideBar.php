@@ -18,8 +18,8 @@
     <div class="logo-details">
       <i class="fas fa-tint icon"></i>
         <div class="logo_name">Agua Mineral Ureña</div>
-        <i class='bx bx-menu' id="btn" ></i>
-    </div>
+        <i class="fas fa-bars" id="btn"></i>    
+      </div>
     <ul class="nav-list">
       <li>
        <a href="http://localhost/aguaMineral/principal">
@@ -36,7 +36,7 @@
          <span class="tooltip">Clientes</span>
       </li>
       <li>
-       <a href="http://localhost/aguaMineral/contratoEstante">
+       <a href="http://localhost/aguaMineral/contratoPrincipal">
          <i class="fas fa-file-signature"></i>
          <span class="links_name">Contratos</span>       
        </a>
@@ -65,7 +65,7 @@
      ?>
      <li class="profile">
         <form action="" method="post">
-         <span title="Cerrar Sesión"><button name="cerrar"><i class='bx bx-log-out' id="log_out"></i></button></span>
+         <span title="Cerrar Sesión"><button name="cerrar"><i class="fas fa-sign-out-alt" id="log_out"></i></button></span>
         </form>
      </li>
     </ul>

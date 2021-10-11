@@ -1,3 +1,14 @@
+//Ocultar Formulario de Contrato Estante
+$(document).ready(function() {
+  $('.contratoEstante').hide();
+});
+
+function mostrarContratoEstante(){
+    $('.contratoEstante').show();
+    $('#cajasContrato').hide();
+    $('#titulo').hide();
+    $('#menuCajas').hide();
+}
 /*LLamar a la funcion cada vez que se oprime una tecla*/
 
 $("#yes").click(function ocultar(){

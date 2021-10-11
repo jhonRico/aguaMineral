@@ -14,9 +14,10 @@
 
     <!---   PLUGINS DE CSS-->
     <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.css">
-    
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/fontawesome.min.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
-    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet"/>
 
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/sweetalert.css">
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/plugins/select2.min.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
     <link rel="stylesheet" href="<?php echo $url ?>vistas/css/contrato.css">
 
 
-    <script src="https://kit.fontawesome.com/0bfd04ed5e.js" crossorigin="anonymous"></script>
     <script src="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/js/bootstrap.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/jquery.min.js"></script>
@@ -71,7 +71,7 @@
                     if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || 
                        $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos" ||
                        $rutas[0] == "adminPersonas" || $rutas[0] == "zonas" || $rutas[0] == "norte" || $rutas[0] == "sur" || $rutas[0] == "este" || $rutas[0] == "oeste" || $rutas[0] == "centro"
-                       || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "administracionZonas" || $rutas[0] == "adminEstado" || $rutas[0] == "registro")  
+                       || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "administracionZonas" || $rutas[0] == "adminEstado" || $rutas[0] == "registro" || $rutas[0] == "contratoPrincipal")  
                 {
                     include "modulos/cabezaLogueado.php";
                     include "modulos/plantillaSlideBar.php";

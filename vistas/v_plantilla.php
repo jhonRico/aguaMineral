@@ -71,7 +71,7 @@
                     if($rutas[0] == "principal"  || $rutas[0] == "contratoEstante" || $rutas[0] == "administracion" || 
                        $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos" ||
                        $rutas[0] == "adminPersonas" || $rutas[0] == "zonas" || $rutas[0] == "norte" || $rutas[0] == "sur" || $rutas[0] == "este" || $rutas[0] == "oeste" || $rutas[0] == "centro"
-                       || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "administracionZonas")  
+                       || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "administracionZonas" || $rutas[0] == "adminEstado")  
                 {
                     include "modulos/cabezaLogueado.php";
                     include "modulos/plantillaSlideBar.php";
@@ -100,7 +100,8 @@ JAVASCRIPT PERSONALIZADO
 ======================================--> 
 
 <script src="<?php echo $url ?>vistas/js/adminTipoUsuario.js"></script>
-
+<script src="<?php echo $url ?>vistas/js/adminZonas.js"></script>
+<script src="<?php echo $url ?>vistas/js/adminEstados.js"></script>
 <script src="<?php echo $url ?>vistas/js/zonaClientes.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminPais.js"></script>
 <script src="<?php echo $url ?>vistas/js/usuario.js"></script>

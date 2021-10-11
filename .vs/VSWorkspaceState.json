@@ -3,9 +3,8 @@
     "",
     "\\ajax",
     "\\vistas",
-    "\\vistas\\js",
     "\\vistas\\modulos"
   ],
-  "SelectedNode": "\\vistas\\js\\adminPais.js",
+  "SelectedNode": "\\vistas\\modulos\\administracionZonas.php",
   "PreviewInSolutionExplorer": false
 }

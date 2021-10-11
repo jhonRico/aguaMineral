@@ -23,7 +23,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
     <div class="row">
      <div class="col">
-      <a href="http://localhost/aguaMineral/adminPais" class="link-dark">
+      <a href="<?php echo $url2?>adminPais" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-globe-americas iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Paises</h3>
@@ -33,7 +33,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       </a>
      </div>
      <div class="col">
-      <a href="#" class="link-dark">
+      <a href="<?php echo $url2?>adminEstado" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-map-marked-alt iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Estados</h3>
@@ -74,7 +74,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       </a>
      </div>
      <div class="col-md-6">
-      <a href="http://localhost/aguaMineral/administracionZonas" class="link-dark">
+      <a href="<?php echo $url2?>administracionZonas" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="far fa-compass iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Zonas</h3>

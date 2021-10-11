@@ -21,7 +21,7 @@ class ControladorRegistroAdminGeneral
         return $respuesta;
     }
 
-   static public function ctrlAddregistroTipUser($nombreValue,$tabla)
+   static public function ctrlAddregistro($nombreValue,$tabla)
     {
 
  
@@ -33,7 +33,7 @@ class ControladorRegistroAdminGeneral
         return $respuesta;
     }
 
-    static public function ctrleliminarTipoUser($id,$tabla,$atributoEliminar)
+    static public function ctrleliminar($id,$tabla,$atributoEliminar)
     {        
         $datos = array(
              "idTable"=>$id,
@@ -52,6 +52,28 @@ class ControladorRegistroAdminGeneral
          );
 
         $respuesta = ModeloRegistroAdminGeneral::mdlModificarOfTable($tabla, $datos,$atributoSet,$atributoWhere);
+        return $respuesta;
+    }
+
+    static public function ctrlAddRegistroDosParametrosAsociada($parametroValue1,$parametroValue2,$tabla,$atributo1,$atributo2)
+    {        
+        $datos = array(
+             "parametro1"=>$parametroValue1,
+             "parametro2"=>$parametroValue2
+         );
+
+        $respuesta = ModeloRegistroAdminGeneral::mdladdOfTableDosParametrosAsociada($tabla, $datos,$atributo1,$atributo2);
+        return $respuesta;
+    }
+
+    //-----------------Metodo que consulta un registro por dos parametros en el where pero uno de ellos es un int-------------------------
+    static public function ctrlconsultarRegistroExisteBDEnTablaDosParamtrosAsociada($parametroValue1,$parametroValue2,$tabla,$atributo1,$atributo2)
+    {     
+         $datos = array(
+             "parametro1"=>$parametroValue1,
+             "parametro2"=>$parametroValue2
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlconsultarRegistroExisteBDEnTablaDosParamtrosAsociada($datos,$tabla,$atributo1,$atributo2);
         return $respuesta;
     }
 

@@ -1,24 +1,21 @@
-/*------Cuando carga la pagina, consulta los  registrados*/
+/*------Cuando carga la pagina, consulta los  registrados de zonas*/
 $(document).ready(function(){ 
 	rutaActual = window.location.toString();
-	if(rutaActual.includes("adminTipoUsuario")){   
-		
-		consultarTodosTU();
-
+	if(rutaActual.includes("adminEstado")){   		
+		consultarAllEstados();
 	}
 });
-/*consulta todos*/
-
-function consultarTodosTU(){
+/*------------------------------------------Inicia el Espacio de consultar zonas----------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------*/
+function consultarAllEstados(){
 
 		
 	var datos = new FormData();
-	datos.append("tiposusu", "nulo");
-
+	datos.append("parametroNeutro", "nulo");
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -38,19 +35,19 @@ function consultarTodosTU(){
 						auxSplit2[i] = auxSplit2[i]+"}";
 					}
 					var res2 = JSON.parse(auxSplit2[i]);
-					var aux = "'"+res2.descripcion+"'";
+					var aux = "'"+res2.nombreEstado+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminarTipoUser('+res2.idTipoUsuario+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditTipUser('+res2.idTipoUsuario+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreEstado+'<a href="javascript:eliminarZonas('+res2.idEstado+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditZonas('+res2.idEstado+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
 				}
 				plantilla2 +='</div>'
-				$("#respuestaCons1").html(plantilla2);  
-				$('#respuestaCons1').show();
+				$("#verEstados").html(plantilla2);  
+				$('#verEstados').show();
 			}else{
-				$("#respuestaCons1").hide(); 
+				$("#verEstados").hide(); 
 					
 			}
 			
@@ -58,27 +55,28 @@ function consultarTodosTU(){
 		}
 	})
 }
-//Mostramos el modal agregar
+/*------------------------------------------Inicia el Espacio de agregar Estados----------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------*/
 
 $(function(){
-	$(".mostrarModal").click(function(){
-		$("#moddaddTU").modal("show");
+	$(".mostrarModalAddEstados").click(function(){
+		$("#moddaddestado").modal("show");
 	})
 })
 //cerrar modal agregar
 
 $(function(){
 	$(".cerrar").click(function(){
-		$("#nameTU").val('');
-		$("#moddaddTU").modal("hide");
+		$("#nameEstado").val('');
+		$("#moddaddestado").modal("hide");
 	})
 })
-//Validar Registro
 
 $(function(){
-	$("#agregarTU").click(function(){
+	$("#agregarEstadoBtn").click(function(){
 
-		var descripcion = $("#nameTU").val();
+		var descripcion = $("#nameEstado").val();
+		var idPaisValue = $("#paisSelect").val();
 			if (descripcion == "") 
  			{
  				Swal.fire({
@@ -106,75 +104,34 @@ $(function(){
  				return false;
  			}
  			
-			validarRegistroTipUsu();
+			validarRegistroEstado();
 
 			return true;
 		})
 	})
 
-//Capturar valor del campo de texto de agregar 
+function validarRegistroEstado()
+{
+	var nombre = $("#nameEstado").val();			
+	var idPaisValue = $("#paisSelect").val();
 
-function validarRegistroTipUsu()
-{ 
-	var nombre = $("#nameTU").val();
-	var ejecutar = validarRegistroExistenteTipUser(nombre);
+	var ejecutar = validarRegistroExistenteEstado(nombre,idPaisValue);
 	if(ejecutar == "No existe"){
-	     registrarCampoTipUser(nombre);
-		 consultarTodosTU();	
+	     registrarCampoEstados(nombre,idPaisValue);
+		 consultarAllEstados();	
 	}
 
 }
-//Funcion Ajax que valida existente en BD 
-
-function validarRegistroExistenteTipUser(valor)
-{
-	var datos = new FormData();
-	var returnValue = "Existe";
-	datos.append("validaExisteTipUsuInBd", valor);
-
-	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
-		method:"POST",
-		data: datos, 
-		cache: false,
-		contentType: false,
-		processData: false,
-		async:false,
-		success: function(respuesta)
-		{
-			if(respuesta.includes("false"))
-			{
-			   returnValue =  "No existe";
-			}else
-			{
-				Swal.fire({
-					position: 'top-end',
-					icon: 'error',
-					toast: true,
-					title: 'El registro ya existe',
-					showConfirmButton: false,
-					timerProgressBar: true,
-					timer: 1500
-				})
-				returnValue =  "Existe";
-			}
-
-		}                 
-
-	})
-
-	return returnValue;
-}
-
-/*Funcion Ajax que registra el tipo de usuario en BD*/
-function registrarCampoTipUser(valor)
+/*Funcion Ajax que registra el estado en BD*/
+function registrarCampoEstados(valor,idPaisValue)
 {
 	var datos = new FormData();
 
-	datos.append("descripcionTipUserValue", valor);
+	datos.append("descripcionEstadoValue", valor);
+	datos.append("idPaisValue", idPaisValue);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -188,7 +145,7 @@ function registrarCampoTipUser(valor)
 			{
 				Swal.fire({
 					title: 'Error',
-					text: 'Error al registrar',
+					text: 'Error al registrar ',
 					icon: 'error',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'
@@ -205,8 +162,8 @@ function registrarCampoTipUser(valor)
 				{
 					if (result.isConfirmed)
 					{
-						$("#nameTU").val('');
-						$("#moddaddTU").modal("hide");
+						$("#nameEstado").val('');
+						$("#moddaddestado").modal("hide");
 					}
 
 				})
@@ -216,13 +173,57 @@ function registrarCampoTipUser(valor)
 
 	})
 }
+//Funcion Ajax que valida existente en BD 
+
+function validarRegistroExistenteEstado(valor,idPaisValue)
+{
+	var datos = new FormData();
+	var returnValue = "Existe";
+	datos.append("validaExisteEstadoInBd", valor);
+	datos.append("idPaisValue", idPaisValue);
+
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		async:false,
+		success: function(respuesta)
+		{
+			if(respuesta.includes("ok"))
+			{
+			   returnValue =  "No existe";
+			}else
+			{
+			  
+				Swal.fire({
+					position: 'top-end',
+					icon: 'error',
+					toast: true,
+					title: 'El registro ya existe ',
+					showConfirmButton: false,
+					timerProgressBar: true,
+					timer: 1500
+				})
+				returnValue =  "Existe";
+			}
+
+		}                 
+
+	})
+
+	return returnValue;
+}
+/*------------------------------------------Finaliza el Espacio de agregar estados----------------------------------*/
 
 /*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
-function eliminarTipoUser(id){
+function eliminarZonas(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar este país?",
+		text: "¿Seguro que desea eliminar la zona?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -230,19 +231,19 @@ function eliminarTipoUser(id){
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {
 		if (result.isConfirmed){
-			eliminarTipUser(id);
-			consultarTodosTU();
+			eliminarZona(id);
+			consultarAllZonas();
 		}
 	})
 }
 //------------------Funcion que elimina un tipo de usuario-----
- function eliminarTipUser(id)
+ function eliminarZona(id)
  {
  	var datos = new FormData();
 
- 	datos.append("idTipUser", id);
+ 	datos.append("idZona", id);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+ 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -255,7 +256,7 @@ function eliminarTipoUser(id){
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al eliminar tipo de usuario',
+ 					text: 'Error al eliminar la zona',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -264,7 +265,7 @@ function eliminarTipoUser(id){
  			}else
  			{
  				Swal.fire({
- 					title: 'Tipo de usuario Eliminado',
+ 					title: 'Zona Eliminada',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -277,18 +278,20 @@ function eliminarTipoUser(id){
  }
 /*------------------------------------------Finaliza el Espacio de eliminar----------------------------------*/
 
-/*------------------------------------------Inicia el Espacio de Editar tipo de usuario----------------------------------*/
+
+
+/*------------------------------------------Inicia el Espacio de Editar zonas----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
 
-function mostrarModalEditTipUser(id, descripcion)
+function mostrarModalEditZonas(id, descripcion)
 {
 	idTipUser = id;
-	$("#editTipUser").modal("show");
-	$("#nameTipUserId").attr('value', descripcion);
-	$("#editarTipUser").click(function(){
-	        var existeInTable = validarRegistroExistenteTipUser($("#nameTipUserId").val());
+	$("#editZonas").modal("show");
+	$("#nameZonaId").attr('value', descripcion);
+	$("#editarZonaValue").click(function(){
+	        var existeInTable = validarRegistroExistenteZona($("#nameZonaId").val());
 			if(existeInTable == "No existe"){
-			    modificarTipUser(idTipUser);
+			    modificarZonasFinal(idTipUser);
 			}
 		    
 	})
@@ -296,9 +299,9 @@ function mostrarModalEditTipUser(id, descripcion)
 }
 
 
-function modificarTipUser(id)
+function modificarZonasFinal(id)
  {
-		var descripcion = $("#nameTipUserId").val();
+		var descripcion = $("#nameZonaId").val();
   		if (descripcion == "") 
  			{
  				Swal.fire({
@@ -318,7 +321,7 @@ function modificarTipUser(id)
  					position: 'top-end',
  					icon: 'error',
  					toast: true,
- 					title: 'Ingrese un Tipo de Usuario válido',
+ 					title: 'Ingrese una zona válida',
  					showConfirmButton: false,
  					timerProgressBar: true,
  					timer: 1500
@@ -326,24 +329,24 @@ function modificarTipUser(id)
  				return false;
  			}
 
- 			var descripcion = $("#nameTipUserId").val();
-			modificarTipUserValue(id,descripcion);
-			consultarTodosTU(); 			
+ 			var descripcion = $("#nameZonaId").val();
+			modificarZonaValue(id,descripcion);
+			consultarAllZonas(); 			
 
  			return true;
  	}
 
 
-function modificarTipUserValue(id,descripcion)
+function modificarZonaValue(id,descripcion)
  {
  	var datos = new FormData();
 
- 	datos.append("idTipUserModificado", id);
+ 	datos.append("idZonaModificado", id);
  	datos.append("descripcion", descripcion);
 
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+ 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -357,7 +360,7 @@ function modificarTipUserValue(id,descripcion)
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al modificar Tipo de usuario ',
+ 					text: 'Error al modificar la zona ',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -366,7 +369,7 @@ function modificarTipUserValue(id,descripcion)
  			}else
  			{
  				Swal.fire({
- 					title: 'Tipo de usuario Modificado',
+ 					title: 'Zona Modificada',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -374,8 +377,9 @@ function modificarTipUserValue(id,descripcion)
 				{
 					if (result.isConfirmed)
 					{
-						$("#nameTipUserId").attr('value', null);
-						$("#editTipUser").modal("hide");
+						$("#nameZonaId").attr('value',null);
+						$("#editZonas").modal("hide");
+
 					}
 				})
  			}

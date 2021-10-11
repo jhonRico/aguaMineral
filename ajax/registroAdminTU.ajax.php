@@ -20,13 +20,13 @@ class   AjaxRegistroAdmin1{
 
     public function ajaxAddRegistro($nombreValue,$tabla)
     {
-        $respuesta = ControladorRegistroAdminGeneral::ctrlAddregistroTipUser($nombreValue,$tabla);
+        $respuesta = ControladorRegistroAdminGeneral::ctrlAddregistro($nombreValue,$tabla);
         echo  json_encode ($respuesta);
     }
 
    public function ajaxEliminarTipUser($idDeleteTipUser,$tabla,$atributo)
     {
-        $respuesta = ControladorRegistroAdminGeneral::ctrleliminarTipoUser($idDeleteTipUser,$tabla,$atributo);
+        $respuesta = ControladorRegistroAdminGeneral::ctrleliminar($idDeleteTipUser,$tabla,$atributo);
         echo  json_encode ($respuesta);
     }
     

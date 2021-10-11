@@ -1,3 +1,12 @@
+<div class="container mt-3 fs-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminZonas" class="link-primary">Ubicación</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Pais</li>
+          </ol>
+        </nav>
+    </div>
+
 <form method="post" id="formulario" autocomplete="off" class="m-5 fp-5">
   <div class="m-5 p-5">
     <table class="table m-3 p-3">

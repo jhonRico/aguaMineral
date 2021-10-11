@@ -184,9 +184,8 @@ VENTANA MODAL PARA EL REGISTRO
       }
       ?>
       <div class="modal-footer">
-        <button class="btn btn-danger" type="button" id="guardar">Descargar PDF</button>
         <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
-        <button type="button" class="btn btn-primary">Imprimir</button>
+        <button class="btn btn-danger" type="button" id="guardar">Descargar PDF</button>
       </div>
     </div>
   </div>

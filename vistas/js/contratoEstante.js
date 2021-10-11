@@ -50,6 +50,7 @@ $("#cedulaCliente").keyup(function(){
   consultarClienteEnBd();
 });
 
+//Validar que los campos no sean vacios y compararlos con su respectiva expresion regular
 $(function(){
  $(".boton1").click(function(){
   var nombre = $('#nombreCliente').val();
@@ -212,7 +213,7 @@ $(function(){
           position: 'top-end',
           icon: 'error',
           toast: true,
-          title: 'Ingrese una dirección',
+          title: 'Ingrese la dirección del comercio',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 1500
@@ -226,6 +227,19 @@ $(function(){
           icon: 'error',
           toast: true,
           title: 'Ingrese una cantidad',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 1500
+        })        
+        return false;
+      }
+      if (isNaN(cantidadEstantes) == true) 
+      {
+         Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          title: 'Ingrese una cantidad válida',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 1500

@@ -335,7 +335,7 @@ function RegistrarUsuario()
                                 }).then((result) => {
                                   if (result.isConfirmed) 
                                   {
-                                    window.location.replace('http://localhost/aguaMineral/login');
+                                    window.location.replace('http://localhost/aguaMineral/adminPersonas');
                                   }                                
                                 });
                                 

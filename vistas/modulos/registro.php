@@ -1,11 +1,18 @@
 <?php
 $url2 = Ruta::ctrlRuta();  
-?>			
+?>		
 
-<div class="form-group col-md-6">
-	<input type="hidden" placeholder="Por favor Ingrese un telefono" class="form-control w-75 ms-5 mt-3" id="tipoUsuario" name="nombre" value="2">
+<div class="container mt-3 fs-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminPersonas" class="link-primary">Personas</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Crear Cuenta</li>
+          </ol>
+        </nav>
+    </div>
 
-</div>
+
+
 <div class="form-group col-md-6">
 	<input type="hidden" placeholder="Por favor Ingrese un telefono" class="form-control w-75 ms-5 mt-3" id="telefono" name="nombre" value="">
 </div>
@@ -50,6 +57,16 @@ $url2 = Ruta::ctrlRuta();
 				<div class="form-group col-md-6">
 					<label for="" class="ms-5 mt-3 form-label">Repetir Contraseña</label>
 					<input type="password" placeholder="Por favor repita la contraseña" class="form-control w-75 ms-5 mt-3" id="repiteContrasena" name="nombre">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label for="" class="ms-5 mt-3 form-label">Perfil de Usuario</label>
+					<select class="form-select w-75 ms-5 mt-3" id="tipoUsuario">
+						<option value="1">Administrador</option>
+						<option value="2">Empleado</option>
+						<option value="3">Cliente</option>
+					</select>
 				</div>
 			</div>
 

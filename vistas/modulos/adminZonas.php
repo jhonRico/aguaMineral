@@ -3,6 +3,15 @@
 
 ?>
 
+
+<div class="container mt-3 fs-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/administracion" class="link-primary">Administración</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Ubicacion</li>
+          </ol>
+        </nav>
+    </div>
 <section class="home-section">
 
 

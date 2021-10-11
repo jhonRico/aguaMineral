@@ -33,15 +33,11 @@ $url2 = Ruta::ctrlRuta();
           </div>
 
           <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label for="inputPassword" class="mt-3">Apellido del cliente</label>
               <input type="text" class="form-control mt-3" id="apellidoCliente" placeholder="Apellido">
             </div>
-          </div>
-
-          <div class="row">
-
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
               <label for="inputAddress" class="mt-3">Estado del cliente</label>
               <select id="inputState" class="form-select mt-3">
                 <option selected>T&aacute;chira</option>
@@ -49,6 +45,9 @@ $url2 = Ruta::ctrlRuta();
                 <option selected>Barinas</option>                                          
               </select>
             </div>
+          </div>
+
+          <div class="row">
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Municipio de residencia</label>
               <select id="municipio" class="form-select mt-3">
@@ -62,13 +61,22 @@ $url2 = Ruta::ctrlRuta();
                 <option selected>San Cristobal</option>                                     
               </select>
             </div>
-
+            <div class="form-group col-md-4">
+              <label for="inputState" class="mt-3">Zona ciudad</label>
+              <select id="ciudad" class="form-select mt-3">
+                <option selected>Norte</option>                                     
+              </select>
+            </div>
           </div>
 
           <!-- Fin datos del cliente -->
 
           <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-3">
+              <label for="inputAddress" class="mt-3">Sector</label>
+              <input type="text" class="form-control mt-3" id="sectorCliente" placeholder="Ej: Las lomas, El lobo...">
+            </div>
+            <div class="form-group col-md-9">
               <label for="inputAddress" class="mt-3">Direcci&oacute;n del cliente</label>
               <input type="text" class="form-control mt-3" id="direccion" placeholder="Direcci&oacute;n del cliente">
             </div>

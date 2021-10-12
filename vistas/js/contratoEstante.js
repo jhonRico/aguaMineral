@@ -112,7 +112,7 @@ $("#cedulaCliente").keyup(function(){
 
 function validarCampos(parametro)
 {
-  var nombre = $('#nombreCliente').val();
+  /*var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
   var direccion = $('#direccion').val();
@@ -358,7 +358,7 @@ function validarCampos(parametro)
       timer: 1500
     })        
      return false;
-    }
+    }*/
 
     mostrarModal(parametro);
 
@@ -531,20 +531,13 @@ function consultarFormatoContrato(parametro)
 })
 }
 
+function mostrarFoter(){
+  $(".pie").show();  
+}
 
-$('#guardar').click(function(){
-
-  var doc = new jsPDF();
-  var specialElementHandlers = {
-    '#elementH': function (element, renderer) {
-      return true;
-    }
-  };
-  doc.fromHTML(result, 15, 15, {
-    'width': 170,
-    'elementHandlers': specialElementHandlers
-  });
-
-// Save the PDF
-doc.save('sample-document.pdf');
-});
+function imprimirContrato()
+{
+    $(".pie").hide();  
+    window.print();
+    setTimeout(mostrarFoter,2000);
+}

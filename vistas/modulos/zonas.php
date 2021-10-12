@@ -1,6 +1,9 @@
 <?php 
-  $url2 = Ruta::ctrlRuta();  
-
+  $url2 = Ruta::ctrlRuta(); 
+  $consultar = "consultar";
+  $consultaZonas = controladorZonas::ctrlZonas($consultar); 
+  $array = ['fas fa-street-view iconosAdmin','fas fa-map-marker-alt iconosAdmin','fas fa-map-marked-alt iconosAdmin','far fa-map iconosAdmin','fas fa-map-marker-alt iconosAdmin','fas fa-street-view iconosAdmin','fas fa-map-marked-alt iconosAdmin','far fa-map iconosAdmin','fas fa-street-view iconosAdmin','fas fa-map-marked-alt iconosAdmin','far fa-map iconosAdmin','fas fa-street-view iconosAdmin','fas fa-map-marker-alt iconosAdmin','fas fa-map-marker-alt iconosAdmin','far fa-map iconosAdmin','fas fa-map-marker-alt iconosAdmin','far fa-map iconosAdmin','fas fa-street-view iconosAdmin','fas fa-map-marked-alt iconosAdmin','far fa-map iconosAdmin','fas fa-street-view iconosAdmin','fas fa-map-marker-alt iconosAdmin','fas fa-map-marker-alt iconosAdmin','far fa-map iconosAdmin','fas fa-map-marker-alt iconosAdmin'];
+    $i = 0;
 ?>
 
 
@@ -20,59 +23,18 @@
         ===========================================-->
         <ul class="grid0" id="">
           <div class="row">
-               <div class="col">
-                <a href="http://localhost/aguaMineral/centro" class="link-dark">
+            <?php foreach ($consultaZonas as $key): ?>
+               <div class="col-md-6">
+                <a href="javascript: redireccionarPaginaZonas('<?php  echo $key['descripcion']; ?>')" class="link-dark">
                 <div class="border m-3 p-3 bg-light div-admin rounded">
-                      <i class="fas fa-street-view iconosAdmin"></i>
-                      <h3 class="titulosAdmin mb-0">Centro</h3>
-                      <p class="mb-5 mt-0">Clientes de la zona centro</p>  
+                      <i class="<?php echo $array[$i]; $i++; ?>"></i>
+                      <h3 class="titulosAdmin mb-0"><?php echo $key['descripcion']; ?></h3>
+                      <p class="mb-5 mt-0">Clientes de la zona <?php echo $key['descripcion']; ?></p>  
                 </div>
                 </a>
-              </div>
-              <div class="col">
-                <a href="http://localhost/aguaMineral/norte" class="link-dark">
-                <div class="border m-3 p-3 bg-light div-admin rounded">
-                      <i class="fas fa-compass iconosAdmin"></i>
-                      <h3 class="titulosAdmin mb-0">Norte</h3>
-                      <p class="mb-5 mt-0">Clientes de la zona Norte</p>  
-
                 </div>
-                </a>
-              </div>
+              <?php endforeach ?>
           </div>
-
-          <div class="row">
-            <div class="col">
-                <a href="http://localhost/aguaMineral/sur" class="link-dark">
-                <div class="border m-3 p-3 bg-light div-admin rounded">
-                    <i class="fas fa-map-marker-alt iconosAdmin"></i>
-                    <h3 class="titulosAdmin mb-0">Sur</h3>
-                    <p class="mb-5 mt-0">Clientes de la zona Sur</p> 
-                </div>
-                </a>
-              </div>
-              <div class="col">
-                <a href="http://localhost/aguaMineral/este" class="link-dark">
-                <div class="border m-3 p-3 bg-light div-admin rounded">
-                      <i class="fas fa-map-signs iconosAdmin"></i>
-                      <h3 class="titulosAdmin mb-0">Este</h3>
-                      <p class="mb-5 mt-0">Clientes de la zona Este</p>  
-                </div>
-                </a>
-              </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-                <a href="http://localhost/aguaMineral/oeste" class="link-dark">
-                <div class="border m-3 p-3 bg-light div-admin rounded">
-                    <i class="far fa-compass iconosAdmin"></i>
-                    <h3 class="titulosAdmin mb-0">Oeste</h3>
-                    <p class="mb-5 mt-0">Clientes de  zona Oeste</p>
-                </div>
-                </a>
-              </div>
-          </div>
-
         </ul>  
     </div>
 </section>

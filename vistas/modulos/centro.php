@@ -1,7 +1,5 @@
 <?php  
     $consultar = "Hola";
-    $i = 0;
-    $nombreComercio = ['RicoPez','CompañiaRicossCross','RicossAvellaneda'];
     $variable = controladorZonas::ctrlconsultarCiudades($consultar);
     $resultadoConsultaClientes = controladorZonas::ctrlconsultarClientes($consultar);
 ?>
@@ -38,6 +36,7 @@
       <th scope="col">Nombre</th>
       <th scope="col">Apellido</th>
       <th scope="col">Comercio</th>
+      <th scope="col">Sector</th>
       <th scope="col">Detalle</th>
     </tr>
   </thead>
@@ -46,7 +45,8 @@
     <tr>
       <td><?php echo $value['nombrePersona'];?></td>
       <td><?php echo $value['apellidoPersona'];?></td>
-      <td><?php echo $nombreComercio[$i]; $i++;?></td>
+      <td><?php echo $value['nombreTienda'];?></td>
+      <td><?php echo $value['nombreSector'];?></td>
       <td><a href="#"><i class="fas fa-search"></i></a></td>
     </tr>
     <?php endforeach ?>

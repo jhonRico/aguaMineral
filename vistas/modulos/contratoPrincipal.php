@@ -238,14 +238,16 @@ VENTANA MODAL PARA EL REGISTRO
 
 
 <!-- Modal -->
-<div class="modal fade bd-example-modal-lg" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+<div class="modal fade bd-example-modal-lg bg-white" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg w-100 h-100">
+    <div class="bg-white modal-content border-0">
       <?php 
       date_default_timezone_set("America/Argentina/Buenos_Aires");
                           //Dia-Mes-A�o Hora:Minutos:Segundos
       $fecha = date("d-m-Y H:i:s");
-      echo '<div id="contrato"><div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div></div>';
+      echo '<div id="content"><div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div></div>
+
+<div id="elementH"></div>';
 
       function fechaCastellano ($fecha) {
         $fecha = substr($fecha, 0, 10);
@@ -262,9 +264,9 @@ VENTANA MODAL PARA EL REGISTRO
         return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
       }
       ?>
-      <div class="modal-footer">
+      <div class="modal-footer pie">
         <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
-        <button class="btn btn-danger" type="button" id="guardar">Descargar PDF</button>
+        <a href="javascript:imprimirContrato()"><button class="btn btn-primary" type="button">Imprimir</button></a>
       </div>
     </div>
   </div>

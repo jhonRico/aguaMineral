@@ -14,8 +14,8 @@ class controladorZonas
 
 	}
     static public function ctrlconsultarClientes($consultar)
-    {
-        
+    {        
+
     $tabla = "persona";
     $tipoUsuario = "3";
 
@@ -23,6 +23,14 @@ class controladorZonas
 
     return $respuesta;
 
+    }
+    static public function ctrlZonas($consultar)
+    {
+        $tabla = "zonas";
+
+        $respuesta = ModeloZonas::mdlconsultarZonas($tabla);
+
+        return $respuesta;
     }
 
 }

@@ -2,7 +2,14 @@
 
 class ControladorFormatoContrato
 { 
-
+    static public function ctrlConsultarProductosDisponibles($tabla,$parametro)
+    {
+        $datos = array(
+             "parametro"=>$parametro,
+         );
+        $respuesta = ModeloFormatoContrato::mdlConsultarProductosDisponibles($tabla,$datos);
+        return $respuesta;
+    }
 
     static public function ctrlConsultarFormatoContrato($tabla,$parametro)
     {

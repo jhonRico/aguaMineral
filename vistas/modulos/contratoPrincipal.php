@@ -190,7 +190,7 @@ $url2 = Ruta::ctrlRuta();
         <ul class="grid0">
           <div class="row">
            <div class="col-md-4">
-            <a href="javascript:mostrarContrato('estante')" class="link-dark">
+            <a href="javascript:mostrarContrato('estantes')" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">
                 <i class="fas fa-file-contract iconosAdmin"></i>
                 <h3 class="titulosAdmin2 mb-0">Estante</h3>

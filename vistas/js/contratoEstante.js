@@ -360,16 +360,18 @@ function validarCampos(parametro)
      return false;
     }*/
 
-    mostrarModal(parametro);
-
+    consultarProductosDisponibles(parametro);
 
     return true;
 
 }
 
 
-function mostrarModal(parametro){
+function mostrarModal(parametro)
+{
  consultarFormatoContrato(parametro);
+ registrarContrato();
+ registrarPersonas();
  $("#modal2").modal("show");
 }
 
@@ -470,6 +472,58 @@ function consultarCamposDeTienda(id)
   });    
 
 }
+//Consultar que si hallan productos
+function consultarProductosDisponibles(parametro)
+{
+  var dato = "Activar"
+  var datos = new FormData();
+  datos.append("dato", dato);
+  datos.append("parametros", parametro);
+
+  let plantilla2 = " ";
+  let obj
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+     if(!respuesta3.includes('false'))
+     {     
+        mostrarModal(parametro);
+
+     }else
+     {
+          if (parametro == 'ambos') 
+          {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                toast: true,
+                title: 'El producto no se encuentra disponible en estos momentos',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 1500
+              }) 
+          }else
+          {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              toast: true,
+              title: 'No hay '+parametro+' '+'disponibles',
+              showConfirmButton: false,
+              timerProgressBar: true,
+              timer: 1500
+            }) 
+          }
+     }
+    }
+  })
+}
 function consultarFormatoContrato(parametro)
 {
   var datos = new FormData();
@@ -530,7 +584,60 @@ function consultarFormatoContrato(parametro)
   }
 })
 }
+//registrar Contrato en BD
+function registrarContrato()
+{
+  //var datos = new FormData();
 
+  //datos.append("nombrePais", valor);
+/*
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    async:false,
+    success: function(respuesta)
+    {
+      if(!respuesta.includes("ok"))
+      {
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al registrar pais',
+          icon: 'error',
+          showCloseButton: true,
+          confirmButtonText:'Aceptar'
+        }); 
+
+      }else
+      {
+        Swal.fire({
+          title: 'Registro Exitoso',
+          icon: 'success',
+          showCloseButton: true,
+          confirmButtonText:'Aceptar'
+        }).then((result) => 
+        {
+          if (result.isConfirmed)
+          {
+            $("#namePais").val('');
+            $("#moddaddCountry").modal("hide");
+          }
+
+        })
+      }
+
+    }                 
+
+  })*/
+}
+//Registrar Usuario despues de generar el contrato
+function registrarPersonas()
+{
+
+}
 function mostrarFoter(){
   $(".pie").show();  
 }

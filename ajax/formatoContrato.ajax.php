@@ -6,16 +6,24 @@ require_once "../modelos/m_formatoContrato.php";
 class   AjaxFormatoContrato
 {
     
+     public function ajaxConsultarProductosDisponibles($tabla,$parametro)
+    {
+        $respuesta = ControladorFormatoContrato::ctrlConsultarProductosDisponibles($tabla,$parametro);
+        echo  json_encode ($respuesta);
+    }
+
     public function ajaxConsultarFormatoContrato($tabla,$parametro)
     {
         $respuesta = ControladorFormatoContrato::ctrlConsultarFormatoContrato($tabla,$parametro);
         echo  json_encode ($respuesta);
     }
+
     public function ajaxConsultarClientesEnBd($tabla,$tipoUsuario,$nombreCliente)
     {
         $respuesta = ControladorFormatoContrato::ctrlConsultarClientesEnBd($tabla,$tipoUsuario,$nombreCliente);
         echo  json_encode ($respuesta);
     }
+
     public function ajaxConsultarTiendaEnBd($tabla,$idCliente)
     {
         $respuesta = ControladorFormatoContrato::ctrlConsultarTiendaEnBd($tabla,$idCliente);
@@ -24,9 +32,18 @@ class   AjaxFormatoContrato
 }
 
 
+
+if(isset($_POST["dato"]))
+{  
+    $tabla = "producto";
+    $parametro = $_POST['parametros'];
+    $allStates = new AjaxFormatoContrato();
+    $allStates->ajaxConsultarProductosDisponibles($tabla,$parametro);
+}
+
 if(isset($_POST["parametro"]))
 {  
-    $tabla = "formatocontrato";
+    $tabla = "tipocontrato";
     $parametro = $_POST['parametro'];
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxConsultarFormatoContrato($tabla,$parametro);

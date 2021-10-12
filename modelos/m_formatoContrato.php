@@ -5,9 +5,18 @@ require_once "conexion.php";
  class ModeloFormatoContrato
  {
 
+
+    static public function mdlConsultarProductosDisponibles($tabla,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN tipoproducto ON $tabla.TipoProducto_idTipoProducto =  tipoproducto.idTipoProducto WHERE tipoproducto.descripcion = :parametro");
+        $stmt->bindParam(":parametro", $datos["parametro"], PDO::PARAM_STR);
+        $stmt -> execute();
+        return  $stmt->fetch();
+    }
+
     static public function mdlConsultarFormatoContrato($tabla,$datos)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE parametro = :parametro");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE nombre = :parametro");
         $stmt->bindParam(":parametro", $datos["parametro"], PDO::PARAM_STR);
         $stmt -> execute();
         return  $stmt->fetch();

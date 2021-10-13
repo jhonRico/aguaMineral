@@ -2,12 +2,42 @@
 
 class ControladorFormatoContrato
 { 
+
+    static public function ctrlConsultarIdTipoUsuario($tabla)
+    {
+        $respuesta = ModeloFormatoContrato::mdlConsultarIdTipoUsuario($tabla);
+        return $respuesta;
+    }
+
+
     static public function ctrlConsultarProductosDisponibles($tabla,$parametro)
     {
         $datos = array(
              "parametro"=>$parametro,
          );
         $respuesta = ModeloFormatoContrato::mdlConsultarProductosDisponibles($tabla,$datos);
+        return $respuesta;
+    }
+
+
+     static public function ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato)
+    {
+        date_default_timezone_set("America/Bogota");
+        $fecha = date("Y-m-d H:i:s");
+
+        $respuesta = ModeloFormatoContrato::mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$fecha);
+        return $respuesta;
+    }
+
+    static public function ctrlRegistrarContrato($tabla,$idCliente,$cantidad,$fechaContrato, $idTipoContrato)
+    {
+        $datos = array(
+             "idTipoContrato"=>$idTipoContrato,
+             "idCliente"=>$idCliente,
+             "cantidad"=>$cantidad,
+             "fechaContrato"=>$fechaContrato,
+         );
+        $respuesta = ModeloFormatoContrato::mdlRegistrarContrato($tabla,$datos);
         return $respuesta;
     }
 

@@ -12,6 +12,12 @@ class   AjaxFormatoContrato
         echo  json_encode ($respuesta);
     }
 
+    public function ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato)
+    {
+        $respuesta = ControladorFormatoContrato::ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato);
+        echo  json_encode ($respuesta);
+    }
+
     public function ajaxConsultarFormatoContrato($tabla,$parametro)
     {
         $respuesta = ControladorFormatoContrato::ctrlConsultarFormatoContrato($tabla,$parametro);
@@ -39,6 +45,37 @@ if(isset($_POST["dato"]))
     $parametro = $_POST['parametros'];
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxConsultarProductosDisponibles($tabla,$parametro);
+}
+if(isset($_POST["nombre"]))
+{  
+
+    $tabla = "sector";
+    $tabla2 = "persona";
+    $tabla3 = "tienda";
+    $nombre = $_POST['nombre'];
+    $idTipoUsuario = $_POST['idTipoUsuario'];
+    $apellido = $_POST['apellido'];
+    $cedula = $_POST['cedula'];
+    $estadoCliente = $_POST['estadoCliente'];
+    $municipioCliente = $_POST['municipioCliente'];
+    $ciudadCliente = $_POST['ciudadCliente'];
+    $zonaCliente = $_POST['zonaCliente'];
+    $sectorCliente = $_POST['sectorCliente'];
+    $direccionCliente = $_POST['direccionCliente'];
+    $comercio = $_POST['comercio'];
+    $telefono = $_POST['telefono'];
+    $estadoComercio = $_POST['estadoComercio'];
+    $municipioComercio = $_POST['municipioComercio'];
+    $ciudadComercio = $_POST['ciudadComercio'];
+    $zonaComercio = $_POST['zonaComercio'];
+    $sectorComercio = $_POST['sectorComercio'];
+    $direccionComercio = $_POST['direccionComercio'];
+    $cantidadEstantes = $_POST['cantidadEstantes'];
+    $idTipoContrato = $_POST['idTipoContrato'];
+
+
+    $allStates = new AjaxFormatoContrato();
+    $allStates->ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato);
 }
 
 if(isset($_POST["parametro"]))

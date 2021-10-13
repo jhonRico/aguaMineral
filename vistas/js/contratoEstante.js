@@ -4,7 +4,7 @@ $(document).ready(function() {
 });
 
 //mostrar formulario dependiendo del parametro
-function mostrarContrato(parametro){
+function mostrarContrato(parametro,idTipoUsuario){
   $('.contratoEstante').show();
   if (parametro == "botellones") 
   {
@@ -13,11 +13,12 @@ function mostrarContrato(parametro){
     $('#menuCajas').hide();
     $('#TituloPrincipalContrato').text('Crear contrato botellon');
     $('#cantidadBotellones').hide();
+    $('#capacidad').hide();
     $('#labelDescripcion').hide();
     $('#labelCantidadEstantes').text('Cantidad de botellones');
     $('#inputCity').attr('placeholder', 'Por favor ingrese la cantidad de botellones');
     $( ".boton1" ).click(function() {
-     validarCampos(parametro);
+     validarCampos(parametro,idTipoUsuario);
    });
 
   }else if (parametro == "ambos") 
@@ -33,7 +34,7 @@ function mostrarContrato(parametro){
     $('#colocarInput').html(input); 
     $('#colocarInput').show();
     $( ".boton1" ).click(function() {
-     validarCampos(parametro);
+     validarCampos(parametro,idTipoUsuario);
    });
 
   }else
@@ -42,7 +43,7 @@ function mostrarContrato(parametro){
     $('#titulo').hide();
     $('#menuCajas').hide();
     $( ".boton1" ).click(function() {
-     validarCampos(parametro);
+     validarCampos(parametro,idTipoUsuario);
    });
   }
 
@@ -65,6 +66,7 @@ $("#yes").click(function ocultar(){
   $("#labelMunicipioComercio").hide();
   $("#labelCiudadComercio").hide();
   $("#labelDireccionComercio").hide();
+  $("#labelComercio").hide();
   $("#no").attr('type', 'hidden');
   $("#ocultar").hide();
 
@@ -99,6 +101,7 @@ function mostrarInputs()
   $("#labelMunicipioComercio").show();
   $("#labelCiudadComercio").show();
   $("#labelDireccionComercio").show();
+  $("#labelComercio").show();
   $("#no").attr('type', 'checkbox');
   $("#ocultar").show();
 }
@@ -110,9 +113,9 @@ $("#cedulaCliente").keyup(function(){
 
 //Validar que los campos no sean vacios y compararlos con su respectiva expresion regular
 
-function validarCampos(parametro)
+function validarCampos(parametro,idTipoUsuario)
 {
-  /*var nombre = $('#nombreCliente').val();
+  var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
   var direccion = $('#direccion').val();
@@ -120,7 +123,7 @@ function validarCampos(parametro)
   var cedula = $('#cedulaCliente').val();
   var telefono = $('#telefonoComercio').val();
   var direccionComercio = $('#direccionComercio').val();
-  var cantidadEstantes = $('#inputCity').val();
+  var cantidadEstantes = $('#cantidadEstantes').val();
   var sectorComercio = $('#sectorComercio').val();
   if (cedula == '') 
   {
@@ -355,20 +358,20 @@ function validarCampos(parametro)
       timer: 1500
     })        
      return false;
-    }*/
+    }
 
-    consultarProductosDisponibles(parametro);
+    consultarProductosDisponibles(parametro,idTipoUsuario);
 
     return true;
 
 }
 
 
-function mostrarModal(parametro)
+function mostrarModal(parametro,idTipoUsuario)
 {
  consultarFormatoContrato(parametro);
- registrarContrato(parametro);
- registrarPersonas();
+ //registrarContrato(parametro);
+ registrarPersonas(parametro,idTipoUsuario);
  $("#modal2").modal("show");
 }
 
@@ -470,7 +473,7 @@ function consultarCamposDeTienda(id)
 
 }
 //Consultar que si hallan productos
-function consultarProductosDisponibles(parametro)
+function consultarProductosDisponibles(parametro,idTipoUsuario)
 {
   var dato = "Activar"
   var datos = new FormData();
@@ -490,7 +493,7 @@ function consultarProductosDisponibles(parametro)
     {
      if(!respuesta3.includes('false'))
      {     
-        mostrarModal(parametro);
+        mostrarModal(parametro,idTipoUsuario);
 
      }else
      {
@@ -581,23 +584,59 @@ function consultarFormatoContrato(parametro)
   }
 })
 }
-//registrar Contrato en BD
-function registrarContrato(parametro)
+
+//registrar persona, tienda y contrato en BD despues de haber generado contrato
+function registrarPersonas(parametro,idTipoUsuario)
 {
 
-  var idSucursal = "Ureña";
-  var idPersona = 1;
-  var cantidad = 35;
-  var fechaContrato = "2021/10/05";
-
+  //Guardando valores en variables
+  var nombre = $('#nombreCliente').val();
+  var apellido = $('#apellidoCliente').val();
+  var sectorCliente = $('#sectorCliente').val();
+  var estadoCliente = $('#estadoCliente').val();
+  var municipioCliente = $('#municipioCliente').val();
+  var ciudadCliente =  $('#ciudadCliente').val();
+  var estadoComercio = $('#estadoComercio').val();
+  var municipioComercio = $('#municipioComercio').val();
+  var ciudadComercio =  $('#ciudadComercio').val();
+  var zonaComercio = $('#zonaComercio').val();
+  var zonaCliente = $('#zonaCliente').val();
+  var direccionCliente = $('#direccionCliente').val();
+  var comercio = $("#nobreComercio").val();
+  var cedula = $('#cedulaCliente').val();
+  var telefono = $('#telefonoComercio').val();
+  var direccionComercio = $('#direccionComercio').val();
+  var sectorComercio = $('#sectorComercio').val();
+  var cantidadEstantes = $('#cantidadEstantes').val();
 
   var datos = new FormData();
 
+//Datos de Persona
+  datos.append("nombre", nombre);
+  datos.append("idTipoUsuario", idTipoUsuario);
+  datos.append("apellido", apellido);
+  datos.append("cedula", cedula);
+  datos.append("estadoCliente", estadoCliente);
+  datos.append("municipioCliente", municipioCliente);
+  datos.append("ciudadCliente", ciudadCliente);
+  datos.append("zonaCliente", zonaCliente);
+  datos.append("sectorCliente", sectorCliente);
+  datos.append("direccionCliente", direccionCliente);
+  
+//Datos de Tienda
+  datos.append("comercio", comercio);
+  datos.append("telefono", telefono);
+  datos.append("estadoComercio", estadoComercio);
+  datos.append("municipioComercio", municipioComercio);
+  datos.append("ciudadComercio", ciudadComercio);
+  datos.append("zonaComercio", zonaComercio);
+  datos.append("sectorComercio", sectorComercio);
+  datos.append("direccionComercio", direccionComercio);
+  datos.append("cantidadEstantes", cantidadEstantes);
+
+//Datos de contrato
+
   datos.append("idTipoContrato", parametro);
-  datos.append("idSucursal", idSucursal);
-  datos.append("cantidad", cantidad);
-  datos.append("sucursal", idSucursal);
-  datos.append("fechaContrato", fechaContrato);
 
 
 
@@ -611,39 +650,32 @@ function registrarContrato(parametro)
     async:false,
     success: function(respuesta)
     {
-      if(!respuesta.includes("ok"))
+      alert(respuesta);
+      if(respuesta.includes("error"))
       {
         Swal.fire({
           title: 'Error',
-          text: 'Error al registrar pais',
+          text: 'Error al registrar Contrato',
           icon: 'error',
           showCloseButton: true,
           confirmButtonText:'Aceptar'
         }); 
-      }else
+      }else if(respuesta.includes("ok"))
       {
         Swal.fire({
-          title: 'Registro Exitoso',
+          title: 'Registro Exitoso de Cliente y Contrato',
           icon: 'success',
           showCloseButton: true,
           confirmButtonText:'Aceptar'
-        }).then((result) => 
-        {
-          if (result.isConfirmed)
-          {
-            $("#namePais").val('');
-            $("#moddaddCountry").modal("hide");
-          }
         })
       }
     }                 
   })
 }
-//Registrar Usuario despues de generar el contrato
-function registrarPersonas()
-{
 
-}
+
+//Registrar Usuario despues de generar el contrato
+
 function mostrarFoter(){
   $(".pie").show();  
 }

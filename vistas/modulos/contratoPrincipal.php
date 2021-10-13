@@ -1,6 +1,7 @@
 <?php 
 $url2 = Ruta::ctrlRuta();  
-
+$tabla = "tipousuario";
+$resultadoConsultaIdTipoUsuario = ControladorFormatoContrato::ctrlConsultarIdTipoUsuario($tabla);
 ?>
 
 
@@ -39,10 +40,10 @@ $url2 = Ruta::ctrlRuta();
             </div>
             <div class="form-group col-md-6">
               <label for="inputAddress" class="mt-3">Estado del cliente</label>
-              <select id="inputState" class="form-select mt-3">
-                <option selected>T&aacute;chira</option>
-                <option selected>M&eacute;rida</option> 
-                <option selected>Barinas</option>                                          
+              <select id="estadoCliente" class="form-select mt-3">
+                <option value="1">T&aacute;chira</option>
+                <option value="2">M&eacute;rida</option> 
+                <option value="3">Barinas</option>                                          
               </select>
             </div>
           </div>
@@ -51,20 +52,20 @@ $url2 = Ruta::ctrlRuta();
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Municipio de residencia</label>
               <select id="municipioCliente" class="form-select mt-3">
-                <option selected>Cardenas</option>
-                <option selected>San cristobal</option>                                        
+                <option value="1">Cardenas</option>
+                <option value="2">San cristobal</option>                                        
               </select>
             </div>
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Ciudad de residencia</label>
               <select id="ciudadCliente" class="form-select mt-3">
-                <option selected>San Cristobal</option>                                     
+                <option value="1">San Cristobal</option>                                     
               </select>
             </div>
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Zona ciudad</label>
               <select id="zonaCliente" class="form-select mt-3">
-                <option selected>Norte</option>                                     
+                <option value="1">Norte</option>                                     
               </select>
             </div>
           </div>
@@ -102,19 +103,19 @@ $url2 = Ruta::ctrlRuta();
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="" class="form-label mt-3" id="labelEstadoComercio">Estado del Comercio</label>
+              <label for="" class="form-label mt-3" id="labelComercio">Estado del Comercio</label>
               <select id="estadoComercio" class="form-select mt-3">
-                <option>T&aacute;chira</option>
-                <option>M&eacute;rida</option> 
-                <option>Barinas</option>                                          
+                <option value="1">T&aacute;chira</option>
+                <option value="2">M&eacute;rida</option> 
+                <option value="3">Barinas</option>                                          
               </select>
             </div>
             <div class="form-group col-md-6">
               <label for="" class="form-label mt-3" id="labelMunicipioComercio">Municipio del Comercio</label>
               <select id="municipioComercio" class="form-select mt-3">
-                <option>San Cristóbal</option>
-                <option>Cardenas</option> 
-                <option>Bolívar</option>                                          
+                <option value="1">San Cristóbal</option>
+                <option value="2">Cardenas</option> 
+                <option value="3">Bolívar</option>                                          
               </select>
             </div>   
           </div>  
@@ -122,16 +123,16 @@ $url2 = Ruta::ctrlRuta();
             <div class="form-group col-md-9">
               <label for="inputState" class="mt-3" id="labelCiudadComercio">Ciudad del comercio</label>
               <select id="ciudadComercio" class="form-select mt-3">
-                <option>San Cristobal</option>                                     
+                <option value="1">San Cristobal</option>                                     
               </select>
             </div>
             <div class="form-group col-md-3">
               <label for="inputState" class="mt-3" id="labelZonaComercio">Zona del comercio</label>
               <select id="zonaComercio" class="form-select mt-3">
-                <option>Centro</option>  
-                <option>Sur</option>  
-                <option>Este</option>  
-                <option>Oeste</option>                                     
+                <option value="1">Centro</option>  
+                <option value="2">Sur</option>  
+                <option value="3">Este</option>  
+                <option value="4">Oeste</option>                                     
               </select>
             </div>
           </div>    
@@ -149,13 +150,13 @@ $url2 = Ruta::ctrlRuta();
           <div class="row">
             <div class="form-group col-md-6">
               <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de estantes</label>
-              <input type="number" min="1" class="form-control mt-3" id="inputCity" placeholder="Cantidad de estantes">
+              <input type="number" min="1" class="form-control mt-3" id="cantidadEstantes" placeholder="Cantidad de estantes">
             </div>
             <div class="form-group col-md-6">
               <label for="inputState" class="mt-4" id="labelDescripcion">Descripci&oacute;n</label>
-              <select id="cantidadBotellones" class="form-select mt-3">
-                <option selected>Estante de 6 botellones</option>
-                <option selected>Estante de 8 botellones</option>                              
+              <select id="capacidad" class="form-select mt-3">
+                <option value="1">Estante de 6 botellones</option>
+                <option value="2">Estante de 8 botellones</option>                              
               </select>
             </div>
 
@@ -190,7 +191,7 @@ $url2 = Ruta::ctrlRuta();
         <ul class="grid0">
           <div class="row">
            <div class="col-md-4">
-            <a href="javascript:mostrarContrato('estantes')" class="link-dark">
+            <a href="javascript:mostrarContrato('estantes',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">
                 <i class="fas fa-file-contract iconosAdmin"></i>
                 <h3 class="titulosAdmin2 mb-0">Estante</h3>
@@ -199,7 +200,7 @@ $url2 = Ruta::ctrlRuta();
             </a>
           </div>
           <div class="col-md-4">
-            <a href="javascript:mostrarContrato('botellones')" class="link-dark">
+            <a href="javascript:mostrarContrato('botellones',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">
                 <i class="fas fa-file-signature iconosAdmin"></i>
                 <h3 class="titulosAdmin2 mb-0">Botellon</h3>
@@ -209,7 +210,7 @@ $url2 = Ruta::ctrlRuta();
             </a>
           </div>
           <div class="col-md-4">
-            <a href="javascript:mostrarContrato('ambos')" class="link-dark">
+            <a href="javascript:mostrarContrato('ambos',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">
                 <i class="fas fa-file-contract iconosAdmin"></i>
                 <h3 class="titulosAdmin2 mb-0">Ambos</h3>

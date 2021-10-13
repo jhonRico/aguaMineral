@@ -4,6 +4,14 @@ require_once "conexion.php";
 
 class ModeloFormatoContrato 
 {
+
+    static public function mdlConsultarSerial($tabla)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+        $stmt -> execute();
+        return $stmt->fetch();
+    }
     static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$fecha)
     {
              $stmt22 = Conexion::conectar()->prepare("SELECT * FROM $tabla2 WHERE TipoUsuario_idTipoUsuario  = :idTipoUsuario  AND cedulaPersona = :cedula");
@@ -19,7 +27,7 @@ class ModeloFormatoContrato
 
                    $idPersona = $prueba['idPersona'];
                    $stmt = Conexion::conectar()->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-                         Persona_idPersona, cantidad, fechaContrato) VALUES ('$idTipoContrato','$idPersona', '$cantidadEstantes', '$fecha')");   
+                         Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoContrato', '$idPersona', '$cantidadEstantes', '$fecha' , 10)");  
 
                     $stmt->execute();
                     return "true";
@@ -48,7 +56,7 @@ class ModeloFormatoContrato
                     {
 
                        $stmt = $pdo->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-                         Persona_idPersona, cantidad, fechaContrato) VALUES ('$idTipoContrato', '$lastInsertId', '$cantidadEstantes', '$fecha')");      
+                         Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , 10)");      
 
                        if($stmt->execute())
                        {

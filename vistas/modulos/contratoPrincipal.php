@@ -2,9 +2,13 @@
 $url2 = Ruta::ctrlRuta();  
 $tabla = "tipousuario";
 $resultadoConsultaIdTipoUsuario = ControladorFormatoContrato::ctrlConsultarIdTipoUsuario($tabla);
+$tabla = "serialproducto";
+$resultadoConsultaSerial = ControladorFormatoContrato::ctrlConsultarSerial($tabla);
+$array = $resultadoConsultaSerial;
 ?>
 
-
+<input type="hidden" value= "<?php echo $array['idSerialProducto']; ?>" id="serial"> 
+<input type="hidden" value= "<?php echo $array['fechaCreacion']; ?>" id="fechaProducto"> 
 <section class="home-section">
   <div class="contratoEstante">
        <ul class="listasfullC ms-5 p-5" >
@@ -148,12 +152,12 @@ $resultadoConsultaIdTipoUsuario = ControladorFormatoContrato::ctrlConsultarIdTip
           </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-3 text-center">
               <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de estantes</label>
               <input type="number" min="1" class="form-control mt-3" id="cantidadEstantes" placeholder="Cantidad de estantes">
             </div>
-            <div class="form-group col-md-6">
-              <label for="inputState" class="mt-4" id="labelDescripcion">Descripci&oacute;n</label>
+            <div class="form-group col-md-9 text-center">
+              <label for="inputState" class="mt-4" id="labelDescripcion">Capacidad</label>
               <select id="capacidad" class="form-select mt-3">
                 <option value="1">Estante de 6 botellones</option>
                 <option value="2">Estante de 8 botellones</option>                              

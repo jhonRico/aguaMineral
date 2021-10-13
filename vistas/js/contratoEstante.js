@@ -27,7 +27,7 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#titulo').hide();
     $('#menuCajas').hide();
     $('#TituloPrincipalContrato').text('Crear contrato de botellon y estante');
-    var input =  `<div class="form-group col-md-6">
+    var input =  `<div class="form-group col-md-3 text-center">
     <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de Botellones</label>
     <input type="number" min="1" class="form-control mt-3" id="cantidadBotellones" placeholder="Cantidad de botellones">
     </div>`;
@@ -563,10 +563,10 @@ function consultarFormatoContrato(parametro)
           result = result.replace("municipioCliente",$('#municipioComercio').val());
           result = result.replace("telefonoComercio",$('#telefonoComercio').val());
           result = result.replace("direccionComercio",$('#direccionComercio').val());
-          result = result.replace("cantidadEstante",$('#inputCity').val());
-          result = result.replace("cantidadBotellones",$('#cantidadBotellones').val());
-          result = result.replace("codigoProducto","1652131");  
-          result = result.replace("fechaConstruccion","10/09/2021");        
+          result = result.replace("cantidadEstante",$('#cantidadEstantes').val());
+          result = result.replace("cantidadBotellones",$('#cantidadEstantes').val());
+          result = result.replace("codigoProducto",$('#serial').val());  
+          result = result.replace("fechaConstruccion",$('#fechaProducto').val());        
 
 
           plantilla2 += result;

@@ -8,6 +8,11 @@ class ControladorFormatoContrato
         $respuesta = ModeloFormatoContrato::mdlConsultarIdTipoUsuario($tabla);
         return $respuesta;
     }
+    static public function ctrlConsultarSerial($tabla)
+    {
+        $respuesta = ModeloFormatoContrato::mdlConsultarSerial($tabla);
+        return $respuesta;
+    }
 
 
     static public function ctrlConsultarProductosDisponibles($tabla,$parametro)

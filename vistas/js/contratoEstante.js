@@ -122,7 +122,6 @@ function validarCampos(parametro)
   var direccionComercio = $('#direccionComercio').val();
   var cantidadEstantes = $('#inputCity').val();
   var sectorComercio = $('#sectorComercio').val();
-
   if (cedula == '') 
   {
    Swal.fire({
@@ -175,7 +174,6 @@ function validarCampos(parametro)
       })        
       return false;
     }
-
     if (apellido == '') 
     {
      Swal.fire({
@@ -189,7 +187,6 @@ function validarCampos(parametro)
     })        
      return false;
     }
-
     if (!expresiones.nombre.test(apellido)) 
     {
      Swal.fire({
@@ -370,7 +367,7 @@ function validarCampos(parametro)
 function mostrarModal(parametro)
 {
  consultarFormatoContrato(parametro);
- registrarContrato();
+ registrarContrato(parametro);
  registrarPersonas();
  $("#modal2").modal("show");
 }
@@ -585,12 +582,25 @@ function consultarFormatoContrato(parametro)
 })
 }
 //registrar Contrato en BD
-function registrarContrato()
+function registrarContrato(parametro)
 {
-  //var datos = new FormData();
 
-  //datos.append("nombrePais", valor);
-/*
+  var idSucursal = "Ureña";
+  var idPersona = 1;
+  var cantidad = 35;
+  var fechaContrato = "2021/10/05";
+
+
+  var datos = new FormData();
+
+  datos.append("idTipoContrato", parametro);
+  datos.append("idSucursal", idSucursal);
+  datos.append("cantidad", cantidad);
+  datos.append("sucursal", idSucursal);
+  datos.append("fechaContrato", fechaContrato);
+
+
+
   $.ajax({
     url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
     method:"POST",
@@ -610,7 +620,6 @@ function registrarContrato()
           showCloseButton: true,
           confirmButtonText:'Aceptar'
         }); 
-
       }else
       {
         Swal.fire({
@@ -625,13 +634,10 @@ function registrarContrato()
             $("#namePais").val('');
             $("#moddaddCountry").modal("hide");
           }
-
         })
       }
-
     }                 
-
-  })*/
+  })
 }
 //Registrar Usuario despues de generar el contrato
 function registrarPersonas()

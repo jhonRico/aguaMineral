@@ -45,7 +45,6 @@
     <script src="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/js/bootstrap.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/jquery.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/sweetalert.min.js"></script>
-    <script src="<?php echo $url ?>vistas/jsPDF-1.3.2/dist/jspdf.min.js"></script>
 
 </head>
 <body>

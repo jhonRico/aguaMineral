@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ajax",
-    "\\vistas",
-    "\\vistas\\modulos"
+    "\\modelos",
+    "\\vistas"
   ],
-  "SelectedNode": "\\vistas\\modulos\\administracionZonas.php",
+  "SelectedNode": "\\modelos\\m_adminTablasModelo.php",
   "PreviewInSolutionExplorer": false
 }

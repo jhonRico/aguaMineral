@@ -73,7 +73,19 @@ class ControladorRegistroAdminGeneral
              "parametro1"=>$parametroValue1,
              "parametro2"=>$parametroValue2
          );
-        $respuesta = ModeloRegistroAdminGeneral::mdlconsultarRegistroExisteBDEnTablaDosParamtrosAsociada($datos,$tabla,$atributo1,$atributo2);
+        $respuesta = ModeloRegistroAdminGeneral::mdlconsultarRegistroBDTablaDosParamtros($datos,$tabla,$atributo1,$atributo2);
+        return $respuesta;
+    }
+
+    static public function ctrlModificarOfTable2Campos($parametro1Value,$parametros2Value,$parametros3Value,$tabla,$atributo1,$atributo2,$atributo3)
+    {        
+        $datos = array(
+             "parametro1"=>$parametro1Value,
+             "parametros2"=>$parametros2Value,
+             "parametros3"=>$parametros3Value
+         );
+
+        $respuesta = ModeloRegistroAdminGeneral::mdlModificarOfTable2Campos($tabla, $datos,$atributo1,$atributo2,$atributo3);
         return $respuesta;
     }
 

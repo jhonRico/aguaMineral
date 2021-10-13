@@ -38,7 +38,7 @@ function consultarAllEstados(){
 					var aux = "'"+res2.nombreEstado+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreEstado+'<a href="javascript:eliminarZonas('+res2.idEstado+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditZonas('+res2.idEstado+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreEstado+'<a href="javascript:eliminarEstados('+res2.idEstado+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditEstados('+res2.idEstado+','+aux+','+res2.Pais_idPais+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -127,9 +127,8 @@ function registrarCampoEstados(valor,idPaisValue)
 {
 	var datos = new FormData();
 
-	datos.append("descripcionEstadoValue", valor);
+	datos.append("nombreEstadoAdd", valor);
 	datos.append("idPaisValue", idPaisValue);
-
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
 		method:"POST",
@@ -139,7 +138,7 @@ function registrarCampoEstados(valor,idPaisValue)
 		processData: false,
 		async:false,
 		success: function(respuesta)
-		{
+		{     
 			
 			if(!respuesta.includes("ok"))
 			{
@@ -191,8 +190,8 @@ function validarRegistroExistenteEstado(valor,idPaisValue)
 		processData: false,
 		async:false,
 		success: function(respuesta)
-		{
-			if(respuesta.includes("ok"))
+		{  
+			if(respuesta.includes("false"))
 			{
 			   returnValue =  "No existe";
 			}else
@@ -220,10 +219,10 @@ function validarRegistroExistenteEstado(valor,idPaisValue)
 
 /*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
-function eliminarZonas(id){
+function eliminarEstados(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar la zona?",
+		text: "¿Seguro que desea eliminar el estado?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -231,19 +230,19 @@ function eliminarZonas(id){
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {
 		if (result.isConfirmed){
-			eliminarZona(id);
-			consultarAllZonas();
+			eliminarEstado(id);
+			consultarAllEstados();
 		}
 	})
 }
 //------------------Funcion que elimina un tipo de usuario-----
- function eliminarZona(id)
+ function eliminarEstado(id)
  {
  	var datos = new FormData();
 
- 	datos.append("idZona", id);
+ 	datos.append("idEstadoDelete", id);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+ 		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -256,7 +255,7 @@ function eliminarZonas(id){
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al eliminar la zona',
+ 					text: 'Error al eliminar el estado',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -265,7 +264,7 @@ function eliminarZonas(id){
  			}else
  			{
  				Swal.fire({
- 					title: 'Zona Eliminada',
+ 					title: 'Estado Eliminada',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -280,18 +279,22 @@ function eliminarZonas(id){
 
 
 
-/*------------------------------------------Inicia el Espacio de Editar zonas----------------------------------*/
+/*------------------------------------------Inicia el Espacio de Editar estados----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
 
-function mostrarModalEditZonas(id, descripcion)
+function mostrarModalEditEstados(id, descripcion, idPais)
 {
-	idTipUser = id;
-	$("#editZonas").modal("show");
-	$("#nameZonaId").attr('value', descripcion);
-	$("#editarZonaValue").click(function(){
-	        var existeInTable = validarRegistroExistenteZona($("#nameZonaId").val());
+	
+	
+	$("#editEstados").modal("show");
+	$("#nameEstadoIdEdit").attr('value', descripcion);
+	document.getElementById("paisSelectEdit").value = idPais;
+	
+	$("#editarEstadoValue").click(function(){
+	
+	        var existeInTable = validarRegistroExistenteEstado($("#nameEstadoIdEdit").val(),$("#paisSelectEdit").val());
 			if(existeInTable == "No existe"){
-			    modificarZonasFinal(idTipUser);
+			    modificarEstadoFinal(id, $("#nameEstadoIdEdit").val(), $("#paisSelectEdit").val());
 			}
 		    
 	})
@@ -299,9 +302,9 @@ function mostrarModalEditZonas(id, descripcion)
 }
 
 
-function modificarZonasFinal(id)
+function modificarEstadoFinal(id, descripcion, idPais)
  {
-		var descripcion = $("#nameZonaId").val();
+		
   		if (descripcion == "") 
  			{
  				Swal.fire({
@@ -329,24 +332,24 @@ function modificarZonasFinal(id)
  				return false;
  			}
 
- 			var descripcion = $("#nameZonaId").val();
-			modificarZonaValue(id,descripcion);
-			consultarAllZonas(); 			
+ 			
+			modificarEstadoValue(id,descripcion,idPais);
+			consultarAllEstados(); 			
 
  			return true;
  	}
 
 
-function modificarZonaValue(id,descripcion)
+function modificarEstadoValue(id,descripcion,idPais)
  {
  	var datos = new FormData();
-
- 	datos.append("idZonaModificado", id);
+	datos.append("idEstadoModificado", id);
  	datos.append("descripcion", descripcion);
+	datos.append("idEstadoUpdated", idPais);
 
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+ 		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -354,13 +357,12 @@ function modificarZonaValue(id,descripcion)
  		processData: false,
  		async:false,
  		success: function(respuesta)
- 		{  
-
+ 		{  		    
  			if(!respuesta.includes("ok"))
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al modificar la zona ',
+ 					text: 'Error al modificar el estado ',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -369,7 +371,7 @@ function modificarZonaValue(id,descripcion)
  			}else
  			{
  				Swal.fire({
- 					title: 'Zona Modificada',
+ 					title: 'Estado Modificado',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -377,8 +379,8 @@ function modificarZonaValue(id,descripcion)
 				{
 					if (result.isConfirmed)
 					{
-						$("#nameZonaId").attr('value',null);
-						$("#editZonas").modal("hide");
+						$("#nameEstadoIdEdit").attr('value',null);
+						$("#editEstados").modal("hide");
 
 					}
 				})

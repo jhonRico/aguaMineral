@@ -4,9 +4,7 @@ require_once "../modelos/m_registroAdmin.php";
 
 
 class   AjaxRegistroAdmin{
-    
-   
-    
+    //Paises
     public function ajaxAddRegistroPais($nombrePais)
     {
         $respuesta = ControladorRegistroAdmin::ctrlAddPais($nombrePais);
@@ -32,7 +30,27 @@ class   AjaxRegistroAdmin{
         $respuesta = ControladorRegistroAdmin::consultarRegistroPais($registroPais);
         echo  json_encode ($respuesta);
     }
-
+    //Tipo Producto 
+    public function ajaxRegistrarTipoProducto($descripcion)
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlRegistrarTipoProducto($descripcion);
+        echo  json_encode ($respuesta);
+    }
+     public function ajaxConsultarTipoProducto()
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlConsultarTipoProducto();
+        echo  json_encode ($respuesta);
+    }
+    public function ajaxModificarTipoProducto($idTipoProducto,$descripcion)
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlModificarTipoProducto($idTipoProducto,$descripcion);
+        echo  json_encode ($respuesta);
+    }
+    public function ajaxEliminarTipoProducto($idTipoProducto)
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlEliminarTipoProducto($idTipoProducto);
+        echo  json_encode ($respuesta);
+    }
 }
 
 if(isset($_POST["nombrePais"]))
@@ -71,5 +89,31 @@ if(isset($_POST["registroPais"]))
     $allStates->ajaxRegistroPais($registroPais);
 }
 
+//Ajax para registro de Tipo de Producto
+
+if(isset($_POST["descripcion"]))
+{  
+    $allStates = new AjaxRegistroAdmin();
+    $descripcion = $_POST["descripcion"];
+    $allStates->ajaxRegistrarTipoProducto($descripcion);
+}
+if(isset($_POST["consultar"]))
+{  
+    $allStates = new AjaxRegistroAdmin();
+    $allStates->ajaxConsultarTipoProducto();
+}
+if(isset($_POST["idTipoProducto"]))
+{  
+    $idTipoProducto = $_POST["idTipoProducto"];
+    $descripcion = $_POST["descripcionTipoProducto"];
+    $allStates = new AjaxRegistroAdmin();
+    $allStates->ajaxModificarTipoProducto($idTipoProducto,$descripcion);
+}
+if(isset($_POST["idTipoProductoEliminar"]))
+{  
+    $idTipoProducto = $_POST["idTipoProductoEliminar"];
+    $allStates = new AjaxRegistroAdmin();
+    $allStates->ajaxEliminarTipoProducto($idTipoProducto);
+}
 
 ?>

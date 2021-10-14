@@ -23,7 +23,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
     <div class="row">
      <div class="col">
-      <a href="#" class="link-dark">
+      <a href="http://localhost/aguaMineral/administracionTipoProducto" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-hand-holding-water iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Tipo producto</h3>
@@ -32,7 +32,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       </a>
      </div>
      <div class="col">
-      <a href="#" class="link-dark">
+      <a href="http://localhost/aguaMineral/administracionProductos" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
            <i class="fas fa-tint iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Productos</h3>

@@ -4,7 +4,64 @@ require_once "conexion.php";
 
  class ModeloRegistroAdmin
  {
+    //Tipo Producto 
+    static public function mdlRegistrarTipoProducto($tabla, $datos)
+    {
 
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(descripcion)
+                 VALUES  (:descripcion)");
+        
+        $stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+  
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return"Error";
+        }
+        $stmt->close();
+        $stmt=null;
+    }
+    static public function mdlConsultarTipoProducto($tabla)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+        $stmt -> execute();
+        return  $stmt ->fetchAll();      
+    }
+    static public function mdlModificarTipoProducto($tabla,$datos)
+    {
+         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET descripcion = :descripcion WHERE idTipoProducto = :idTipoProducto");
+
+        $stmt->bindParam(":idTipoProducto", $datos["idTipoProducto"], PDO::PARAM_INT);
+        $stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+
+        if($stmt->execute())
+        {
+            return "ok";
+        }else
+        {
+            return"Error";
+        }
+        $stmt->close();
+        $stmt=null;    
+    }
+    static public function mdlEliminarTipoProducto($tabla, $datos)
+     {
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idTipoProducto = :idTipoProducto");
+        $stmt->bindParam(":idTipoProducto", $datos["idTipoProducto"], PDO::PARAM_INT);
+        
+        if($stmt->execute())
+        {
+            return "ok";
+        }else
+        {
+            return"Error";
+        }
+        $stmt->close();
+        $stmt=null;
+    }
+    //Paises
     static public function mdlRegistroAdmin($tabla, $datos)
     {
 

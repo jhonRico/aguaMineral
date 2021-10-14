@@ -1,9 +1,16 @@
 $(document).ready(function(){ 
 	rutaActual = window.location.toString();
 	if(rutaActual.includes("administracionTipoProducto")){   
-		consultarTipoProducto();
+		consultarTipoProducto("tipoproducto");
 	}
 });
+$(document).ready(function(){ 
+	rutaActual = window.location.toString();
+	if(rutaActual.includes("administracionProductos")){   
+		consultarProducto("producto");
+	}
+});
+
 
 $('#agregarTipoProducto').click(function() 
 {
@@ -83,7 +90,7 @@ function registrarTipoProducto()
 					{
 						$("#descripcion").val('');
 						$("#moddaddCountry").modal("hide");
-						consultarTipoProducto();
+						consultarTipoProducto("tipoproducto");
 					}
 				})
 			}
@@ -92,10 +99,10 @@ function registrarTipoProducto()
 
 	})
 }
-function consultarTipoProducto()
+function consultarTipoProducto(tabla)
 {
 	var datos = new FormData();
-	datos.append("consultar", "nulo");
+	datos.append("tabla", tabla);
 	let plantilla2 = " ";
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
@@ -185,7 +192,7 @@ function modificarTipoProducto(idTipoProducto,descripcionTipoProducto)
 					{
 						$("#namePais2").attr('value', null);
 						$("#editCountry").modal("hide");
-						consultarTipoProducto();
+						consultarTipoProducto("tipoproducto");
 					}
 				})
  			}
@@ -245,7 +252,7 @@ function eliminarTipoProducto(id)
  				}).then((result) => {
 					if (result.isConfirmed)
 					{
-						consultarTipoProducto();
+						consultarTipoProducto("tipoproducto");
 					}
  				});
  			}
@@ -254,78 +261,37 @@ function eliminarTipoProducto(id)
 }
 
 //Administracion de Productos
-
-$('#agregarProducto').click(function() {
-	validarCamposProductos();
+$(document).ready(function() 
+{
+	$('#tipoProducto').click(function(event) {
+		var array = $('#tipoProducto').val().split("-");
+		if (array[1] == "Botellones") 
+		{
+			$('#modalSerial').hide();
+		}else
+		{
+			$('#modalSerial').show();		
+		}
+	});
 });
 
-function validarCamposProductos()
-{
-	var descripcion = $('#descripcion').val();
-	var tipoProducto = $('#tipoProducto').val();
-	var serial = $('#serial').val();
-	if (descripcion == "") 
- 	{
- 		Swal.fire({
- 			position: 'top-end',
- 			icon: 'error',
- 			toast: true,
- 			title: 'El campo esta vacio',
- 			showConfirmButton: false,
- 			timerProgressBar: true,
- 			timer: 1500
- 		})
- 		return false;
- 	}
- 	if (!expresiones.nombre.test(descripcion)) 
- 	{
- 		Swal.fire({
- 			position: 'top-end',
- 		    icon: 'error',
- 			toast: true,
- 			title: 'Ingrese un producto válido',
- 			showConfirmButton: false,
- 			timerProgressBar: true,
- 			timer: 1500
- 		})
- 		return false;
- 	}
- 	if (serial == "") 
- 	{
- 		Swal.fire({
- 			position: 'top-end',
- 			icon: 'error',
- 			toast: true,
- 			title: 'El campo esta vacio',
- 			showConfirmButton: false,
- 			timerProgressBar: true,
- 			timer: 1500
- 		})
- 		return false;
- 	}
- 	if (!expresiones.usuario.test(serial)) 
- 	{
- 		Swal.fire({
- 			position: 'top-end',
- 		    icon: 'error',
- 			toast: true,
- 			title: 'Ingrese un serial válido',
- 			showConfirmButton: false,
- 			timerProgressBar: true,
- 			timer: 1500
- 		})
- 		return false;
- 	}
-    registrarProductoEnBd();
- 	return true;
-}
+$('#agregarProducto').click(function(){
+	registrarProductoEnBd();
+});
 
 function registrarProductoEnBd()
 {
-	var descripcion = $('#descripcion').val();
+	var array = $('#tipoProducto').val().split("-");
+	var tipoProducto = array[0];
+	var serial = $('#serial').val();
+	var capacidad = $('#capacidad').val();
+	var cantidad = $('#cantidad').val();
 	var datos = new FormData();
 
-	datos.append("descripcion", descripcion);
+	datos.append("tipoProducto", tipoProducto);
+	datos.append("serial", serial);
+	datos.append("capacidad", capacidad);
+	datos.append("cantidad", cantidad);
 
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
@@ -341,7 +307,7 @@ function registrarProductoEnBd()
 			{
 				Swal.fire({
 					title: 'Error',
-					text: 'Error al registrar Tipo de Producto',
+					text: 'Error al registrar producto',
 					icon: 'error',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'
@@ -358,14 +324,60 @@ function registrarProductoEnBd()
 				{
 					if (result.isConfirmed)
 					{
-						$("#descripcion").val('');
 						$("#moddaddCountry").modal("hide");
-						consultarTipoProducto();
+						consultarProducto();
 					}
 				})
 			}
 
 		}                 
 
+	})
+}
+
+function consultarProducto()
+{
+	var datos = new FormData();
+	datos.append("consultar", "valor");
+	let plantilla2 = " ";
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta3)
+		{	
+			 if(respuesta3.length >10 )
+			 {
+				respuesta3 =respuesta3.replace("[","");
+				respuesta3 =respuesta3.replace("]","");
+				var auxSplit2 = respuesta3.split("},");
+				for(var i=0;i<auxSplit2.length;i++)
+				{
+					if(!auxSplit2[i].includes("}"))
+					{
+						auxSplit2[i] = auxSplit2[i]+"}";
+					}
+					var res2 = JSON.parse(auxSplit2[i]);
+					var aux = "'"+res2.descripcion+"'";
+					result = aux.replace("'","");
+					result2 = result.replace("'","");
+					plantilla2 += `
+					<tr>
+					      <b><th scope="row">${result2}</th></b>
+					      <td></td>
+					      <td></td>
+					      <td class="eliminar">${res2.cantidadProductos}</td>
+					</tr><br>`;
+				}
+
+				$("#fila").append(plantilla2);  
+			}else
+			{
+				$("#respuestaCons").hide(); 			
+			}
+		}
 	})
 }

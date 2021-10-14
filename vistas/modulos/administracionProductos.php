@@ -1,41 +1,32 @@
 <?php  
-  $consultar = ControladorRegistroAdmin::ctrlConsultarTipoProducto();
+  $tabla = "tipoproducto";
+  $consultar = ControladorRegistroAdmin::ctrlConsultarTipoProducto($tabla);
 ?>
-<div class="container mt-3 fs-5">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
+<input type="hidden" id="oculto" value="<?php echo $consultar; ?>">
+<div class="container mt-3 fs-5 ms-5">
+        <nav aria-label="breadcrumb" class="ms-5">
+          <ol class="breadcrumb" class="ms-5">
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminProductos" class="link-primary">Administración Producto</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Producto</li>
           </ol>
         </nav>
     </div>
-
-<form method="post" id="formulario" autocomplete="off" class="m-5 fp-5">
-  <div class="m-5 p-5">
-    <table class="table m-3 p-3">
-    <thead>
+<div class="ms-5 me-5 mt-0  p-5">
+<div class="ms-5 me-5 mt-0 p-5">
+<div class="ms-5 me-5 mt-0 p-5">
+  <div class="ms-5 me-5 mt-0 p-5">
+    <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-4">
+  <thead class="bg-light text-dark border">
     <tr>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col" class="ms-5"><h3 class="display-6 ms-5">Productos</h3></th>
+      <th scope="col">Tipo Producto</th>
       <th></th>
       <th></th>
-      <th scope="col">
-        <div class="me-5 ms-0">
-          <div class="me-5">
-            <div class="me-5">
-              <div class="me-5">
-                <button class="mb-2 ms-0 mt-2 btn btn-primary me-3 text-white mostrarModal" type="button" id="" dataToggle="modal">Agregar</button>  
-                <div id="aqui"></div>
-                <!--<button class="btn btn-danger" type="button" >Eliminar</button>-->
-              </div>
-            </div>
-          </div>
-        </div>
-      </th>
+      <th scope="col">Cantidad Inventario</th>    
     </tr>
-   </thead>
-</table> 
+  </thead>
+  <tbody id="fila">
+  </tbody>
+</table>
 <div class="ms-5">
   <div class="ms-5">
     <div class=" w-100 rounded ms-5">
@@ -44,7 +35,9 @@
   </div>
 </div>  
 </div>
-</form>
+</div>
+</div>
+</div>
   <!-- Modal para agregar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="moddaddCountry" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -56,21 +49,17 @@
                                         </div>
                                       
                                       <div class="modal-body mx-3">
-                                             <div class="modal-body">    
-                                              <label for="" class="form-label mb-3">Nombre Producto</label>
-                                                   <input   type="text" class="form-control" id="descripcion" name ="nameEstado" placeholder="Por favor ingrese el nombre del producto" required>  
-                                             </div>
                                              <div class="modal-body">  
                                                    <label for="" class="form-label mb-3">Tipo Producto</label>                     
                                                    <select class="form-select" id="tipoProducto">
                                                     <?php foreach ($consultar as $key):?>
-                                                     <option value="<?php echo $key['idTipoProducto'];?>"><?php echo $key['descripcion'];?></option>
+                                                     <option value="<?php echo $key['idTipoProducto']."-". $key['descripcion'];?>"><?php echo $key['descripcion'];?></option>
                                                     <?php endforeach ?>
                                                    </select>
                                              </div>
-                                             <div class="modal-body">
-                                                   <label for="" class="form-label mb-3">Serial</label>   
-                                                   <input   type="text" class="form-control" id="serial" name ="nameEstado" placeholder="Por favor ingrese el serial del producto" required>  
+                                             <div class="modal-body" id="modalSerial">
+                                                   <label for="" class="form-label mb-3" id="labelSerial">Serial</label>   
+                                                   <input   type="text" class="form-control" id="serial" name ="nameEstado" placeholder="Por favor ingrese el serial del producto" required> 
                                              </div>
                                              <div class="modal-body">
                                                    <label for="" class="form-label mb-3">Capacidad</label> 

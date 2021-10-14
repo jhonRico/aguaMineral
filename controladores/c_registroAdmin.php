@@ -64,10 +64,15 @@ class ControladorRegistroAdmin
         $respuesta = ModeloRegistroAdmin::mdlRegistrarTipoProducto($tabla, $datos);
         return $respuesta;
     }
-    static public function ctrlConsultarTipoProducto()
+    static public function ctrlConsultarProducto()
     {
-        $tabla = "tipoproducto";
-        $respuesta = ModeloRegistroAdmin::mdlConsultarTipoProducto($tabla);
+        $respuesta = ModeloRegistroAdmin::mdlConsultarProducto();
+        return $respuesta;
+    }
+    static public function ctrlConsultarTipoProducto($tabla)
+    {
+        $tabla2 = "tipoproducto";
+        $respuesta = ModeloRegistroAdmin::mdlConsultarTipoProducto($tabla,$tabla2);
         return $respuesta;
     }
     static public function ctrlModificarTipoProducto($idTipoProducto,$descripcion)
@@ -87,6 +92,24 @@ class ControladorRegistroAdmin
              "idTipoProducto"=>$idTipoProducto,
          );
         $respuesta = ModeloRegistroAdmin::mdlEliminarTipoProducto($tabla,$datos);
+        return $respuesta;
+    }
+    //Productos
+    static public function ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad)
+    {
+        date_default_timezone_set("America/Bogota");
+        $tabla = "serialproducto";
+        $tabla2 = "producto";
+        $datos = array(
+             "tipoProducto"=>$tipoProducto,
+             "serial"=>$serial,
+             "capacidad"=>$capacidad,
+             "cantidad"=>$cantidad,
+             "fecha"=> date("Y-m-d H:i:s"),
+             "estado"=> "disponible",
+             "idContrato" => 0
+         );
+        $respuesta = ModeloRegistroAdmin::mdlRegistrarProducto($tabla,$tabla2,$datos);
         return $respuesta;
     }
 }

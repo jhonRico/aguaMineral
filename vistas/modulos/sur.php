@@ -1,13 +1,13 @@
 <?php  
     $consultar = "Hola";
-    $i = 0;
-    $nombreComercio = ['RicoPez','CompañiaRicossCross','RicossAvellaneda'];
-    $variable = controladorZonas::ctrlconsultarCiudades($consultar);
-    $resultadoConsultaClientes = controladorZonas::ctrlconsultarClientes($consultar);
+    $consultarCiudades = controladorZonas::ctrlconsultarCiudades($consultar);
+    $resultado = ControladorClientes::ctrlConsultarTipoUsuario("Cliente");
+    $rutas = explode("/", $_GET["ruta"]);
 ?>
-
-
-<div class="container mt-3 fs-5">
+<input type="hidden" id="informacion" value="<?php echo $rutas[0];?>">
+<input type="hidden" value="<?php echo $resultado['idTipoUsuario']; ?>" id="tipoUsuario">
+<div class="container-fluid blogs text-center">
+    <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/zonas" class="link-primary">Zonas</a></li>
@@ -15,40 +15,38 @@
           </ol>
         </nav>
     </div>
+  
   <section class="home-section"> 
-      <h1 class="mt-5 mb-5 display-6 text-center">Clientes Zona Sur</h1>
+      <h1 class="mt-5 mb-5 display-6">Zona Sur</h1>
 
       <div class="row g-3 align-items-center">
         <div class="col-auto">
-          <label for="inputPassword6" class="col-form-label me-3 ms-3"><b>Seleccione Ciudad</b></label>
+          <label for="inputPassword6" class="col-form-label me-3"><b>Seleccione Ciudad</b></label>
         </div>
         <div class="col-md-3">
           <select name="" id="centro" class="form-select w-75">
-            <?php foreach ($variable as $key): ?>
-            <option value="<?php echo $key['nombreCiudad']; ?>"><?php echo $key['nombreCiudad']; ?></option>
+            <?php foreach ($consultarCiudades as $key): ?>
+            <option value="<?php echo $key['idCiudad']; ?>"><?php echo $key['nombreCiudad']; ?></option>
           <?php endforeach ?>
           </select>
         </div>
       </div>
 
-      <table class="table table-hover m-3 p-3" id="tablaCentro">
+      <table class="table table-hover mt-3" id="tablaCentro">
         <thead class="bg-light">
     <tr>
+      <th scope="col">Cedula</th>
       <th scope="col">Nombre</th>
       <th scope="col">Apellido</th>
       <th scope="col">Comercio</th>
+      <th scope="col">Sector</th>
       <th scope="col">Detalle</th>
     </tr>
   </thead>
-  <tbody>
-    <?php foreach ($resultadoConsultaClientes as $value): ?>
-    <tr>
-      <td><?php echo $value['nombrePersona'];?></td>
-      <td><?php echo $value['apellidoPersona'];?></td>
-      <td><?php echo $nombreComercio[$i]; $i++;?></td>
-      <td><a href="#"><i class="fas fa-search"></i></a></td>
-    </tr>
-    <?php endforeach ?>
+  <tbody id="fila">
   </tbody>
       </table>
   </section>
+
+ 
+</div>

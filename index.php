@@ -1,5 +1,6 @@
 <?php
 /**se incluyen los controladores */
+require_once "controladores/c_clientes.php";
 require_once 'controladores/c_zonas.php';
 require_once 'controladores/c_formatoContrato.php';
 require_once "controladores/c_plantilla.php";
@@ -16,6 +17,7 @@ require_once "controladores/c_registroAdmin.php";
 require_once "controladores/c_adminTablas.php";
 
 /**se incluyen los Modelos */
+require_once "modelos/m_clientes.php";
 require_once 'modelos/m_zonas.php';
 require_once 'modelos/m_formatoContrato.php';
 require_once "modelos/rutas.php";

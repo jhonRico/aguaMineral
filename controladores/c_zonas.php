@@ -13,13 +13,16 @@ class controladorZonas
     return $respuesta;
 
 	}
-    static public function ctrlconsultarClientes($consultar)
+    static public function ctrlconsultarClientes($zona,$tipoUsuario)
     {        
 
     $tabla = "persona";
-    $tipoUsuario = "3";
+    $datos = array(
+        "tipoUsuario"=>$tipoUsuario,
+        "zona"=>$zona
+    );
 
-    $respuesta = ModeloZonas::mdlconsultarClientes($tabla,$tipoUsuario);
+    $respuesta = ModeloZonas::mdlconsultarClientes($tabla,$datos);
 
     return $respuesta;
 

@@ -19,7 +19,7 @@
   <div class="ms-5">
       <button class="mb-5 ms-5 mt-2 btn btn-primary me-0 text-white mostrarModal w-50" type="button" id="" dataToggle="modal">Agregar</button> 
   </div>
-  <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-4">
+  <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5">
   <thead class="cabezaTabla text-white">
     <tr>
       <th scope="col">Producto</th>

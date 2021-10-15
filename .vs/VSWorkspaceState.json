@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\modelos",
-    "\\vistas"
+    "\\modelos"
   ],
-  "SelectedNode": "\\modelos\\m_adminTablasModelo.php",
+  "SelectedNode": "\\modelos\\m_registroAdmin.php",
   "PreviewInSolutionExplorer": false
 }

@@ -88,7 +88,41 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlModificarOfTable2Campos($tabla, $datos,$atributo1,$atributo2,$atributo3);
         return $respuesta;
     }
+    static public function ctrlModificarOfTable3Campos($parametros1,$parametros2,$parametros3,$parametros4,$tabla,$atributo1,$atributo2,$atributo3,$atributo4)
+    {        
+        $datos = array(
+             "parametros1"=>$parametros1,
+             "parametros2"=>$parametros2,
+             "parametros3"=>$parametros3,
+             "parametros4"=>$parametros4
+         );
 
+        $respuesta = ModeloRegistroAdminGeneral::mdlModificarOfTable3Campos($tabla, $datos,$atributo1,$atributo2,$atributo3,$atributo4);
+        return $respuesta;
+    }
+
+   static public function ctrlConsultarSiRegistroExisteBD($parametros1,$parametros2,$parametros3,$tabla,$atributo1,$atributo2,$atributo3)
+    {     
+         $datos = array(
+             "parametros1"=>$parametros1,
+             "parametros2"=>$parametros2,
+             "parametros3"=>$parametros3
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarSiRegistroExisteBD($datos,$tabla,$atributo1,$atributo2,$atributo3);
+        return $respuesta;
+    }
+
+   static public function ctrlAddRegistroTresParametros($parametro1,$parametro2,$parametro3,$tabla,$atributo1,$atributo2,$atributo3)
+    {        
+        $datos = array(
+             "parametro1"=>$parametro1,
+             "parametro2"=>$parametro2,
+             "parametro3"=>$parametro3
+         );
+
+        $respuesta = ModeloRegistroAdminGeneral::mdlAddRegistroTresParametros($tabla, $datos,$atributo1,$atributo2,$atributo3);
+        return $respuesta;
+    }
 
    } 
 ?>

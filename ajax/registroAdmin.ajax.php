@@ -36,9 +36,14 @@ class   AjaxRegistroAdmin{
         $respuesta = ControladorRegistroAdmin::ctrlRegistrarTipoProducto($descripcion);
         echo  json_encode ($respuesta);
     }
-     public function ajaxConsultarTipoProducto()
+     public function ajaxConsultarTipoProducto($tabla)
     {
-        $respuesta = ControladorRegistroAdmin::ctrlConsultarTipoProducto();
+        $respuesta = ControladorRegistroAdmin::ctrlConsultarTipoProducto($tabla);
+        echo  json_encode ($respuesta);
+    }
+     public function ajaxConsultarProducto()
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlConsultarProducto();
         echo  json_encode ($respuesta);
     }
     public function ajaxModificarTipoProducto($idTipoProducto,$descripcion)
@@ -49,6 +54,12 @@ class   AjaxRegistroAdmin{
     public function ajaxEliminarTipoProducto($idTipoProducto)
     {
         $respuesta = ControladorRegistroAdmin::ctrlEliminarTipoProducto($idTipoProducto);
+        echo  json_encode ($respuesta);
+    }
+    //Producto
+    public function ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad)
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad);
         echo  json_encode ($respuesta);
     }
 }
@@ -97,10 +108,11 @@ if(isset($_POST["descripcion"]))
     $descripcion = $_POST["descripcion"];
     $allStates->ajaxRegistrarTipoProducto($descripcion);
 }
-if(isset($_POST["consultar"]))
+if(isset($_POST["tabla"]))
 {  
+    $tabla = $_POST['tabla'];
     $allStates = new AjaxRegistroAdmin();
-    $allStates->ajaxConsultarTipoProducto();
+    $allStates->ajaxConsultarTipoProducto($tabla);
 }
 if(isset($_POST["idTipoProducto"]))
 {  
@@ -114,6 +126,24 @@ if(isset($_POST["idTipoProductoEliminar"]))
     $idTipoProducto = $_POST["idTipoProductoEliminar"];
     $allStates = new AjaxRegistroAdmin();
     $allStates->ajaxEliminarTipoProducto($idTipoProducto);
+}
+
+//Ajax para productos
+
+if(isset($_POST["tipoProducto"]))
+{  
+    $tipoProducto = $_POST["tipoProducto"];
+    $serial = $_POST["serial"];
+    $capacidad = $_POST["capacidad"];
+    $cantidad = $_POST["cantidad"];
+
+    $allStates = new AjaxRegistroAdmin();
+    $allStates->ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad);
+}
+if(isset($_POST["consultar"]))
+{  
+    $allStates = new AjaxRegistroAdmin();
+    $allStates->ajaxConsultarProducto();
 }
 
 ?>

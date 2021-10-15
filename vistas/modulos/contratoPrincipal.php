@@ -205,10 +205,9 @@ $array = $resultadoConsultaSerial;
           <div class="col-md-4">
             <a href="javascript:mostrarContrato('botellones',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">
-                <i class="fas fa-file-signature iconosAdmin"></i>
+                <i class="fas fa-file-contract iconosAdmin"></i>
                 <h3 class="titulosAdmin2 mb-0">Botellon</h3>
                 <p class="mb-5 mt-0">Contrato para botellones</p>  
-
               </div>
             </a>
           </div>

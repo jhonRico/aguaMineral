@@ -1,11 +1,11 @@
 <?php  
     $consultar = "Hola";
+    $resultadoFinal = 0;
+    $resultadoFinal2 = 0;
     $consultarCiudades = controladorZonas::ctrlconsultarCiudades($consultar);
     $resultado = ControladorClientes::ctrlConsultarTipoUsuario("Cliente");
-    $rutas = explode("/", $_GET["ruta"]);
 ?>
 <section class="home-section"> 
-
 <input type="hidden" id="informacion" value="<?php echo $rutas[0];?>">
 <input type="hidden" value="<?php echo $resultado['idTipoUsuario']; ?>" id="tipoUsuario">
 <div class="container-fluid blogs text-center">
@@ -17,7 +17,7 @@
           </ol>
         </nav>
     </div>
-      <h1 class="mt-5 mb-5 display-6">Zona Centro</h1>
+      <h1 class="mt-5 mb-5 display-6" id="ejecutar">Zona Centro</h1>
 
       <div class="row g-3">
         <div class="col-auto">
@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-3">
           <select name="" id="centro" class="form-select w-75">
-            <?php foreach ($consultarCiudades as $key): ?>
+            <?php foreach ($consultarCiudades as $key):?>
             <option value="<?php echo $key['idCiudad']; ?>"><?php echo $key['nombreCiudad'];?></option>
           <?php endforeach ?>
           </select>
@@ -34,11 +34,11 @@
         </div>
         <div class="col-md-1">
         </div>
-        <div class="card col-md-3 bg-light">
+        <div class="card col-md-3 bg-light text-center">
           <div class="card-body p-4">
             <h5 class="card-title fs-3">Total Prestamo en Zona</h5>
-            <p class="card-text text-start fs-5">Estantes: </p>
-            <p class="card-text text-start fs-5">Botellones: </p>
+            <p class="card-text text-start fs-5">Estantes <b class="ms-4" id="estanteTotal"></b></p>
+            <p class="card-text text-start fs-5">Botellones <b class="ms-2" id="botellonTotal"></b></p>
           </div>
         </div>
         <div>
@@ -62,3 +62,30 @@
       </table>
 </div>
 </section>
+
+<!----Modal de Boostrap---->
+
+<!-- Large modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="reporte">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10 me-5 ms-5 mt-3 mb-3 p-5 text-center">
+          <h1>Reporte Persona</h1>
+          <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-6" id="tablaCentro">
+        <thead class="cabezaTabla text-white">
+        <tr>
+          <th scope="col">Dirección</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Estantes Prestados</th>
+          <th scope="col">Botellones Prestados</th>
+        </tr>
+      </thead>
+      <tbody id="fila2">
+      </tbody>
+      </table>        
+    </div>  
+      </div>
+    </div>
+  </div>
+</div>

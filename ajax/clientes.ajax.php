@@ -10,6 +10,12 @@ class   AjaxClientes
         $respuesta = ControladorClientes::ctrlConsultarPersonasEnBd($zona,$ciudad,$tipoUsuario);
         echo  json_encode ($respuesta);
     }
+    public function ajaxConsultarReporte($zona,$ciudad,$tipoUsuario,$idPersona)
+    {
+        $respuesta = ControladorClientes::ctrlConsultarReporte($zona,$ciudad,$tipoUsuario,$idPersona);
+        echo  json_encode ($respuesta);
+    }
+
 }
 
 if(isset($_POST["zona"]))
@@ -19,6 +25,15 @@ if(isset($_POST["zona"]))
     $tipoUsuario = $_POST['tipoUsuario'];
     $allStates = new AjaxClientes();
     $allStates->ajaxConsultarClientes($zona,$ciudad,$tipoUsuario);
+}
+if(isset($_POST["idPersona"]))
+{  
+    $idPersona = $_POST['idPersona'];
+    $zona = $_POST['zonas'];
+    $ciudad = $_POST['ciudad'];
+    $tipoUsuario = $_POST['tipoUsuario'];
+    $allStates = new AjaxClientes();
+    $allStates->ajaxConsultarReporte($zona,$ciudad,$tipoUsuario,$idPersona);
 }
 
 ?>

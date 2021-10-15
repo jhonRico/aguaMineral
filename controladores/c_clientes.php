@@ -21,6 +21,18 @@ class ControladorClientes
         $respuesta = ModeloClientes::mdlConsultarTipoUsuario($tabla,$datos);
         return $respuesta;
     }
+    static public function ctrlConsultarReporte($zona,$ciudad,$tipoUsuario,$idPersona)
+    {
+        $tabla = "persona";
+        $datos = array(
+            "idPersona"=>$idPersona,
+            "tipoUsuario"=>$tipoUsuario,
+            "zona"=>$zona,
+            "ciudad"=>$ciudad
+        );
+        $respuesta = ModeloClientes::mdlConsultarReporte($tabla,$datos);
+        return $respuesta;
+    }
 }  
 
 ?>

@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\modelos"
+    "\\modelos",
+    "\\vistas",
+    "\\vistas\\modulos",
+    "\\vistas\\webfonts"
   ],
-  "SelectedNode": "\\modelos\\m_registroAdmin.php",
+  "SelectedNode": "\\vistas\\modulos\\contratoPrincipal.php",
   "PreviewInSolutionExplorer": false
 }

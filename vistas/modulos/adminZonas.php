@@ -63,7 +63,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       </a>
      </div>
      <div class="col">
-      <a href="#" class="link-dark">
+      <a href="<?php echo $url2?>adminCiudad" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-map-signs iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Ciudad</h3>

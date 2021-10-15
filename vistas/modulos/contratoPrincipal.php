@@ -152,21 +152,20 @@ $array = $resultadoConsultaSerial;
           </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-3 text-center">
+            <div class="form-group col-md-4 text-center" id="colocarInput">
+              
+            </div>
+            <div class="form-group col-md-4 text-center">
               <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de estantes</label>
               <input type="number" min="1" class="form-control mt-3" id="cantidadEstantes" placeholder="Cantidad de estantes">
             </div>
-            <div class="form-group col-md-9 text-center">
+            <div class="form-group col-md-4 text-center">
               <label for="inputState" class="mt-4" id="labelDescripcion">Capacidad</label>
               <select id="capacidad" class="form-select mt-3">
                 <option value="1">Estante de 6 botellones</option>
                 <option value="2">Estante de 8 botellones</option>                              
               </select>
             </div>
-
-          </div>
-          <div id="colocarInput"> 
-            
           </div>
           <div class="row">
             <div class="col-md-4">

@@ -1,8 +1,6 @@
-.tabla{
-	font-size: 15px;
-	margin-top: 50px;
-	margin-right: 300px;
-	margin-left: 100px;
+.cabezaTabla{
+	background: #2365B9;
+	border-radius: 30px;
 }
 
 .iconosAdmin{

@@ -2,7 +2,7 @@
   $tabla = "tipoproducto";
   $consultar = ControladorRegistroAdmin::ctrlConsultarTipoProducto($tabla);
 ?>
-<input type="hidden" id="oculto" value="<?php echo $consultar; ?>">
+<input type="hidden" id="oculto" value="<?php echo $consultar;?>">
 <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
@@ -10,18 +10,26 @@
             <li class="breadcrumb-item active" aria-current="page" class="">Producto</li>
           </ol>
         </nav>
-    </div>
-<div class="ms-5 me-5 mt-0  p-5">
-<div class="ms-5 me-5 mt-0 p-5">
-<div class="ms-5 me-5 mt-0 p-5">
+    </div> 
+<div class="ms-5 me-5 mt-0 p-5 text-center">
+  <div class="ms-5">
+    <h1 class="ms-5">Inventario de Productos</h1>
+  </div>
   <div class="ms-5 me-5 mt-0 p-5">
-    <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-4">
-  <thead class="bg-light text-dark border">
+  <div class="ms-5">
+      <button class="mb-5 ms-5 mt-2 btn btn-primary me-0 text-white mostrarModal w-50" type="button" id="" dataToggle="modal">Agregar</button> 
+  </div>
+  <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-4">
+  <thead class="cabezaTabla text-white">
     <tr>
-      <th scope="col">Tipo Producto</th>
-      <th></th>
-      <th></th>
-      <th scope="col">Cantidad Inventario</th>    
+      <th scope="col">Producto</th>
+      <th scope="col">Capacidad</th>
+      <th scope="col">Serial</th>
+      <th scope="col"></th> 
+      <th scope="col">Inventario</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">Acciones</th>   
     </tr>
   </thead>
   <tbody id="fila">
@@ -36,21 +44,19 @@
 </div>  
 </div>
 </div>
-</div>
-</div>
   <!-- Modal para agregar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="moddaddCountry" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
-                                              <h5  id="staticBackdropLabel"> Agregar Producto</h5>
+                                              <h5  id="staticBackdropLabel">Agregar Producto</h5>
                                               <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrar text-white"></i></button></a>
                                         </div>
                                       
                                       <div class="modal-body mx-3">
                                              <div class="modal-body">  
-                                                   <label for="" class="form-label mb-3">Tipo Producto</label>                     
+                                                   <label for="" class="form-label mb-3"><b>Tipo Producto</b></label>                     
                                                    <select class="form-select" id="tipoProducto">
                                                     <?php foreach ($consultar as $key):?>
                                                      <option value="<?php echo $key['idTipoProducto']."-". $key['descripcion'];?>"><?php echo $key['descripcion'];?></option>
@@ -58,16 +64,28 @@
                                                    </select>
                                              </div>
                                              <div class="modal-body" id="modalSerial">
-                                                   <label for="" class="form-label mb-3" id="labelSerial">Serial</label>   
+                                                   <label for="" class="form-label mb-3" id="labelSerial"><b>Serial</b></label>   
                                                    <input   type="text" class="form-control" id="serial" name ="nameEstado" placeholder="Por favor ingrese el serial del producto" required> 
                                              </div>
                                              <div class="modal-body">
-                                                   <label for="" class="form-label mb-3">Capacidad</label> 
-                                                   <input   type="number" class="form-control" id="capacidad" name ="nameEstado" placeholder="Por favor ingrese la capacidad del producto" required>  
+                                              <div class="row g-3 align-items-center">
+                                                  <div class="col-auto">
+                                                    <label for="" class="col-form-label me-3"><b>Capacidad</b></label>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                    <input   type="number" class="form-control w-75" id="capacidad" name ="nameEstado" placeholder="Capacidad" required> 
+                                                  </div>
+                                                </div>
                                              </div>
                                              <div class="modal-body">
-                                                   <label for="" class="form-label mb-3">Cantidad</label> 
-                                                   <input   type="number" class="form-control" id="cantidad" name ="nameEstado" placeholder="Por favor ingrese la cantidad de productos" required>  
+                                              <div class="row g-3 align-items-center">
+                                                  <div class="col-auto">
+                                                    <label for="" class="col-form-label me-4"><b>Cantidad</b></label>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                   <input   type="number" class="form-control w-75" id="cantidad" name ="nameEstado" placeholder="Productos" required>  
+                                                  </div>
+                                                </div>
                                              </div>
                                       </div>
                                        <div class="form-group">  

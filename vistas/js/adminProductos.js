@@ -7,7 +7,7 @@ $(document).ready(function(){
 $(document).ready(function(){ 
 	rutaActual = window.location.toString();
 	if(rutaActual.includes("administracionProductos")){   
-		consultarProducto("producto");
+		consultarProducto();
 	}
 });
 
@@ -263,14 +263,15 @@ function eliminarTipoProducto(id)
 //Administracion de Productos
 $(document).ready(function() 
 {
-	$('#tipoProducto').click(function(event) {
+		$('#modalSerial').hide();
+		$('#tipoProducto').click(function(event) {
 		var array = $('#tipoProducto').val().split("-");
-		if (array[1] == "Botellones") 
+		if (array[1] == "Estantes") 
 		{
-			$('#modalSerial').hide();
+			$('#modalSerial').show();
 		}else
 		{
-			$('#modalSerial').show();		
+			$('#modalSerial').hide();
 		}
 	});
 });
@@ -303,7 +304,8 @@ function registrarProductoEnBd()
 		async:false,
 		success: function(respuesta)
 		{
-			if(!respuesta.includes("ok"))
+			alert(respuesta);
+			if(respuesta.includes("error"))
 			{
 				Swal.fire({
 					title: 'Error',
@@ -313,8 +315,9 @@ function registrarProductoEnBd()
 					confirmButtonText:'Aceptar'
 				}); 
 
-			}else
+			}else if(respuesta.includes("ok"))
 			{
+				consultarProducto();				
 				Swal.fire({
 					title: 'Registro Exitoso',
 					icon: 'success',
@@ -326,6 +329,21 @@ function registrarProductoEnBd()
 					{
 						$("#moddaddCountry").modal("hide");
 						consultarProducto();
+					}
+				})
+			}else
+			{
+				consultarProducto();				
+				Swal.fire({
+					title: 'Sumado Exitosamente',
+					icon: 'success',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				}).then((result) => 
+				{
+					if (result.isConfirmed)
+					{
+						$("#moddaddCountry").modal("hide");
 					}
 				})
 			}
@@ -367,16 +385,22 @@ function consultarProducto()
 					plantilla2 += `
 					<tr>
 					      <b><th scope="row">${result2}</th></b>
+					      <td>${res2.capacidadProducto}</td>
+					      <td>${res2.numeroSerial}</td>
+					      <td></td>
+					      <td>${res2.cantidadProductos}</td>
 					      <td></td>
 					      <td></td>
-					      <td class="eliminar">${res2.cantidadProductos}</td>
+					      <td><a href="#"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="#"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
 					</tr><br>`;
 				}
 
-				$("#fila").append(plantilla2);  
+				$("#fila").html(plantilla2); 
+				$("#fila").show();
+
 			}else
 			{
-				$("#respuestaCons").hide(); 			
+				$("#fila").hide(); 			
 			}
 		}
 	})

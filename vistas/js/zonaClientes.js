@@ -145,24 +145,25 @@ function consultarCliente(idPersona)
           {
             auxSplit2[i] = auxSplit2[i]+"}";
           }
+
           var res2 = JSON.parse(auxSplit2[i]);
-          if (registroAnterior == res2.cedulaPersona) 
-          {
-            plantilla2 += "";
-          }else
-          {
-             plantilla2 += `
+          var array = res2.fechaContrato.split(" ");
+          plantilla2 += `
               <tr>
-                    <b><th scope="row">${res2.direccionPersona}</th></b>
-                    <td>${res2.telefonoPersona}</td>
-                    <b><td>${res2.cantidadProd}</td></b>
-                    <b><td>${res2.cantidadProd_2}</td></b>
+                    <td><b>${array[0]}</b></td>
+                    <td><b>${res2.cantidadProd}</b></td>
+                    <td><b>${res2.cantidadProd_2}</b></td>
               </tr><br>`;
-          }
 
         }
-       // plantilla3 = `<p>${resultadoFinal}</p>`;
+        
 
+       // plantilla3 = `<p>${resultadoFinal}</p>`;
+        $('#cliente').text(res2.nombrePersona+' '+res2.apellidoPersona);
+        $('#comercio').text(res2.nombreTienda);
+        $('#cedula').text(res2.cedulaPersona);
+        $('#direccion').text(res2.direccionPersona);
+        $('#telefono').text(res2.telefonoPersona);
         $("#fila2").html(plantilla2); 
         $("#fila2").show();
 
@@ -188,5 +189,11 @@ function mostrarModalReporte(id)
   consultarCliente(id);
   $("#reporte").modal("show");
 }
+$(document).ready(function() {
+  $("#close").click(function(event) {
+    $("#reporte").modal("hide");
+  });
+});
+
     
  

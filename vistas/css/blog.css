@@ -1,3 +1,11 @@
+#x{
+    float: right;
+    color: white;
+}
+.fondoModal{
+    background: linear-gradient(to bottom, #C3E4FF, white);
+}
+
 .single-blog-img {
     overflow: hidden;
 }

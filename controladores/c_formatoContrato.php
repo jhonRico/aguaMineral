@@ -2,7 +2,11 @@
 
 class ControladorFormatoContrato
 { 
-
+    static public function ctrlConsultarTotalProductosPrestados($tabla)
+    {
+        $respuesta = ModeloFormatoContrato::mdlConsultarTotalProductosPrestados($tabla);
+        return $respuesta;
+    }
     static public function ctrlConsultarIdTipoUsuario($tabla)
     {
         $respuesta = ModeloFormatoContrato::mdlConsultarIdTipoUsuario($tabla);

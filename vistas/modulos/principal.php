@@ -60,7 +60,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
         </div>
         <div class="blog-content-box">
           <div class="blog-content">
-            <h4><a href="http://localhost/aguaMineral/zonas"><i class="fa fa-map-signs" aria-hidden="true"></i> ZONAS</a></h4>
+            <h4><a href="http://localhost/aguaMineral/zonas"><i class="fa fa-map-signs" aria-hidden="true"></i> CLIENTES</a></h4>
           </div>
           <div>
             <div class="exerpt">

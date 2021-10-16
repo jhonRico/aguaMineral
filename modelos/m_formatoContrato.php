@@ -4,13 +4,19 @@ require_once "conexion.php";
 
 class ModeloFormatoContrato 
 {
-
     static public function mdlConsultarSerial($tabla)
     {
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
 
         $stmt -> execute();
         return $stmt->fetch();
+    }
+    static public function mdlConsultarTotalProductosPrestados($tabla)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+        $stmt -> execute();
+        return $stmt->fetchAll();
     }
     static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$fecha)
     {

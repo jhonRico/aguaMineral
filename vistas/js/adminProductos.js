@@ -304,7 +304,6 @@ function registrarProductoEnBd()
 		async:false,
 		success: function(respuesta)
 		{
-			alert(respuesta);
 			if(respuesta.includes("error"))
 			{
 				Swal.fire({

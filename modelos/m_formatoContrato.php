@@ -18,7 +18,7 @@ class ModeloFormatoContrato
         $stmt -> execute();
         return $stmt->fetchAll();
     }
-    static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$fecha)
+    static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$fecha)
     {
              $stmt22 = Conexion::conectar()->prepare("SELECT * FROM $tabla2 WHERE TipoUsuario_idTipoUsuario  = :idTipoUsuario  AND cedulaPersona = :cedula");
 
@@ -33,7 +33,7 @@ class ModeloFormatoContrato
 
                    $idPersona = $prueba['idPersona'];
                    $stmt = Conexion::conectar()->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-                         Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoContrato', '$idPersona', '$cantidadEstantes', '$fecha' , 10)");  
+                         Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoContrato', '$idPersona', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");  
 
                     $stmt->execute();
                     return "true";
@@ -62,7 +62,7 @@ class ModeloFormatoContrato
                     {
 
                        $stmt = $pdo->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-                         Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , 10)");      
+                         Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");      
 
                        if($stmt->execute())
                        {
@@ -102,7 +102,7 @@ static public function mdlConsultarIdTipoUsuario($tabla)
 }
 static public function mdlConsultarClientesEnBd($tabla,$datos)
 {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE TipoUsuario_idTipoUsuario = :tipoUsuario AND cedulaPersona = :nombreCliente");
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN sector s ON t.Sector_idSector = s.idSector WHERE TipoUsuario_idTipoUsuario = :tipoUsuario AND cedulaPersona = :nombreCliente");
 
     $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_STR);
     $stmt->bindParam(":nombreCliente", $datos["nombreCliente"], PDO::PARAM_INT);

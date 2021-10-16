@@ -34,6 +34,7 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#colocarInput').html(input); 
     $('#colocarInput').show();
     $( ".boton1" ).click(function() {
+     parametro = "estantes";
      validarCampos(parametro,idTipoUsuario);
    });
 
@@ -414,7 +415,7 @@ function consultarClienteEnBd()
         $('#apellidoCliente').val(res2.apellidoPersona);
         $('#direccion').val(res2.direccionPersona);
         $('#cedulaCliente').val(res2.cedulaPersona);
-
+        $('#sectorCliente').val(res2.nombreSector);
 
         Swal.fire({
           position: 'top-end',
@@ -608,6 +609,7 @@ function registrarPersonas(parametro,idTipoUsuario)
   var direccionComercio = $('#direccionComercio').val();
   var sectorComercio = $('#sectorComercio').val();
   var cantidadEstantes = $('#cantidadEstantes').val();
+  var cantidadBotellones = $('#cantidadBotellones').val();
 
   var datos = new FormData();
 
@@ -633,10 +635,12 @@ function registrarPersonas(parametro,idTipoUsuario)
   datos.append("sectorComercio", sectorComercio);
   datos.append("direccionComercio", direccionComercio);
   datos.append("cantidadEstantes", cantidadEstantes);
+  datos.append("cantidadBotellones", cantidadBotellones);
+
 
 //Datos de contrato
 
-  datos.append("idTipoContrato", parametro);
+  datos.append("idTipoContrato", idTipoUsuario);
 
 
 

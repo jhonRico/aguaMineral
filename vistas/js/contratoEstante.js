@@ -494,6 +494,16 @@ function consultarProductosDisponibles(parametro,idTipoUsuario)
     {
      if(!respuesta3.includes('false'))
      {     
+        respuesta3 =respuesta3.replace("[","");
+        respuesta3 =respuesta3.replace("]","");
+        var auxSplit2 = respuesta3.split("},");
+
+        for(var i=0;i<auxSplit2.length;i++){
+          if(!auxSplit2[i].includes("}")){
+            auxSplit2[i] = auxSplit2[i]+"}";
+          }
+          var res2 = JSON.parse(auxSplit2[i]);
+        }
         mostrarModal(parametro,idTipoUsuario);
 
      }else
@@ -640,8 +650,7 @@ function registrarPersonas(parametro,idTipoUsuario)
 
 //Datos de contrato
 
-  datos.append("idTipoContrato", idTipoUsuario);
-
+  datos.append("idTipoContrato", parametro);
 
 
   $.ajax({
@@ -654,7 +663,6 @@ function registrarPersonas(parametro,idTipoUsuario)
     async:false,
     success: function(respuesta)
     {
-      alert(respuesta);
       if(respuesta.includes("error"))
       {
         Swal.fire({
@@ -664,10 +672,10 @@ function registrarPersonas(parametro,idTipoUsuario)
           showCloseButton: true,
           confirmButtonText:'Aceptar'
         }); 
-      }else if(respuesta.includes("ok"))
+      }else if(respuesta.includes("ok") || respuesta.includes("true"))
       {
         Swal.fire({
-          title: 'Registro Exitoso de Cliente y Contrato',
+          title: 'Contrato registrado exitosamente',
           icon: 'success',
           showCloseButton: true,
           confirmButtonText:'Aceptar'

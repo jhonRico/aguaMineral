@@ -39,7 +39,7 @@ class ControladorRegistro
              "vacio" => date("Y-m-d H:i:s")
          );
 
-        $respuesta = ModeloRegistro::mdlRegistroUsuario($tabla,$datos,$tabla2);
+        $respuesta = ModeloRegistro::mdlRegistroUsuario($tabla,$tabla2,$datos);
         return $respuesta;
 	}
 }

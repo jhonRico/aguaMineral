@@ -293,7 +293,7 @@ function IniciarSesion()
 
 function RegistrarUsuario()
 {
-
+      var tipoUsuario = $("#tipoUsuario").val();
       var datos = new FormData();
       datos.append("nombre", $("#nombre").val());
       datos.append("apellido", $("#apellido").val());
@@ -302,9 +302,8 @@ function RegistrarUsuario()
       datos.append("telefono", $("#telefono").val());
       datos.append("correo", $("#correo").val());
       datos.append("sector", $("#sector").val());
-      datos.append("tipoUsuario", $("#tipoUsuario").val());
+      datos.append("tipoUsuario", tipoUsuario);
       datos.append("contrasena", $("#contrasena").val());
-     
             $.ajax({
                     url:"//localhost/aguaMineral/ajax/registro.ajax.php",
                     method:"POST",
@@ -315,7 +314,6 @@ function RegistrarUsuario()
                     async:false,
                     success: function(respuesta)
                     {
-                      alert(respuesta);
                           if(!respuesta.includes("ok"))
                           {
                               Swal.fire({

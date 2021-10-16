@@ -18,17 +18,17 @@ require_once "conexion.php";
                 $stmt->bindParam(":cedula", $datos["cedula"], PDO::PARAM_INT);
                 $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_INT);
 
-                 if ($stmt->execute()) 
+                if ($stmt->execute()) 
                 {
 
-                        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario,correoUsuario,clave,fechaRegistro)
+                       $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario,correoUsuario,clave,fechaRegistro)
                              VALUES  (:tipoUsuario , :correo ,:contrasena, :vacio)");
 
 
                         $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
                         $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
                         $stmt->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
-                        $stmt->bindParam(":vacio", $datos["vacio"], PDO::PARAM_STR);
+                        $stmt->bindParam(":vacio", $datos["vacio"], PDO::PARAM_INT);
                    
                         if($stmt->execute())
                         {
@@ -37,7 +37,7 @@ require_once "conexion.php";
                         {
                             return "error";
                         }
-                }   
+                } 
                    
         
       /*  $stmt2->close();

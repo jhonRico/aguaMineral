@@ -75,5 +75,6 @@ class ControladorFormatoContrato
         $respuesta = ModeloFormatoContrato::mdlConsultarTiendaEnBd($tabla,$datos);
         return $respuesta;
     }
+ 
 
 }

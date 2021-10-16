@@ -18,10 +18,10 @@
       <h1 class="mt-5 mb-5 display-6">Clientes Zona Centro</h1>
 
       <div class="row g-3 align-items-center">
-        <div class="col-auto">
+        <div class="col-auto mb-5">
           <label for="inputPassword6" class="col-form-label me-3"><b>Seleccione Ciudad</b></label>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mb-5">
           <select name="" id="centro" class="form-select w-75">
             <?php foreach ($variable as $key): ?>
             <option value="<?php echo $key['nombreCiudad']; ?>"><?php echo $key['nombreCiudad']; ?></option>
@@ -30,19 +30,21 @@
         </div>
       </div>
 
-      <table class="table table-hover mt-3" id="tablaCentro">
+      <table class="table table-hover mt-5">
         <thead class="bg-light">
     <tr>
+      <th scope="col">Documento de Identidad</th>
       <th scope="col">Nombre</th>
       <th scope="col">Apellido</th>
       <th scope="col">Comercio</th>
-      <th scope="col">Sector</th>
+      <th scope="col">Municipio</th>
       <th scope="col">Detalle</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($resultadoConsultaClientes as $value): ?>
     <tr>
+      <td><?php echo $value['cedulaPersona'];?></td>
       <td><?php echo $value['nombrePersona'];?></td>
       <td><?php echo $value['apellidoPersona'];?></td>
       <td><?php echo $value['nombreTienda'];?></td>

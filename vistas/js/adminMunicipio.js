@@ -1,3 +1,4 @@
+
 /*------Cuando carga la pagina, consulta los  registrados de Municipios*/
 $(document).ready(function(){ 
 	rutaActual = window.location.toString();
@@ -24,7 +25,8 @@ function consultarAllMunicipios(){
 		cache: false,
 		contentType: false,
 		processData: false,
-		success: function(respuesta3){
+		success: function(respuesta3)
+		{
 			
 			 if(respuesta3.length >10 ){
 
@@ -256,7 +258,7 @@ function validarRegistroExistenteMunicipio(municipio,capital,idEstadoValue)
 function eliminarMunicipio(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar el municipio?",
+		text: "Â¿Seguro que desea eliminar el municipio?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -361,7 +363,7 @@ function modificarMunicipioFinal(idPaisidMunicipio,nombreMunicipio,capitalMunici
  					position: 'top-end',
  					icon: 'error',
  					toast: true,
- 					title: 'Ingrese un nombre válido',
+ 					title: 'Ingrese un nombre vÃ¡lido',
  					showConfirmButton: false,
  					timerProgressBar: true,
  					timer: 1500
@@ -387,7 +389,7 @@ function modificarMunicipioFinal(idPaisidMunicipio,nombreMunicipio,capitalMunici
  					position: 'top-end',
  					icon: 'error',
  					toast: true,
- 					title: 'Ingrese una capital válida',
+ 					title: 'Ingrese una capital vÃ¡lida',
  					showConfirmButton: false,
  					timerProgressBar: true,
  					timer: 1500

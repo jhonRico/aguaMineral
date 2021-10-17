@@ -1,6 +1,15 @@
 //Ocultar Formulario de Contrato Estante
 $(document).ready(function() {
   $('.contratoEstante').hide();
+  rutaActual = window.location.toString();
+  if(rutaActual.includes("contratoPrincipal")){       
+    window.onbeforeunload = function() 
+    {
+      return "Seguro que quieres recargar";
+    }
+  }
+  
+
 });
 
 //mostrar formulario dependiendo del parametro
@@ -50,22 +59,33 @@ function mostrarContrato(parametro,idTipoUsuario){
 
 }
 //Consultar Selects dependiendo de la opcion
-
-$('#estadoCliente').on('change', function() 
-    {
+$('#estadoCliente').click(function() {
       estado = $('#estadoCliente').val();
       selector = "municipioCliente";
       tabla = "municipio";
       llenarSelect(estado,selector,tabla,"Estado_idEstado","idMunicipio","nombreMunicipio");
-    })
+});
 
-$('#municipioCliente').on('change', function() 
-    {
-      municipio = $('#municipioCliente').val();
+$('#municipioCliente').click(function() {
+   municipio = $('#municipioCliente').val();
       selector = "ciudadCliente";
       tabla = "ciudad";
       llenarSelect(municipio,selector,tabla,"Municipio_idMunicipio ","idCiudad ","nombreCiudad");
-    })
+});
+
+$('#estadoComercio').click(function() {
+      estado = $('#estadoComercio').val();
+      selector = "municipioComercio";
+      tabla = "municipio";
+      llenarSelect(estado,selector,tabla,"Estado_idEstado","idMunicipio","nombreMunicipio");
+});
+
+$('#municipioComercio').click(function() {
+   municipio = $('#municipioComercio').val();
+      selector = "ciudadComercio";
+      tabla = "ciudad";
+      llenarSelect(municipio,selector,tabla,"Municipio_idMunicipio ","idCiudad ","nombreCiudad");
+});
 function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro2)
 {
   var datos = new FormData();
@@ -83,7 +103,6 @@ function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro
     processData: false,
     success: function(respuesta3)
     { 
-      alert(respuesta3);
        if(respuesta3.length >10)
        {
         respuesta3 =respuesta3.replace("[","");
@@ -96,92 +115,52 @@ function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro
             auxSplit2[i] = auxSplit2[i]+"}";
           }
           var res2 = JSON.parse(auxSplit2[i]);
-          var aux = "'"+res2.descripcion+"'";
-          result = aux.replace("'","");
-          result2 = result.replace("'","");
           plantilla2 += `
-          <option value="${res2[parametro1]}>${res2[parametro2]}</option>
+          <option value="${res2[parametro1]}">${res2[parametro2]}</option>
           `;
         }
+
 
         $(`#${selector}`).html(plantilla2); 
         $(`#${selector}`).show();
 
       }else
       {
-        $("#fila").hide(); 
-         Swal.fire({
-              position: 'bottom',
-              icon: 'info',
-              toast: true,
-              title: 'No hay productos en esta sucursal',
-              showConfirmButton: false,
-              timerProgressBar: true,
-              timer: 2000,
-            })      
+        $("#fila").hide();  
+        $(`#${selector}`).val('');
       }
     }
   })
 }
 
-/*LLamar a la funcion cada vez que se oprime una tecla*/
+$(document).ready(function() {
+  $('#yes').on('change', function() {
+        $("#direccionComercio").toggle();
+        $("#estadoComercio").toggle();
+        $("#ciudadComercio").toggle();
+        $("#zonaComercio").toggle();
+        $("#municipioComercio").toggle();
+        $("#sectorComercio").toggle();
+        $("#labelEstadoComercio").toggle();
+        $("#labelZonaComercio").toggle();
+        $("#labelSectorComercio").toggle();
+        $("#labelMunicipioComercio").toggle();
+        $("#labelCiudadComercio").toggle();
+        $("#labelDireccionComercio").toggle();
+        $("#labelComercio").toggle();
+        $("#no").toggle();
+        $("#ocultar").toggle();
+        //Dar Valor a los inputs
+        $("#direccionComercio").val($("#direccionCliente").val())
+        $("#estadoComercio").val($("#estadoCliente").val());
+        $("#municipioComercio").val($("#municipioCliente").val());
+        $("#ciudadComercio").val($("#ciudadCliente").val());
+        $("#zonaComercio").val($("#zonaCliente").val());
+        $("#sectorComercio").val($("#sectorCliente").val());
+    });
 
-$("#yes").click(function ocultar(){
-
-  //Ocultar Inputs
-
-  $("#direccionComercio").attr('type', 'hidden');
-  $("#estadoComercio").hide();
-  $("#ciudadComercio").hide();
-  $("#zonaComercio").hide();
-  $("#municipioComercio").hide();
-  $("#sectorComercio").hide();
-  $("#labelEstadoComercio").hide();
-  $("#labelZonaComercio").hide();
-  $("#labelSectorComercio").hide();
-  $("#labelMunicipioComercio").hide();
-  $("#labelCiudadComercio").hide();
-  $("#labelDireccionComercio").hide();
-  $("#labelComercio").hide();
-  $("#no").attr('type', 'hidden');
-  $("#ocultar").hide();
-
-  //Dar Valor a los inputs
-
-  $("#direccionComercio").val($("#direccionCliente").val())
-  $("#estadoComercio").val($("#estadoCliente").val());
-  $("#municipioComercio").val($("#municipioCliente").val());
-  $("#ciudadComercio").val($("#ciudadCliente").val());
-  $("#zonaComercio").val($("#zonaCliente").val());
-  $("#sectorComercio").val($("#sectorCliente").val());
-
-  $("#yes").click(function(){
-    mostrarInputs();
-
-  })
-
-})
-//Vlover a mostrar inputs
-function mostrarInputs()
-{  
-
-  $("#direccionComercio").attr('type', 'text');
-  $("#estadoComercio").show();
-  $("#ciudadComercio").show();
-  $("#zonaComercio").show();
-  $("#municipioComercio").show();
-  $("#sectorComercio").show();
-  $("#labelEstadoComercio").show();
-  $("#labelZonaComercio").show();
-  $("#labelSectorComercio").show();
-  $("#labelMunicipioComercio").show();
-  $("#labelCiudadComercio").show();
-  $("#labelDireccionComercio").show();
-  $("#labelComercio").show();
-  $("#no").attr('type', 'checkbox');
-  $("#ocultar").show();
-}
-
+});
+//Consultar cada vez que se presione una tecla
 
 $("#cedulaCliente").keyup(function(){
   consultarClienteEnBd();

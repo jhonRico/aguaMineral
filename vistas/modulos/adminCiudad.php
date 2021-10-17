@@ -10,7 +10,7 @@
           </ol>
         </nav>
   </div> 
-<form method="post" id="formulario" autocomplete="off" class="m-5 fp-5">
+  <form method="post" id="formulario" autocomplete="off" class="m-5 fp-5">
   <div class="m-5 p-5">
     <table class="table m-3 p-3">
     <thead>

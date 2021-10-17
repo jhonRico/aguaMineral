@@ -3,8 +3,10 @@ $url2 = Ruta::ctrlRuta();
 $tabla = "tipousuario";
 $resultadoConsultaIdTipoUsuario = ControladorFormatoContrato::ctrlConsultarIdTipoUsuario($tabla);
 $resultadoConsultarEstado = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("estado");
+$resultadoConsultarZonas = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("zonas");
 $tabla = "serialproducto";
 $resultadoConsultarTipoContrato = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("tipocontrato");
+$resultadoConsultarSucursales = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("sucursal");
 $resultadoConsultaSerial = ControladorFormatoContrato::ctrlConsultarSerial($tabla);
 $array = $resultadoConsultaSerial;
 ?>
@@ -29,11 +31,19 @@ $array = $resultadoConsultaSerial;
           </div>
 
           <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+              <label for="inputEmail4" class="mb-3">Sucursal</label>
+              <select name="" id="" class="form-select">
+                <?php foreach ($resultadoConsultarSucursales as $key): ?>  
+                <option value="<?php echo $key['idSucursal'];?>"><?php echo $key['nombreSucursal'];?></option>
+              <?php endforeach ?>  
+              </select>
+            </div>
+            <div class="form-group col-md-4">
               <label for="inputEmail4" class="mb-3">C&eacute;dula del cliente</label>
               <input type="text" class="form-control mb-3" id="cedulaCliente" placeholder="C&eacute;dula">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="inputEmail4">Nombre del cliente</label>
               <input type="text" class="form-control mt-3" id="nombreCliente" placeholder="Nombre">
             </div>
@@ -68,7 +78,9 @@ $array = $resultadoConsultaSerial;
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Zona ciudad</label>
               <select id="zonaCliente" class="form-select mt-3">
-                <option value="1">Norte</option>                                     
+                <?php foreach ($resultadoConsultarZonas as $key): ?>  
+                <option value="<?php echo $key['idZonas'];?>"><?php echo $key['descripcion'];?></option>
+                <?php endforeach ?>                                     
               </select>
             </div>
           </div>
@@ -126,7 +138,10 @@ $array = $resultadoConsultaSerial;
             </div>
             <div class="form-group col-md-3">
               <label for="inputState" class="mt-3" id="labelZonaComercio">Zona del comercio</label>
-              <select id="zonaComercio" class="form-select mt-3">                              
+              <select id="zonaComercio" class="form-select mt-3">
+                <?php foreach ($resultadoConsultarZonas as $key): ?>  
+                <option value="<?php echo $key['idZonas'];?>"><?php echo $key['descripcion'];?></option>
+                <?php endforeach ?>                            
               </select>
             </div>
           </div>    

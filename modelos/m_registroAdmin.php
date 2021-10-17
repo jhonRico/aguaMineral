@@ -46,12 +46,12 @@ require_once "conexion.php";
         $stmt->close();
         $stmt=null;    
     }
-    static public function mdlEliminarTipoProducto($tabla, $datos)
+    static public function mdlEliminarRegistroTabla($tabla,$datos)
      {
+        $parametro = $datos['parametro'];
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $parametro = :id");
+        $stmt->bindParam(":id", $datos["id"], PDO::PARAM_STR);
 
-        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idTipoProducto = :idTipoProducto");
-        $stmt->bindParam(":idTipoProducto", $datos["idTipoProducto"], PDO::PARAM_INT);
-        
         if($stmt->execute())
         {
             return "ok";
@@ -59,8 +59,6 @@ require_once "conexion.php";
         {
             return"Error";
         }
-        $stmt->close();
-        $stmt=null;
     }
     //Productos
     static public function mdlRegistrarProducto($tabla,$tabla2,$datos)
@@ -133,11 +131,11 @@ require_once "conexion.php";
             }
         }
     }
-    static public function mdlConsultarProducto()
+    static public function mdlConsultarProducto($parametro)
     {
         $atributo1 = "TipoProducto_idTipoProducto";
         $atributo2 = "idTipoProducto";
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM producto t1 INNER JOIN tipoproducto t2 ON t1.$atributo1 = t2.$atributo2 INNER JOIN serialproducto s ON  t1.SerialProducto_idSerialProducto = s.idSerialProducto ORDER BY t2.descripcion ASC");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM producto t1 INNER JOIN tipoproducto t2 ON t1.$atributo1 = t2.$atributo2 INNER JOIN serialproducto s ON  t1.SerialProducto_idSerialProducto = s.idSerialProducto INNER JOIN producto_has_sucursal ps ON t1.idProducto = ps.Producto_idProducto WHERE ps.Sucursal_idSucursal = '$parametro' ORDER BY t2.descripcion ASC");
 
         $stmt -> execute();
         return  $stmt ->fetchAll(); 

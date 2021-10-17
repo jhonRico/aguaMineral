@@ -9,24 +9,26 @@ require_once "conexion.php";
     // Muestra todas los blogs registrados en la base de datos
     //**************************************************************** 
 
-    static public function ctrlMostrarBlogs($tabla,$tabla1){
+    static public function ctrlMostrarBlogs($tabla,$tabla1)
+    {
 
         $stmt = Conexion::conectar()->prepare("select * from $tabla1 t1 INNER JOIN (select * from $tabla)t2 on t1.idPersona = t2.Persona_idPersona");        
         $stmt -> execute();
         return  $stmt ->fetchAll(); 
 
      }
-
-         static public function mdlMostrarBlogsForRuta($tabla , $item, $valor){
-
-        if($item !=  "control"){
+    static public function mdlMostrarBlogsForRuta($tabla , $item, $valor)
+    {
+        if($item !=  "control")
+        {
             
             $stmt = Conexion::conectar()->prepare("SELECT *  from Persona t1 INNER JOIN (SELECT * FROM $tabla WHERE $item = :$item) t2 on t1.idPersona = t2.Persona_idPersona");
             $stmt -> bindParam(":".$item, $valor,  PDO::PARAM_STR);
             $stmt -> execute();
             return  $stmt ->fetch(); 
 
-        }else{
+        }else
+        {
             
             $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
             $stmt -> execute();

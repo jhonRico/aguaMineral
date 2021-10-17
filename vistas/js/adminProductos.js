@@ -1,3 +1,5 @@
+//Mensaje exitoso mas redirreccionar
+
 $(document).ready(function(){ 
 	rutaActual = window.location.toString();
 	if(rutaActual.includes("administracionTipoProducto")){   
@@ -214,14 +216,33 @@ function mostrarModalEliminar(id)
 	}).then((result) => {
 		if (result.isConfirmed)
 		{
-			eliminarTipoProducto(id);		
+			eliminarRegistroEnTabla(id,"tipoproducto","idTipoProducto");		
 		}
 	})
 }
-function eliminarTipoProducto(id)
+function mostrarModalEliminarProducto(id, tabla, parametro)
+{
+	Swal.fire({
+		title: 'Eliminar',
+		text: "¿Seguro que desea eliminar este país?",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: 'red',
+		cancelButtonColor: 'gray',
+		confirmButtonText: 'Eliminar'
+	}).then((result) => {
+		if (result.isConfirmed)
+		{
+			eliminarRegistroEnTabla(id, tabla, parametro);		
+		}
+	})
+}
+function eliminarRegistroEnTabla(id, tabla, parametro)
 {
 	var datos = new FormData();
- 	datos.append("idTipoProductoEliminar", id);
+ 	datos.append("idEliminar", id);
+ 	datos.append("tablaEliminar", tabla);
+ 	datos.append("parametroEliminar", parametro);
 
  	$.ajax({
  		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
@@ -237,7 +258,7 @@ function eliminarTipoProducto(id)
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al Tipo Producto',
+ 					text: 'Error al eliminar',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -245,16 +266,16 @@ function eliminarTipoProducto(id)
  			}else
  			{
  				Swal.fire({
- 					title: 'Tipo Producto Eliminado',
- 					icon: 'success',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}).then((result) => {
+			 		title: 'Producto Eliminado',
+			 		icon: 'success',
+			 		showCloseButton: true,
+			 		confirmButtonText:'Aceptar'
+			 		}).then((result) => {
 					if (result.isConfirmed)
 					{
-						consultarTipoProducto("tipoproducto");
+						consultarProducto();
 					}
- 				});
+			 	});
  			}
  		}                 
  	})
@@ -263,7 +284,14 @@ function eliminarTipoProducto(id)
 //Administracion de Productos
 $(document).ready(function() 
 {
-		$('#modalSerial').hide();
+		$(".cerrarModalProducto").click(function() 
+		{
+			$('#capacidad').val("");
+			$('#serial').val("");
+			$('#cantidad').val("");
+			$('#moddaddCountry').modal("hide");
+		});
+
 		$('#tipoProducto').click(function(event) {
 		var array = $('#tipoProducto').val().split("-");
 		if (array[1] == "Estantes") 
@@ -272,6 +300,7 @@ $(document).ready(function()
 		}else
 		{
 			$('#modalSerial').hide();
+			$('#serial').val('');
 		}
 	});
 });
@@ -316,7 +345,17 @@ function registrarProductoEnBd()
 					icon: 'error',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'
-				}); 
+				}).then((result) => 
+				{
+					if (result.isConfirmed)
+					{
+						$("#moddaddCountry").modal("hide");
+						consultarProducto();
+						$('#capacidad').val("");
+						$('#serial').val("");
+						$('#cantidad').val("");
+					}
+				}) 
 
 			}else if(respuesta.includes("ok"))
 			{
@@ -332,6 +371,9 @@ function registrarProductoEnBd()
 					{
 						$("#moddaddCountry").modal("hide");
 						consultarProducto();
+						$('#capacidad').val("");
+						$('#serial').val("");
+						$('#cantidad').val("");
 					}
 				})
 			}else
@@ -347,6 +389,9 @@ function registrarProductoEnBd()
 					if (result.isConfirmed)
 					{
 						$("#moddaddCountry").modal("hide");
+						$('#capacidad').val("");
+						$('#serial').val("");
+						$('#cantidad').val("");
 					}
 				})
 			}
@@ -358,8 +403,9 @@ function registrarProductoEnBd()
 
 function consultarProducto()
 {
+	var selectSucursales = $("#selectSucursales").val();
 	var datos = new FormData();
-	datos.append("consultar", "valor");
+	datos.append("consultar", selectSucursales);
 	let plantilla2 = " ";
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
@@ -394,7 +440,7 @@ function consultarProducto()
 					      <td>${res2.cantidadProductos}</td>
 					      <td></td>
 					      <td></td>
-					      <td><a href="#"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="#"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
+					      <td><a href="#"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:mostrarModalEliminarProducto(${res2.idProducto},'producto','idProducto')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
 					</tr><br>`;
 				}
 
@@ -403,8 +449,26 @@ function consultarProducto()
 
 			}else
 			{
-				$("#fila").hide(); 			
+				$("#fila").hide(); 
+				 Swal.fire({
+		          position: 'bottom',
+		          icon: 'info',
+		          toast: true,
+		          title: 'No hay productos en esta sucursal',
+		          showConfirmButton: false,
+		          timerProgressBar: true,
+		          timer: 2000,
+		        }) 			
 			}
 		}
 	})
 }
+
+$(document).ready(function() 
+{
+    $('#selectSucursales').on('change', function() 
+    {
+      consultarProducto();
+    })
+});
+

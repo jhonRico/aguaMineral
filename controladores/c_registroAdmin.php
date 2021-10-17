@@ -64,9 +64,9 @@ class ControladorRegistroAdmin
         $respuesta = ModeloRegistroAdmin::mdlRegistrarTipoProducto($tabla, $datos);
         return $respuesta;
     }
-    static public function ctrlConsultarProducto()
+    static public function ctrlConsultarProducto($parametro)
     {
-        $respuesta = ModeloRegistroAdmin::mdlConsultarProducto();
+        $respuesta = ModeloRegistroAdmin::mdlConsultarProducto($parametro);
         return $respuesta;
     }
     static public function ctrlConsultarTipoProducto($tabla,$parametro1)
@@ -87,13 +87,13 @@ class ControladorRegistroAdmin
         $respuesta = ModeloRegistroAdmin::mdlModificarTipoProducto($tabla,$datos);
         return $respuesta;
     }
-    static public function ctrlEliminarTipoProducto($idTipoProducto)
+    static public function ctrlEliminarRegistroTabla($id,$tabla,$parametro)
     {
-        $tabla = "tipoproducto";
         $datos = array(
-             "idTipoProducto"=>$idTipoProducto,
+             "id"=>$id,
+             "parametro"=>$parametro
          );
-        $respuesta = ModeloRegistroAdmin::mdlEliminarTipoProducto($tabla,$datos);
+        $respuesta = ModeloRegistroAdmin::mdlEliminarRegistroTabla($tabla,$datos);
         return $respuesta;
     }
     //Productos

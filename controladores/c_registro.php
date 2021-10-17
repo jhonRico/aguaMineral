@@ -21,7 +21,8 @@ class ControladorRegistro
         return $respuesta;
 
 	}
-    static public function ctrlAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena){
+    static public function ctrlAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena)
+    {
 
     date_default_timezone_set("America/Bogota");
     $tabla = "persona";

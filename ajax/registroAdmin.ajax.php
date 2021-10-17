@@ -57,9 +57,9 @@ class   AjaxRegistroAdmin{
         echo  json_encode ($respuesta);
     }
     //Producto
-    public function ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad)
+    public function ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal)
     {
-        $respuesta = ControladorRegistroAdmin::ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad);
+        $respuesta = ControladorRegistroAdmin::ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal);
         echo  json_encode ($respuesta);
     }
 }
@@ -132,13 +132,14 @@ if(isset($_POST["idTipoProductoEliminar"]))
 
 if(isset($_POST["tipoProducto"]))
 {  
+    $sucursal = $_POST["sucursal"];
     $tipoProducto = $_POST["tipoProducto"];
     $serial = $_POST["serial"];
     $capacidad = $_POST["capacidad"];
     $cantidad = $_POST["cantidad"];
 
     $allStates = new AjaxRegistroAdmin();
-    $allStates->ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad);
+    $allStates->ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal);
 }
 if(isset($_POST["consultar"]))
 {  

@@ -314,19 +314,33 @@ function RegistrarUsuario()
                     async:false,
                     success: function(respuesta)
                     {
-                          if(!respuesta.includes("ok"))
+                          if(respuesta.includes("ok"))
                           {
                               Swal.fire({
+                                  title: 'Registrado',
+                                  icon: 'success',
+                                  showCloseButton: true,
+                                  confirmButtonText:'Aceptar'
+                                }).then((result) => {
+                                  if (result.isConfirmed) 
+                                  {
+                                    window.location.replace('http://localhost/aguaMineral/adminPersonas');
+                                  }                                
+                                });             
+                          }else if (respuesta.includes("ya existe"))
+                          {
+                                                                
+                              Swal.fire({
                                 title: 'Error',
-                                text: 'Error al registrar',
+                                text: 'El usuario ya existe',
                                 icon: 'error',
                                 showCloseButton: true,
                                 confirmButtonText:'Aceptar'
                               });
-                             
+                                
                           }else
                           {
-                                Swal.fire({
+                              Swal.fire({
                                   title: 'Registrado',
                                   icon: 'success',
                                   showCloseButton: true,
@@ -337,7 +351,6 @@ function RegistrarUsuario()
                                     window.location.replace('http://localhost/aguaMineral/adminPersonas');
                                   }                                
                                 });
-                                
                           }
 
                      }                 

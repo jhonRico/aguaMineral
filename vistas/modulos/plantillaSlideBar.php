@@ -28,14 +28,7 @@
        </a>
        <span class="tooltip">Principal</span>
      </li>
-      <li>
-        <a href="http://localhost/aguaMineral/zonas">
-          <i class="fas fa-user-alt"></i>
-          <span class="links_name">Clientes</span>
-        </a>
-         <span class="tooltip">Clientes</span>
-      </li>
-      <li>
+     <li>
        <a href="http://localhost/aguaMineral/contratoPrincipal">
          <i class="fas fa-file-signature"></i>
          <span class="links_name">Contratos</span>       
@@ -43,12 +36,19 @@
        <span class="tooltip">Contratos</span>
      </li>
      <li>
-       <a href="#">
+       <a href="#"> 
          <i class="fas fa-file-alt"></i>
          <span class="links_name">Reportes</span>
        </a>
        <span class="tooltip">Reportes</span>
      </li>
+      <li>
+        <a href="http://localhost/aguaMineral/zonas">
+          <i class="fas fa-user-alt"></i>
+          <span class="links_name">Clientes</span>
+        </a>
+         <span class="tooltip">Clientes</span>
+      </li>
      <?php 
        if($usuario == 1) 
        {

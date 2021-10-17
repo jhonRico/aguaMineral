@@ -67,10 +67,6 @@ if(isset($_POST["idMunicipioDelete"])){
     $idDeleteMunicipio = $_POST['idMunicipioDelete'];
     $objMunicipio->ajaxEliminarMunicipio($idDeleteMunicipio,"municipio","idMunicipio");
 }
-
-
-
-
 if(isset($_POST["idMunicipioEdit"])){
     $objEstado = new AjaxAdministracionMunicipio();
     $idMunicipioEdit = $_POST['idMunicipioEdit'];
@@ -78,6 +74,20 @@ if(isset($_POST["idMunicipioEdit"])){
     $capitalMunicipioEdit = $_POST['capitalMunicipioEdit'];
     $idEstadoEditipioEdit = $_POST['idEstadoEdit'];
     $objEstado->ajaxModificarOfTable3Campos($nombreMunicipioEdit,$capitalMunicipioEdit,$idEstadoEditipioEdit,$idMunicipioEdit,"municipio","nombreMunicipio","capitalMunicipio","Estado_idEstado","idMunicipio");
+}
+/*Ajax para sucursales*/
+if(isset($_POST["sector"]))
+{  
+    $allStates = new AjaxAdministracionMunicipio();
+    $sector    = $_POST["sector"];
+    $sucursal  = $_POST["sucursal"];
+    $direccion = $_POST["direccion"];
+    $allStates->ajaxAddRegistroTresParametros($sector,$sucursal,$direccion,"sucursal","Sector_idSector" ,"nombreSucursal","direccionSucursal");
+}
+if(isset($_POST["consultar"]))
+{  
+    $objmunicipio = new AjaxAdministracionMunicipio();
+    $objmunicipio->ajaxConsultaTodosBD("sucursal");
 }
 
 ?>

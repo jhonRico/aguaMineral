@@ -69,10 +69,12 @@ class ControladorRegistroAdmin
         $respuesta = ModeloRegistroAdmin::mdlConsultarProducto();
         return $respuesta;
     }
-    static public function ctrlConsultarTipoProducto($tabla)
+    static public function ctrlConsultarTipoProducto($tabla,$parametro1)
     {
-        $tabla2 = "tipoproducto";
-        $respuesta = ModeloRegistroAdmin::mdlConsultarTipoProducto($tabla,$tabla2);
+        $datos = array(
+           "parametro1"=>$parametro1,
+        );
+        $respuesta = ModeloRegistroAdmin::mdlConsultarTipoProducto($tabla,$datos);
         return $respuesta;
     }
     static public function ctrlModificarTipoProducto($idTipoProducto,$descripcion)
@@ -95,7 +97,7 @@ class ControladorRegistroAdmin
         return $respuesta;
     }
     //Productos
-    static public function ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad)
+    static public function ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal)
     {
         date_default_timezone_set("America/Bogota");
         $tabla = "serialproducto";
@@ -105,6 +107,7 @@ class ControladorRegistroAdmin
              "serial"=>$serial,
              "capacidad"=>$capacidad,
              "cantidad"=>$cantidad,
+             "sucursal"=>$sucursal,
              "fecha"=> date("Y-m-d H:i:s"),
              "estado"=> "disponible",
              "idContrato" => 0

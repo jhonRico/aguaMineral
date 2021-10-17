@@ -3,7 +3,8 @@ require_once "../controladores/c_registro.php";
 require_once "../modelos/m_registro.php";
 
 
-class   AjaxUser{
+class   AjaxUser
+{
     
     public function ajaxConsultUser($usuario,$contrasena)
     {

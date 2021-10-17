@@ -58,6 +58,14 @@ $('#estadoCliente').on('change', function()
       tabla = "municipio";
       llenarSelect(estado,selector,tabla,"Estado_idEstado","idMunicipio","nombreMunicipio");
     })
+
+$('#municipioCliente').on('change', function() 
+    {
+      municipio = $('#municipioCliente').val();
+      selector = "ciudadCliente";
+      tabla = "ciudad";
+      llenarSelect(municipio,selector,tabla,"Municipio_idMunicipio ","idCiudad ","nombreCiudad");
+    })
 function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro2)
 {
   var datos = new FormData();
@@ -65,7 +73,6 @@ function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro
   datos.append("tablaSelect", tabla);
   datos.append("atributo", atributo);
 
-alert(valorAnterior+' '+tabla+' '+atributo+' '+selector);
   let plantilla2 = " ";
   $.ajax({
     url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",

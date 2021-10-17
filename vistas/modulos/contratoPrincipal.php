@@ -189,7 +189,7 @@ $array = $resultadoConsultaSerial;
               <div class="border m-3 p-3 bg-light div-admin rounded">
                 <i class="fas fa-file-contract iconosAdmin"></i>
                 <h3 class="titulosAdmin2 mb-0"><?php echo $key['nombre'];?></h3>
-                <p class="mb-5 mt-0">Contraro para <?php echo $key['nombre'];?></p>  
+                <p class="mb-5 mt-0">Contrato para <?php echo $key['nombre'];?></p>  
               </div>
             </a>
           </div>

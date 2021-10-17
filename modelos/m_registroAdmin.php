@@ -160,21 +160,29 @@ require_once "conexion.php";
     }
      static public function mdlEliminarPais($tabla, $datos)
      {
+           $tablaEstado = "estado";
+           $stmtEstado = Conexion::conectar()->prepare("SELECT * FROM $tablaEstado where Pais_idPais = :idPais");
+           $stmtEstado->bindParam(":idPais", $datos["idPais"], PDO::PARAM_INT);
+           $stmtEstado-> execute();
+           $existeEstado = $stmtEstado ->fetchAll();
 
-        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idPais = :idPais");
-        
-        $stmt->bindParam(":idPais", $datos["idPais"], PDO::PARAM_INT);
-  
+           if($existeEstado==false){
+                    $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idPais = :idPais");        
+                    $stmt->bindParam(":idPais", $datos["idPais"], PDO::PARAM_INT);
+                    if($stmt->execute())
+                    {
+                        return "ok";
+                    }else
+                    {
+                        return"Error";
+                    }
+                    $stmt->close();
+                    $stmt=null;
 
-        if($stmt->execute())
-        {
-            return "ok";
-        }else
-        {
-            return"Error";
-        }
-        $stmt->close();
-        $stmt=null;
+           }else{
+                return "relacionado";
+		   }
+           $stmtEstado->close();
     }
     static public function mdlModificarPais($tabla, $datos)
      {

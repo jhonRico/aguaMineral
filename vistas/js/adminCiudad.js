@@ -252,16 +252,11 @@ function eliminarCiudadFinal(id)
 		async:false,
 		success: function(respuesta)
 		{
-			if(!respuesta.includes("ok"))
+			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
 			{
-				Swal.fire({
-					title: 'Error',
-					text: 'Error al eliminar la ciudad',
-					icon: 'error',
-					showCloseButton: true,
-					confirmButtonText:'Aceptar'
-				}); 
-
+				mensajeError('Error al eliminar la ciudad');
+			}else if(respuesta.includes("relacionado")){
+			   mensajeError('No se puede eliminar la ciudad, se encuentra con sectores asociados');
 			}else
 			{
 				Swal.fire({
@@ -276,6 +271,17 @@ function eliminarCiudadFinal(id)
 
 	})
 }
+
+ //----------------Funcion para mensaje de alerta de error
+ function mensajeError(mensaje){ 
+  	Swal.fire({
+ 		title: 'Error',
+ 		text: mensaje,
+ 		icon: 'error',
+ 		showCloseButton: true,
+ 		confirmButtonText:'Aceptar'
+ 	}); 
+ }
 /*------------------------------------------Finaliza el Espacio de eliminar----------------------------------*/
 
 
@@ -383,7 +389,7 @@ function modificarCiudadValue(id,descripcion,idPais)
 					{
 						$("#nameCiudadIdEdit").attr('value',null);
 						$("#editCiudad").modal("hide");
-
+						location.reload();
 					}
 				})
 			}
@@ -464,5 +470,5 @@ function validarRegistroSucursal()
 		})
 		return false;
 	}
-	alert("ok");
+	
 }

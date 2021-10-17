@@ -186,7 +186,7 @@ function validarRegistroExistenteZona(valor)
 		processData: false,
 		async:false,
 		success: function(respuesta)
-		{
+		{  
 			if(respuesta.includes("false"))
 			{
 			   returnValue =  "No existe";
@@ -197,7 +197,47 @@ function validarRegistroExistenteZona(valor)
 					position: 'top-end',
 					icon: 'error',
 					toast: true,
-					title: 'El registro ya existes'+respuesta,
+					title: 'El registro ya existe',
+					showConfirmButton: false,
+					timerProgressBar: true,
+					timer: 1500
+				})
+				returnValue =  "Existe";
+			}
+
+		}                 
+
+	})
+
+	return returnValue;
+}
+function validarRegistroExistenteZonaTwo(valor)
+{
+	var datos = new FormData();
+	var returnValue = "Existe";
+	datos.append("validaExisteZonaInBd", valor);
+
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		async:false,
+		success: function(respuesta)
+		{  
+			if(respuesta.includes("false"))
+			{
+			   returnValue =  "No existe";
+			}else
+			{
+			  
+				Swal.fire({
+					position: 'top-end',
+					icon: 'error',
+					toast: true,
+					title: 'El registro ya existe ',
 					showConfirmButton: false,
 					timerProgressBar: true,
 					timer: 1500
@@ -281,12 +321,15 @@ function eliminarZonas(id){
 function mostrarModalEditZonas(id, descripcion)
 {
 	idTipUser = id;
+	document.getElementById("nameZonaId").value = descripcion;
 	$("#editZonas").modal("show");
-	$("#nameZonaId").attr('value', descripcion);
+	
+	
 	$("#editarZonaValue").click(function(){
-	        var existeInTable = validarRegistroExistenteZona($("#nameZonaId").val());
-			if(existeInTable == "No existe"){
+	        var existeInTable = validarRegistroExistenteZonaTwo($("#nameZonaId").val());
+		    if(existeInTable == "No existe"){
 			    modificarZonasFinal(idTipUser);
+				
 			}
 		    
 	})
@@ -372,8 +415,10 @@ function modificarZonaValue(id,descripcion)
 				{
 					if (result.isConfirmed)
 					{
-						$("#nameZonaId").attr('value',null);
+						
+						document.getElementById("nameZonaId").value = null;
 						$("#editZonas").modal("hide");
+						location.reload();
 
 					}
 				})

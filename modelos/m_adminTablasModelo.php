@@ -38,23 +38,59 @@ require_once "conexion.php";
         $stmt->close();
         $stmt=null;
     }
-
-      static public function mdlEliminarOfTable($tabla, $datos,$atributo)
-     {
-
-        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $atributo = :idTable");        
-        $stmt->bindParam(":idTable", $datos["idTable"], PDO::PARAM_INT);  
-
-        if($stmt->execute())
-        {
-            return "ok";
-        }else
-        {
-            return"Error";
+   static public function validaTabla($tabla){
+        $returnValue = "";
+        if($tabla!=null){
+               switch ($tabla) {
+                    case "estado":
+                        $returnValue = "municipio-Estado_idEstado";
+                        break;
+                    case "municipio":
+                        $returnValue = "ciudad-Municipio_idMunicipio";  
+                        break;
+                    case "ciudad":
+                        $returnValue = "sector-Ciudad_idCiudad"; 
+                        break; 
+                }
         }
-        $stmt->close();
-        $stmt=null;
+        return $returnValue;
+	}
+      static public function mdlEliminarOfTable($tabla, $datos,$atributo)
+     { 
+         $resultValidar = self::validaTabla($tabla);
+         if($resultValidar!=""){
+                $datosFinales= explode("-", $resultValidar);
+                $atributoGenerico = $datosFinales[1];
+                $tablaGenerica = $datosFinales[0];
+                $stmtGenerico = Conexion::conectar()->prepare("SELECT * FROM $tablaGenerica where $atributoGenerico = :idTable");
+                $stmtGenerico->bindParam(":idTable", $datos["idTable"], PDO::PARAM_INT);  
+                $stmtGenerico-> execute();
+                $existe = $stmtGenerico ->fetchAll();
+
+                if($existe==false){
+                    return self::EliminarOfTableFinal($tabla, $datos,$atributo);
+                }else{
+                    return "relacionado";        
+				}
+                $stmtEstado->close();
+
+		 }else{
+               return self::EliminarOfTableFinal($tabla, $datos,$atributo);
+         }
     }
+    static public function EliminarOfTableFinal($tabla, $datos,$atributo){
+         $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $atributo = :idTable");        
+         $stmt->bindParam(":idTable", $datos["idTable"], PDO::PARAM_INT);  
+         if($stmt->execute())
+         {
+             return "ok";
+         }else
+         {
+             return"Error";
+         }
+         $stmt->close();
+         $stmt=null;
+	}
 
     static public function mdlModificarOfTable($tabla, $datos,$atributoSet,$atributoWhere)
      {
@@ -99,22 +135,36 @@ require_once "conexion.php";
 
    static public function mdlAddRegistroTresParametros($tabla, $datos,$atributo1,$atributo2,$atributo3)
     {
-
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla ($atributo1,$atributo2,$atributo3)
-                 VALUES  (:parametro1,:parametro2,:parametro3)");        
+                $pdo = Conexion::conectar();
+                $stmt = $pdo->prepare("INSERT INTO $tabla ($atributo1,$atributo2,$atributo3)
+                         VALUES  (:parametro1,:parametro2,:parametro3)");        
         
-        $stmt->bindParam(":parametro1", $datos["parametro1"], PDO::PARAM_INT);
-        $stmt->bindParam(":parametro2", $datos["parametro2"], PDO::PARAM_STR);
-        $stmt->bindParam(":parametro3", $datos["parametro3"], PDO::PARAM_STR);
-  
+                $stmt->bindParam(":parametro1", $datos["parametro1"], PDO::PARAM_INT);
+                $stmt->bindParam(":parametro2", $datos["parametro2"], PDO::PARAM_STR);
+                $stmt->bindParam(":parametro3", $datos["parametro3"], PDO::PARAM_STR);
+                $ejecucion = $stmt->execute();
 
-        if($stmt->execute()){
-            return "ok";
-        }else{
-            return"Error";
-        }
-        $stmt->close();
-        $stmt=null;
+                if($ejecucion && $tabla !="municipio"){
+                    return "ok";
+                }else if($ejecucion && $tabla =="municipio"){
+                     $datos2 = array(
+                         "registroValue"=>$datos["parametro3"],
+                     );
+                     $datosInsert = array(
+                         "parametro1"=>$datos["parametro3"],
+                         "parametro2"=>$pdo->lastInsertId(),
+
+                     );
+                      $respuestaSelect = self::mdlConsultarRegistroAdd($datos2,"ciudad","nombreCiudad");
+                      if($respuestaSelect==false){
+                         self::mdladdOfTableDosParametrosAsociada("ciudad", $datosInsert,"nombreCiudad","Municipio_idMunicipio");
+					  }
+                     return "ok";
+                }else{
+                    return"Error";
+                }
+                $stmt->close();
+                $stmt=null;
     }
 
 

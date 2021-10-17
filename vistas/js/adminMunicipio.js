@@ -176,7 +176,7 @@ function registrarCampoMunicipio(municipio,capital,idEstadoValue)
 			{
 				Swal.fire({
 					title: 'Error',
-					text: 'Error al registrar ',
+					text: 'Error al registrar '+respuesta,
 					icon: 'error',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'

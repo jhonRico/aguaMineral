@@ -386,7 +386,7 @@ function modificarEstadoValue(id,descripcion,idPais)
 					{
 						$("#nameEstadoIdEdit").attr('value',null);
 						$("#editEstados").modal("hide");
-
+						location.reload();
 					}
 				})
  			}

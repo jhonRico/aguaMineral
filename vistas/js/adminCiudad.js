@@ -389,7 +389,7 @@ function modificarCiudadValue(id,descripcion,idPais)
 					{
 						$("#nameCiudadIdEdit").attr('value',null);
 						$("#editCiudad").modal("hide");
-
+						location.reload();
 					}
 				})
 			}
@@ -470,5 +470,5 @@ function validarRegistroSucursal()
 		})
 		return false;
 	}
-	alert("ok");
+	
 }

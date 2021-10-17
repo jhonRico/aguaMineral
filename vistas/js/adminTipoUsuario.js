@@ -376,6 +376,7 @@ function modificarTipUserValue(id,descripcion)
 					{
 						$("#nameTipUserId").attr('value', null);
 						$("#editTipUser").modal("hide");
+						location.reload();
 					}
 				})
  			}

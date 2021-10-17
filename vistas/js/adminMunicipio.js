@@ -577,6 +577,7 @@ function agregarSucursalEnBd()
 					    $("#sucursal").val('');
 						$("#direccion").val('');
 						$("#moddAddSucursal").modal("hide");
+						location.reload();
 					}
 
 				})

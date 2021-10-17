@@ -38,60 +38,60 @@ class ModeloFormatoContrato
 
         if ($prueba != false) 
         {
-                $stmt = Conexion::conectar()->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-                   Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoDeContrato', '$idPersona', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");      
+            $stmt = Conexion::conectar()->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
+               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoDeContrato', '$idPersona', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");      
 
-                if($stmt->execute())
-                {
-                   $lastInsertId = $pdo->lastInsertId();
-                   $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto p ON c.idContrato  = p.TipoContrato_idTipoContrato INNER JOIN tipoproducto t ON
-                    P."); 
-                   $arrayProducto = $stmt->fetch();
-                    if($stmt->execute())
-                    {
-                        
-                    }
-                }else
-                {
-                    return"Error";
-                }
-        }
-    }else
-    {
-
-       $pdo = Conexion::conectar();
-       $stmt = $pdo->prepare("INSERT INTO $tabla(Zonas_idZonas, Ciudad_idCiudad, nombreSector)
-        VALUES  ('$zonaComercio', '$ciudadCliente', '$sectorComercio')");
-
-       if($stmt->execute())
-       {
-                            //este metodo permite obtener el ultimo id ingresado en la tabla qeu se acaba de hacer un incer.
-        $lastInsertId = $pdo->lastInsertId();
-
-        $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
-            VALUES  ('$idTipoUsuario','$lastInsertId','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
-
-        if ($stmt->execute()) 
-        {
-            $lastInsertId = $pdo->lastInsertId();
-
-            $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
-                VALUES  ('$lastInsertId', '$sectorComercio', '$comercio', '$direccionComercio', '$telefono')");
             if($stmt->execute())
             {
-
-               $stmt = $pdo->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-                   Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");      
-
+               $lastInsertId = $pdo->lastInsertId();
+               $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto p ON c.idContrato  = p.TipoContrato_idTipoContrato INNER JOIN tipoproducto t ON
+                P."); 
+               $arrayProducto = $stmt->fetch();
                if($stmt->execute())
                {
-                return "ok";
-            }else
-            {
-                return"Error";
-            }
+
+               }
+           }else
+           {
+            return"Error";
         }
     }
+}else
+{
+
+   $pdo = Conexion::conectar();
+   $stmt = $pdo->prepare("INSERT INTO $tabla(Zonas_idZonas, Ciudad_idCiudad, nombreSector)
+    VALUES  ('$zonaComercio', '$ciudadCliente', '$sectorComercio')");
+
+   if($stmt->execute())
+   {
+                            //este metodo permite obtener el ultimo id ingresado en la tabla qeu se acaba de hacer un incer.
+    $lastInsertId = $pdo->lastInsertId();
+
+    $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
+        VALUES  ('$idTipoUsuario','$lastInsertId','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
+
+    if ($stmt->execute()) 
+    {
+        $lastInsertId = $pdo->lastInsertId();
+
+        $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
+            VALUES  ('$lastInsertId', '$sectorComercio', '$comercio', '$direccionComercio', '$telefono')");
+        if($stmt->execute())
+        {
+
+           $stmt = $pdo->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
+               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");      
+
+           if($stmt->execute())
+           {
+            return "ok";
+        }else
+        {
+            return"Error";
+        }
+    }
+}
 }
 
 }
@@ -147,6 +147,16 @@ static public function mdlConsultarTiendaEnBd($tabla,$datos)
 
     $stmt -> execute();
     return $stmt->fetch();
+}
+
+static public function mdlConsultarSelectsDeContrato($tablaSelect,$datos,$atributo)
+{
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tablaSelect WHERE  $atributo = :valorAnterior");
+
+    $stmt->bindParam(":valorAnterior", $datos["valorAnterior"], PDO::PARAM_INT);
+
+    $stmt -> execute();
+    return $stmt->fetchAll();
 }
 
 }

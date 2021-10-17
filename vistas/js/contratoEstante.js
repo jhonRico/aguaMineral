@@ -6,7 +6,7 @@ $(document).ready(function() {
 //mostrar formulario dependiendo del parametro
 function mostrarContrato(parametro,idTipoUsuario){
   $('.contratoEstante').show();
-  if (parametro == "botellones") 
+  if (parametro == "Botellones") 
   {
     $('#cajasContrato').hide();
     $('#titulo').hide();
@@ -21,7 +21,7 @@ function mostrarContrato(parametro,idTipoUsuario){
      validarCampos(parametro,idTipoUsuario);
    });
 
-  }else if (parametro == "ambos") 
+  }else if (parametro == "Ambos") 
   {
     $('#cajasContrato').hide();
     $('#titulo').hide();
@@ -49,6 +49,74 @@ function mostrarContrato(parametro,idTipoUsuario){
   }
 
 }
+//Consultar Selects dependiendo de la opcion
+
+$('#estadoCliente').on('change', function() 
+    {
+      estado = $('#estadoCliente').val();
+      selector = "municipioCliente";
+      tabla = "municipio";
+      llenarSelect(estado,selector,tabla,"Estado_idEstado","idMunicipio","nombreMunicipio");
+    })
+function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro2)
+{
+  var datos = new FormData();
+  datos.append("valorAnterior", valorAnterior);
+  datos.append("tablaSelect", tabla);
+  datos.append("atributo", atributo);
+
+alert(valorAnterior+' '+tabla+' '+atributo+' '+selector);
+  let plantilla2 = " ";
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    { 
+      alert(respuesta3);
+       if(respuesta3.length >10)
+       {
+        respuesta3 =respuesta3.replace("[","");
+        respuesta3 =respuesta3.replace("]","");
+        var auxSplit2 = respuesta3.split("},");
+        for(var i=0;i<auxSplit2.length;i++)
+        {
+          if(!auxSplit2[i].includes("}"))
+          {
+            auxSplit2[i] = auxSplit2[i]+"}";
+          }
+          var res2 = JSON.parse(auxSplit2[i]);
+          var aux = "'"+res2.descripcion+"'";
+          result = aux.replace("'","");
+          result2 = result.replace("'","");
+          plantilla2 += `
+          <option value="${res2[parametro1]}>${res2[parametro2]}</option>
+          `;
+        }
+
+        $(`#${selector}`).html(plantilla2); 
+        $(`#${selector}`).show();
+
+      }else
+      {
+        $("#fila").hide(); 
+         Swal.fire({
+              position: 'bottom',
+              icon: 'info',
+              toast: true,
+              title: 'No hay productos en esta sucursal',
+              showConfirmButton: false,
+              timerProgressBar: true,
+              timer: 2000,
+            })      
+      }
+    }
+  })
+}
+
 /*LLamar a la funcion cada vez que se oprime una tecla*/
 
 $("#yes").click(function ocultar(){
@@ -119,7 +187,7 @@ function validarCampos(parametro,idTipoUsuario)
   var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
-  var direccion = $('#direccion').val();
+  var direccion = $('#direccionCliente').val();
   var comercio = $("#nobreComercio").val();
   var cedula = $('#cedulaCliente').val();
   var telefono = $('#telefonoComercio').val();
@@ -413,7 +481,7 @@ function consultarClienteEnBd()
         consultarCamposDeTienda(res2.idPersona);
         $('#nombreCliente').val(res2.nombrePersona);
         $('#apellidoCliente').val(res2.apellidoPersona);
-        $('#direccion').val(res2.direccionPersona);
+        $('#direccionCliente').val(res2.direccionPersona);
         $('#cedulaCliente').val(res2.cedulaPersona);
         $('#sectorCliente').val(res2.nombreSector);
 
@@ -466,7 +534,10 @@ function consultarCamposDeTienda(id)
           var res2 = JSON.parse(auxSplit2[i]);
         }
         $("#nobreComercio").val(res2.nombreTienda);
-        $('#direccionCliente').val(res2.direccionTienda);
+        $('#direccionComercio').val(res2.direccionTienda);
+        $('#ciudadComercio').val(res2.telefonoTienda);
+        $('#telefonoComercio').val(res2.nombreSector);
+        $('#telefonoComercio').val(res2.telefonoTienda);
         $('#telefonoComercio').val(res2.telefonoTienda);
       }
     }
@@ -578,7 +649,6 @@ function consultarFormatoContrato(parametro)
           result = result.replace("cantidadBotellones",$('#cantidadEstantes').val());
           result = result.replace("codigoProducto",$('#serial').val());  
           result = result.replace("fechaConstruccion",$('#fechaProducto').val());        
-
 
           plantilla2 += result;
         }

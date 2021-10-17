@@ -75,6 +75,15 @@ class ControladorFormatoContrato
         $respuesta = ModeloFormatoContrato::mdlConsultarTiendaEnBd($tabla,$datos);
         return $respuesta;
     }
+
+    static public function ctrlConsultarSelectsContrato($valorAnterior,$tablaSelect,$atributo)
+    {
+        $datos = array(
+             "valorAnterior"=>$valorAnterior,
+         );
+        $respuesta = ModeloFormatoContrato::mdlConsultarSelectsDeContrato($tablaSelect,$datos,$atributo);
+        return $respuesta;
+    }
  
 
 }

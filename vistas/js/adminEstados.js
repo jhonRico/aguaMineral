@@ -251,20 +251,15 @@ function eliminarEstados(id){
  		async:false,
  		success: function(respuesta)
  		{
- 			if(!respuesta.includes("ok"))
+ 			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
+ 			{
+			    mensajeError("Error al eliminar el estado ");
+ 			}else if(respuesta.includes("relacionado")){
+			   mensajeError('No se puede eliminar el Estado, se encuentra con municipios');
+			}else
  			{
  				Swal.fire({
- 					title: 'Error',
- 					text: 'Error al eliminar el estado',
- 					icon: 'error',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}); 
-
- 			}else
- 			{
- 				Swal.fire({
- 					title: 'Estado Eliminada',
+ 					title: 'Estado Eliminado',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -274,6 +269,16 @@ function eliminarEstados(id){
  		}                 
 
  	})
+ }
+  //----------------Funcion para mensaje de alerta de error
+ function mensajeError(mensaje){ 
+  	Swal.fire({
+ 		title: 'Error',
+ 		text: mensaje,
+ 		icon: 'error',
+ 		showCloseButton: true,
+ 		confirmButtonText:'Aceptar'
+ 	}); 
  }
 /*------------------------------------------Finaliza el Espacio de eliminar----------------------------------*/
 

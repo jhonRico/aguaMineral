@@ -21,9 +21,10 @@ require_once "conexion.php";
         $stmt->close();
         $stmt=null;
     }
-    static public function mdlConsultarTipoProducto($tabla)
+    static public function mdlConsultarTipoProducto($tabla,$datos)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY descripcion ASC");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY :parametro1 ASC");
+        $stmt->bindParam(":parametro1", $datos["parametro1"], PDO::PARAM_STR);
 
         $stmt -> execute();
         return  $stmt ->fetchAll();
@@ -64,8 +65,9 @@ require_once "conexion.php";
     //Productos
     static public function mdlRegistrarProducto($tabla,$tabla2,$datos)
     {
-        $stmt2 = Conexion::conectar()->prepare("SELECT * FROM serialproducto D INNER JOIN (SELECT * FROM producto A INNER JOIN (SELECT * FROM tipoproducto WHERE idTipoProducto = :tipoProducto) B ON A.TipoProducto_idTipoProducto = B.idTipoProducto WHERE A.capacidadProducto = :capacidad)C ON D.idSerialProducto = C.SerialProducto_idSerialProducto WHERE D.numeroSerial = :seria");
+        $stmt2 = Conexion::conectar()->prepare("SELECT * FROM serialproducto s INNER JOIN producto p ON s.idSerialProducto = p.SerialProducto_idSerialProducto INNER JOIN tipoproducto t ON p.TipoProducto_idTipoProducto = t.idTipoProducto INNER JOIN producto_has_sucursal ps ON p.idProducto = ps.Producto_idProducto  WHERE t.idTipoProducto = :tipoProducto AND p.capacidadProducto = :capacidad AND s.numeroSerial = :seria AND ps.Sucursal_idSucursal = :sucursal");
 
+        $stmt2->bindParam(":sucursal", $datos["sucursal"], PDO::PARAM_INT);
         $stmt2->bindParam(":tipoProducto", $datos["tipoProducto"], PDO::PARAM_INT);
         $stmt2->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
         $stmt2->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
@@ -91,7 +93,6 @@ require_once "conexion.php";
             }
         }else
         {   
-            
             $pdo = Conexion::conectar();
             $stmt = $pdo->prepare("INSERT INTO $tabla(numeroSerial, fechaCreacion, estado)
             VALUES  (:seria, :fecha, :estado)");
@@ -115,10 +116,19 @@ require_once "conexion.php";
 
                     if($stmt->execute())
                     {
-                        return "ok";
-                    }else
-                    {
-                        return "error";
+                        $lastInsertId = $pdo->lastInsertId();
+
+                        $stmt = $pdo->prepare("INSERT INTO producto_has_sucursal(Producto_idProducto, Sucursal_idSucursal)
+                        VALUES  ('$lastInsertId',:sucursal)");
+                        $stmt->bindParam(":sucursal", $datos["sucursal"], PDO::PARAM_INT);
+
+                        if ($stmt->execute()) 
+                        {
+                            return "ok";
+                        }else
+                        {
+                            return "error";
+                        }
                     }
             }
         }

@@ -287,8 +287,12 @@ function registrarProductoEnBd()
 	var serial = $('#serial').val();
 	var capacidad = $('#capacidad').val();
 	var cantidad = $('#cantidad').val();
+	var sucursal = $("#sucursal").val();
+	var result = sucursal.split("-");
 	var datos = new FormData();
+	var sucursalFinal = result[0];
 
+    datos.append("sucursal", sucursalFinal);
 	datos.append("tipoProducto", tipoProducto);
 	datos.append("serial", serial);
 	datos.append("capacidad", capacidad);

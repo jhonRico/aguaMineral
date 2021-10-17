@@ -74,15 +74,6 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
     </div>
 <div class="row">
      <div class="col-md-6">
-      <a href="#" class="link-dark">
-        <div class="border m-3 p-3 bg-light div-admin rounded">
-          <i class="fas fa-road iconosAdmin"></i>
-          <h3 class="titulosAdmin mb-0">Sector</h3>
-          <p class="mb-5 mt-0">Administración de Paises</p>
-        </div>
-      </a>
-     </div>
-     <div class="col-md-6">
       <a href="<?php echo $url2?>administracionZonas" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="far fa-compass iconosAdmin"></i>

@@ -1,6 +1,6 @@
 <?php  
-  $tabla = "tipoproducto";
-  $consultar = ControladorRegistroAdmin::ctrlConsultarTipoProducto($tabla);
+  $consultar = ControladorRegistroAdmin::ctrlConsultarTipoProducto("tipoproducto","descripcion");
+  $consultarSucurales = ControladorRegistroAdmin::ctrlConsultarTipoProducto("sucursal","nombreSucursal");
 ?>
 <input type="hidden" id="oculto" value="<?php echo $consultar;?>">
 <div class="container mt-3 fs-5 ms-5">
@@ -56,6 +56,12 @@
                                       
                                       <div class="modal-body mx-3">
                                              <div class="modal-body">  
+                                                    <label for="" class="form-label mb-3"><b>Sucursales</b></label>                   
+                                                   <select class="form-select mb-3" id="sucursal">
+                                                    <?php foreach ($consultarSucurales as $key):?>
+                                                     <option value="<?php echo $key['idSucursal']."-". $key['nombreSucursal'];?>"><?php echo $key['nombreSucursal'];?></option>
+                                                    <?php endforeach ?>
+                                                   </select>
                                                    <label for="" class="form-label mb-3"><b>Tipo Producto</b></label>                     
                                                    <select class="form-select" id="tipoProducto">
                                                     <?php foreach ($consultar as $key):?>

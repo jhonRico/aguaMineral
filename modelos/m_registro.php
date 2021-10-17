@@ -7,7 +7,17 @@ require_once "conexion.php";
 
     static public function mdlRegistroUsuario($tabla,$tabla2,$datos){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona,direccionPersona, cedulaPersona, telefonoPersona)
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla2 WHERE correoUsuario = :correo");
+        $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
+        $stmt->execute();
+        $resultado = $stmt ->fetch(); 
+
+        if ($resultado != false) 
+        {
+            return "ya existe";
+        }else
+        {
+            $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona,direccionPersona, cedulaPersona, telefonoPersona)
                  VALUES  (:tipoUsuario, :sector, :nombre, :apellido, :direccion, :cedula, :telefono)");
 
                 $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
@@ -28,7 +38,7 @@ require_once "conexion.php";
                         $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
                         $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
                         $stmt->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
-                        $stmt->bindParam(":vacio", $datos["vacio"], PDO::PARAM_INT);
+                        $stmt->bindParam(":vacio", $datos["vacio"], PDO::PARAM_STR);
                    
                         if($stmt->execute())
                         {
@@ -38,6 +48,9 @@ require_once "conexion.php";
                             return "error";
                         }
                 } 
+        }
+
+        
                    
         
       /*  $stmt2->close();

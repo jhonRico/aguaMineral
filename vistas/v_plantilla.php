@@ -72,7 +72,7 @@
                        $rutas[0] == "adminPais" || $rutas[0] == "adminZonas" || $rutas[0] == "adminContrato" || $rutas[0] == "adminProductos" ||
                        $rutas[0] == "adminPersonas" || $rutas[0] == "zonas" || $rutas[0] == "norte" || $rutas[0] == "sur" || $rutas[0] == "este" || $rutas[0] == "oeste" || $rutas[0] == "centro"
                        || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "administracionZonas" || $rutas[0] == "adminEstado" || $rutas[0] == "registro" || $rutas[0] == "contratoPrincipal" || $rutas[0] == "administracionTipoProducto"
-                       || $rutas[0] == "administracionProductos" || $rutas[0] == "administracionMunicipio" || $rutas[0] == "adminCiudad")  
+                       || $rutas[0] == "administracionProductos" || $rutas[0] == "administracionMunicipio" || $rutas[0] == "adminCiudad" || $rutas[0] == "adminSucursal")  
                 {
                     include "modulos/cabezaLogueado.php";
                     include "modulos/plantillaSlideBar.php";

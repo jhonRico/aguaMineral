@@ -9,7 +9,7 @@ $(document).ready(function(){
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllCiudades(){
 
-		
+
 	var datos = new FormData();
 	datos.append("parametroNeutro", "nulo");
 	let plantilla2 = " ";
@@ -23,7 +23,7 @@ function consultarAllCiudades(){
 		processData: false,
 		success: function(respuesta3){
 			
-			 if(respuesta3.length >10 ){
+			if(respuesta3.length >10 ){
 
 				respuesta3 =respuesta3.replace("[","");
 				respuesta3 =respuesta3.replace("]","");
@@ -48,7 +48,7 @@ function consultarAllCiudades(){
 				$('#verCiudades').show();
 			}else{
 				$("#verCiudades").hide(); 
-					
+
 			}
 			
 
@@ -77,48 +77,48 @@ $(function(){
 
 		var descripcion = $("#nameCiudad").val();
 		var idMunicipioValue = $("#municipioAddSelect").val();
-			if (descripcion == "") 
- 			{
- 				Swal.fire({
- 					position: 'top-end',
- 					icon: 'error',
- 					toast: true,
- 					title: 'El campo esta vacio',
- 					showConfirmButton: false,
- 					timerProgressBar: true,
- 					timer: 1500
- 				})
- 				return false;
- 			}
- 			if (!expresiones.nombre.test(descripcion)) 
- 			{
- 				Swal.fire({
- 					position: 'top-end',
- 					icon: 'error',
- 					toast: true,
- 					title: 'Ingrese un valor valido',
- 					showConfirmButton: false,
- 					timerProgressBar: true,
- 					timer: 1500
- 				})
- 				return false;
- 			}
- 			
-			validarRegistroCiudad();
+		if (descripcion == "") 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'El campo esta vacio',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
+		if (!expresiones.nombre.test(descripcion)) 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'Ingrese un valor valido',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
 
-			return true;
-		})
+		validarRegistroCiudad();
+
+		return true;
 	})
+})
 
 function validarRegistroCiudad()
 {
-		var ciudad = $("#nameCiudad").val();
-		var idMunicipioValue = $("#municipioAddSelect").val();
+	var ciudad = $("#nameCiudad").val();
+	var idMunicipioValue = $("#municipioAddSelect").val();
 
 	var ejecutar = validarRegistroExistenteCiudad(ciudad,idMunicipioValue);
 	if(ejecutar == "No existe"){
-	     registrarCampoCiudad(ciudad,idMunicipioValue);
-		 consultarAllCiudades();	
+		registrarCampoCiudad(ciudad,idMunicipioValue);
+		consultarAllCiudades();	
 	}
 
 }
@@ -176,7 +176,7 @@ function registrarCampoCiudad(valor,idMunicipioValue)
 
 function validarRegistroExistenteCiudad(ciudad,idMunicipioValue)
 {
-    
+
 	var datos = new FormData();
 	var returnValue = "Existe";
 	datos.append("ciudad", ciudad);
@@ -194,10 +194,10 @@ function validarRegistroExistenteCiudad(ciudad,idMunicipioValue)
 		{
 			if(respuesta.includes("false"))
 			{
-			   returnValue =  "No existe";
+				returnValue =  "No existe";
 			}else
 			{
-			  
+
 				Swal.fire({
 					position: 'top-end',
 					icon: 'error',
@@ -237,45 +237,45 @@ function eliminarCiudad(id){
 	})
 }
 //------------------Funcion que elimina un tipo de usuario-----
- function eliminarCiudadFinal(id)
- {
- 	var datos = new FormData();
+function eliminarCiudadFinal(id)
+{
+	var datos = new FormData();
 
- 	datos.append("idCiudadDelete", id);
- 	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
- 		method:"POST",
- 		data: datos, 
- 		cache: false,
- 		contentType: false,
- 		processData: false,
- 		async:false,
- 		success: function(respuesta)
- 		{
- 			if(!respuesta.includes("ok"))
- 			{
- 				Swal.fire({
- 					title: 'Error',
- 					text: 'Error al eliminar la ciudad',
- 					icon: 'error',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}); 
+	datos.append("idCiudadDelete", id);
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		async:false,
+		success: function(respuesta)
+		{
+			if(!respuesta.includes("ok"))
+			{
+				Swal.fire({
+					title: 'Error',
+					text: 'Error al eliminar la ciudad',
+					icon: 'error',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				}); 
 
- 			}else
- 			{
- 				Swal.fire({
- 					title: 'Ciudad Eliminada',
- 					icon: 'success',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				});
- 			}
+			}else
+			{
+				Swal.fire({
+					title: 'Ciudad Eliminada',
+					icon: 'success',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				});
+			}
 
- 		}                 
+		}                 
 
- 	})
- }
+	})
+}
 /*------------------------------------------Finaliza el Espacio de eliminar----------------------------------*/
 
 
@@ -292,92 +292,92 @@ function mostrarModalEditCiudad(idCiudadUpdate, nombreCiudadUpdate, idMunicipioU
 	document.getElementById("MunicipioSelectEdit").value = idMunicipioUpdate;
 	
 	$("#editarCiudadValue").click(function(){
-	
-	        var existeInTable = validarRegistroExistenteCiudad($("#nameCiudadIdEdit").val(),$("#MunicipioSelectEdit").val());
-			
-			if(existeInTable == "No existe"){
-			    modificarCiudadFinal(idCiudadUpdate, $("#nameCiudadIdEdit").val(), $("#MunicipioSelectEdit").val());
-			}
-		    
+
+		var existeInTable = validarRegistroExistenteCiudad($("#nameCiudadIdEdit").val(),$("#MunicipioSelectEdit").val());
+
+		if(existeInTable == "No existe"){
+			modificarCiudadFinal(idCiudadUpdate, $("#nameCiudadIdEdit").val(), $("#MunicipioSelectEdit").val());
+		}
+
 	})
-	 
+
 }
 
 
 function modificarCiudadFinal(id, descripcion, idPais)
- {
-		
-  		if (descripcion == "") 
- 			{
- 				Swal.fire({
- 					position: 'top-end',
- 					icon: 'error',
- 					toast: true,
- 					title: 'El campo esta vacio',
- 					showConfirmButton: false,
- 					timerProgressBar: true,
- 					timer: 1500
- 				})
- 				return false;
- 			}
- 			if (!expresiones.nombre.test(descripcion)) 
- 			{
- 				Swal.fire({
- 					position: 'top-end',
- 					icon: 'error',
- 					toast: true,
- 					title: 'Ingrese una zona válida',
- 					showConfirmButton: false,
- 					timerProgressBar: true,
- 					timer: 1500
- 				})
- 				return false;
- 			}
+{
 
- 			
-			modificarCiudadValue(id,descripcion,idPais);
-			consultarAllCiudades(); 			
+	if (descripcion == "") 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'El campo esta vacio',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
+	if (!expresiones.nombre.test(descripcion)) 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'Ingrese una zona válida',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
 
- 			return true;
- 	}
+
+	modificarCiudadValue(id,descripcion,idPais);
+	consultarAllCiudades(); 			
+
+	return true;
+}
 
 
 function modificarCiudadValue(id,descripcion,idPais)
- {
- 	var datos = new FormData();
+{
+	var datos = new FormData();
 	datos.append("idCiudadModificado", id);
- 	datos.append("descripcion", descripcion);
+	datos.append("descripcion", descripcion);
 	datos.append("idMunicipioUpdated", idPais);
 
 
- 	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
- 		method:"POST",
- 		data: datos, 
- 		cache: false,
- 		contentType: false,
- 		processData: false,
- 		async:false,
- 		success: function(respuesta)
- 		{  		    
- 			if(!respuesta.includes("ok"))
- 			{
- 				Swal.fire({
- 					title: 'Error',
- 					text: 'Error al modificar la ciudad ',
- 					icon: 'error',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}); 
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		async:false,
+		success: function(respuesta)
+		{  		    
+			if(!respuesta.includes("ok"))
+			{
+				Swal.fire({
+					title: 'Error',
+					text: 'Error al modificar la ciudad ',
+					icon: 'error',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				}); 
 
- 			}else
- 			{
- 				Swal.fire({
- 					title: 'Ciudad Modificado',
- 					icon: 'success',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}).then((result) => 
+			}else
+			{
+				Swal.fire({
+					title: 'Ciudad Modificado',
+					icon: 'success',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				}).then((result) => 
 				{
 					if (result.isConfirmed)
 					{
@@ -386,11 +386,83 @@ function modificarCiudadValue(id,descripcion,idPais)
 
 					}
 				})
- 			}
+			}
 
- 		}                 
+		}                 
 
- 	})
- }
+	})
+}
 
 /*------------------------------------------Finaliza el Espacio de Editar tipo de usuario----------------------------------*/
+
+
+/*----Empieza el espacio de Registrar Sur------*/
+
+$(document).ready(function() {
+	$(".mostrarModalAddSucursal").click(function() 
+	{
+		mostrarModalRegistrarSucursal();
+	});
+	$(".cerrar").click(function() 
+	{
+		cerrarModalRegistrarSucursal();
+	});
+	$("#agregarSucursalBtn").click(function() 
+	{
+		validarRegistroSucursal();
+	});
+});
+function mostrarModalRegistrarSucursal()
+{
+	$("#moddAddSucursal").modal("show");
+}
+function cerrarModalRegistrarSucursal()
+{
+	$("#moddAddSucursal").modal("hide");
+}
+
+function validarRegistroSucursal()
+{
+	var sucursal = $("#sucursal").val();
+	var direccion = $("#direccion").val();
+	if (sucursal == "") 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'El campo esta vacio',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
+	if (!expresiones.nombre.test(sucursal)) 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'Ingrese una sucursal valida',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
+	if (direccion == "") 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'El campo esta vacio',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
+	alert("ok");
+}

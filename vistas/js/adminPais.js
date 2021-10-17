@@ -168,18 +168,11 @@ function registrarPais(valor)
  		async:false,
  		success: function(respuesta)
  		{
- 			if(!respuesta.inclusde("ok"))
+ 			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
  			{
- 				/*Swal.fire({
- 					title: 'Error',
- 					text: 'Error al eliminar pais',
- 					icon: 'error',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}); */
 				mensajeError('Error al eliminar pais');
 
- 			}else if(respuesta.inclusde("relacionado")){
+ 			}else if(respuesta.includes("relacionado")){
 			   mensajeError('No se puede eliminar el pais, se encuentra con estados asociados');
 			}else
  			{
@@ -196,7 +189,7 @@ function registrarPais(valor)
  	})
  }
  //----------------Funcion para mensaje de alerta de error
- function mensajeError(mensaje){
+ function mensajeError(mensaje){ 
   	Swal.fire({
  		title: 'Error',
  		text: mensaje,

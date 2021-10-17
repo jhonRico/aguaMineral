@@ -168,7 +168,7 @@ require_once "conexion.php";
            $stmtEstado-> execute();
            $existeEstado = $stmtEstado ->fetchAll();
 
-           if($existeEstado!=false){
+           if($existeEstado==false){
                     $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idPais = :idPais");        
                     $stmt->bindParam(":idPais", $datos["idPais"], PDO::PARAM_INT);
                     if($stmt->execute())
@@ -182,7 +182,7 @@ require_once "conexion.php";
                     $stmt=null;
 
            }else{
-                
+                return "relacionado";
 		   }
            $stmtEstado->close();
     }

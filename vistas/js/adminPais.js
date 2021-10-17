@@ -168,17 +168,20 @@ function registrarPais(valor)
  		async:false,
  		success: function(respuesta)
  		{
- 			if(!respuesta.includes("ok"))
+ 			if(!respuesta.inclusde("ok"))
  			{
- 				Swal.fire({
+ 				/*Swal.fire({
  					title: 'Error',
  					text: 'Error al eliminar pais',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
- 				}); 
+ 				}); */
+				mensajeError('Error al eliminar pais');
 
- 			}else
+ 			}else if(respuesta.inclusde("relacionado")){
+			   mensajeError('No se puede eliminar el pais, se encuentra con estados asociados');
+			}else
  			{
  				Swal.fire({
  					title: 'Pais Eliminado',
@@ -192,7 +195,16 @@ function registrarPais(valor)
 
  	})
  }
-
+ //----------------Funcion para mensaje de alerta de error
+ function mensajeError(mensaje){
+  	Swal.fire({
+ 		title: 'Error',
+ 		text: mensaje,
+ 		icon: 'error',
+ 		showCloseButton: true,
+ 		confirmButtonText:'Aceptar'
+ 	}); 
+ }
  /*Funcion de Ajax que modifica el Pais*/
 
  function modificarPais(id,descripcion)

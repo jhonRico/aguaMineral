@@ -1,11 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\modelos",
     "\\vistas",
-    "\\vistas\\modulos",
-    "\\vistas\\webfonts"
+    "\\vistas\\modulos"
   ],
-  "SelectedNode": "\\vistas\\modulos\\contratoPrincipal.php",
+  "SelectedNode": "\\vistas\\modulos\\adminZonas.php",
   "PreviewInSolutionExplorer": false
 }

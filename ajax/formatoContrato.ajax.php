@@ -12,9 +12,9 @@ class   AjaxFormatoContrato
         echo  json_encode ($respuesta);
     }
 
-    public function ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones)
+    public function ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon)
     {
-        $respuesta = ControladorFormatoContrato::ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones);
+        $respuesta = ControladorFormatoContrato::ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon);
         echo  json_encode ($respuesta);
     }
 
@@ -59,7 +59,7 @@ if(isset($_POST["nombre"]))
 
     $tabla = "sector";
     $tabla2 = "persona";
-    $tabla3 = "tienda";
+    $tabla3 = "comercios";
     $nombre = $_POST['nombre'];
     $idTipoUsuario = $_POST['idTipoUsuario'];
     $apellido = $_POST['apellido'];
@@ -81,9 +81,12 @@ if(isset($_POST["nombre"]))
     $cantidadEstantes = $_POST['cantidadEstantes'];
     $idTipoContrato = $_POST['idTipoContrato'];
     $cantidadBotellones = $_POST['cantidadBotellones'];
+    $sucursal = $_POST['sucursal'];
+    $capacidadEstantes = $_POST['capacidadEstantes'];
+    $capacidadBotellon = $_POST['capacidadBotellon'];
 
     $allStates = new AjaxFormatoContrato();
-    $allStates->ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones);
+    $allStates->ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon);
 }
 
 if(isset($_POST["parametro"]))
@@ -104,7 +107,7 @@ if(isset($_POST["nombreCliente"]))
 }
 if(isset($_POST["idCliente"]))
 {  
-    $tabla = "tienda";
+    $tabla = "comercios";
     $idCliente = $_POST['idCliente'];
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxConsultarTiendaEnBd($tabla,$idCliente);

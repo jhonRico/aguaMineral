@@ -18,7 +18,7 @@ class ModeloFormatoContrato
         $stmt -> execute();
         return $stmt->fetchAll();
     }
-    static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$fecha)
+    static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$fecha)
     {       
      $stmt11 =  Conexion::conectar()->prepare("SELECT * FROM tipocontrato WHERE nombre  ='$idTipoContrato'");
      $stmt11 -> execute();
@@ -34,68 +34,64 @@ class ModeloFormatoContrato
 
         $stmt22 -> execute();
         $prueba = $stmt22->fetch();
-        $idPersona = $prueba['idPersona'];
-
+        
         if ($prueba != false) 
         {
-            $stmt = Conexion::conectar()->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoDeContrato', '$idPersona', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");      
+            $idPersona = $prueba['idPersona'];
+            $pdo = Conexion::conectar();
+            $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
+               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$idPersona', '$cantidadEstantes', '$fecha' , '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");      
 
             if($stmt->execute())
             {
                $lastInsertId = $pdo->lastInsertId();
-               $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto p ON c.idContrato  = p.TipoContrato_idTipoContrato INNER JOIN tipoproducto t ON
-                P."); 
+               $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto p ON c.idContrato  = p.Contrato_idContrato INNER JOIN tipoproducto t ON p.TipoProducto_idTipoProducto = t.idTipoProducto"); 
                $arrayProducto = $stmt->fetch();
                if($stmt->execute())
                {
-
-               }
-           }else
-           {
-            return"Error";
-        }
-    }
-}else
-{
-
-   $pdo = Conexion::conectar();
-   $stmt = $pdo->prepare("INSERT INTO $tabla(Zonas_idZonas, Ciudad_idCiudad, nombreSector)
-    VALUES  ('$zonaComercio', '$ciudadCliente', '$sectorComercio')");
-
-   if($stmt->execute())
-   {
-                            //este metodo permite obtener el ultimo id ingresado en la tabla qeu se acaba de hacer un incer.
-    $lastInsertId = $pdo->lastInsertId();
-
-    $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
-        VALUES  ('$idTipoUsuario','$lastInsertId','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
-
-    if ($stmt->execute()) 
-    {
-        $lastInsertId = $pdo->lastInsertId();
-
-        $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
-            VALUES  ('$lastInsertId', '$sectorComercio', '$comercio', '$direccionComercio', '$telefono')");
-        if($stmt->execute())
-        {
-
-           $stmt = $pdo->prepare("INSERT INTO contrato (TipoContrato_idTipoContrato,
-               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2) VALUES ('$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones')");      
-
-           if($stmt->execute())
-           {
-            return "ok";
+                    return "true";
+               }else
+                {
+                    return"error";
+                }
+            }
         }else
         {
-            return"Error";
+
+            $pdo = Conexion::conectar();
+            $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
+            VALUES  ('$zonaComercio','$sectorComercio')");
+
+            if($stmt->execute())
+            {
+                                        
+                $lastInsertId = $pdo->lastInsertId();
+
+                $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
+                    VALUES  ('$idTipoUsuario','$lastInsertId','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
+
+                if ($stmt->execute()) 
+                {
+                    $lastInsertId = $pdo->lastInsertId();
+
+                    $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
+                        VALUES  ('$lastInsertId', '$sectorComercio', '$comercio', '$direccionComercio', '$telefono')");
+                    if($stmt->execute())
+                    {
+                           $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
+                               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");
+                       if($stmt->execute())
+                       {
+                            return "ok";
+                        }else
+                        {
+                            return "error";
+                        }
+                    }
+                }
+            }
         }
     }
-}
-}
-
-}
-
 }
 
 

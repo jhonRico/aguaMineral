@@ -2,14 +2,6 @@
 $(document).ready(function() {
   $('.contratoEstante').hide();
   rutaActual = window.location.toString();
-  if(rutaActual.includes("contratoPrincipal")){       
-    window.onbeforeunload = function() 
-    {
-      return "Seguro que quieres recargar";
-    }
-  }
-  
-
 });
 
 //mostrar formulario dependiendo del parametro
@@ -22,10 +14,18 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#menuCajas').hide();
     $('#TituloPrincipalContrato').text('Crear contrato botellon');
     $('#cantidadBotellones').hide();
-    $('#capacidad').hide();
+    $('#capacidadEstantes').hide();
     $('#labelDescripcion').hide();
     $('#labelCantidadEstantes').text('Cantidad de botellones');
     $('#inputCity').attr('placeholder', 'Por favor ingrese la cantidad de botellones');
+    $("#labelCapacidadBotellon").hide();
+    $("#capacidadBotellon").hide();
+    var input =  `
+    <label for="inputCity" class="mt-4"">Capacidad de Botellones</label>
+    <input type="number" min="1" class="form-control mt-3" id="capacidadBotellon" placeholder="Capacidad de botellones">
+    `;
+    $('#capacidad').html(input); 
+    $('#capacidad').show();
     $( ".boton1" ).click(function() {
      validarCampos(parametro,idTipoUsuario);
    });
@@ -49,6 +49,8 @@ function mostrarContrato(parametro,idTipoUsuario){
 
   }else
   {
+    $("#labelCapacidadBotellon").hide();
+    $("#capacidadBotellon").hide();
     $('#cajasContrato').hide();
     $('#titulo').hide();
     $('#menuCajas').hide();
@@ -65,12 +67,18 @@ $('#estadoCliente').click(function() {
       tabla = "municipio";
       llenarSelect(estado,selector,tabla,"Estado_idEstado","idMunicipio","nombreMunicipio");
 });
+$('#ciudadCliente').click(function() {
+      estado = $('#ciudadCliente').val();
+      selector = "zonaCliente";
+      tabla = "parroquia";
+      llenarSelect(estado,selector,tabla,"Ciudad_idCiudad","idParroquia","nombreParroquia");
+});
 
 $('#municipioCliente').click(function() {
    municipio = $('#municipioCliente').val();
       selector = "ciudadCliente";
       tabla = "ciudad";
-      llenarSelect(municipio,selector,tabla,"Municipio_idMunicipio ","idCiudad ","nombreCiudad");
+      llenarSelect(municipio,selector,tabla,"Municipio_idMunicipio","idCiudad","nombreCiudad");
 });
 
 $('#estadoComercio').click(function() {
@@ -84,8 +92,15 @@ $('#municipioComercio').click(function() {
    municipio = $('#municipioComercio').val();
       selector = "ciudadComercio";
       tabla = "ciudad";
-      llenarSelect(municipio,selector,tabla,"Municipio_idMunicipio ","idCiudad ","nombreCiudad");
+      llenarSelect(municipio,selector,tabla,"Municipio_idMunicipio","idCiudad","nombreCiudad");
 });
+$('#ciudadComercio').click(function() {
+      estado = $('#ciudadComercio').val();
+      selector = "zonaComercio";
+      tabla = "parroquia";
+      llenarSelect(estado,selector,tabla,"Ciudad_idCiudad","idParroquia","nombreParroquia");
+});
+
 function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro2)
 {
   var datos = new FormData();
@@ -170,7 +185,7 @@ $("#cedulaCliente").keyup(function(){
 
 function validarCampos(parametro,idTipoUsuario)
 {
-  var nombre = $('#nombreCliente').val();
+ /* var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
   var direccion = $('#direccionCliente').val();
@@ -413,7 +428,7 @@ function validarCampos(parametro,idTipoUsuario)
       timer: 1500
     })        
      return false;
-    }
+    }*/
 
     consultarProductosDisponibles(parametro,idTipoUsuario);
 
@@ -522,8 +537,7 @@ function consultarCamposDeTienda(id)
         $("#nobreComercio").val(res2.nombreTienda);
         $('#direccionComercio').val(res2.direccionTienda);
         $('#ciudadComercio').val(res2.telefonoTienda);
-        $('#telefonoComercio').val(res2.nombreSector);
-        $('#telefonoComercio').val(res2.telefonoTienda);
+        $('#sectorComercio').val(res2.nombreSector);
         $('#telefonoComercio').val(res2.telefonoTienda);
       }
     }
@@ -627,8 +641,8 @@ function consultarFormatoContrato(parametro)
           result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
           result = result.replace("cedulaCliente",$('#cedulaCliente').val());
           result = result.replace("nombreComercio",$('#nobreComercio').val());
-          result = result.replace("MunicipioCliente",$('#municipioComercio').val());
           result = result.replace("municipioCliente",$('#municipioComercio').val());
+          result = result.replace("municipioComercio",$('#municipioComercio').val());
           result = result.replace("telefonoComercio",$('#telefonoComercio').val());
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#cantidadEstantes').val());
@@ -646,8 +660,6 @@ function consultarFormatoContrato(parametro)
     {
       $("#cuerpoContrato").hide();     
     }
-
-
   }
 })
 }
@@ -657,6 +669,7 @@ function registrarPersonas(parametro,idTipoUsuario)
 {
 
   //Guardando valores en variables
+  var sucursal = $("#sucursal").val();
   var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
@@ -676,6 +689,9 @@ function registrarPersonas(parametro,idTipoUsuario)
   var sectorComercio = $('#sectorComercio').val();
   var cantidadEstantes = $('#cantidadEstantes').val();
   var cantidadBotellones = $('#cantidadBotellones').val();
+  var capacidadEstantes = $('#capacidadEstantes').val();
+  var capacidadBotellon = $('#capacidadBotellon').val();
+
 
   var datos = new FormData();
 
@@ -702,7 +718,9 @@ function registrarPersonas(parametro,idTipoUsuario)
   datos.append("direccionComercio", direccionComercio);
   datos.append("cantidadEstantes", cantidadEstantes);
   datos.append("cantidadBotellones", cantidadBotellones);
-
+  datos.append("sucursal", sucursal);
+  datos.append("capacidadEstantes", capacidadEstantes);
+  datos.append("capacidadBotellon", capacidadBotellon);
 
 //Datos de contrato
 
@@ -719,6 +737,7 @@ function registrarPersonas(parametro,idTipoUsuario)
     async:false,
     success: function(respuesta)
     {
+      alert(respuesta);
       if(respuesta.includes("error"))
       {
         Swal.fire({

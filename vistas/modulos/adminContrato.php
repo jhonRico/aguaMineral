@@ -23,7 +23,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
     <div class="row">
      <div class="col">
-      <a href="#" class="link-dark">
+      <a href="<?php echo $url2;?>adminFormatos" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-file-signature iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Formato</h3>

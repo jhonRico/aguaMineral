@@ -26,7 +26,7 @@
             <div class="me-5">
               <div class="me-5">
                 <button class="mb-2 ms-0 mt-2 btn btn-primary me-4 text-white mostrarModalAddSucursal" id="" type="button" dataToggle="modal">Agregar</button>  
-                <div id="aqui"></div>               
+                        
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@
 <div class="bg-light ms-5">
   <div class="ms-5">
     <div class=" w-100 rounded ms-5">
-       <div class="text-dark m-3 p-2 mb-1 rounded ms-5" id="verMunicipios"></div>
+       <div class="text-dark m-3 p-2 mb-1 rounded ms-5" id="verSucursal"></div>
     </div>
   </div>
 </div>  
@@ -64,9 +64,9 @@
                                                     <?php endforeach ?>
                                                   </select>
                                                    <label for="form-label" class="mt-3 mb-3">Sucursal</label>
-                                                   <input   type="text" class="form-control" id="sucursal" name ="" placeholder="Por favor ingrese una Sucursal" required>  
+                                                   <input   type="text" class="form-control" id="sucursalAdd" name ="" placeholder="Por favor ingrese una Sucursal" required>  
                                                    <label for="form-label" class="mt-3 mb-3">Dirección</label>
-                                                   <input   type="text" class="form-control" id="direccion" name ="" placeholder="Por favor ingrese una direccion" required>
+                                                   <input   type="text" class="form-control" id="direccionAdd" name ="" placeholder="Por favor ingrese una direccion" required>
                                              </div>
                                       </div>
 

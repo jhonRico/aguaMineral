@@ -124,5 +124,11 @@ class ControladorRegistroAdminGeneral
         return $respuesta;
     }
 
+    static public function ctrlConsultarParametros(){
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarParametros();
+        return $respuesta;
+	}
+
+
    } 
 ?>

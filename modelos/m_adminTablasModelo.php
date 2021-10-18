@@ -231,5 +231,23 @@ require_once "conexion.php";
 
     }
 
+    static public function mdlConsultarParametros(){
+      $datos = array(
+            array('NombreCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('MunicipioCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('cedulaCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('nombreComercio', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('direccionComercio', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('telefonoComercio', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('municipioCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('cantidadEstante', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('codigoProducto', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('fechaConstruccion', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('fechaConstruccion', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+
+        );
+         return  $datos;
+	}
+
  }
 ?>

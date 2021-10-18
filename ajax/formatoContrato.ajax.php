@@ -35,6 +35,14 @@ class   AjaxFormatoContrato
         $respuesta = ControladorFormatoContrato::ctrlConsultarTiendaEnBd($tabla,$idCliente);
         echo  json_encode ($respuesta);
     }
+
+    //Consultar Selects
+
+    public function ajaxConsultarSelectsContrato($valorAnterior,$tablaSelect,$atributo)
+    {
+        $respuesta = ControladorFormatoContrato::ctrlConsultarSelectsContrato($valorAnterior,$tablaSelect,$atributo);
+        echo  json_encode ($respuesta);
+    }
 }
 
 
@@ -101,5 +109,15 @@ if(isset($_POST["idCliente"]))
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxConsultarTiendaEnBd($tabla,$idCliente);
 }
+
+if(isset($_POST["valorAnterior"]))
+{  
+    $valorAnterior = $_POST["valorAnterior"];
+    $tablaSelect = $_POST["tablaSelect"];
+    $atributo = $_POST["atributo"];
+    $allStates = new AjaxFormatoContrato();
+    $allStates->ajaxConsultarSelectsContrato($valorAnterior,$tablaSelect,$atributo);
+}
+
 
 ?>

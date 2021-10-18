@@ -276,7 +276,7 @@ function IniciarSesion()
                               position: 'top-end',
                               icon: 'error',
                               toast: true,
-                              title: 'Correo y/o contraseña incorrectos',
+                              title: 'Usuario y/o contraseña incorrectos',
                               showConfirmButton: false,
                               timerProgressBar: true,
                               timer: 1500

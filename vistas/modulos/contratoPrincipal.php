@@ -2,7 +2,11 @@
 $url2 = Ruta::ctrlRuta();  
 $tabla = "tipousuario";
 $resultadoConsultaIdTipoUsuario = ControladorFormatoContrato::ctrlConsultarIdTipoUsuario($tabla);
+$resultadoConsultarEstado = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("estado");
+$resultadoConsultarZonas = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("zonas");
 $tabla = "serialproducto";
+$resultadoConsultarTipoContrato = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("tipocontrato");
+$resultadoConsultarSucursales = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("sucursal");
 $resultadoConsultaSerial = ControladorFormatoContrato::ctrlConsultarSerial($tabla);
 $array = $resultadoConsultaSerial;
 ?>
@@ -27,11 +31,19 @@ $array = $resultadoConsultaSerial;
           </div>
 
           <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+              <label for="inputEmail4" class="mb-3">Sucursal</label>
+              <select name="" id="" class="form-select">
+                <?php foreach ($resultadoConsultarSucursales as $key): ?>  
+                <option value="<?php echo $key['idSucursal'];?>"><?php echo $key['nombreSucursal'];?></option>
+              <?php endforeach ?>  
+              </select>
+            </div>
+            <div class="form-group col-md-4">
               <label for="inputEmail4" class="mb-3">C&eacute;dula del cliente</label>
               <input type="text" class="form-control mb-3" id="cedulaCliente" placeholder="C&eacute;dula">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="inputEmail4">Nombre del cliente</label>
               <input type="text" class="form-control mt-3" id="nombreCliente" placeholder="Nombre">
             </div>
@@ -45,9 +57,9 @@ $array = $resultadoConsultaSerial;
             <div class="form-group col-md-6">
               <label for="inputAddress" class="mt-3">Estado del cliente</label>
               <select id="estadoCliente" class="form-select mt-3">
-                <option value="1">T&aacute;chira</option>
-                <option value="2">M&eacute;rida</option> 
-                <option value="3">Barinas</option>                                          
+              <?php foreach ($resultadoConsultarEstado as $key): ?>  
+                <option value="<?php echo $key['idEstado'];?>"><?php echo $key['nombreEstado'];?></option>
+              <?php endforeach ?>                   
               </select>
             </div>
           </div>
@@ -55,21 +67,20 @@ $array = $resultadoConsultaSerial;
           <div class="row">
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Municipio de residencia</label>
-              <select id="municipioCliente" class="form-select mt-3">
-                <option value="1">Cardenas</option>
-                <option value="2">San cristobal</option>                                        
+              <select id="municipioCliente" class="form-select mt-3">                      
               </select>
             </div>
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Ciudad de residencia</label>
               <select id="ciudadCliente" class="form-select mt-3">
-                <option value="1">San Cristobal</option>                                     
               </select>
             </div>
             <div class="form-group col-md-4">
               <label for="inputState" class="mt-3">Zona ciudad</label>
               <select id="zonaCliente" class="form-select mt-3">
-                <option value="1">Norte</option>                                     
+                <?php foreach ($resultadoConsultarZonas as $key): ?>  
+                <option value="<?php echo $key['idZonas'];?>"><?php echo $key['descripcion'];?></option>
+                <?php endforeach ?>                                     
               </select>
             </div>
           </div>
@@ -109,34 +120,28 @@ $array = $resultadoConsultaSerial;
             <div class="form-group col-md-6">
               <label for="" class="form-label mt-3" id="labelComercio">Estado del Comercio</label>
               <select id="estadoComercio" class="form-select mt-3">
-                <option value="1">T&aacute;chira</option>
-                <option value="2">M&eacute;rida</option> 
-                <option value="3">Barinas</option>                                          
+              <?php foreach ($resultadoConsultarEstado as $key): ?>  
+                <option value="<?php echo $key['idEstado'];?>"><?php echo $key['nombreEstado'];?></option>
+              <?php endforeach ?>                            
               </select>
             </div>
             <div class="form-group col-md-6">
               <label for="" class="form-label mt-3" id="labelMunicipioComercio">Municipio del Comercio</label>
-              <select id="municipioComercio" class="form-select mt-3">
-                <option value="1">San Cristóbal</option>
-                <option value="2">Cardenas</option> 
-                <option value="3">Bolívar</option>                                          
+              <select id="municipioComercio" class="form-select mt-3">                          
               </select>
             </div>   
           </div>  
           <div class="row">
             <div class="form-group col-md-9">
               <label for="inputState" class="mt-3" id="labelCiudadComercio">Ciudad del comercio</label>
-              <select id="ciudadComercio" class="form-select mt-3">
-                <option value="1">San Cristobal</option>                                     
-              </select>
+              <select id="ciudadComercio" class="form-select mt-3"></select>
             </div>
             <div class="form-group col-md-3">
               <label for="inputState" class="mt-3" id="labelZonaComercio">Zona del comercio</label>
               <select id="zonaComercio" class="form-select mt-3">
-                <option value="1">Centro</option>  
-                <option value="2">Sur</option>  
-                <option value="3">Este</option>  
-                <option value="4">Oeste</option>                                     
+                <?php foreach ($resultadoConsultarZonas as $key): ?>  
+                <option value="<?php echo $key['idZonas'];?>"><?php echo $key['descripcion'];?></option>
+                <?php endforeach ?>                            
               </select>
             </div>
           </div>    
@@ -193,33 +198,17 @@ $array = $resultadoConsultaSerial;
         <h1 class="mb-3 mt-3">Contratos</h1>
         <ul class="grid0">
           <div class="row">
+            <?php foreach ($resultadoConsultarTipoContrato as $key):?>
            <div class="col-md-4">
-            <a href="javascript:mostrarContrato('estantes',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
+            <a href="javascript:mostrarContrato('<?php echo $key['nombre'];?>',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">
                 <i class="fas fa-file-contract iconosAdmin"></i>
-                <h3 class="titulosAdmin2 mb-0">Estante</h3>
-                <p class="mb-5 mt-0">Contrato para estantes</p>  
+                <h3 class="titulosAdmin2 mb-0"><?php echo $key['nombre'];?></h3>
+                <p class="mb-5 mt-0">Contrato para <?php echo $key['nombre'];?></p>  
               </div>
             </a>
           </div>
-          <div class="col-md-4">
-            <a href="javascript:mostrarContrato('botellones',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
-              <div class="border m-3 p-3 bg-light div-admin rounded">
-                <i class="fas fa-file-contract iconosAdmin"></i>
-                <h3 class="titulosAdmin2 mb-0">Botellon</h3>
-                <p class="mb-5 mt-0">Contrato para botellones</p>  
-              </div>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="javascript:mostrarContrato('ambos',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
-              <div class="border m-3 p-3 bg-light div-admin rounded">
-                <i class="fas fa-file-contract iconosAdmin"></i>
-                <h3 class="titulosAdmin2 mb-0">Ambos</h3>
-                <p class="mb-5 mt-0">Contrato para ambos</p>  
-              </div>
-            </a>
-          </div>
+          <?php endforeach ?>
         </div>
       </ul>  
     </div>

@@ -2,6 +2,7 @@
   $consultar = ControladorRegistroAdmin::ctrlConsultarTipoProducto("tipoproducto","descripcion");
   $consultarSucurales = ControladorRegistroAdmin::ctrlConsultarTipoProducto("sucursal","nombreSucursal");
 ?>
+<body class="">
 <input type="hidden" id="oculto" value="<?php echo $consultar;?>">
 <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
@@ -13,13 +14,30 @@
     </div> 
 <div class="ms-5 me-5 mt-0 p-5 text-center">
   <div class="ms-5">
-    <h1 class="ms-5">Inventario de Productos</h1>
+    <h1 class="ms-5 mb-5">Inventario de Productos</h1>
+  </div>
+  <div class="row g-3 ms-3">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-4">
+          <label for="inputPassword6" class="col-form-label me-0 mt-5 btn btn-light p-2 rounded"><b>Seleccione Sucursal</b></label>
+        </div>
+        <div class="col-md-3">
+          <select name="" id="selectSucursales" class="form-select w-75 mt-5">
+            <?php foreach ($consultarSucurales as $key):?>
+            <option value="<?php echo $key['idSucursal'];?>"><?php echo $key['nombreSucursal'];?></option>
+          <?php endforeach ?>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <button class="col-md-2 mb-0 ms-5 mt-5 btn btn-primary me-0 text-white mostrarModal w-50" type="button" id="" dataToggle="modal">Agregar</button> 
+        </div>
   </div>
   <div class="ms-5 me-5 mt-0 p-5">
   <div class="ms-5">
-      <button class="mb-5 ms-5 mt-2 btn btn-primary me-0 text-white mostrarModal w-50" type="button" id="" dataToggle="modal">Agregar</button> 
+      
   </div>
-  <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5">
+  <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
   <thead class="cabezaTabla text-white">
     <tr>
       <th scope="col">Producto</th>
@@ -51,7 +69,7 @@
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
                                               <h5  id="staticBackdropLabel">Agregar Producto</h5>
-                                              <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrar text-white"></i></button></a>
+                                              <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrarModalProducto text-white"></i></button></a>
                                         </div>
                                       
                                       <div class="modal-body mx-3">
@@ -79,7 +97,7 @@
                                                     <label for="" class="col-form-label me-3"><b>Capacidad</b></label>
                                                   </div>
                                                   <div class="col-md-6">
-                                                    <input   type="number" class="form-control w-75" id="capacidad" name ="nameEstado" placeholder="Capacidad" required> 
+                                                    <input   type="number" min="1" class="form-control w-75" id="capacidad" name ="nameEstado" placeholder="Capacidad" required> 
                                                   </div>
                                                 </div>
                                              </div>
@@ -89,14 +107,14 @@
                                                     <label for="" class="col-form-label me-4"><b>Cantidad</b></label>
                                                   </div>
                                                   <div class="col-md-6">
-                                                   <input   type="number" class="form-control w-75" id="cantidad" name ="nameEstado" placeholder="Productos" required>  
+                                                   <input   type="number" min="1" class="form-control w-75" id="cantidad" name ="nameEstado" placeholder="Productos" required>  
                                                   </div>
                                                 </div>
                                              </div>
                                       </div>
                                        <div class="form-group">  
                                                <div class="modal-footer">         
-                                                     <button type="button" class="btn btn-secondary cerrar" style ="width:48%;">Cancelar</button>                                                                 
+                                                     <button type="button" class="btn btn-secondary cerrarModalProducto" style ="width:48%;">Cancelar</button>                                                                 
                                                      <a style ="width:48%;" id = "agregarProducto"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Agregar</span></a>
                                                 </div>
                                          </div>
@@ -111,7 +129,7 @@
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
                                               <h5  id="staticBackdropLabel"> Modificar Producto</h5>
-                                              <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrar text-white"></i></button></a>
+                                              <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrarModalProducto text-white"></i></button></a>
                                         </div>
                                       
                                       <div class="modal-body mx-3">
@@ -121,7 +139,7 @@
                                       </div>
                                        <div class="form-group">  
                                                <div class="modal-footer">         
-                                                     <button type="button" class="btn btn-secondary cerrar" style ="width:48%;">Cancelar</button>                                                                 
+                                                     <button type="button" class="btn btn-secondary cerrarModalProducto" style ="width:48%;">Cancelar</button>                                                                 
                                                      <a style ="width:48%;" id = "editarPais"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
                                                 </div>
                                          </div>
@@ -129,3 +147,4 @@
                   </div>   
         </div>
   </form>
+</body>

@@ -78,20 +78,37 @@ require_once "conexion.php";
             $idProducto = $prueba['idProducto'];
             $cantidadActual = $prueba['cantidadProductos'];
             $cantidadASumar = $datos["cantidad"];
+            $nombreTipoContrato = $prueba['nombre'];
+            $idTipoContrato = $prueba['idTipoContrato'];
             $resultado = $cantidadASumar + $cantidadActual;
 
             $stmt = Conexion::conectar()->prepare("UPDATE producto SET cantidadProductos = $resultado WHERE idProducto = $idProducto");
 
             if($stmt->execute())
             {
-                return "agregado";
+                $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,'$idTipoContrato','$idProducto',:seria,:capacidad)");
+                $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
+                $stmt->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
+                $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
+                $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+                if ($stmt->execute()) 
+                {
+                    return "agregado";                
+                }
             }else
             {
                 return "error";
             }
         }else
         {   
+            $idProducto = $prueba['idProducto'];
+            $cantidadActual = $prueba['cantidadProductos'];
+            $cantidadASumar = $datos["cantidad"];
+            $nombreTipoContrato = $prueba['nombre'];
+            $idTipoContrato = $prueba['idTipoContrato'];
+            $resultado = $cantidadASumar + $cantidadActual;
             $pdo = Conexion::conectar();
+
             $stmt = $pdo->prepare("INSERT INTO $tabla(numeroSerial, fechaCreacion, estado)
             VALUES  (:seria, :fecha, :estado)");
 
@@ -121,10 +138,18 @@ require_once "conexion.php";
 
                         if ($stmt->execute()) 
                         {
-                            return "ok";
-                        }else
-                        {
-                            return "error";
+                            $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,'$idTipoContrato','$idProducto',:seria,:capacidad)");
+                                $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
+                                $stmt->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
+                                $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
+                                $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+                                 if ($stmt->execute()) 
+                                {
+                                    return "ok";
+                                }else
+                                {
+                                    return "error";
+                                }
                         }
                     }
             }

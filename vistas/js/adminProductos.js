@@ -130,7 +130,7 @@ function consultarTipoProducto(tabla)
 					var res2 = JSON.parse(auxSplit2[i]);
 					var aux = "'"+res2.descripcion+"'";
 					plantilla2 +=`<div class="p-2">
-                    <h3 class="div-pais p-3 rounded">${res2.descripcion}<a href="javascript:mostrarModalEliminarProducto('${res2.idTipoProducto}','tipoproducto','idTipoProducto')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditTipoProducto('${res2.idTipoProducto}','${aux}');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>
+                    <h3 class="div-pais p-3 rounded">${res2.descripcion}<a href="javascript:mostrarModalEliminarProducto('${res2.idTipoProducto}','tipoproducto','idTipoProducto')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditTipoProducto('${res2.idTipoProducto}',${aux})" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>
 					</div>`;
 
 				}
@@ -146,6 +146,7 @@ function consultarTipoProducto(tabla)
 }
 function mostrarModalEditTipoProducto(id,descripcion)
 {
+
 	idTipoProducto = id;
 	$("#editCountry").modal("show");
 	$("#namePais2").attr('value', descripcion);
@@ -216,7 +217,15 @@ function mostrarModalEliminarProducto(id, tabla, parametro)
 	}).then((result) => {
 		if (result.isConfirmed)
 		{
-			eliminarRegistroEnTabla(id, tabla, parametro);		
+			eliminarRegistroEnTabla(id, tabla, parametro);
+			if (tabla == "tipoproducto") 
+			{
+				consultarTipoProducto("tipoproducto");
+			}else
+			{
+				consultarProducto();
+			}	
+				
 		}
 	})
 }
@@ -253,12 +262,7 @@ function eliminarRegistroEnTabla(id, tabla, parametro)
 			 		icon: 'success',
 			 		showCloseButton: true,
 			 		confirmButtonText:'Aceptar'
-			 		}).then((result) => {
-					if (result.isConfirmed)
-					{
-						consultarProducto();
-					}
-			 	});
+			 		})
  			}
  		}                 
  	})
@@ -320,6 +324,7 @@ function registrarProductoEnBd()
 		async:false,
 		success: function(respuesta)
 		{
+			alert(respuesta);
 			if(respuesta.includes("error"))
 			{
 				Swal.fire({

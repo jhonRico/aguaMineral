@@ -29,7 +29,7 @@ class controladorZonas
     }
     static public function ctrlZonas($consultar)
     {
-        $tabla = "zonas";
+        $tabla = "parroquia";
 
         $respuesta = ModeloZonas::mdlconsultarZonas($tabla);
 

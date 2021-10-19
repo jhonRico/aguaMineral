@@ -1,13 +1,12 @@
 <?php
 class ControladorClientes
 {      
-    static public function ctrlConsultarPersonasEnBd($zona,$ciudad,$tipoUsuario)
+    static public function ctrlConsultarPersonasEnBd($zona,$tipoUsuario)
     {
         $tabla = "persona";
         $datos = array(
         	"tipoUsuario"=>$tipoUsuario,
         	"zona"=>$zona,
-        	"ciudad"=>$ciudad
         );
         $respuesta = ModeloClientes::mdlConsultarClientesEnBd($tabla,$datos);
         return $respuesta;
@@ -31,6 +30,15 @@ class ControladorClientes
             "ciudad"=>$ciudad
         );
         $respuesta = ModeloClientes::mdlConsultarReporte($tabla,$datos);
+        return $respuesta;
+    }
+    static public function ctrlConsultarParroquias($ciudad)
+    {
+        $tabla = "parroquia";
+        $datos = array(
+            "ciudad"=>$ciudad
+        );
+        $respuesta = ModeloClientes::ctrlConsultarParroquias($tabla,$datos);
         return $respuesta;
     }
 }  

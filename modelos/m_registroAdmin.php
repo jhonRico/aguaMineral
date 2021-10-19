@@ -272,6 +272,18 @@ require_once "conexion.php";
         }
     }
 
+    static public function mdlConsultarProductoExistente($tabla,$tabla2,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM producto p INNER JOIN producto_has_sucursal ps ON p.idProducto = ps.Producto_idProducto WHERE ps.Sucursal_idSucursal = :sucursalProductoExistente AND p.capacidadProducto = :capacidadProductoExistente AND p.TipoProducto_idTipoProducto = :tipoProductoExistente");
+
+        $stmt->bindParam(":capacidadProductoExistente", $datos["capacidadProductoExistente"], PDO::PARAM_INT);
+        $stmt->bindParam(":sucursalProductoExistente", $datos["sucursalProductoExistente"], PDO::PARAM_INT);
+        $stmt->bindParam(":tipoProductoExistente", $datos["tipoProductoExistente"], PDO::PARAM_INT);
+
+        $stmt -> execute();
+        return  $stmt ->fetchAll();
+    }
+
 }
 
 ?>

@@ -280,13 +280,43 @@ $(document).ready(function()
 		});
 
 		$('#capacidad').keyup(function() {
-			consultarProductosExistentes();
+			consultarProductoExistente();
 		});
 });
 
 $('#agregarProducto').click(function(){
 	registrarProductoEnBd();
 });
+
+function consultarProductoExistente()
+{
+	var capacidad = $("#capacidad").val();
+	var array = ($('#sucursal').val()).split("-");
+	var arrayTipoProducto = ($("#tipoProducto").val()).split("-");
+	var datos = new FormData();
+	datos.append("capacidadProductoExistente", capacidad);
+	datos.append("sucursalProductoExistente", array[0]);
+	datos.append("tipoProductoExistente", arrayTipoProducto[0]);
+
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta3)
+		{	
+			if(respuesta3.length > 10)
+			{
+				$('#modalSerial').hide();			
+			}else
+			{
+				$('#modalSerial').show();			
+			}
+		}
+	})
+}
 
 function consultarProductosExistentes()
 {

@@ -133,6 +133,18 @@ class ControladorRegistroAdmin
         $respuesta = ModeloRegistroAdmin::mdlModificarProducto($tabla,$tabla2,$datos);
         return $respuesta;
     }
+    public static function ctrlConsultarProductoExistente($capacidadProductoExistente,$tipoProductoExistente,$sucursalProductoExistente)
+    {
+        $tabla = 'producto';
+        $tabla2 = 'producto_has_contrato';
+        $datos = array(
+             "capacidadProductoExistente"=>$capacidadProductoExistente,
+             "tipoProductoExistente"=>$tipoProductoExistente,
+             "sucursalProductoExistente"=>$sucursalProductoExistente,
+         );
+        $respuesta = ModeloRegistroAdmin::mdlConsultarProductoExistente($tabla,$tabla2,$datos);
+        return $respuesta;
+    }
 }
 
 ?>

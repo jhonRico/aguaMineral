@@ -100,6 +100,10 @@ class ControladorRegistroAdmin
     static public function ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal)
     {
         date_default_timezone_set("America/Bogota");
+        if ($serial == '') 
+        {
+            $serial = date("Y-m-d H:i:s");
+        }
         $tabla = "serialproducto";
         $tabla2 = "producto";
         $datos = array(
@@ -113,6 +117,20 @@ class ControladorRegistroAdmin
              "idContrato" => 0
          );
         $respuesta = ModeloRegistroAdmin::mdlRegistrarProducto($tabla,$tabla2,$datos);
+        return $respuesta;
+    }
+    public static function ctrlModificarProducto($idEditarProducto,$serialEditar,$cantidadEditar,$capacidadEditar,$serialDescripcion)
+    {
+        $tabla = 'producto';
+        $tabla2 = 'serialproducto';
+        $datos = array(
+             "idEditarProducto"=>$idEditarProducto,
+             "serialEditar"=>$serialEditar,
+             "cantidadEditar"=>$cantidadEditar,
+             "capacidadEditar"=>$capacidadEditar,
+             "serialDescripcion"=>$serialDescripcion,
+         );
+        $respuesta = ModeloRegistroAdmin::mdlModificarProducto($tabla,$tabla2,$datos);
         return $respuesta;
     }
 }

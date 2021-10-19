@@ -74,7 +74,7 @@
                                       
                                       <div class="modal-body mx-3">
                                              <div class="modal-body">  
-                                                    <label for="" class="form-label mb-3"><b>Sucursales</b></label>                   
+                                                    <label for="" class="form-label mb-3"><b>Sucursal</b></label>                   
                                                    <select class="form-select mb-3" id="sucursal">
                                                     <?php foreach ($consultarSucurales as $key):?>
                                                      <option value="<?php echo $key['idSucursal']."-". $key['nombreSucursal'];?>"><?php echo $key['nombreSucursal'];?></option>
@@ -124,7 +124,7 @@
   </form>
     <!-- Modal para editar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
-        <div class="modal fade" id="editCountry" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="editProducto" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
@@ -132,9 +132,30 @@
                                               <a class="link-white "><button type="button" class="btn"><i class="fas fa-times cerrarModalProducto text-white"></i></button></a>
                                         </div>
                                       
-                                      <div class="modal-body mx-3">
-                                             <div class="modal-body">                       
-                                                   <input   type="text" class="form-control" id="namePais2" name ="nameEstado" placeholder="Por favor ingrese el nombre del producto" required>  
+                                       <div class="modal-body mx-3">
+                                             <div class="modal-body" id="modalSerial">
+                                                   <label for="" class="form-label mb-3" id="labelSerial"><b>Serial</b></label>   
+                                                   <input   type="text" class="form-control" id="serialEditar" name ="nameEstado" placeholder="Por favor ingrese el serial del producto" required> 
+                                             </div>
+                                             <div class="modal-body">
+                                              <div class="row g-3 align-items-center">
+                                                  <div class="col-auto">
+                                                    <label for="" class="col-form-label me-3"><b>Capacidad</b></label>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                    <input   type="number" min="1" class="form-control w-75" id="capacidadEditar" name ="nameEstado" placeholder="Capacidad" required> 
+                                                  </div>
+                                                </div>
+                                             </div>
+                                             <div class="modal-body">
+                                              <div class="row g-3 align-items-center">
+                                                  <div class="col-auto">
+                                                    <label for="" class="col-form-label me-4"><b>Cantidad</b></label>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                   <input   type="number" min="1" class="form-control w-75" id="cantidadEditar" name ="nameEstado" placeholder="Productos" required>  
+                                                  </div>
+                                                </div>
                                              </div>
                                       </div>
                                        <div class="form-group">  

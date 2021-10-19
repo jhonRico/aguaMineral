@@ -104,10 +104,9 @@ require_once "conexion.php";
 
                 $lastInsertId = $pdo->lastInsertId();
 
-                $stmt = $pdo->prepare("INSERT INTO $tabla2(Contrato_idContrato , SerialProducto_idSerialProducto , TipoProducto_idTipoProducto , capacidadProducto, cantidadProductos)
-                VALUES  (:idContrato,'$lastInsertId',:tipoProducto, :capacidad, :cantidad)");
+                $stmt = $pdo->prepare("INSERT INTO $tabla2(SerialProducto_idSerialProducto , TipoProducto_idTipoProducto , capacidadProducto, cantidadProductos)
+                VALUES  ('$lastInsertId',:tipoProducto, :capacidad, :cantidad)");
 
-                $stmt->bindParam(":idContrato", $datos["idContrato"], PDO::PARAM_INT);
                 $stmt->bindParam(":tipoProducto", $datos["tipoProducto"], PDO::PARAM_INT);
                 $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
                 $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
@@ -221,6 +220,31 @@ require_once "conexion.php";
 
         $stmt -> execute();
         return  $stmt ->fetch();
+    }
+    static public function mdlModificarProducto($tabla,$tabla2,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla2 SET numeroSerial = :serialDescripcion WHERE idSerialProducto = :serialEditar");
+
+        $stmt->bindParam(":serialEditar", $datos["serialEditar"], PDO::PARAM_STR);
+        $stmt->bindParam(":serialDescripcion", $datos["serialDescripcion"], PDO::PARAM_STR);
+
+        if ($stmt->execute()) 
+        {
+            $stmt2 = Conexion::conectar()->prepare("UPDATE producto SET SerialProducto_idSerialProducto = :serialEditar , capacidadProducto = :capacidadEditar , cantidadProductos = :cantidadEditar WHERE idProducto  = :idEditarProducto");
+
+            $stmt2->bindParam(":serialEditar", $datos["serialEditar"], PDO::PARAM_STR);
+            $stmt2->bindParam(":idEditarProducto", $datos["idEditarProducto"], PDO::PARAM_INT);
+            $stmt2->bindParam(":cantidadEditar", $datos["cantidadEditar"], PDO::PARAM_INT);
+            $stmt2->bindParam(":capacidadEditar", $datos["capacidadEditar"], PDO::PARAM_INT);
+
+            if($stmt2->execute())
+            {
+                return "ok";
+            }else
+            {
+                return"Error";
+            }  
+        }
     }
 
 }

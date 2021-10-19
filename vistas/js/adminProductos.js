@@ -129,11 +129,9 @@ function consultarTipoProducto(tabla)
 					}
 					var res2 = JSON.parse(auxSplit2[i]);
 					var aux = "'"+res2.descripcion+"'";
-					plantilla2 +='<div class="p-2">'
-
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:mostrarModalEliminar('+res2.idTipoProducto+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditTipoProducto('+res2.idTipoProducto+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
-
-					plantilla2 +='   </div>'
+					plantilla2 +=`<div class="p-2">
+                    <h3 class="div-pais p-3 rounded">${res2.descripcion}<a href="javascript:mostrarModalEliminarProducto('${res2.idTipoProducto}','tipoproducto','idTipoProducto')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditTipoProducto('${res2.idTipoProducto}','${aux}');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>
+					</div>`;
 
 				}
 				plantilla2 +='</div>'
@@ -203,30 +201,15 @@ function modificarTipoProducto(idTipoProducto,descripcionTipoProducto)
 
  	})
 }
-function mostrarModalEliminar(id)
-{
-	Swal.fire({
-		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar este país?",
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: 'red',
-		cancelButtonColor: 'gray',
-		confirmButtonText: 'Eliminar'
-	}).then((result) => {
-		if (result.isConfirmed)
-		{
-			eliminarRegistroEnTabla(id,"tipoproducto","idTipoProducto");		
-		}
-	})
-}
+
 function mostrarModalEliminarProducto(id, tabla, parametro)
 {
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar este país?",
+		text: "¿Seguro que desea eliminar este Producto?",
 		icon: 'warning',
 		showCancelButton: true,
+		cancelButtonText: 'Cancelar',
 		confirmButtonColor: 'red',
 		cancelButtonColor: 'gray',
 		confirmButtonText: 'Eliminar'
@@ -428,19 +411,21 @@ function consultarProducto()
 						auxSplit2[i] = auxSplit2[i]+"}";
 					}
 					var res2 = JSON.parse(auxSplit2[i]);
-					var aux = "'"+res2.descripcion+"'";
-					result = aux.replace("'","");
-					result2 = result.replace("'","");
+					var aux = "'"+res2.numeroSerial+"'";
+					result = aux.replace('-','');
+					result2 = result.replace('-','');
+					result2 = result2.replace("'",'')
+					result2 = result2.replace("'",'')
 					plantilla2 += `
 					<tr>
-					      <b><th scope="row">${result2}</th></b>
+					      <b><th scope="row">${res2.descripcion}</th></b>
 					      <td>${res2.capacidadProducto}</td>
-					      <td>${res2.numeroSerial}</td>
+					      <td>${result2}</td>
 					      <td></td>
 					      <td>${res2.cantidadProductos}</td>
 					      <td></td>
 					      <td></td>
-					      <td><a href="#"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:mostrarModalEliminarProducto(${res2.idProducto},'producto','idProducto')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
+					      <td><a href="javascript:mostrarModalModificarProducto('${res2.idProducto}','${result2}','${res2.idSerialProducto}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:mostrarModalEliminarProducto(${res2.idProducto},'producto','idProducto')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
 					</tr><br>`;
 				}
 
@@ -462,6 +447,97 @@ function consultarProducto()
 			}
 		}
 	})
+}
+function mostrarModalModificarProducto(id,serial,idSerial)
+{
+		$("#editProducto").modal("show");
+		$("#serialEditar").val(serial);
+		$("#editarPais").click(function(){
+		serial = $("#serialEditar").val();
+		capacidad = $('#capacidadEditar').val();
+		cantidad = $('#cantidadEditar').val();	
+
+		preguntar(id,idSerial,cantidad,capacidad,serial);
+
+	});
+}
+$('.cerrarModalProducto').click(function(){
+	$("#editProducto").modal("hide");
+});
+
+var boolean = false;
+
+
+function preguntar(id,idSerial,cantidad,capacidad,serial)
+{
+	Swal.fire({
+ 		title: 'Seguro que desea modificar',
+ 		icon: 'info',
+ 		showCloseButton: true,
+ 		showCancelButton: true,
+ 		cancelButtonText: 'Cancelar',
+ 		confirmButtonText:'Aceptar'
+ 		}).then((result) => 
+		{
+			if (result.isConfirmed)
+			{
+				modificarProducto(id,idSerial,cantidad,capacidad,serial);
+			}
+		})
+}
+
+function modificarProducto(id,serial,cantidad,capacidad,serialDescripcion)
+{
+	
+	var datos = new FormData();
+ 	datos.append("idEditarProducto", id);
+ 	datos.append("serialEditar", serial);
+ 	datos.append("cantidadEditar", cantidad);
+ 	datos.append("capacidadEditar", capacidad);
+ 	datos.append("serialDescripcion", serialDescripcion);
+
+	 $.ajax({
+ 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+ 		method:"POST",
+ 		data: datos, 
+ 		cache: false,
+ 		contentType: false,
+ 		processData: false,
+ 		async:false,
+ 		success: function(respuesta)
+ 		{
+ 			if(!respuesta.includes("ok"))
+ 			{
+ 				Swal.fire({
+ 					title: 'Error',
+ 					text: 'Error al modificar pais',
+ 					icon: 'error',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				}); 
+
+ 			}else
+ 			{
+ 				Swal.fire({
+ 					title: 'Pais Modificado',
+ 					icon: 'success',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				}).then((result) => 
+				{
+					if (result.isConfirmed)
+					{
+						serial = $("#serialEditar").val(null);
+						capacidad = $('#capacidadEditar').val(null);
+						cantidad = $('#cantidadEditar').val(null);	
+						$("#editProducto").modal("hide");
+						consultarProducto();
+					}
+				})
+ 			}
+ 		}                 
+
+ 	})
 }
 
 $(document).ready(function() 

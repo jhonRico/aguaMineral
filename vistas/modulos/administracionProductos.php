@@ -87,10 +87,6 @@
                                                     <?php endforeach ?>
                                                    </select>
                                              </div>
-                                             <div class="modal-body" id="modalSerial">
-                                                   <label for="" class="form-label mb-3" id="labelSerial"><b>Serial</b></label>   
-                                                   <input   type="text" class="form-control" id="serial" name ="nameEstado" placeholder="Por favor ingrese el serial del producto" required> 
-                                             </div>
                                              <div class="modal-body">
                                               <div class="row g-3 align-items-center">
                                                   <div class="col-auto">
@@ -110,6 +106,10 @@
                                                    <input   type="number" min="1" class="form-control w-75" id="cantidad" name ="nameEstado" placeholder="Productos" required>  
                                                   </div>
                                                 </div>
+                                             </div>
+                                             <div class="modal-body" id="modalSerial">
+                                                   <label for="" class="form-label mb-3" id="labelSerial"><b>Serial</b></label>   
+                                                   <input   type="text" class="form-control" id="serial" name ="nameEstado" placeholder="Por favor ingrese el serial del producto" required> 
                                              </div>
                                       </div>
                                        <div class="form-group">  

@@ -279,22 +279,19 @@ $(document).ready(function()
 			$('#moddaddCountry').modal("hide");
 		});
 
-		$('#tipoProducto').click(function(event) {
-		var array = $('#tipoProducto').val().split("-");
-		if (array[1] == "Estantes") 
-		{
-			$('#modalSerial').show();
-		}else
-		{
-			$('#modalSerial').hide();
-			$('#serial').val('');
-		}
-	});
+		$('#capacidad').keyup(function() {
+			consultarProductosExistentes();
+		});
 });
 
 $('#agregarProducto').click(function(){
 	registrarProductoEnBd();
 });
+
+function consultarProductosExistentes()
+{
+	alert('Hola');
+}	
 
 function registrarProductoEnBd()
 {

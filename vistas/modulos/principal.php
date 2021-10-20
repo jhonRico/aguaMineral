@@ -32,7 +32,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
             </div>
             <div>       
               <div class="exerpt">
-               Generar Contrato de prestamos de productos.
+               Generar contrato de préstamos de producto.
              </div>
            </div>
          </div>
@@ -46,7 +46,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
             </div>
             <div>       
               <div class="exerpt">
-               Inventario de productos y contratos
+               Inventario de productos y contratos.
              </div>
            </div>
          </div>
@@ -62,7 +62,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
           </div>
           <div>
             <div class="exerpt">
-              Modulo para consultar los clientes por zonas
+              Modulo para consultar los clientes por zonas.
             </div>
 
           </div>

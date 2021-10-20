@@ -49,7 +49,10 @@ require_once "conexion.php";
                         $returnValue = "ciudad-Municipio_idMunicipio";  
                         break;
                     case "ciudad":
-                        $returnValue = "sector-Ciudad_idCiudad"; 
+                        $returnValue = "parroquia-Ciudad_idCiudad"; 
+                        break; 
+                    case "sucursal":
+                        $returnValue = "contrato-Sucursal_idSucursal"; 
                         break; 
                 }
         }
@@ -219,6 +222,25 @@ require_once "conexion.php";
         $stmt->close();
         $stmt=null;
     }
+
+     static public function mdlModificarOfTable2CamposStrings($datos,$tabla,$atributo1,$atributo2,$atributo3)
+     {
+
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $atributo1 = :parametro1, $atributo2 = :parametro2  WHERE $atributo3 = :parametro3");
+        $stmt->bindParam(":parametro1", $datos["parametro1"], PDO::PARAM_STR);
+        $stmt->bindParam(":parametro2", $datos["parametro2"], PDO::PARAM_STR);
+        $stmt->bindParam(":parametro3", $datos["parametro3"], PDO::PARAM_INT);
+      
+        if($stmt->execute())
+        {
+            return "ok";
+        }else
+        {
+            return"Error";
+        }
+        $stmt->close();
+        $stmt=null;
+    }
     static public function mdlConsultarSiRegistroExisteBD($datos,$tabla,$atributo1,$atributo2,$atributo3) 
     {
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $atributo1 = :parametro1 and $atributo2 = :parametro2 and $atributo3 = :parametro3");
@@ -233,21 +255,40 @@ require_once "conexion.php";
 
     static public function mdlConsultarParametros(){
       $datos = array(
-            array('NombreCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('MunicipioCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('cedulaCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('nombreComercio', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('direccionComercio', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('telefonoComercio', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('municipioCliente', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('cantidadEstante', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('codigoProducto', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('fechaConstruccion', 'Aqui va la descripcion de lo que el parametro hace bebe'),
-            array('fechaConstruccion', 'Aqui va la descripcion de lo que el parametro hace bebe'),
+            array('NombreCliente', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe el nombre del cliente.'),
+            array('MunicipioCliente', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe el municipio de la direcci&oacuten fiscal o residencia del cliente.'),
+            array('cedulaCliente', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la cedula del cliente.'),
+            array('nombreComercio', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe el nombre del comercio o tienda del cliente.'),
+            array('direccionComercio', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la direcci&oacuten del comercio o tienda del cliente.'),
+            array('telefonoComercio', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe el tel&eacutefono del comercio o tienda del cliente.'),
+            array('municipioCliente', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe el municipio del comercio o tienda del cliente.'),
+            array('cantidadEstante', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la cantidad del producto que presta el cliente'),
+            array('codigoProducto', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe el c&oacutedigo de serial del producto que presta el cliente'),
+            array('fechaConstruccion', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la fecha de construcci&oacuten del producto que presta el cliente'),
+            
 
         );
          return  $datos;
 	}
+
+    static public function mdladdOfTableDosParametrosString($tabla, $datos,$atributo1,$atributo2)
+    {
+
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla ($atributo1,$atributo2)
+                 VALUES  (:parametro1,:parametro2)");
+        
+        $stmt->bindParam(":parametro1", $datos["parametro1"], PDO::PARAM_STR);
+        $stmt->bindParam(":parametro2", $datos["parametro2"], PDO::PARAM_STR);
+  
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return"Error";
+        }
+        $stmt->close();
+        $stmt=null;
+    }
 
  }
 ?>

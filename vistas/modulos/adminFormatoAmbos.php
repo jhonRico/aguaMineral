@@ -72,8 +72,8 @@
                                               <div class="col-sm-12">
                                                         <div class="card">
                                                           <div class="card-body">
-                                                            <h5 class="card-title">Descripción de los parámetros</h5>
-                                                            <p class="card-text">En esta sesión encontrara la breve explicación de los diferentes parámetros</p>
+                                                            <h5 class="card-title">Ayuda modificación formato</h5>
+                                                            <p class="card-text">El formato se puede modificar, pero se debe tener en cuenta mantener los parámetros para que se genere el contrato correctamente. A continuación, se describe la lista de parámetros que permiten registrar la información de los clientes y productos en base de datos para cada uno de los formatos de contrato disponible.</p>
                                                             
                                                           </div>
                                                         </div>

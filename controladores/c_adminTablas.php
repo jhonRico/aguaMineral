@@ -66,6 +66,17 @@ class ControladorRegistroAdminGeneral
         return $respuesta;
     }
 
+    static public function ctrladdOfTableDosParametrosString($parametroValue1,$parametroValue2,$tabla,$atributo1,$atributo2)
+    {        
+        $datos = array(
+             "parametro1"=>$parametroValue1,
+             "parametro2"=>$parametroValue2
+         );
+
+        $respuesta = ModeloRegistroAdminGeneral::mdladdOfTableDosParametrosString($tabla, $datos,$atributo1,$atributo2);
+        return $respuesta;
+    }
+
     //-----------------Metodo que consulta un registro por dos parametros en el where pero uno de ellos es un int-------------------------
     static public function ctrlconsultarRegistroExisteBDEnTablaDosParamtrosAsociada($parametroValue1,$parametroValue2,$tabla,$atributo1,$atributo2)
     {     
@@ -128,6 +139,28 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlConsultarParametros();
         return $respuesta;
 	}
+
+        //-----------------Metodo que consulta un registro por dos parametros ambos string-------------------------
+    static public function ctrlconsultarRegistroExisteBDDosParamtros($parametroValue1,$parametroValue2,$tabla,$atributo1,$atributo2)
+    {     
+         $datos = array(
+             "parametro1"=>$parametroValue1,
+             "parametro2"=>$parametroValue2
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlconsultarRegistroBDTablaDosParamtros($datos,$tabla,$atributo1,$atributo2);
+        return $respuesta;
+    }
+
+    static public function ctrlModificarOfTable2CamposStrings($parametroValue1,$parametroValue2,$parametroValue3,$tabla,$atributo1,$atributo2,$atributo3)
+    {     
+         $datos = array(
+             "parametro1"=>$parametroValue1,
+             "parametro2"=>$parametroValue2,
+             "parametro3"=>$parametroValue3
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlModificarOfTable2CamposStrings($datos,$tabla,$atributo1,$atributo2,$atributo3);
+        return $respuesta;
+    }
 
 
    } 

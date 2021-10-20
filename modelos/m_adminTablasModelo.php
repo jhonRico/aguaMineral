@@ -49,7 +49,7 @@ require_once "conexion.php";
                         $returnValue = "ciudad-Municipio_idMunicipio";  
                         break;
                     case "ciudad":
-                        $returnValue = "sector-Ciudad_idCiudad"; 
+                        $returnValue = "parroquia-Ciudad_idCiudad"; 
                         break; 
                     case "sucursal":
                         $returnValue = "contrato-Sucursal_idSucursal"; 

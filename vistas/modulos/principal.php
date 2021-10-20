@@ -32,9 +32,8 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
             </div>
             <div>       
               <div class="exerpt">
-               Generar Contrato
+               Generar Contrato de prestamos de productos.
              </div>
-
            </div>
          </div>
        </div>     <div class="single-blog col">
@@ -47,9 +46,8 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
             </div>
             <div>       
               <div class="exerpt">
-               Inventario de estante y envases disponibles y prestados
+               Inventario de productos y contratos
              </div>
-
            </div>
          </div>
        </div>

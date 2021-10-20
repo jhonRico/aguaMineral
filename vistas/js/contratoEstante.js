@@ -45,7 +45,7 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#colocarInput').show();
     $( ".boton1" ).click(function() {
      parametro = "estantes";
-     //validarCampos(parametro,idTipoUsuario,'cantidadEstantes','');
+     validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
    });
 
   }else
@@ -601,7 +601,6 @@ function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector
   datos.append("parametros", idProducto);
 
   let plantilla2 = " ";
-  let obj
   $.ajax({
     url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
     method:"POST",
@@ -615,17 +614,6 @@ function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector
       if(respuesta3.includes('ok'))
       {     
           mostrarModal(parametro,idTipoUsuario,idProducto);
-      }else if (respuesta3.includes('errorExistencia')) 
-      {
-         Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                toast: true,
-                title: 'El producto no se encuentra disponible en estos momentos',
-                showConfirmButton: false,
-                timerProgressBar: true,
-                timer: 1500
-              }) 
       }else
       {
          Swal.fire({
@@ -636,7 +624,8 @@ function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 1500
-              }) 
+              });
+         return false;
       }
     }
   })

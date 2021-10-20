@@ -78,20 +78,37 @@ require_once "conexion.php";
             $idProducto = $prueba['idProducto'];
             $cantidadActual = $prueba['cantidadProductos'];
             $cantidadASumar = $datos["cantidad"];
+            $nombreTipoContrato = $prueba['nombre'];
+            $idTipoContrato = $prueba['idTipoContrato'];
             $resultado = $cantidadASumar + $cantidadActual;
 
             $stmt = Conexion::conectar()->prepare("UPDATE producto SET cantidadProductos = $resultado WHERE idProducto = $idProducto");
 
             if($stmt->execute())
             {
-                return "agregado";
+                $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,'$idTipoContrato','$idProducto',:seria,:capacidad)");
+                $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
+                $stmt->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
+                $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
+                $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+                if ($stmt->execute()) 
+                {
+                    return "agregado";                
+                }
             }else
             {
                 return "error";
             }
         }else
         {   
+            $idProducto = $prueba['idProducto'];
+            $cantidadActual = $prueba['cantidadProductos'];
+            $cantidadASumar = $datos["cantidad"];
+            $nombreTipoContrato = $prueba['nombre'];
+            $idTipoContrato = $prueba['idTipoContrato'];
+            $resultado = $cantidadASumar + $cantidadActual;
             $pdo = Conexion::conectar();
+
             $stmt = $pdo->prepare("INSERT INTO $tabla(numeroSerial, fechaCreacion, estado)
             VALUES  (:seria, :fecha, :estado)");
 
@@ -104,10 +121,9 @@ require_once "conexion.php";
 
                 $lastInsertId = $pdo->lastInsertId();
 
-                $stmt = $pdo->prepare("INSERT INTO $tabla2(Contrato_idContrato , SerialProducto_idSerialProducto , TipoProducto_idTipoProducto , capacidadProducto, cantidadProductos)
-                VALUES  (:idContrato,'$lastInsertId',:tipoProducto, :capacidad, :cantidad)");
+                $stmt = $pdo->prepare("INSERT INTO $tabla2(SerialProducto_idSerialProducto , TipoProducto_idTipoProducto , capacidadProducto, cantidadProductos)
+                VALUES  ('$lastInsertId',:tipoProducto, :capacidad, :cantidad)");
 
-                $stmt->bindParam(":idContrato", $datos["idContrato"], PDO::PARAM_INT);
                 $stmt->bindParam(":tipoProducto", $datos["tipoProducto"], PDO::PARAM_INT);
                 $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
                 $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
@@ -122,10 +138,18 @@ require_once "conexion.php";
 
                         if ($stmt->execute()) 
                         {
-                            return "ok";
-                        }else
-                        {
-                            return "error";
+                            $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,'$idTipoContrato','$idProducto',:seria,:capacidad)");
+                                $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
+                                $stmt->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
+                                $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
+                                $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+                                 if ($stmt->execute()) 
+                                {
+                                    return "ok";
+                                }else
+                                {
+                                    return "error";
+                                }
                         }
                     }
             }
@@ -221,6 +245,43 @@ require_once "conexion.php";
 
         $stmt -> execute();
         return  $stmt ->fetch();
+    }
+    static public function mdlModificarProducto($tabla,$tabla2,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla2 SET numeroSerial = :serialDescripcion WHERE idSerialProducto = :serialEditar");
+
+        $stmt->bindParam(":serialEditar", $datos["serialEditar"], PDO::PARAM_STR);
+        $stmt->bindParam(":serialDescripcion", $datos["serialDescripcion"], PDO::PARAM_STR);
+
+        if ($stmt->execute()) 
+        {
+            $stmt2 = Conexion::conectar()->prepare("UPDATE producto SET SerialProducto_idSerialProducto = :serialEditar , capacidadProducto = :capacidadEditar , cantidadProductos = :cantidadEditar WHERE idProducto  = :idEditarProducto");
+
+            $stmt2->bindParam(":serialEditar", $datos["serialEditar"], PDO::PARAM_STR);
+            $stmt2->bindParam(":idEditarProducto", $datos["idEditarProducto"], PDO::PARAM_INT);
+            $stmt2->bindParam(":cantidadEditar", $datos["cantidadEditar"], PDO::PARAM_INT);
+            $stmt2->bindParam(":capacidadEditar", $datos["capacidadEditar"], PDO::PARAM_INT);
+
+            if($stmt2->execute())
+            {
+                return "ok";
+            }else
+            {
+                return"Error";
+            }  
+        }
+    }
+
+    static public function mdlConsultarProductoExistente($tabla,$tabla2,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM producto p INNER JOIN producto_has_sucursal ps ON p.idProducto = ps.Producto_idProducto WHERE ps.Sucursal_idSucursal = :sucursalProductoExistente AND p.capacidadProducto = :capacidadProductoExistente AND p.TipoProducto_idTipoProducto = :tipoProductoExistente");
+
+        $stmt->bindParam(":capacidadProductoExistente", $datos["capacidadProductoExistente"], PDO::PARAM_INT);
+        $stmt->bindParam(":sucursalProductoExistente", $datos["sucursalProductoExistente"], PDO::PARAM_INT);
+        $stmt->bindParam(":tipoProductoExistente", $datos["tipoProductoExistente"], PDO::PARAM_INT);
+
+        $stmt -> execute();
+        return  $stmt ->fetchAll();
     }
 
 }

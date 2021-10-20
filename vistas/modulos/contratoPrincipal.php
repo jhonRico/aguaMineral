@@ -3,7 +3,7 @@ $url2 = Ruta::ctrlRuta();
 $tabla = "tipousuario";
 $resultadoConsultaIdTipoUsuario = ControladorFormatoContrato::ctrlConsultarIdTipoUsuario($tabla);
 $resultadoConsultarEstado = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("estado");
-$resultadoConsultarZonas = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("zonas");
+$resultadoConsultarZonas = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("parroquia");
 $tabla = "serialproducto";
 $resultadoConsultarTipoContrato = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("tipocontrato");
 $resultadoConsultarSucursales = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("sucursal");
@@ -33,7 +33,7 @@ $array = $resultadoConsultaSerial;
           <div class="row">
             <div class="form-group col-md-4">
               <label for="inputEmail4" class="mb-3">Sucursal</label>
-              <select name="" id="" class="form-select">
+              <select name="" id="sucursal" class="form-select">
                 <?php foreach ($resultadoConsultarSucursales as $key): ?>  
                 <option value="<?php echo $key['idSucursal'];?>"><?php echo $key['nombreSucursal'];?></option>
               <?php endforeach ?>  
@@ -76,11 +76,8 @@ $array = $resultadoConsultaSerial;
               </select>
             </div>
             <div class="form-group col-md-4">
-              <label for="inputState" class="mt-3">Zona ciudad</label>
-              <select id="zonaCliente" class="form-select mt-3">
-                <?php foreach ($resultadoConsultarZonas as $key): ?>  
-                <option value="<?php echo $key['idZonas'];?>"><?php echo $key['descripcion'];?></option>
-                <?php endforeach ?>                                     
+              <label for="inputState" class="mt-3">Parroquia</label>
+              <select id="zonaCliente" class="form-select mt-3">                       
               </select>
             </div>
           </div>
@@ -137,11 +134,8 @@ $array = $resultadoConsultaSerial;
               <select id="ciudadComercio" class="form-select mt-3"></select>
             </div>
             <div class="form-group col-md-3">
-              <label for="inputState" class="mt-3" id="labelZonaComercio">Zona del comercio</label>
+              <label for="inputState" class="mt-3" id="labelZonaComercio">Parroquia del comercio</label>
               <select id="zonaComercio" class="form-select mt-3">
-                <?php foreach ($resultadoConsultarZonas as $key): ?>  
-                <option value="<?php echo $key['idZonas'];?>"><?php echo $key['descripcion'];?></option>
-                <?php endforeach ?>                            
               </select>
             </div>
           </div>    
@@ -161,9 +155,9 @@ $array = $resultadoConsultaSerial;
               <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de estantes</label>
               <input type="number" min="1" class="form-control mt-3" id="cantidadEstantes" placeholder="Cantidad de estantes">
             </div>
-            <div class="form-group col-md-4 text-center">
+            <div class="form-group col-md-4 text-center" id="capacidad">
               <label for="inputState" class="mt-4" id="labelDescripcion">Capacidad</label>
-              <select id="capacidad" class="form-select mt-3">
+              <select id="capacidadEstantes" class="form-select mt-3">
                 <option value="1">Estante de 6 botellones</option>
                 <option value="2">Estante de 8 botellones</option>                              
               </select>
@@ -173,7 +167,21 @@ $array = $resultadoConsultaSerial;
             </div>
           </div>
           <div class="row">
+            <div class="form-group col-md-4 text-center">
+              <label for="inputState" id="labelCapacidadBotellon" class="mt-4" id="labelDescripcion">Capacidad Botellon</label>
+              <input type="number" min="1" class="form-control mt-4 w-100" placeholder="Capacidad de botellon" id="capacidadBotellon">
+            </div>  
+            <div class="form-group col-md-4 text-center">
+            </div>
+            <div class="col-md-4 text-center">
+            </div>   
             <div class="col-md-4">
+            </div>   
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group col-md-4 text-center">             
+              </div>
             </div>    
             <div class="col-md-4 text-center">
               <button type="button" class="btn btn-primary mt-5 w-75 boton1">
@@ -198,7 +206,7 @@ $array = $resultadoConsultaSerial;
         <h1 class="mb-3 mt-3">Contratos</h1>
         <ul class="grid0">
           <div class="row">
-            <?php foreach ($resultadoConsultarTipoContrato as $key):?>
+          <?php foreach ($resultadoConsultarTipoContrato as $key):?>
            <div class="col-md-4">
             <a href="javascript:mostrarContrato('<?php echo $key['nombre'];?>',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">

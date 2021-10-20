@@ -36,7 +36,7 @@
         </div>
         <div class="card col-md-3 bg-light text-center">
           <div class="card-body p-4">
-            <h5 class="card-title fs-3">Total Prestamo en Zona</h5>
+            <h5 class="card-title fs-3">Total Prestamo en Parroquia</h5>
             <p class="card-text text-start fs-5">Estantes <b class="ms-4" id="estanteTotal"></b></p>
             <p class="card-text text-start fs-5">Botellones <b class="ms-2" id="botellonTotal"></b></p>
           </div>

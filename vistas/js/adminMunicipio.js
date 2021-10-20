@@ -330,7 +330,7 @@ function mostrarModalEditMunicipio(idMunicipio,nombreMunicipio,capitalMunicipio,
 	
 	        var existeInTable = validarRegistroExistenteMunicipio($("#nameMunicipioEdit").val(),$("#capitalMunicipioEdit").val(),$("#estadoSelectValueEdit").val());
 			
-		if(existeInTable == "No existe"){*/
+		if(existeInTable == "No existe"){
 			    modificarMunicipioFinal(idMunicipio,$("#nameMunicipioEdit").val(),$("#capitalMunicipioEdit").val(),$("#estadoSelectValueEdit").val());
 		}
 		    

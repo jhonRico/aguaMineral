@@ -62,6 +62,17 @@ class   AjaxRegistroAdmin{
         $respuesta = ControladorRegistroAdmin::ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal);
         echo  json_encode ($respuesta);
     }
+
+    public function ajaxModificarProducto($idEditarProducto,$serialEditar,$cantidadEditar,$capacidadEditar,$serialDescripcion)
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlModificarProducto($idEditarProducto,$serialEditar,$cantidadEditar,$capacidadEditar,$serialDescripcion);
+        echo  json_encode ($respuesta);
+    }
+    public function ajaxConsultarProductoExistente($capacidadProductoExistente,$tipoProductoExistente,$sucursalProductoExistente)
+    {
+        $respuesta = ControladorRegistroAdmin::ctrlConsultarProductoExistente($capacidadProductoExistente,$tipoProductoExistente,$sucursalProductoExistente);
+        echo  json_encode ($respuesta);
+    }
 }
 
 if(isset($_POST["nombrePais"]))
@@ -133,6 +144,18 @@ if(isset($_POST["idEliminar"]))
 
 //Ajax para productos
 
+if(isset($_POST["capacidadProductoExistente"]))
+{  
+    $capacidadProductoExistente = $_POST["capacidadProductoExistente"];
+    $tipoProductoExistente = $_POST["tipoProductoExistente"];
+    $sucursalProductoExistente = $_POST["sucursalProductoExistente"];
+
+    $allStates = new AjaxRegistroAdmin();
+    $allStates->ajaxConsultarProductoExistente($capacidadProductoExistente,$tipoProductoExistente,$sucursalProductoExistente);
+}
+
+
+
 if(isset($_POST["tipoProducto"]))
 {  
     $sucursal = $_POST["sucursal"];
@@ -149,6 +172,17 @@ if(isset($_POST["consultar"]))
     $sucursal = $_POST["consultar"];
     $allStates = new AjaxRegistroAdmin();
     $allStates->ajaxConsultarProducto($sucursal);
+}
+if(isset($_POST["idEditarProducto"]))
+{  
+    $idEditarProducto = $_POST["idEditarProducto"];
+    $serialEditar = $_POST["serialEditar"];
+    $cantidadEditar = $_POST["cantidadEditar"];
+    $capacidadEditar = $_POST["capacidadEditar"];
+    $serialDescripcion = $_POST["serialDescripcion"];
+
+    $allStates = new AjaxRegistroAdmin();
+    $allStates->ajaxModificarProducto($idEditarProducto,$serialEditar,$cantidadEditar,$capacidadEditar,$serialDescripcion);
 }
 
 ?>

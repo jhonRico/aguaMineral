@@ -2,6 +2,12 @@
 
 class ControladorFormatoContrato
 { 
+    static public function ctrlConsultarCapacidad($tipoProducto)
+    {
+        $tabla = "producto";
+        $respuesta = ModeloFormatoContrato::mdlConsultarCapacidad($tabla,$tipoProducto);
+        return $respuesta;
+    }
     static public function ctrlConsultarTotalProductosPrestados($tabla)
     {
         $respuesta = ModeloFormatoContrato::mdlConsultarTotalProductosPrestados($tabla);
@@ -19,22 +25,23 @@ class ControladorFormatoContrato
     }
 
 
-    static public function ctrlConsultarProductosDisponibles($tabla,$parametro)
+    static public function ctrlConsultarProductosDisponibles($tabla,$parametro,$cantidad)
     {
         $datos = array(
              "parametro"=>$parametro,
+             "cantidad"=>$cantidad,
          );
         $respuesta = ModeloFormatoContrato::mdlConsultarProductosDisponibles($tabla,$datos);
         return $respuesta;
     }
 
 
-     static public function ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon)
+     static public function ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idProducto)
     {
         date_default_timezone_set("America/Bogota");
         $fecha = date("Y-m-d H:i:s");
 
-        $respuesta = ModeloFormatoContrato::mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$fecha);
+        $respuesta = ModeloFormatoContrato::mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idProducto,$fecha);
         return $respuesta;
     }
 

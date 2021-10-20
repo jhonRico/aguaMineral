@@ -4,6 +4,14 @@ require_once "conexion.php";
 
 class ModeloFormatoContrato 
 {
+    static public function mdlConsultarCapacidad($tabla,$tipoProducto)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN tipoproducto tp ON t.TipoProducto_idTipoProducto = tp.idTipoProducto WHERE tp.descripcion = :tipoProducto");
+
+        $stmt->bindParam(":tipoProducto", $tipoProducto, PDO::PARAM_STR);
+        $stmt -> execute();
+        return $stmt->fetchAll();
+    }
     static public function mdlConsultarSerial($tabla)
     {
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
@@ -18,8 +26,10 @@ class ModeloFormatoContrato
         $stmt -> execute();
         return $stmt->fetchAll();
     }
-    static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$fecha)
-    {       
+    /*static public function mdlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idProducto,$fecha)
+    {
+
+
      $stmt11 =  Conexion::conectar()->prepare("SELECT * FROM tipocontrato WHERE nombre  ='$idTipoContrato'");
      $stmt11 -> execute();
      $prueba1 = $stmt11->fetch();
@@ -45,15 +55,33 @@ class ModeloFormatoContrato
             if($stmt->execute())
             {
                $lastInsertId = $pdo->lastInsertId();
-               $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto p ON c.idContrato  = p.Contrato_idContrato INNER JOIN tipoproducto t ON p.TipoProducto_idTipoProducto = t.idTipoProducto"); 
-               $arrayProducto = $stmt->fetch();
-               if($stmt->execute())
+               $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+               $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+               $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
+
+                if ($stmt->execute()) 
                {
-                    return "true";
-               }else
-                {
-                    return"error";
-                }
+                    $lastInsertId = $pdo->lastInsertId();
+                    $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato WHERE pc.Producto_idProducto = :idProducto"); 
+                   $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                   if($stmt->execute())
+                   {    
+                        $arrayProducto = $stmt->fetch();
+                        $cantidadActual = $arrayProducto['cantidadProductos'];
+                        $resultado = $cantidadActual - $cantidadEstantes;
+                        $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
+                        $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                        $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                        if ($stmt->execute()) 
+                        {
+                            return "true";
+                        }else
+                        {
+                           return"error";    
+                        } 
+                    }
+               }
+               
             }
         }else
         {
@@ -92,7 +120,7 @@ class ModeloFormatoContrato
             }
         }
     }
-}
+}*/
 
 
 
@@ -103,10 +131,27 @@ class ModeloFormatoContrato
 
 static public function mdlConsultarProductosDisponibles($tabla,$datos)
 {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN tipoproducto ON $tabla.TipoProducto_idTipoProducto =  tipoproducto.idTipoProducto WHERE tipoproducto.descripcion = :parametro");
-    $stmt->bindParam(":parametro", $datos["parametro"], PDO::PARAM_STR);
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN tipoproducto ON $tabla.TipoProducto_idTipoProducto =  tipoproducto.idTipoProducto WHERE $tabla.idProducto = :parametro");
+    $stmt->bindParam(":parametro", $datos["parametro"], PDO::PARAM_INT);
     $stmt -> execute();
-    return  $stmt->fetch();
+    if ($stmt -> fetch() != false) 
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN tipoproducto ON $tabla.TipoProducto_idTipoProducto =  tipoproducto.idTipoProducto WHERE $tabla.cantidadProductos > :cantidad");
+        $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+        $stmt->execute();
+        if ($stmt -> fetch() != false) 
+        {
+            return "ok";
+        }else
+        {
+            return $stmt->fetch();
+        }
+    }else
+    {
+        return "errorExistencia";
+    }
+    
+
 }
 
 static public function mdlConsultarFormatoContrato($tabla,$datos)

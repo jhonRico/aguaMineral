@@ -282,6 +282,16 @@ $(document).ready(function()
 		$('#capacidad').keyup(function() {
 			consultarProductoExistente();
 		});
+
+		$('#sucursal').change(function() {
+			consultarProductoExistente();
+		});
+
+		$('#tipoProducto').change(function(){
+			consultarProductoExistente();
+		});
+
+
 });
 
 $('#agregarProducto').click(function(){
@@ -307,20 +317,31 @@ function consultarProductoExistente()
 		processData: false,
 		success: function(respuesta3)
 		{	
+
 			if(respuesta3.length > 10)
 			{
-				$('#modalSerial').hide();			
+				respuesta3 =respuesta3.replace("[","");
+				respuesta3 =respuesta3.replace("]","");
+				var auxSplit2 = respuesta3.split("},");
+				for(var i=0;i<auxSplit2.length;i++)
+				{
+					if(!auxSplit2[i].includes("}"))
+					{
+						auxSplit2[i] = auxSplit2[i]+"}";
+					}
+					var res2 = JSON.parse(auxSplit2[i]);
+				}
+				var result = res2.numeroSerial.replace("-","");
+				var result2 = result.replace("-","");
+				$('#modalSerial').hide();
+				$('#serial').val(result2);			
 			}else
 			{
 				$('#modalSerial').show();			
+				$('#serial').val('');
 			}
 		}
 	})
-}
-
-function consultarProductosExistentes()
-{
-	alert('Hola');
 }	
 
 function registrarProductoEnBd()
@@ -351,7 +372,6 @@ function registrarProductoEnBd()
 		async:false,
 		success: function(respuesta)
 		{
-			alert(respuesta);
 			if(respuesta.includes("error"))
 			{
 				Swal.fire({

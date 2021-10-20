@@ -66,17 +66,29 @@ require_once "conexion.php";
 
         //Consultar Para Iniciar Sesions
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE correoUsuario = :usuario AND clave = :contrasena");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE correoUsuario = :usuario");
+        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR); 
+        $stmt -> execute(); 
+        $respuesta = $stmt ->fetch();
+        if ($respuesta != false) 
+        {
+            $stmt2 = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE clave = :contrasena");
+            $stmt2->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
+            $stmt2->execute();
+            if ($stmt2 ->fetch() != false) 
+            {
+                return $respuesta;
+            }else
+            {
+                return "falsePassword";
+            }
+        }else
+        {
+            return "falseUser";
+        }  
+         
 
 
-        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-        $stmt->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
-          
-        $stmt -> execute();  
-        $respuesta = $stmt ->fetch(); 
-
-
-        return $respuesta;
 
     }
    /* consultarUsuarioActual()

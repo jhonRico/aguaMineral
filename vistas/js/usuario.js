@@ -251,11 +251,9 @@ $(function(){
 function IniciarSesion()
 {
   var datos = new FormData();
+  datos.append("user", $("#correo").val());
+  datos.append("password", $("#password").val());
 
-      datos.append("user", $("#correo").val());
-      datos.append("password", $("#password").val());
-
-     
             $.ajax({
                     url:"//localhost/aguaMineral/ajax/registro.ajax.php",
                     method:"POST",
@@ -266,26 +264,36 @@ function IniciarSesion()
                     async:false,
                     success: function(respuesta)
                     {
-                          if(!respuesta.includes("false"))
+                          if(respuesta.includes("falsePassword"))
                           {
-                              window.location.replace('http://localhost/aguaMineral/principal');
-                             
-                          }else
-                          {
-                            Swal.fire({
+                             Swal.fire({
                               position: 'top-end',
                               icon: 'error',
                               toast: true,
-                              title: 'Usuario y/o contraseña incorrectos',
+                              title: 'Contraseña incorrecta',
                               showConfirmButton: false,
                               timerProgressBar: true,
                               timer: 1500
                             })        
                             return false;
+
+                          }else if(respuesta.includes("falseUser"))
+                          {
+                            Swal.fire({
+                              position: 'top-end',
+                              icon: 'error',
+                              toast: true,
+                              title: 'El usuario no existe',
+                              showConfirmButton: false,
+                              timerProgressBar: true,
+                              timer: 1500
+                            })        
+                            return false;
+                          }else
+                          {
+                            window.location.replace('http://localhost/aguaMineral/principal');
                           }
-
                      }                 
-
               })
 }
 

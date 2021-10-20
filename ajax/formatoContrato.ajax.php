@@ -6,15 +6,15 @@ require_once "../modelos/m_formatoContrato.php";
 class   AjaxFormatoContrato
 {
     
-     public function ajaxConsultarProductosDisponibles($tabla,$parametro)
+     public function ajaxConsultarProductosDisponibles($tabla,$parametro,$cantidad)
     {
-        $respuesta = ControladorFormatoContrato::ctrlConsultarProductosDisponibles($tabla,$parametro);
+        $respuesta = ControladorFormatoContrato::ctrlConsultarProductosDisponibles($tabla,$parametro,$cantidad);
         echo  json_encode ($respuesta);
     }
 
-    public function ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon)
+    public function ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idProducto)
     {
-        $respuesta = ControladorFormatoContrato::ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon);
+        $respuesta = ControladorFormatoContrato::ctrlRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idProducto);
         echo  json_encode ($respuesta);
     }
 
@@ -43,6 +43,11 @@ class   AjaxFormatoContrato
         $respuesta = ControladorFormatoContrato::ctrlConsultarSelectsContrato($valorAnterior,$tablaSelect,$atributo);
         echo  json_encode ($respuesta);
     }
+    public function ajaxConsultarCapacidad($tipoProducto)
+    {
+        $respuesta = ControladorFormatoContrato::ctrlConsultarCapacidad($tipoProducto);
+        echo  json_encode ($respuesta);
+    }
 }
 
 
@@ -50,9 +55,10 @@ class   AjaxFormatoContrato
 if(isset($_POST["dato"]))
 {  
     $tabla = "producto";
+    $cantidad = $_POST['dato'];
     $parametro = $_POST['parametros'];
     $allStates = new AjaxFormatoContrato();
-    $allStates->ajaxConsultarProductosDisponibles($tabla,$parametro);
+    $allStates->ajaxConsultarProductosDisponibles($tabla,$parametro,$cantidad);
 }
 if(isset($_POST["nombre"]))
 {  
@@ -84,9 +90,10 @@ if(isset($_POST["nombre"]))
     $sucursal = $_POST['sucursal'];
     $capacidadEstantes = $_POST['capacidadEstantes'];
     $capacidadBotellon = $_POST['capacidadBotellon'];
+    $idProducto = $_POST['idProducto'];
 
     $allStates = new AjaxFormatoContrato();
-    $allStates->ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon);
+    $allStates->ajaxRegistrarPersona($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idProducto);
 }
 
 if(isset($_POST["parametro"]))
@@ -120,6 +127,12 @@ if(isset($_POST["valorAnterior"]))
     $atributo = $_POST["atributo"];
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxConsultarSelectsContrato($valorAnterior,$tablaSelect,$atributo);
+}
+if(isset($_POST["tipoProductoAConsultar"]))
+{  
+    $tipoProducto = $_POST["tipoProductoAConsultar"];
+    $allStates = new AjaxFormatoContrato();
+    $allStates->ajaxConsultarCapacidad($tipoProducto);
 }
 
 

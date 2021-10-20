@@ -7,6 +7,9 @@ $resultadoConsultarZonas = ControladorFormatoContrato::ctrlConsultarTotalProduct
 $tabla = "serialproducto";
 $resultadoConsultarTipoContrato = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("tipocontrato");
 $resultadoConsultarSucursales = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("sucursal");
+
+$consultarCapacidadEstante = ControladorFormatoContrato::ctrlConsultarCapacidad("producto");
+
 $resultadoConsultaSerial = ControladorFormatoContrato::ctrlConsultarSerial($tabla);
 $array = $resultadoConsultaSerial;
 ?>
@@ -157,9 +160,7 @@ $array = $resultadoConsultaSerial;
             </div>
             <div class="form-group col-md-4 text-center" id="capacidad">
               <label for="inputState" class="mt-4" id="labelDescripcion">Capacidad</label>
-              <select id="capacidadEstantes" class="form-select mt-3">
-                <option value="1">Estante de 6 botellones</option>
-                <option value="2">Estante de 8 botellones</option>                              
+              <select id="capacidadEstantes" class="form-select mt-3">                            
               </select>
             </div>
             <div class="form-group col-md-4 text-center" id="colocarInput">
@@ -169,7 +170,8 @@ $array = $resultadoConsultaSerial;
           <div class="row">
             <div class="form-group col-md-4 text-center">
               <label for="inputState" id="labelCapacidadBotellon" class="mt-4" id="labelDescripcion">Capacidad Botellon</label>
-              <input type="number" min="1" class="form-control mt-4 w-100" placeholder="Capacidad de botellon" id="capacidadBotellon">
+              <select class="form-select" id="capacidadBotellon">
+              </select>
             </div>  
             <div class="form-group col-md-4 text-center">
             </div>

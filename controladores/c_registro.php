@@ -20,7 +20,7 @@ class ControladorRegistro
         $_SESSION['username'] = $respuesta[1];
         return $respuesta;
 
-	}
+    }
     static public function ctrlAddUser($nombre,$apellido,$direccion,$cedula,$telefono,$correo,$sector,$tipoUsuario,$contrasena)
     {
 
@@ -42,5 +42,5 @@ class ControladorRegistro
 
         $respuesta = ModeloRegistro::mdlRegistroUsuario($tabla,$tabla2,$datos);
         return $respuesta;
-	}
+    }
 }

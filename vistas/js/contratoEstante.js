@@ -21,13 +21,14 @@ function mostrarContrato(parametro,idTipoUsuario){
     $("#labelCapacidadBotellon").hide();
     $("#capacidadBotellon").hide();
     var input =  `
-    <label for="inputCity" class="mt-4"">Capacidad de Botellones</label>
-    <input type="number" min="1" class="form-control mt-3" id="capacidadBotellon" placeholder="Capacidad de botellones">
+              <label for="inputState" id="labelCapacidadBotellon" class="mt-4" id="labelDescripcion">Capacidad Botellon</label>
+              <select class="form-select mt-3" id="capacidadBotellon"> 
     `;
     $('#capacidad').html(input); 
     $('#capacidad').show();
+    llenarSelectCapacidad(parametro,'capacidadBotellon');
     $( ".boton1" ).click(function() {
-     validarCampos(parametro,idTipoUsuario);
+     validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadBotellon');
    });
 
   }else if (parametro == "Ambos") 
@@ -44,7 +45,7 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#colocarInput').show();
     $( ".boton1" ).click(function() {
      parametro = "estantes";
-     validarCampos(parametro,idTipoUsuario);
+     //validarCampos(parametro,idTipoUsuario,'cantidadEstantes','');
    });
 
   }else
@@ -54,8 +55,9 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#cajasContrato').hide();
     $('#titulo').hide();
     $('#menuCajas').hide();
+    llenarSelectCapacidad(parametro,'capacidadEstantes');
     $( ".boton1" ).click(function() {
-     validarCampos(parametro,idTipoUsuario);
+     validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
    });
   }
 
@@ -100,6 +102,51 @@ $('#ciudadComercio').click(function() {
       tabla = "parroquia";
       llenarSelect(estado,selector,tabla,"Ciudad_idCiudad","idParroquia","nombreParroquia");
 });
+
+function llenarSelectCapacidad(tipoProductoAConsultar,selector)
+{
+  var datos = new FormData();
+  datos.append("tipoProductoAConsultar", tipoProductoAConsultar);
+
+  let plantilla2 = " ";
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    { 
+       if(respuesta3.length >10)
+       {
+        respuesta3 =respuesta3.replace("[","");
+        respuesta3 =respuesta3.replace("]","");
+        var auxSplit2 = respuesta3.split("},");
+        for(var i=0;i<auxSplit2.length;i++)
+        {
+          if(!auxSplit2[i].includes("}"))
+          {
+            auxSplit2[i] = auxSplit2[i]+"}";
+          }
+          var res2 = JSON.parse(auxSplit2[i]);
+          plantilla2 += `
+          <option value="${res2.idProducto}">${res2.capacidadProducto}</option>
+          `;
+        }
+
+
+        $(`#${selector}`).html(plantilla2); 
+        $(`#${selector}`).show();
+
+      }else
+      {
+        $(`#${selector}`).hide();  
+        $(`#${selector}`).val('');
+      }
+    }
+  })
+}
 
 function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro2)
 {
@@ -183,9 +230,9 @@ $("#cedulaCliente").keyup(function(){
 
 //Validar que los campos no sean vacios y compararlos con su respectiva expresion regular
 
-function validarCampos(parametro,idTipoUsuario)
+function validarCampos(parametro,idTipoUsuario,selector,selector2)
 {
- /* var nombre = $('#nombreCliente').val();
+  var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
   var direccion = $('#direccionCliente').val();
@@ -428,20 +475,20 @@ function validarCampos(parametro,idTipoUsuario)
       timer: 1500
     })        
      return false;
-    }*/
+    }
 
-    consultarProductosDisponibles(parametro,idTipoUsuario);
+    consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector2);
 
     return true;
 
 }
 
 
-function mostrarModal(parametro,idTipoUsuario)
+function mostrarModal(parametro,idTipoUsuario,idProducto)
 {
  consultarFormatoContrato(parametro);
  //registrarContrato(parametro);
- registrarPersonas(parametro,idTipoUsuario);
+ registrarPersonas(parametro,idTipoUsuario,idProducto);
  $("#modal2").modal("show");
 }
 
@@ -545,12 +592,13 @@ function consultarCamposDeTienda(id)
 
 }
 //Consultar que si hallan productos
-function consultarProductosDisponibles(parametro,idTipoUsuario)
+function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector2)
 {
-  var dato = "Activar"
+  var cantidad = $(`#${selector}`).val();
   var datos = new FormData();
-  datos.append("dato", dato);
-  datos.append("parametros", parametro);
+  var idProducto = $(`#${selector2}`).val();
+  datos.append("dato", cantidad);
+  datos.append("parametros", idProducto);
 
   let plantilla2 = " ";
   let obj
@@ -563,25 +611,13 @@ function consultarProductosDisponibles(parametro,idTipoUsuario)
     processData: false,
     success: function(respuesta3)
     {
-     if(!respuesta3.includes('false'))
-     {     
-        respuesta3 =respuesta3.replace("[","");
-        respuesta3 =respuesta3.replace("]","");
-        var auxSplit2 = respuesta3.split("},");
-
-        for(var i=0;i<auxSplit2.length;i++){
-          if(!auxSplit2[i].includes("}")){
-            auxSplit2[i] = auxSplit2[i]+"}";
-          }
-          var res2 = JSON.parse(auxSplit2[i]);
-        }
-        mostrarModal(parametro,idTipoUsuario);
-
-     }else
-     {
-          if (parametro == 'ambos') 
-          {
-              Swal.fire({
+      alert(respuesta3);
+      if(respuesta3.includes('ok'))
+      {     
+          mostrarModal(parametro,idTipoUsuario,idProducto);
+      }else if (respuesta3.includes('errorExistencia')) 
+      {
+         Swal.fire({
                 position: 'top-end',
                 icon: 'error',
                 toast: true,
@@ -590,19 +626,18 @@ function consultarProductosDisponibles(parametro,idTipoUsuario)
                 timerProgressBar: true,
                 timer: 1500
               }) 
-          }else
-          {
-            Swal.fire({
-              position: 'top-end',
-              icon: 'error',
-              toast: true,
-              title: 'No hay '+parametro+' '+'disponibles',
-              showConfirmButton: false,
-              timerProgressBar: true,
-              timer: 1500
-            }) 
-          }
-     }
+      }else
+      {
+         Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                toast: true,
+                title: 'No hay suficientes '+parametro,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 1500
+              }) 
+      }
     }
   })
 }
@@ -665,7 +700,7 @@ function consultarFormatoContrato(parametro)
 }
 
 //registrar persona, tienda y contrato en BD despues de haber generado contrato
-function registrarPersonas(parametro,idTipoUsuario)
+function registrarPersonas(parametro,idTipoUsuario,idProducto)
 {
 
   //Guardando valores en variables
@@ -725,6 +760,7 @@ function registrarPersonas(parametro,idTipoUsuario)
 //Datos de contrato
 
   datos.append("idTipoContrato", parametro);
+  datos.append("idProducto", idProducto);
 
 
   $.ajax({

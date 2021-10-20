@@ -32,7 +32,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
             </div>
             <div>       
               <div class="exerpt">
-               Generar contrato de préstamos de producto.
+               Generar contrato de préstamo de producto.
              </div>
            </div>
          </div>

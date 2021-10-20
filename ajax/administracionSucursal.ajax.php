@@ -19,24 +19,37 @@ class   AjaxAdministracionSucursal{
         $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarSiRegistroExisteBD($parametro1,$parametros2,$parametros3,$tabla,$atributo1,$atributo2,$atributo3);
         echo  json_encode ($respuesta);
     }
-   public function ajaxEliminarMunicipio($idDelete,$tabla,$atributo)
+   public function ajaxEliminarSucursal($idDelete,$tabla,$atributo)
     {
         $respuesta = ControladorRegistroAdminGeneral::ctrleliminar($idDelete,$tabla,$atributo);
         echo  json_encode ($respuesta);
     }
-    public function ajaxModificarOfTable3Campos($parametros1,$parametros2,$parametros3,$parametros4,$tabla,$atributo1,$atributo2,$atributo3,$atributo4)
+    public function ajaxModificarOfTable2Campos($parametros1,$parametros2,$parametros3,$tabla,$atributo1,$atributo2,$atributo3)
     {
-        $respuesta = ControladorRegistroAdminGeneral::ctrlModificarOfTable3Campos($parametros1,$parametros2,$parametros3,$parametros4,$tabla,$atributo1,$atributo2,$atributo3,$atributo4);
+        $respuesta = ControladorRegistroAdminGeneral::ctrlModificarOfTable2CamposStrings($parametros1,$parametros2,$parametros3,$tabla,$atributo1,$atributo2,$atributo3);
         echo  json_encode ($respuesta);
     }
 
 
-
+    public function ajaxConsultarSiRegistroExisteBD2parametros($parametro1,$parametro2,$tabla,$atributo1,$atributo2){
+         $respuesta = ControladorRegistroAdminGeneral::ctrlconsultarRegistroExisteBDDosParamtros($parametro1,$parametro2,$tabla,$atributo1,$atributo2);
+         echo  json_encode ($respuesta);
+	}
 
    public function ajaxAddRegistroTresParametros($parametro1,$parametro2,$parametro3,$tabla,$atributo1,$atributo2,$atributo3){
         $respuesta = ControladorRegistroAdminGeneral::ctrlAddRegistroTresParametros($parametro1,$parametro2,$parametro3,$tabla,$atributo1,$atributo2,$atributo3);
         echo  json_encode ($respuesta);
     }
+
+    public function ajaxAddRegistroDosParametrosString($parametro1,$parametro2,$tabla,$atributo1,$atributo2){
+        $respuesta = ControladorRegistroAdminGeneral::ctrladdOfTableDosParametrosString($parametro1,$parametro2,$tabla,$atributo1,$atributo2);
+        echo  json_encode ($respuesta);
+    }
+
+    public function ajaxConsultarSiRegistroExisteBDDosParametrosSrting($parametro1,$parametro2,$tabla,$atributo1,$atributo2){
+        $respuesta = ControladorRegistroAdminGeneral::ctrlconsultarRegistroExisteBDDosParamtros($parametro1,$parametro2,$tabla,$atributo1,$atributo2);
+        echo  json_encode ($respuesta);    
+	}
 
  }
 //---------------------------------------------------------------------------------------------------------------
@@ -46,55 +59,31 @@ if(isset($_POST["parametroNeutro"]))
     $objSucursal->ajaxConsultaTodosBD("sucursal");
 }
 
-
-
-
-
-
-
-
-if(isset($_POST["municipio"]))
+if(isset($_POST["nameSucursal"]))
 {  
-    $objMunicipio = new AjaxAdministracionMunicipio();
-    $municipio = $_POST['municipio'];
-    $idEstadoValue = $_POST['idEstadoValue'];
-    $capital = $_POST['capital'];
-    $objMunicipio->ajaxConsultarSiRegistroExisteBD($municipio,$idEstadoValue,$capital,"municipio","nombreMunicipio","Estado_idEstado","capitalMunicipio");
+    $objSucursal = new AjaxAdministracionSucursal();
+    $sucursal = $_POST['nameSucursal'];
+    $direccion = $_POST['direccion'];
+    $objSucursal->ajaxConsultarSiRegistroExisteBDDosParametrosSrting($sucursal,$direccion,"sucursal","nombreSucursal","direccionSucursal");
 }
-if(isset($_POST["addMunicipio"]))
+if(isset($_POST["nombreSucursalAdd"]))
 {  
-    $allStates = new AjaxAdministracionMunicipio();
-    $municipio     = $_POST["addMunicipio"];
-    $capital       = $_POST["addCapital"];
-    $idEstadoValue = $_POST["addidEstadoValue"];
-    $allStates->ajaxAddRegistroTresParametros($idEstadoValue,$municipio,$capital,"municipio","Estado_idEstado","nombreMunicipio","capitalMunicipio");
+    $allStates = new AjaxAdministracionSucursal();
+    $sucursal     = $_POST["nombreSucursalAdd"];
+    $direccion       = $_POST["direccionAdd"];
+    $allStates->ajaxAddRegistroDosParametrosString($sucursal,$direccion,"sucursal","nombreSucursal","direccionSucursal");
 }
-if(isset($_POST["idMunicipioDelete"])){
-    $objMunicipio = new AjaxAdministracionMunicipio();
-    $idDeleteMunicipio = $_POST['idMunicipioDelete'];
-    $objMunicipio->ajaxEliminarMunicipio($idDeleteMunicipio,"municipio","idMunicipio");
+if(isset($_POST["idSucursalDelete"])){
+    $objMunicipio = new AjaxAdministracionSucursal();
+    $idDeleteSucursal = $_POST['idSucursalDelete'];
+    $objMunicipio->ajaxEliminarSucursal($idDeleteSucursal,"sucursal","idSucursal ");
 }
-if(isset($_POST["idMunicipioEdit"])){
-    $objEstado = new AjaxAdministracionMunicipio();
-    $idMunicipioEdit = $_POST['idMunicipioEdit'];
-    $nombreMunicipioEdit = $_POST['nombreMunicipioEdit'];
-    $capitalMunicipioEdit = $_POST['capitalMunicipioEdit'];
-    $idEstadoEditipioEdit = $_POST['idEstadoEdit'];
-    $objEstado->ajaxModificarOfTable3Campos($nombreMunicipioEdit,$capitalMunicipioEdit,$idEstadoEditipioEdit,$idMunicipioEdit,"municipio","nombreMunicipio","capitalMunicipio","Estado_idEstado","idMunicipio");
-}
-/*Ajax para sucursales*/
-if(isset($_POST["sector"]))
-{  
-    $allStates = new AjaxAdministracionMunicipio();
-    $sector    = $_POST["sector"];
-    $sucursal  = $_POST["sucursal"];
-    $direccion = $_POST["direccion"];
-    $allStates->ajaxAddRegistroTresParametros($sector,$sucursal,$direccion,"sucursal","Sector_idSector" ,"nombreSucursal","direccionSucursal");
-}
-if(isset($_POST["consultar"]))
-{  
-    $objmunicipio = new AjaxAdministracionMunicipio();
-    $objmunicipio->ajaxConsultaTodosBD("sucursal");
+if(isset($_POST["idSucursalModificado"])){
+    $objEstado = new AjaxAdministracionSucursal();
+    $idSucursalEdit = $_POST['idSucursalModificado'];
+    $nombreSucursalEdit = $_POST['sucursalupdate'];
+    $direccionEdit = $_POST['direccionUpdate'];
+    $objEstado->ajaxModificarOfTable2Campos($nombreSucursalEdit,$direccionEdit,$idSucursalEdit,"sucursal","nombreSucursal","direccionSucursal","idSucursal");
 }
 
 ?>

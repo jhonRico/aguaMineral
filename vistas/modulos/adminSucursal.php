@@ -25,8 +25,8 @@
           <div class="me-5">
             <div class="me-5">
               <div class="me-5">
-                <button class="mb-2 ms-0 mt-2 btn btn-primary me-4 text-white mostrarModalAddSucursal" id="" type="button" dataToggle="modal">Agregar</button>  
-                        
+                <button class="mb-2 ms-0 mt-2 btn btn-primary me-4 text-white modalAddSucursal"  type="button" dataToggle="modal">Agregar</button>  
+                  <div id="aqui"></div>          
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
 </div>  
 </div>
 </form>
-  <!-- Modal para agregar una nuevo estado -->
+  <!-- Modal para agregar una nueva sucursal -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="moddAddSucursal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
@@ -57,16 +57,10 @@
                                       <div class="modal-body mx-3">
 
                                             <div class="modal-body"> 
-                                               <p>Sector</p>
-                                                 <select name="" id="idSector" class="form-select w-75">
-                                                    <?php foreach ($respuesta as $key): ?>
-                                                       <option value="<?php echo $key['idSector']; ?>"><?php echo $key['nombreSector']; ?></option>
-                                                    <?php endforeach ?>
-                                                  </select>
-                                                   <label for="form-label" class="mt-3 mb-3">Sucursal</label>
+                                               <label for="form-label" class="mt-3 mb-3">Sucursal</label>
                                                    <input   type="text" class="form-control" id="sucursalAdd" name ="" placeholder="Por favor ingrese una Sucursal" required>  
                                                    <label for="form-label" class="mt-3 mb-3">Dirección</label>
-                                                   <input   type="text" class="form-control" id="direccionAdd" name ="" placeholder="Por favor ingrese una direccion" required>
+                                                   <input   type="text" class="form-control" id="direccionAdd" name ="" placeholder="Por favor ingrese una dirección" required>
                                              </div>
                                       </div>
 
@@ -82,7 +76,7 @@
   </form>
     <!-- Modal para editar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
-        <div class="modal fade" id="editCiudad" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="editSucursal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
                   <div class="modal-dialog">
                            <div class="modal-content">
@@ -92,21 +86,17 @@
                                         </div>
                                       <div class="modal-body mx-3">
                                          <div class="modal-body">  
-                                          <select name="" id="MunicipioSelectEdit" class="form-select w-75">
-                                             <?php foreach ($respuesta as $key): ?>
-                                                <option value="<?php echo $key['idSector']; ?>"><?php echo $key['nombreSector']; ?></option>
-                                             <?php endforeach ?>
-                                           </select>                                       
-                                          </div>
-                                             <div class="modal-body">                       
-                                                   <input   type="text" class="form-control" id="nameCiudadIdEdit" name ="nameCiudadIdEdit" value="" placeholder="Por favor ingrese el nombre del pais" required>  
-                                             </div>
+                                                 <input   type="text" class="form-control" id="sucursalupdate" name ="" placeholder="Por favor ingrese una Sucursal" required>  
+                                                 <label for="form-label" class="mt-3 mb-3">Dirección</label>
+                                                 <input   type="text" class="form-control" id="direccionUpdate" name ="" placeholder="Por favor ingrese una dirección" required>
+                                  
+                                          </div>                                             
                                       </div>
 
                                        <div class="form-group">  
                                                <div class="modal-footer">         
                                                      <button type="submit" class="btn btn-secondary " style ="width:48%;"data-dismiss="modal">Cancelar</button>                                                                 
-                                                     <a style ="width:48%;" id = "editarCiudadValue"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
+                                                     <a style ="width:48%;" id = "editarSucursalValue"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
                                                 </div>
                                          </div>
                             </div>

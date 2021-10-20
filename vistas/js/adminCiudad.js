@@ -1,5 +1,7 @@
 /*------Cuando carga la pagina, consulta los  registrados de ciudades*/
 $(document).ready(function(){ 
+	
+
 	rutaActual = window.location.toString();
 	if(rutaActual.includes("adminCiudad")){   		
 		consultarAllCiudades();
@@ -402,73 +404,3 @@ function modificarCiudadValue(id,descripcion,idPais)
 /*------------------------------------------Finaliza el Espacio de Editar tipo de usuario----------------------------------*/
 
 
-/*----Empieza el espacio de Registrar Sur------*/
-
-$(document).ready(function() {
-	$(".mostrarModalAddSucursal").click(function() 
-	{
-		mostrarModalRegistrarSucursal();
-	});
-	$(".cerrar").click(function() 
-	{
-		cerrarModalRegistrarSucursal();
-	});
-	$("#agregarSucursalBtn").click(function() 
-	{
-		validarRegistroSucursal();
-	});
-});
-function mostrarModalRegistrarSucursal()
-{
-	$("#moddAddSucursal").modal("show");
-}
-function cerrarModalRegistrarSucursal()
-{
-	$("#moddAddSucursal").modal("hide");
-}
-
-function validarRegistroSucursal()
-{
-	var sucursal = $("#sucursal").val();
-	var direccion = $("#direccion").val();
-	if (sucursal == "") 
-	{
-		Swal.fire({
-			position: 'top-end',
-			icon: 'error',
-			toast: true,
-			title: 'El campo esta vacio',
-			showConfirmButton: false,
-			timerProgressBar: true,
-			timer: 1500
-		})
-		return false;
-	}
-	if (!expresiones.nombre.test(sucursal)) 
-	{
-		Swal.fire({
-			position: 'top-end',
-			icon: 'error',
-			toast: true,
-			title: 'Ingrese una sucursal valida',
-			showConfirmButton: false,
-			timerProgressBar: true,
-			timer: 1500
-		})
-		return false;
-	}
-	if (direccion == "") 
-	{
-		Swal.fire({
-			position: 'top-end',
-			icon: 'error',
-			toast: true,
-			title: 'El campo esta vacio',
-			showConfirmButton: false,
-			timerProgressBar: true,
-			timer: 1500
-		})
-		return false;
-	}
-	
-}

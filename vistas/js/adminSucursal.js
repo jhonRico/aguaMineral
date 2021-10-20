@@ -1,16 +1,16 @@
-/*------Cuando carga la pagina, consulta los  registrados de Municipios*/
+/*------Cuando carga la pagina, consulta los  registrados de ciudades*/
 $(document).ready(function(){ 
 	rutaActual = window.location.toString();
-	if(rutaActual.includes("adminSucursal")){   		
-		consultarAllSucursal();
+	if(rutaActual.includes("adminSucursal")){ 
+	    consultarAllSucursalesValue();
 	}
-
 });
-/*------------------------------------------Inicia el Espacio de consultar Municipios----------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------*/
-function consultarAllSucursal(){
 
-		
+/*------------------------------------------Inicia el Espacio de consultar ciudades----------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------*/
+function consultarAllSucursalesValue(){
+
+
 	var datos = new FormData();
 	datos.append("parametroNeutro", "nulo");
 	let plantilla2 = " ";
@@ -24,7 +24,7 @@ function consultarAllSucursal(){
 		processData: false,
 		success: function(respuesta3){
 			
-			 if(respuesta3.length >10 ){
+			if(respuesta3.length >10 ){
 
 				respuesta3 =respuesta3.replace("[","");
 				respuesta3 =respuesta3.replace("]","");
@@ -37,10 +37,10 @@ function consultarAllSucursal(){
 					}
 					var res2 = JSON.parse(auxSplit2[i]);
 					var aux = "'"+res2.nombreSucursal+"'";
-					var aux1 = "'"+res2.nombreSucursal+"'";
+					var aux2 = "'"+res2.direccionSucursal+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreSucursal+'<a href="javascript:eliminarMunicipio('+res2.idSucursal +')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditMunicipio('+res2.idMunicipio+','+aux+','+aux1+','+res2.Estado_idEstado+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreSucursal+'<a href="javascript:eliminarCiudad('+res2.idSucursal+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditSucursal('+res2.idSucursal+','+aux+','+aux2+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -50,20 +50,18 @@ function consultarAllSucursal(){
 				$('#verSucursal').show();
 			}else{
 				$("#verSucursal").hide(); 
-					
+
 			}
 			
 
 		}
 	})
 }
-
-
-/*------------------------------------------Inicia el Espacio de agregar municipio----------------------------------*/
+/*------------------------------------------Inicia el Espacio de agregar Ciudades----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 
 $(function(){
-	$(".agregarSucursalBtn").click(function(){
+	$(".modalAddSucursal").click(function(){
 		$("#moddAddSucursal").modal("show");
 	})
 })
@@ -72,86 +70,81 @@ $(function(){
 $(function(){
 	$(".cerrar").click(function(){
 		$("#sucursalAdd").val('');
-		$("#direccionAdd").val('');
 		$("#moddAddSucursal").modal("hide");
 	})
 })
 
 $(function(){
-	$("#agregarMunicipioBtn").click(function(){
-
-		var sucursal = $("#sucursalAdd").val();
+	$("#agregarSucursalBtn").click(function(){
+	    
+		var nameSucursal= $("#sucursalAdd").val();
 		var direccion = $("#direccionAdd").val();
+		if (nameSucursal == "") 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'El campo esta vacio',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
+		if (!expresiones.nombre.test(nameSucursal)) 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'Ingrese un valor valido',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
+
+		if (direccion == "") 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'El campo esta vacio',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
 		
-			if (sucursal == "") 
- 			{
- 				Swal.fire({
- 					position: 'top-end',
- 					icon: 'error',
- 					toast: true,
- 					title: 'El campo esta vacio sucursal',
- 					showConfirmButton: false,
- 					timerProgressBar: true,
- 					timer: 1500
- 				})
- 				return false;
- 			}
- 			if (!expresiones.nombre.test(sucursal)) 
- 			{
- 				Swal.fire({
- 					position: 'top-end',
- 					icon: 'error',
- 					toast: true,
- 					title: 'Ingrese un valor valido en sucursal',
- 					showConfirmButton: false,
- 					timerProgressBar: true,
- 					timer: 1500
- 				})
- 				return false;
- 			}
-			if (direccion == "") 
- 			{
- 				Swal.fire({
- 					position: 'top-end',
- 					icon: 'error',
- 					toast: true,
- 					title: 'El campo esta vacio dereccion',
- 					showConfirmButton: false,
- 					timerProgressBar: true,
- 					timer: 1500
- 				})
- 				return false;
- 			}
- 			
-			validarRegistroSucursal();
+		validarRegistroSucursal(nameSucursal,direccion);
 
-			return true;
-		})
+		return true;
 	})
+})
 
-function validarRegistroSucursal()
-{
-		var sucursal = $("#sucursalAdd").val();
-		var direccion = $("#direccionAdd").val();
-		var idEstadoValue = $("#idSector").val();
+function validarRegistroSucursal(nameSucursal,direccion){
 
-	var ejecutar = validarRegistroExistenteSucursal(municipio,capital,idEstadoValue);
+	var ejecutar = validarRegistroExistenteSucursal(nameSucursal,direccion);
+	
 	if(ejecutar == "No existe"){
-	     registrarCampoMunicipio(municipio,capital,idEstadoValue);
-		 consultarAllMunicipios();	
+		registrarCampoSucursal(nameSucursal,direccion);
+		consultarAllSucursalesValue();	
 	}
 
 }
-/*Funcion Ajax que registra el estado en BD*/
-function registrarCampoMunicipio(municipio,capital,idEstadoValue)
+/*Funcion Ajax que registra el ciudad en BD*/
+function registrarCampoSucursal(nameSucursal,direccion)
 {
 	var datos = new FormData();
 
-	datos.append("addMunicipio", municipio);
-	datos.append("addCapital", capital);
-	datos.append("addidEstadoValue", idEstadoValue);
+	datos.append("nombreSucursalAdd", nameSucursal);
+	datos.append("direccionAdd", direccion);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
+		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -159,12 +152,13 @@ function registrarCampoMunicipio(municipio,capital,idEstadoValue)
 		processData: false,
 		async:false,
 		success: function(respuesta)
-		{     			
+		{     
+			
 			if(!respuesta.includes("ok"))
 			{
 				Swal.fire({
 					title: 'Error',
-					text: 'Error al registrar '+respuesta,
+					text: 'Error al registrar ',
 					icon: 'error',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'
@@ -181,9 +175,9 @@ function registrarCampoMunicipio(municipio,capital,idEstadoValue)
 				{
 					if (result.isConfirmed)
 					{
-					    $("#nameMunicipio").val('');
-						$("#capitalMunicipio").val('');
-						$("#moddaddmunicipio").modal("hide");
+						$("#sucursalAdd").val('');
+						$("#direccionAdd").val('');
+						$("#moddAddSucursal").modal("hide");
 					}
 
 				})
@@ -195,16 +189,16 @@ function registrarCampoMunicipio(municipio,capital,idEstadoValue)
 }
 //Funcion Ajax que valida existente en BD 
 
-function validarRegistroExistenteSucursal(municipio,capital,idEstadoValue)
+function validarRegistroExistenteSucursal(nameSucursal,direccion)
 {
+
 	var datos = new FormData();
 	var returnValue = "Existe";
-	datos.append("municipio", municipio);
-	datos.append("idEstadoValue", idEstadoValue);
-	datos.append("capital", capital);
+	datos.append("nameSucursal", nameSucursal);
+	datos.append("direccion", direccion);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
+		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -212,56 +206,13 @@ function validarRegistroExistenteSucursal(municipio,capital,idEstadoValue)
 		processData: false,
 		async:false,
 		success: function(respuesta)
-		{  
+		{
 			if(respuesta.includes("false"))
 			{
-			   returnValue =  "No existe";
+				returnValue =  "No existe";
 			}else
 			{
-			  
-				Swal.fire({
-					position: 'top-end',
-					icon: 'error',
-					toast: true,
-					title: 'El registro ya existe ',
-					showConfirmButton: false,
-					timerProgressBar: true,
-					timer: 1500
-				})
-				returnValue =  "Existe";
-			}
 
-		}                 
-
-	})
-
-	return returnValue;
-}
-
-function validarRegistroExistenteMunicipio(municipio,capital,idEstadoValue)
-{
-	var datos = new FormData();
-	var returnValue = "Existe";
-	datos.append("municipio", municipio);
-	datos.append("idEstadoValue", idEstadoValue);
-	datos.append("capital", capital);
-
-	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
-		method:"POST",
-		data: datos, 
-		cache: false,
-		contentType: false,
-		processData: false,
-		async:false,
-		success: function(respuesta)
-		{  
-			if(respuesta.includes("false"))
-			{
-			   returnValue =  "No existe";
-			}else
-			{
-			  
 				Swal.fire({
 					position: 'top-end',
 					icon: 'error',
@@ -281,3 +232,202 @@ function validarRegistroExistenteMunicipio(municipio,capital,idEstadoValue)
 	return returnValue;
 }
 /*------------------------------------------Finaliza el Espacio de agregar estados----------------------------------*/
+
+/*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
+/*----------------------------------------------------------------------------------------------------------*/
+function eliminarCiudad(id){
+	Swal.fire({
+		title: 'Eliminar',
+		text: "¿Seguro que desea eliminar la sucursal?",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: 'red',
+		cancelButtonColor: 'gray',
+		confirmButtonText: 'Eliminar'
+	}).then((result) => {
+		if (result.isConfirmed){
+			eliminarSucursalFinal(id);
+			consultarAllSucursalesValue();
+		}
+	})
+}
+//------------------Funcion que elimina un tipo de usuario-----
+function eliminarSucursalFinal(id)
+{
+	var datos = new FormData();
+
+	datos.append("idSucursalDelete", id);
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		async:false,
+		success: function(respuesta)
+		{
+			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
+			{
+				mensajeError('Error al eliminar la sucursal');
+			}else if(respuesta.includes("relacionado")){
+			   mensajeError('No se puede eliminar la sucursal, se encuentra con contratos asociados');
+			}else
+			{
+				Swal.fire({
+					title: 'sucursal Eliminada',
+					icon: 'success',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				});
+			}
+
+		}                 
+
+	})
+}
+
+ //----------------Funcion para mensaje de alerta de error
+ function mensajeError(mensaje){ 
+  	Swal.fire({
+ 		title: 'Error',
+ 		text: mensaje,
+ 		icon: 'error',
+ 		showCloseButton: true,
+ 		confirmButtonText:'Aceptar'
+ 	}); 
+ }
+/*------------------------------------------Finaliza el Espacio de eliminar----------------------------------*/
+
+
+
+/*------------------------------------------Inicia el Espacio de Editar estados----------------------------------*/
+/*----------------------------------------------------------------------------------------------------------*/
+
+function mostrarModalEditSucursal(idsucursal, nombreSucursalUpdate, direccionSucursalUpdate)
+{
+	
+	
+	$("#editSucursal").modal("show");
+	$("#sucursalupdate").attr('value', nombreSucursalUpdate);
+	$("#direccionUpdate").attr('value', direccionSucursalUpdate);
+	//document.getElementById("MunicipioSelectEdit").value = idMunicipioUpdate;
+	
+	$("#editarSucursalValue").click(function(){
+
+		var existeInTable = validarRegistroExistenteSucursal($("#sucursalupdate").val(),$("#direccionUpdate").val());
+		if(existeInTable == "No existe"){
+			modificarSucursalFinal(idsucursal, $("#sucursalupdate").val(), $("#direccionUpdate").val());
+		}
+
+	})
+
+}
+
+
+function modificarSucursalFinal(id, sucursalupdate, direccionUpdate)
+{
+
+	if (sucursalupdate == "") 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'El campo esta vacio',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
+	if (!expresiones.nombre.test(sucursalupdate)) 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'Ingrese una zona válida',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
+	if (direccionUpdate == "") 
+	{
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			toast: true,
+			title: 'El campo esta vacio',
+			showConfirmButton: false,
+			timerProgressBar: true,
+			timer: 1500
+		})
+		return false;
+	}
+
+
+	modificarSucursalValue(id, sucursalupdate, direccionUpdate);
+	consultarAllSucursalesValue(); 			
+
+	return true;
+}
+
+
+function modificarSucursalValue(id, sucursalupdate, direccionUpdate)
+{
+	var datos = new FormData();
+	datos.append("idSucursalModificado", id);
+	datos.append("sucursalupdate", sucursalupdate);
+	datos.append("direccionUpdate", direccionUpdate);
+
+
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		async:false,
+		success: function(respuesta)
+		{  		   
+			if(!respuesta.includes("ok"))
+			{
+				Swal.fire({
+					title: 'Error',
+					text: 'Error al modificar la sucursal ',
+					icon: 'error',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				}); 
+
+			}else
+			{
+				Swal.fire({
+					title: 'Sucursal Modificado',
+					icon: 'success',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				}).then((result) => 
+				{
+					if (result.isConfirmed)
+					{
+						$("#sucursalupdate").attr('value',null);
+						$("#direccionUpdate").attr('value',null);
+						$("#editSucursal").modal("hide");
+						location.reload();
+					}
+				})
+			}
+
+		}                 
+
+	})
+}
+
+/*------------------------------------------Finaliza el Espacio de Editar tipo de usuario----------------------------------*/
+
+

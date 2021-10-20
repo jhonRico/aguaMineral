@@ -138,27 +138,18 @@ class ModeloFormatoContrato
 
 static public function mdlConsultarProductosDisponibles($tabla,$datos)
 {
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN tipoproducto ON $tabla.TipoProducto_idTipoProducto =  tipoproducto.idTipoProducto WHERE $tabla.idProducto = :parametro");
-    $stmt->bindParam(":parametro", $datos["parametro"], PDO::PARAM_INT);
-    $stmt -> execute();
-    if ($stmt -> fetch() != false) 
-    {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN tipoproducto ON $tabla.TipoProducto_idTipoProducto =  tipoproducto.idTipoProducto WHERE $tabla.cantidadProductos >= :cantidad");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN tipoproducto ON $tabla.TipoProducto_idTipoProducto =  tipoproducto.idTipoProducto WHERE $tabla.cantidadProductos >= :cantidad AND $tabla.idProducto = :parametro");
         $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+        $stmt->bindParam(":parametro", $datos["parametro"], PDO::PARAM_INT);
+
         $stmt->execute();
         if ($stmt -> fetch() != false) 
         {
             return "ok";
         }else
         {
-            return $stmt->fetch();
+            return "false";
         }
-    }else
-    {
-        return "errorExistencia";
-    }
-    
-
 }
 
 static public function mdlConsultarFormatoContrato($tabla,$datos)

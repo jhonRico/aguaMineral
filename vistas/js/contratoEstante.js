@@ -41,11 +41,13 @@ function mostrarContrato(parametro,idTipoUsuario){
     <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de Botellones</label>
     <input type="number" min="1" class="form-control mt-3" id="cantidadBotellones" placeholder="Cantidad de botellones">
     `;
+    llenarSelectCapacidad('Estantes','capacidadEstantes');
+    llenarSelectCapacidad('Botellones','capacidadBotellon');
+
     $('#colocarInput').html(input); 
     $('#colocarInput').show();
     $( ".boton1" ).click(function() {
-     parametro = "estantes";
-     validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+     ejecutarFuncionAmbos(parametro,idTipoUsuario);
    });
 
   }else
@@ -102,6 +104,20 @@ $('#ciudadComercio').click(function() {
       tabla = "parroquia";
       llenarSelect(estado,selector,tabla,"Ciudad_idCiudad","idParroquia","nombreParroquia");
 });
+
+function ejecutarFuncionAmbos(parametro,idTipoUsuario)
+{
+  consultarProductosDisponibles(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+  consultarProductosDisponibles(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
+  setInterval(ejecutar(idTipoUsuario),5000);
+}
+function ejecutar(idTipoUsuario)
+{
+    idProducto1 = $("#capacidadEstantes").val();
+    idProducto2 = $("#capacidadBotellon").val();
+    registrarPersonas('Estantes',idTipoUsuario,idProducto1);
+    registrarPersonas('Botellones',idTipoUsuario,idProducto2);
+}
 
 function llenarSelectCapacidad(tipoProductoAConsultar,selector)
 {
@@ -478,6 +494,7 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
     }
 
     consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector2);
+    mostrarModal(parametro,idTipoUsuario,idProducto);
 
     return true;
 
@@ -611,9 +628,8 @@ function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector
     success: function(respuesta3)
     {
       alert(respuesta3);
-      if(respuesta3.includes('ok'))
+      if(!respuesta3.includes('false'))
       {     
-          mostrarModal(parametro,idTipoUsuario,idProducto);
       }else
       {
          Swal.fire({

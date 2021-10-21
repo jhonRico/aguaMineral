@@ -45,6 +45,7 @@
     <script src="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/js/bootstrap.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/jquery.min.js"></script>
     <script src="<?php echo $url ?>vistas/js/plugins/sweetalert.min.js"></script>
+    <script src="<?php echo $url ?>vistas/js/plugins/chartjs.js"></script>
 
 </head>
 <body>
@@ -73,8 +74,8 @@
                        $rutas[0] == "adminPersonas" || $rutas[0] == "zonas" || $rutas[0] == "norte" || $rutas[0] == "sur" || $rutas[0] == "este" || $rutas[0] == "oeste" || $rutas[0] == "centro"
                        || $rutas[0] == "adminTipoUsuario" || $rutas[0] == "administracionZonas" || $rutas[0] == "adminEstado" || $rutas[0] == "registro" || $rutas[0] == "contratoPrincipal" || $rutas[0] == "administracionTipoProducto"
                        || $rutas[0] == "administracionProductos" || $rutas[0] == "administracionMunicipio" || $rutas[0] == "adminCiudad" || $rutas[0] == "adminSucursal"||
-                          $rutas[0] == "adminFormatos"|| $rutas[0] =="adminFormatoEstantes"  || $rutas[0] == "adminFormatoBotellones" || $rutas[0] == "adminFormatoAmbos")  
-                {
+                          $rutas[0] == "adminFormatos"|| $rutas[0] =="adminFormatoEstantes"  || $rutas[0] == "adminFormatoBotellones" || $rutas[0] == "adminFormatoAmbos" || $rutas[0] == "reportePrincipal" || $rutas[0] == "reporteProducto")               
+                    {
                     include "modulos/cabezaLogueado.php";
                     include "modulos/plantillaSlideBar.php";
                     include "modulos/".$rutas[0].".php";
@@ -121,6 +122,7 @@ JAVASCRIPT PERSONALIZADO
 <script src="<?php echo $url ?>vistas/js/blog.js"></script> 
 <script src="<?php echo $url ?>vistas/js/plugins/select2.min.js"></script>
 <script src="<?php echo $url ?>vistas/js/contratoEstante.js"></script>
+<script src="<?php echo $url ?>vistas/js/reporte.js"></script>
 
 <!--=====================================
 INICIO SE SESION CON FACEBOOK 

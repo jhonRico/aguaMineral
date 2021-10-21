@@ -38,11 +38,11 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
          </div>
        </div>     <div class="single-blog col">
           <div class="single-blog-img">
-            <a href="#" ><img src="<?php echo $url2;?>vistas/img/general/reporte.jpg" alt="Blog Image"></a>
+            <a href="http://localhost/aguaMineral/reportePrincipal" ><img src="<?php echo $url2;?>vistas/img/general/reporte.jpg" alt="Blog Image"></a>
           </div>
           <div class="blog-content-box">
             <div class="blog-content">
-              <h4><a href="#"><i class="fas fa-file-alt"></i> REPORTES</a></h4>
+              <h4><a href="http://localhost/aguaMineral/reportePrincipal"><i class="fas fa-file-alt"></i> REPORTES</a></h4>
             </div>
             <div>       
               <div class="exerpt">

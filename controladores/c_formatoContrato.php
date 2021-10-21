@@ -25,11 +25,12 @@ class ControladorFormatoContrato
     }
 
 
-    static public function ctrlConsultarProductosDisponibles($tabla,$parametro,$cantidad)
+    static public function ctrlConsultarProductosDisponibles($tabla,$parametro,$cantidad,$idSucursalProductosDisponibles)
     {
         $datos = array(
              "parametro"=>$parametro,
              "cantidad"=>$cantidad,
+             "idSucursalProductosDisponibles"=>$idSucursalProductosDisponibles,
          );
         $respuesta = ModeloFormatoContrato::mdlConsultarProductosDisponibles($tabla,$datos);
         return $respuesta;
@@ -91,6 +92,23 @@ class ControladorFormatoContrato
         $respuesta = ModeloFormatoContrato::mdlConsultarSelectsDeContrato($tablaSelect,$datos,$atributo);
         return $respuesta;
     }
- 
+    static public function ctrlConsultarProductosDisponiblesAmbos($datoAmbos,$parametrosAmbos, $idSucursalProductosDisponiblesAmbos)
+    {
+        $datos = array(
+             "parametro"=>$parametrosAmbos,
+             "cantidad"=>$datoAmbos,
+             "idSucursalProductosDisponibles"=>$idSucursalProductosDisponiblesAmbos,
+         );
+        $respuesta = ModeloFormatoContrato::mdlConsultarProductosDisponiblesAmbos($datos);
+        return $respuesta;
+    }
+    static public function ctrlRegistrarContratoAmbos($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idEstante,$idBotellon)
+    {
+        date_default_timezone_set("America/Bogota");
+        $fecha = date("Y-m-d H:i:s");
+
+        $respuesta = ModeloFormatoContrato::mdlRegistrarContratoAmbos($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idEstante,$idBotellon,$fecha);
+        return $respuesta;
+    }
 
 }

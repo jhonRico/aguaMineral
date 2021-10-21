@@ -47,7 +47,7 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#colocarInput').html(input); 
     $('#colocarInput').show();
     $( ".boton1" ).click(function() {
-     ejecutarFuncionAmbos(parametro,idTipoUsuario);
+    validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
    });
 
   }else
@@ -104,21 +104,6 @@ $('#ciudadComercio').click(function() {
       tabla = "parroquia";
       llenarSelect(estado,selector,tabla,"Ciudad_idCiudad","idParroquia","nombreParroquia");
 });
-
-function ejecutarFuncionAmbos(parametro,idTipoUsuario)
-{
-  consultarProductosDisponibles(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
-  consultarProductosDisponibles(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
-  setInterval(ejecutar(idTipoUsuario),5000);
-}
-function ejecutar(idTipoUsuario)
-{
-    idProducto1 = $("#capacidadEstantes").val();
-    idProducto2 = $("#capacidadBotellon").val();
-    registrarPersonas('Estantes',idTipoUsuario,idProducto1);
-    registrarPersonas('Botellones',idTipoUsuario,idProducto2);
-}
-
 function llenarSelectCapacidad(tipoProductoAConsultar,selector)
 {
   var datos = new FormData();
@@ -493,18 +478,68 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
      return false;
     }
 
-    consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector2);
-    mostrarModal(parametro,idTipoUsuario,idProducto);
+    if (parametro == "Ambos") 
+    {
+        consultarProductosAmbos(parametro,idTipoUsuario,selector,selector2);
+        consultarProductosAmbos(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
+    }else
+    {
+        idProducto = $(`#${selector2}`).val();
+        consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector2);
+    }
 
     return true;
 
 }
+var contador = 0;
+function consultarProductosAmbos(parametro,idTipoUsuario,selector,selector2)
+{
+  var cantidad = $(`#${selector}`).val();
+  var datos = new FormData();
+  var idProducto = $(`#${selector2}`).val();
+  var idEstante = $('#capacidadEstantes').val();
+  var idBotellon = $('#capacidadBotellon').val()
+  var sucursal = $('#sucursal').val();
+  datos.append("datoAmbos", cantidad);
+  datos.append("parametrosAmbos", idProducto);
+  datos.append("idSucursalProductosDisponiblesAmbos", sucursal);
 
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+      if(!respuesta3.includes('false'))
+      {  
+        contador++;
+        if (contador==2) 
+        { 
+          registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon);
+        }
+      }else
+      {
+        contador = 0;
+         Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                toast: true,
+                title: 'No hay productos disponibles',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 1500
+              });
+      }
+    }
+  })
+}
 
 function mostrarModal(parametro,idTipoUsuario,idProducto)
 {
  consultarFormatoContrato(parametro);
- //registrarContrato(parametro);
  registrarPersonas(parametro,idTipoUsuario,idProducto);
  $("#modal2").modal("show");
 }
@@ -614,9 +649,10 @@ function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector
   var cantidad = $(`#${selector}`).val();
   var datos = new FormData();
   var idProducto = $(`#${selector2}`).val();
+  var sucursal = $('#sucursal').val();
   datos.append("dato", cantidad);
   datos.append("parametros", idProducto);
-
+  datos.append("idSucursalProductosDisponibles", sucursal);
   let plantilla2 = " ";
   $.ajax({
     url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
@@ -627,9 +663,9 @@ function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector
     processData: false,
     success: function(respuesta3)
     {
-      alert(respuesta3);
       if(!respuesta3.includes('false'))
       {     
+          mostrarModal(parametro,idTipoUsuario,idProducto);
       }else
       {
          Swal.fire({
@@ -778,7 +814,6 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
     async:false,
     success: function(respuesta)
     {
-      alert(respuesta);
       if(respuesta.includes("error"))
       {
         Swal.fire({
@@ -813,4 +848,99 @@ function imprimirContrato()
     $(".pie").hide();  
     window.print();
     setTimeout(mostrarFoter,2000);
+}
+
+
+function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
+{
+  var sucursal = $("#sucursal").val();
+  var nombre = $('#nombreCliente').val();
+  var apellido = $('#apellidoCliente').val();
+  var sectorCliente = $('#sectorCliente').val();
+  var estadoCliente = $('#estadoCliente').val();
+  var municipioCliente = $('#municipioCliente').val();
+  var ciudadCliente =  $('#ciudadCliente').val();
+  var estadoComercio = $('#estadoComercio').val();
+  var municipioComercio = $('#municipioComercio').val();
+  var ciudadComercio =  $('#ciudadComercio').val();
+  var zonaComercio = $('#zonaComercio').val();
+  var zonaCliente = $('#zonaCliente').val();
+  var direccionCliente = $('#direccionCliente').val();
+  var comercio = $("#nobreComercio").val();
+  var cedula = $('#cedulaCliente').val();
+  var telefono = $('#telefonoComercio').val();
+  var direccionComercio = $('#direccionComercio').val();
+  var sectorComercio = $('#sectorComercio').val();
+  var cantidadEstantes = $('#cantidadEstantes').val();
+  var cantidadBotellones = $('#cantidadBotellones').val();
+  var capacidadEstantes = $('#capacidadEstantes').val();
+  var capacidadBotellon = $('#capacidadBotellon').val();
+
+
+  var datos = new FormData();
+
+//Datos de Persona
+  datos.append("nombreContratoAmbos", nombre);
+  datos.append("idTipoUsuario", idTipoUsuario);
+  datos.append("apellido", apellido);
+  datos.append("cedula", cedula);
+  datos.append("estadoCliente", estadoCliente);
+  datos.append("municipioCliente", municipioCliente);
+  datos.append("ciudadCliente", ciudadCliente);
+  datos.append("zonaCliente", zonaCliente);
+  datos.append("sectorCliente", sectorCliente);
+  datos.append("direccionCliente", direccionCliente);
+  
+//Datos de Tienda
+  datos.append("comercio", comercio);
+  datos.append("telefono", telefono);
+  datos.append("estadoComercio", estadoComercio);
+  datos.append("municipioComercio", municipioComercio);
+  datos.append("ciudadComercio", ciudadComercio);
+  datos.append("zonaComercio", zonaComercio);
+  datos.append("sectorComercio", sectorComercio);
+  datos.append("direccionComercio", direccionComercio);
+  datos.append("cantidadEstantes", cantidadEstantes);
+  datos.append("cantidadBotellones", cantidadBotellones);
+  datos.append("sucursal", sucursal);
+  datos.append("capacidadEstantes", capacidadEstantes);
+  datos.append("capacidadBotellon", capacidadBotellon);
+
+//Datos de contrato
+
+  datos.append("idTipoContrato", parametro);
+  datos.append("idEstante", idEstante);
+  datos.append("idBotellon", idBotellon);
+
+
+  $.ajax({
+    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    async:false,
+    success: function(respuesta)
+    {
+      if(respuesta.includes("error"))
+      {
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al registrar Contrato',
+          icon: 'error',
+          showCloseButton: true,
+          confirmButtonText:'Aceptar'
+        }); 
+      }else if(respuesta.includes("ok") || respuesta.includes("true"))
+      {
+        Swal.fire({
+          title: 'Contrato registrado exitosamente',
+          icon: 'success',
+          showCloseButton: true,
+          confirmButtonText:'Aceptar'
+        })
+      }
+    }                 
+  })
 }

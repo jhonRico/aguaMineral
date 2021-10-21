@@ -36,7 +36,7 @@
        <span class="tooltip">Contratos</span>
      </li>
      <li>
-       <a href="#"> 
+       <a href="http://localhost/aguaMineral/reportePrincipal"> 
          <i class="fas fa-file-alt"></i>
          <span class="links_name">Reportes</span>
        </a>

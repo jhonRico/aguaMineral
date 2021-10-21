@@ -717,13 +717,13 @@ function consultarFormatoContrato(parametro)
           result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
           result = result.replace("cedulaCliente",$('#cedulaCliente').val());
           result = result.replace("nombreComercio",$('#nobreComercio').val());
-          result = result.replace("municipioCliente",$('#municipioComercio').val());
-          result = result.replace("municipioComercio",$('#municipioComercio').val());
+          result = result.replace("MunicipioCliente", 'San Cristobal');
+          result = result.replace("municipioCliente", 'San Cristobal');
           result = result.replace("telefonoComercio",$('#telefonoComercio').val());
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#cantidadEstantes').val());
           result = result.replace("cantidadBotellones",$('#cantidadEstantes').val());
-          result = result.replace("codigoProducto",$('#serial').val());  
+          result = result.replace("codigoProducto",'28DFefe75');  
           result = result.replace("fechaConstruccion",$('#fechaProducto').val());        
 
           plantilla2 += result;

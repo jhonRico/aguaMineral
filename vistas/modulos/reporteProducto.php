@@ -51,11 +51,6 @@
         </select>
         </div>
         <div class="col-md-3 ms-3">
-          <label for="" class="ms-3 mb-3 mt-0">Seleccione el año</label>
-          <select name="" id="sucursal" class="form-select">
-            <option selected>Seleccione</option>
-            <option value="1">2021</option>
-        </select>
         </div>
          <div class="col-md-4 ms-3">
           <label for="" class="ms-3 mb-3 mt-0">Seleccione el producto</label>
@@ -73,7 +68,20 @@
         ZONAS POR CLIENTES 
         ===========================================-->
 
-        <canvas id="densityChart" width="20" height="10" class="mt-3 p-3"></canvas>       
+        <canvas id="densityChart" width="20" height="10" class="mt-3 p-3"></canvas> 
+        </div>
+        <div class="row mb-5">
+        <div class="col-md-4 ms-3">
+        </div>
+        <div class="col-md-3 ms-3">
+          <label for="" class="ms-3 mb-3 mt-0">Seleccione el año</label>
+          <select name="" id="sucursal" class="form-select">
+            <option selected>Seleccione</option>
+            <option value="1">2021</option>
+        </select>
+        </div>
+         <div class="col-md-4 ms-3">
+        </div>      
         <div class="row" id="filas">
         </div>
 

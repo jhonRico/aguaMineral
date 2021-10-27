@@ -32,7 +32,7 @@ $rutas = explode("/", $_GET["ruta"]);
        
             ?>
                 <div  class="container-fluid p-1 barra"> 
-                    <span title="administración"><a href="http://localhost/aguaMineral/administracion" class="home"><i class="fas fa-users-cog text-white"></i></a></span>
+                    <span title="Administración"><a href="http://localhost/aguaMineral/administracion" class="home"><i class="fas fa-users-cog text-white"></i></a></span>
                 </div>
             <?php
         }

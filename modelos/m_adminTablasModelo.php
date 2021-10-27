@@ -10,8 +10,6 @@ require_once "conexion.php";
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
         $stmt -> execute();
         return  $stmt ->fetchAll();
-
-       
 	}
      static public function mdlConsultarRegistroAdd($datos,$tabla,$atributoComparar) 
     {
@@ -289,6 +287,96 @@ require_once "conexion.php";
         $stmt->close();
         $stmt=null;
     }
+    //Metodo que consulta en dos tablas con un atributo entero
+    public static function mdlConsultar2TablasAtributoEntero($tabla,$tabla2,$valor,$atributo,$atributoTabla,$atributoTabla2)
+    {
+        if($atributo == "idContrato")
+        {
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 INNER JOIN comercios c ON c.Persona_idPersona = t2.idPersona WHERE t.$atributo = :valor ORDER BY t.fechaContrato ASC");
+            $stmt->bindParam(":valor", $valor, PDO::PARAM_INT);
+            $stmt -> execute();
+            return  $stmt ->fetchAll();
+        }else
+        {
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 WHERE t2.$atributo = :valor ORDER BY t.fechaContrato ASC");
+            $stmt->bindParam(":valor", $valor, PDO::PARAM_INT);
+            $stmt -> execute();
+            return  $stmt ->fetchAll();
+        }
+        
+    }
+    public static function mdlConsultarTablaAtributoEntero($tabla,$atributo,$valor)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $atributo = :valor");
+        $stmt->bindParam(":valor", $valor, PDO::PARAM_INT);
+        $stmt -> execute();
+        return  $stmt ->fetchAll();
+    }
+    public static function consultarCantidadProducto($tabla,$idProducto)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT cantidadProductos FROM $tabla t INNER JOIN producto_has_contrato pc ON t.idContrato = pc.Contrato_idContrato INNER JOIN producto p ON p.idProducto = pc.Producto_idProducto WHERE p.idProducto = :id");
+        $stmt->bindParam(":id", $idProducto, PDO::PARAM_INT);
+        $stmt->execute();
+        $array = $stmt->fetch();
+        return $array['cantidadProductos'];
 
- }
+    }
+    public static function agregarProductoContratoDevuelto($tabla,$datos,$idProducto,$resultado)
+    {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla t INNER JOIN producto_has_contrato pc ON t.idContrato = pc.Contrato_idContrato INNER JOIN producto p ON p.idProducto = pc.Producto_idProducto SET estadoContrato = :estadoAModificar, cantidadProductos = :cantidad WHERE p.idProducto = :id AND t.idContrato = :idContratoDevolucion");
+        $stmt->bindParam(":id", $idProducto, PDO::PARAM_INT);
+        $stmt->bindParam(":idContratoDevolucion", $datos['idContratoDevolucion'], PDO::PARAM_INT);
+        $stmt->bindParam(":cantidad", $resultado, PDO::PARAM_INT);
+        $stmt->bindParam(":estadoAModificar",  $datos['estadoAModificar'], PDO::PARAM_STR);
+        if ($stmt -> execute()) 
+        {
+            return  "ok";
+        }else
+        {
+            return "error";
+        }
+    }
+    public static function mdlDevolverContrato($tabla,$datos)
+    {
+        $idProducto1 = $datos['capacidad'];
+        $idProducto2 = $datos['capacidad2'];
+        $cantidadProducto1 = ModeloRegistroAdminGeneral::consultarCantidadProducto($tabla,$idProducto1);
+        if ($cantidadProducto1 == null)
+        {
+            $cantidadProducto1 = 0;
+        }
+        $resultado = $cantidadProducto1 + $datos['cantidad'];
+        $resultadoDevolucion = ModeloRegistroAdminGeneral::agregarProductoContratoDevuelto($tabla,$datos,$idProducto1,$resultado);
+
+        $cantidadProducto2 = ModeloRegistroAdminGeneral::consultarCantidadProducto($tabla,$idProducto2);
+        if ($cantidadProducto2 == null) 
+        {
+            $cantidadProducto2 = 0;
+        }
+        $resultado2 = $cantidadProducto2 + $datos['cantidad2'];
+        $resultadoDevolucion2 = ModeloRegistroAdminGeneral::agregarProductoContratoDevuelto($tabla,$datos,$idProducto2,$resultado2);
+        if ($resultadoDevolucion2 == "ok" || $resultadoDevolucion == "ok") 
+        {
+            return  "ok";
+        }else
+        {
+            return "error";
+        }
+    }
+
+    //Metodo para consultar todos los registros de dos tablas
+    public static function mdlConsultarTodosContratos($tabla,$tabla2,$atributoTabla,$atributoTabla2)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 ORDER BY t2.cedulaPersona ASC");
+        $stmt -> execute();
+        return  $stmt ->fetchAll();
+    }
+    public static function mdlConsultarTodosContratosSucursal($tabla,$tabla2,$valor,$atributoTabla,$atributoTabla2)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 WHERE t.Sucursal_idSucursal = :valor ORDER BY t2.cedulaPersona ASC");
+        $stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+        $stmt -> execute();
+        return $stmt -> fetchAll();
+    }
+}
 ?>

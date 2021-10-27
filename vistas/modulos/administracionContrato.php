@@ -1,81 +1,61 @@
 <?php 
-  $url2 = Ruta::ctrlRuta(); 
-  $consultar = "consultar";
-  $consultaZonas = controladorZonas::ctrlZonas($consultar); 
-  $resultadoConsultarCiudad = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("ciudad");
-  $resultado = ControladorClientes::ctrlConsultarTipoUsuario("Cliente");
+	$url = Ruta::ctrlRuta();   
 ?>
-
-<input type="hidden" value="<?php echo $resultado['idTipoUsuario']; ?>" id="tipoUsuario">
-<section class="home-section">
-    <div class="container mt-3 fs-5">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/principal" class="link-primary" id="anterior">Principal</a></li>
-            <li class="breadcrumb-item active" aria-current="page" class="">Clientes por zonas</li>
+<div class="container mt-3 fs-5 ms-5">
+        <nav aria-label="breadcrumb" class="ms-5">
+          <ol class="breadcrumb" class="ms-5">
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminContrato" class="link-primary">Administración de Contratos</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Contratos</li>
+            <div class="container text-end ms-5">
+            	<div class="ms-5">
+            		<a href="<?php echo $url?>todosContratos"><button class="btn btn-primary ms-5">Visualizar todos los contratos</button></a>
+            	</div>
+            </div>			            	
           </ol>
         </nav>
-    </div>
-    </div>
-    <div class="container-fluid blogs text-center" id="contenedorClientes">
-        <h1 class="mt-5 mb-5" id="tituloClientes"></h1>
-    </div>
-    <div class="container-fluid blogs text-center" id="contenedorZonasClientes">
-    	  <h1 class="mt-5 mb-5">Clientes por Zona</h1>
-        <div class="col-md-4 ms-3">
-          <label for="" class="ms-3 mb-3">Seleccione la ciudad</label>
-          <select name="" id="ciudad" class="form-select">
-            <option selected>Seleccione</option>
-          <?php foreach ($resultadoConsultarCiudad as $key): ?>
-          <option value="<?php echo $key['idCiudad']?>"><?php echo $key['nombreCiudad']?></option>
-        <?php endforeach ?>
-        </select>
-        </div>
-        
-        <!---========================================  
-        ZONAS POR CLIENTES 
-        ===========================================-->
-        <div class="row" id="filas">
-        </div>
-
-    </div>
-
-    <div id="tablaEsconder">
-     <div class="row g-3">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-3">
-        </div>
-        <div class="card col-md-3 bg-light text-center">
-          <div class="card-body p-4">
-            <h5 class="card-title fs-3">Total Prestamo en Parroquia</h5>
-            <p class="card-text text-start fs-5">Estantes <b class="ms-4" id="estanteTotal"></b></p>
-            <p class="card-text text-start fs-5">Botellones <b class="ms-2" id="botellonTotal"></b></p>
-          </div>
-        </div>
-        <div>
-        </div>
-      </div>
-
-
-      <table class="table table-sm ms-0 me-5 mt-0 p-5 fs-6" id="tablaCentro">
-        <thead class="cabezaTabla text-white">
-    <tr>
-      <th scope="col">Identificación</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Comercio</th>
-      <th scope="col">Sector</th>
-      <th scope="col">Detalle</th>
-    </tr>
-  </thead>
-  <tbody id="fila">
-  </tbody>
-      </table>
-  </div>
-</section>
+  </div> 
+<div class="container text-center mt-4">
+	<h2 class="mt-3">Administracion de Contratos</h2>
+</div>
+<div class="container text-center">
+	<label for="" class="form-label mb-0 mt-5">Cédula del contrato</label>
+	<input type="text" placeholder="Por favor ingrese una cédula" class="form-control w-25 mx-auto mt-3" id="cedulaContrato">
+</div>
+<div class="container text-center mt-3">
+	<h3 class="mt-5 ms-3" id="nombrePersona"></h3>
+</div>
+<div class="ms-5 me-5 mt-5">
+	<div class="ms-5 me-5 mt-5">
+		<div class="ms-5 me-5 mt-5">
+			<div class="ms-3 me-5 mt-5">
+				<div class="ms-3 me-5 mt-5">
+					<div class="ms-5 me-5 mt-5">
+						<div class="ms-5 me-5 mt-5">
+							<div class="ms-5 me-5 mt-5">
+								<div class="ms-5 me-5 mt-5">
+									<div class="ms-3 me-5 mt-5">
+										<table class="table table-sm ms-5 mt-5 p-5 me-5 fondoModal">
+										  <thead class="bg-primary text-white">
+										    <tr>
+										      <th scope="col">Número</th>
+										      <th scope="col">Fecha</th>
+										      <th scope="col">Estado</th>
+										      <th scope="col">Detalle</th>
+										    </tr>
+										  </thead>
+										  <tbody id="tablaContrato">
+										  </tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="reporte">
   <div class="modal-dialog modal-lg">
@@ -138,7 +118,9 @@
       </thead>
       <tbody id="fila2">
       </tbody>
-      </table> 
+      </table>
+      <div class="container text-center" id="devolucion">	
+      </div> 
         </div>
       </div>
     </div>  

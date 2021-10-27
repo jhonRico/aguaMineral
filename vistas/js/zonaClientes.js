@@ -191,14 +191,13 @@ function consultarCliente(idPersona,descripcion)
   datos.append("zonas", zona);
   datos.append("ciudad", ciudad);
   datos.append("tipoUsuario", tipoUsuario);
-  alert(zona);
   $.ajax({
     url:"//localhost/aguaMineral/ajax/clientes.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
     contentType: false,
-    processData: false,
+    processData: false, 
     success: function(respuesta3)
     { 
        if(respuesta3.length >10 )
@@ -219,7 +218,7 @@ function consultarCliente(idPersona,descripcion)
 
           var res2 = JSON.parse(auxSplit2[i]);
           var array = res2.fechaContrato.split(" ");
-          plantilla2 = `
+          plantilla2 += `
               <tr>
                     <td><b>${array[0]}</b></td>
                     <td><b>${res2.cantidadProd}</b></td>
@@ -245,7 +244,7 @@ function consultarCliente(idPersona,descripcion)
           position: 'button',
           icon: 'info',
           toast: true,
-          title: 'No hay clientes en esta zona',
+          title: 'No hay contratos disponibles para este cliente',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 2000,

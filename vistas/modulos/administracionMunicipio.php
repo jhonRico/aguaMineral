@@ -9,7 +9,7 @@
             <li class="breadcrumb-item active" aria-current="page" class="">Municipio</li>
           </ol>
         </nav>
-  </div> 
+  </div>
 <form method="post" id="formulario" autocomplete="off" class="m-5 fp-5">
   <div class="m-5 p-5">
     <table class="table m-3 p-3">

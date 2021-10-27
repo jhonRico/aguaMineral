@@ -154,7 +154,7 @@ $array = $resultadoConsultaSerial;
           </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-4 text-center">
+            <div class="form-group col-md-4 text-center" id="divCantidadEstantes">
               <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de estantes</label>
               <input type="number" min="1" class="form-control mt-3" id="cantidadEstantes" placeholder="Cantidad de estantes">
             </div>

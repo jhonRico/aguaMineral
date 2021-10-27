@@ -1,4 +1,3 @@
-
 .barraPrincipal{
     background: #003FA5;
     padding: 0px;
@@ -14,7 +13,8 @@
 }
 .barra
 {
-    background: #003FA5;
+    background-color: #003FA5;
+    box-shadow: 0 0 3px 3px #1a1a1a;
 }
 /*===================================================== 
 Cabecera 

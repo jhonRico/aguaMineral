@@ -16,8 +16,8 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#cantidadBotellones').hide();
     $('#capacidadEstantes').hide();
     $('#labelDescripcion').hide();
-    $('#labelCantidadEstantes').text('Cantidad de botellones');
-    $('#inputCity').attr('placeholder', 'Por favor ingrese la cantidad de botellones');
+    $('#labelCantidadEstantes').hide();
+    $('#cantidadEstantes').hide();
     $("#labelCapacidadBotellon").hide();
     $("#capacidadBotellon").hide();
     var input =  `
@@ -26,8 +26,14 @@ function mostrarContrato(parametro,idTipoUsuario){
     `;
     $('#capacidad').html(input); 
     $('#capacidad').show();
+    var input =  `
+             <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de Botellones</label>
+             <input type="number" min="1" class="form-control mt-3" id="cantidadBotellones" placeholder="Cantidad de botellones">
+    `;
+    $('#divCantidadEstantes').html(input); 
+    $('#divCantidadEstantes').show();
     llenarSelectCapacidad(parametro,'capacidadBotellon');
-    $( ".boton1" ).click(function() {
+    $( ".boton1" ).click(function(){
      validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadBotellon');
    });
 
@@ -179,7 +185,7 @@ function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro
           }
           var res2 = JSON.parse(auxSplit2[i]);
           plantilla2 += `
-          <option value="${res2[parametro1]}">${res2[parametro2]}</option>
+          <option value="${res2[parametro1]}" adicional="${res2[parametro2]}">${res2[parametro2]}</option>
           `;
         }
 
@@ -451,7 +457,7 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
     })        
      return false;
     }
-    if (cantidadEstantes == '') 
+    /*if (cantidadEstantes == '') 
     {
      Swal.fire({
       position: 'top-end',
@@ -476,7 +482,7 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
       timer: 1500
     })        
      return false;
-    }
+    }*/
 
     if (parametro == "Ambos") 
     {
@@ -717,8 +723,8 @@ function consultarFormatoContrato(parametro)
           result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
           result = result.replace("cedulaCliente",$('#cedulaCliente').val());
           result = result.replace("nombreComercio",$('#nobreComercio').val());
-          result = result.replace("MunicipioCliente", 'San Cristobal');
-          result = result.replace("municipioCliente", 'San Cristobal');
+          result = result.replace("MunicipioCliente", $('#municipioCliente').attr('adicional'));
+          result = result.replace("municipioCliente", $('#municipioCliente').attr('adicional'));
           result = result.replace("telefonoComercio",$('#telefonoComercio').val());
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#cantidadEstantes').val());

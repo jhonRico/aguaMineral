@@ -23,11 +23,13 @@ class ControladorClientes
     static public function ctrlConsultarReporte($zona,$ciudad,$tipoUsuario,$idPersona)
     {
         $tabla = "persona";
+        $estadoContrato = "A";
         $datos = array(
             "idPersona"=>$idPersona,
             "tipoUsuario"=>$tipoUsuario,
             "zona"=>$zona,
-            "ciudad"=>$ciudad
+            "ciudad"=>$ciudad,
+            "estadoContrato"=>$estadoContrato
         );
         $respuesta = ModeloClientes::mdlConsultarReporte($tabla,$datos);
         return $respuesta;

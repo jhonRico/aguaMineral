@@ -1,10 +1,7 @@
 <?php
 
 class ControladorRegistroAdminGeneral
-
 {
-
-
     static public function consultarTodoRegBD($tabla)
     {
         
@@ -23,7 +20,6 @@ class ControladorRegistroAdminGeneral
 
    static public function ctrlAddregistro($nombreValue,$tabla)
     {
-
  
     $datos = array(
              "registroValueTipUser"=>$nombreValue,
@@ -161,7 +157,41 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlModificarOfTable2CamposStrings($datos,$tabla,$atributo1,$atributo2,$atributo3);
         return $respuesta;
     }
-
-
-   } 
+    /*------Consultar dos tablas con un atibuto entero----------------------------------------------------------------------*/
+    public static function ctrlConsultar2TablasAtributoEntero($tabla,$tabla2,$valor,$atributo,$atributoTabla,$atributoTabla2)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultar2TablasAtributoEntero($tabla,$tabla2,$valor,$atributo,$atributoTabla,$atributoTabla2);
+        return $respuesta;
+    }
+    public static function ctrlConsultarTablaAtributoEntero($tabla,$atributo,$valor)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTablaAtributoEntero($tabla,$atributo,$valor);
+        return $respuesta;
+    }
+    public static function ctrlDevolverContrato($tabla,$idContratoDevolucion,$cantidad,$cantidad2,$capacidad,$capacidad2)
+    {
+        $estadoAModificar = 'D';
+        $datos = array(
+             "idContratoDevolucion"=>$idContratoDevolucion,
+             "estadoAModificar"=>$estadoAModificar,
+             "cantidad"=>$cantidad,
+             "cantidad2"=>$cantidad2,
+             "capacidad"=>$capacidad,
+             "capacidad2"=>$capacidad2,
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlDevolverContrato($tabla,$datos);
+        return $respuesta;
+    }
+    //Consultar todos los registros de dos tablas
+    public static function ctrlConsultarTodosContratos($tabla,$tabla2,$atributoTabla,$atributoTabla2)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodosContratos($tabla,$tabla2,$atributoTabla,$atributoTabla2);
+        return $respuesta;
+    }
+    public static function ctrlConsultarTodosContratosSucursal($tabla,$tabla2,$valor,$atributoTabla1,$atributoTabla2)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodosContratosSucursal($tabla,$tabla2,$valor,$atributoTabla1,$atributoTabla2);
+        return $respuesta;
+    }
+} 
 ?>

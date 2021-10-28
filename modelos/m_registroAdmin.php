@@ -86,7 +86,10 @@ require_once "conexion.php";
 
             if($stmt->execute())
             {
-                $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,'$idTipoContrato','$idProducto',:seria,:capacidad)");
+                $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,:idTipoProducto,:idProducto,:seria,:capacidad)");
+
+                $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                $stmt->bindParam(":idTipoProducto", $datos["tipoProducto"], PDO::PARAM_INT);
                 $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
                 $stmt->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
                 $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
@@ -130,15 +133,18 @@ require_once "conexion.php";
 
                     if($stmt->execute())
                     {
-                        $lastInsertId = $pdo->lastInsertId();
+                        $idProducto = $pdo->lastInsertId();
 
                         $stmt = $pdo->prepare("INSERT INTO producto_has_sucursal(Producto_idProducto, Sucursal_idSucursal)
-                        VALUES  ('$lastInsertId',:sucursal)");
+                        VALUES  ('$idProducto',:sucursal)");
                         $stmt->bindParam(":sucursal", $datos["sucursal"], PDO::PARAM_INT);
 
                         if ($stmt->execute()) 
                         {
-                            $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,'$idTipoContrato','$idProducto',:seria,:capacidad)");
+                            $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,:idTipoContrato,:idProducto,:seria,:capacidad)");
+
+                                $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                                $stmt->bindParam(":idTipoContrato", $datos["tipoProducto"], PDO::PARAM_INT);
                                 $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
                                 $stmt->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
                                 $stmt->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);

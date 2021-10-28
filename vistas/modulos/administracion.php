@@ -96,6 +96,18 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="single-blog col-md-4">
+    <div class="single-blog-img">
+      <a href="<?php echo $url2;?>bitacora" ><img src="<?php echo $url2;?>vistas/img/general/bitacora.jpg" alt="Blog Image"></a>
+    </div>
+    <div class="blog-content-box">
+      <div class="blog-content">
+        <h4><a href="<?php echo $url2;?>bitacora">Bitácora</a></h4>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

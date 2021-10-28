@@ -4,6 +4,10 @@ $(document).ready(function() {
   rutaActual = window.location.toString();
 });
 
+$(document).ready(function($){
+  
+});
+
 //mostrar formulario dependiendo del parametro
 function mostrarContrato(parametro,idTipoUsuario){
   $('.contratoEstante').show();
@@ -34,7 +38,11 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#divCantidadEstantes').show();
     llenarSelectCapacidad(parametro,'capacidadBotellon');
     $( ".boton1" ).click(function(){
-     validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadBotellon');
+      consultarFormatoContrato(parametro);
+      $("#modal2").modal("show");
+      $("#registrarContrato").click(function(){
+         validarCampos(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
+      });
    });
 
   }else if (parametro == "Ambos") 
@@ -52,8 +60,13 @@ function mostrarContrato(parametro,idTipoUsuario){
 
     $('#colocarInput').html(input); 
     $('#colocarInput').show();
-    $( ".boton1" ).click(function() {
-    validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+    $( ".boton1" ).click(function(){
+    consultarFormatoContrato(parametro);
+    $("#modal2").modal("show");
+    $("#registrarContrato").click(function(){
+        validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+    });
+
    });
 
   }else
@@ -64,8 +77,12 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#titulo').hide();
     $('#menuCajas').hide();
     llenarSelectCapacidad(parametro,'capacidadEstantes');
-    $( ".boton1" ).click(function() {
-     validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+    $( ".boton1" ).click(function(){
+    consultarFormatoContrato(parametro);
+    $("#modal2").modal("show");
+    $("#registrarContrato").click(function(){
+        validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+      });
    });
   }
 
@@ -224,8 +241,8 @@ $(document).ready(function() {
         $("#estadoComercio").val($("#estadoCliente").val());
         $("#municipioComercio").val($("#municipioCliente").val());
         $("#ciudadComercio").val($("#ciudadCliente").val());
-        $("#zonaComercio").val($("#zonaCliente").val());
-        $("#sectorComercio").val($("#sectorCliente").val());
+        $("#zonaComercio").attr('value', $("#zonaCliente").val());
+        $("#sectorComercio").attr('value', $("#sectorCliente").val());
     });
 
 });
@@ -248,7 +265,7 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
   var telefono = $('#telefonoComercio').val();
   var direccionComercio = $('#direccionComercio').val();
   var cantidadEstantes = $('#cantidadEstantes').val();
-  var sectorComercio = $('#sectorComercio').val();
+  var sectorComercio = $('#sectorComercio').attr('value');
   if (cedula == '') 
   {
    Swal.fire({
@@ -457,33 +474,6 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
     })        
      return false;
     }
-    /*if (cantidadEstantes == '') 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese una cantidad',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
-    }
-    if (isNaN(cantidadEstantes) == true) 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese una cantidad válida',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
-    }*/
-
     if (parametro == "Ambos") 
     {
         consultarProductosAmbos(parametro,idTipoUsuario,selector,selector2);
@@ -545,9 +535,7 @@ function consultarProductosAmbos(parametro,idTipoUsuario,selector,selector2)
 
 function mostrarModal(parametro,idTipoUsuario,idProducto)
 {
- consultarFormatoContrato(parametro);
  registrarPersonas(parametro,idTipoUsuario,idProducto);
- $("#modal2").modal("show");
 }
 
 $(function(){
@@ -836,7 +824,14 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
           icon: 'success',
           showCloseButton: true,
           confirmButtonText:'Aceptar'
-        })
+        }).then((result) => 
+        {
+          if (result.isConfirmed)
+          {
+            $("#modal2").modal("hide");
+            window.location.reload();
+          }
+        })  
       }
     }                 
   })
@@ -945,7 +940,14 @@ function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
           icon: 'success',
           showCloseButton: true,
           confirmButtonText:'Aceptar'
-        })
+        }).then((result) => 
+        {
+          if (result.isConfirmed)
+          {
+            $("#modal2").modal("hide");
+            window.location.reload();
+          }
+        })  
       }
     }                 
   })

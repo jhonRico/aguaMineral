@@ -92,38 +92,144 @@ class ModeloFormatoContrato
             }
         }else
         {
-
-            $pdo = Conexion::conectar();
-            $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
-            VALUES  ('$zonaComercio','$sectorComercio')");
-
-            if($stmt->execute())
+            if ($sectorCliente == $sectorComercio) 
             {
-                                        
-                $lastInsertId = $pdo->lastInsertId();
-
+                $pdo = Conexion::conectar();
+                $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
+                VALUES  (:zonaCliente,:sectorComercio)");
+                $stmt->bindParam(":zonaCliente", $zonaCliente, PDO::PARAM_INT);
+                $stmt->bindParam(":sectorComercio", $sectorComercio, PDO::PARAM_STR);
+                $stmt -> execute();
+    
+                $idSectorCliente = $pdo->lastInsertId();
                 $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
-                    VALUES  ('$idTipoUsuario','$lastInsertId','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
+                        VALUES  ('$idTipoUsuario','$idSectorCliente','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
 
                 if ($stmt->execute()) 
                 {
                     $lastInsertId = $pdo->lastInsertId();
 
                     $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
-                        VALUES  ('$lastInsertId', '$sectorComercio', '$comercio', '$direccionComercio', '$telefono')");
+                        VALUES  ('$lastInsertId', '$idSectorCliente', '$comercio', '$direccionComercio', '$telefono')");
                     if($stmt->execute())
                     {
-                           $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
-                               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");
-                       if($stmt->execute())
-                       {
-                            return "ok";
-                        }else
+                        $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
+                           Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");
+
+                        if($stmt->execute())
                         {
-                            return "error";
+                           $lastInsertId = $pdo->lastInsertId();
+                           $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+                           $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                           $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
+
+                            if ($stmt->execute()) 
+                           {
+                                $lastInsertId = $pdo->lastInsertId();
+                                $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
+                               $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                               if($stmt->execute())
+                               { 
+                                    $catidadARestar = 0;   
+                                    $arrayProducto = $stmt->fetch();
+                                    $cantidadActual = $arrayProducto['cantidadProductos'];
+                                    if($cantidadBotellones == 0)
+                                    {
+                                        $catidadARestar = $cantidadEstantes;
+                                    }else
+                                    {
+                                        $catidadARestar = $cantidadBotellones;
+                                    }
+                                    $resultado = $cantidadActual - $catidadARestar;
+                                    $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
+                                    $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                                    $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                                    if ($stmt->execute()) 
+                                    {
+                                        return "true";
+                                    }else
+                                    {
+                                       return"error";    
+                                    } 
+                                }
+                           }
+                           
+                        }
+                    }
+            }
+            }else
+            {
+            $pdo = Conexion::conectar();
+            $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
+            VALUES  (:zonaComercio,:sectorCliente)");
+            $stmt->bindParam(":zonaComercio", $zonaCliente, PDO::PARAM_INT);
+            $stmt->bindParam(":sectorCliente", $sectorCliente, PDO::PARAM_STR);
+            if($stmt->execute())
+            {
+                $idSectorCliente = $pdo->lastInsertId();
+                $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
+                    VALUES  ('$idTipoUsuario','$idSectorCliente','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
+
+                if ($stmt->execute()) 
+                {
+                    $idPersona = $pdo->lastInsertId();
+
+                    $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
+                    VALUES  (:zonaComercio,:sectorComercio)");
+                    $stmt->bindParam(":zonaComercio", $zonaComercio, PDO::PARAM_INT);
+                    $stmt->bindParam(":sectorComercio", $sectorComercio, PDO::PARAM_STR);
+                    $stmt->execute();
+                    $idSectorComercio = $pdo->lastInsertId();
+
+                    $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
+                        VALUES  ('$idPersona', '$idSectorComercio', '$comercio', '$direccionComercio', '$telefono')");
+                    if($stmt->execute())
+                    {
+                        $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
+                           Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$idPersona', '$cantidadEstantes', '$fecha', '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");
+
+                        if($stmt->execute())
+                        {
+                           $lastInsertId = $pdo->lastInsertId();
+                           $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+                           $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                           $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
+
+                            if ($stmt->execute()) 
+                           {
+                                $lastInsertId = $pdo->lastInsertId();
+                                $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
+                               $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                               if($stmt->execute())
+                               { 
+                                    $catidadARestar = 0;   
+                                    $arrayProducto = $stmt->fetch();
+                                    $cantidadActual = $arrayProducto['cantidadProductos'];
+                                    if($cantidadBotellones == 0)
+                                    {
+                                        $catidadARestar = $cantidadEstantes;
+                                    }else
+                                    {
+                                        $catidadARestar = $cantidadBotellones;
+                                    }
+                                    $resultado = $cantidadActual - $catidadARestar;
+                                    $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
+                                    $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+                                    $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                                    if ($stmt->execute()) 
+                                    {
+                                        return "true";
+                                    }else
+                                    {
+                                       return"error";    
+                                    } 
+                                }
+                           }
+                           
                         }
                     }
                 }
+            }
             }
         }
     }
@@ -295,87 +401,185 @@ static public function mdlRegistrarContratoAmbos($tabla,$tabla2,$tabla3,$nombre,
             }
         }else
         {
-            $pdo = Conexion::conectar();
-            $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
-            VALUES  ('$zonaComercio','$sectorComercio')");
+            if ($sectorCliente == $sectorComercio) 
+            {
+                $pdo = Conexion::conectar();
+                $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
+                VALUES  (:zonaCliente, :sectorComercio)");
+                $stmt->bindParam(":zonaCliente", $zonaCliente, PDO::PARAM_INT);
+                $stmt->bindParam(":sectorComercio", $sectorComercio, PDO::PARAM_STR);
 
             if($stmt->execute())
             {
                                         
-                $lastInsertId = $pdo->lastInsertId();
+                $idSector = $pdo->lastInsertId();
 
                 $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
-                    VALUES  ('$idTipoUsuario','$lastInsertId','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
+                    VALUES  ('$idTipoUsuario','$idSector','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
 
                 if ($stmt->execute()) 
                 {
                     $lastInsertId = $pdo->lastInsertId();
 
                     $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
-                        VALUES  ('$lastInsertId', '$sectorComercio', '$comercio', '$direccionComercio', '$telefono')");
+                        VALUES  ('$lastInsertId', '$idSector', '$comercio', '$direccionComercio', '$telefono')");
                     if($stmt->execute())
                     {
-                           $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
-                               Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");
-                       if($stmt->execute())
-                       {
-                            if($stmt->execute())
+                        $pdo = Conexion::conectar();
+                        $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
+                       Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$lastInsertId', '$cantidadEstantes', '$fecha' , '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");
+
+                    if($stmt->execute())
+                    {
+                           $lastInsertId = $pdo->lastInsertId();
+                           $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+                           $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
+                           $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
+
+                            if ($stmt->execute()) 
+                           {
+                            $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+                            $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
+                            $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
+
+                            if ($stmt->execute()) 
                             {
-                               $lastInsertId = $pdo->lastInsertId();
-                               $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+                                $lastInsertId = $pdo->lastInsertId();
+                                $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
                                $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
-                               $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
 
-                                if ($stmt->execute()) 
-                               {
-                                $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
-                                $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
-                                $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
-
-                                if ($stmt->execute()) 
-                                {
-                                    $lastInsertId = $pdo->lastInsertId();
-                                    $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
-                                   $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
-
-                                   if($stmt->execute())
-                                   {   
-                                        $arrayProducto = $stmt->fetch();
-                                        $cantidadActual = $arrayProducto['cantidadProductos'];
-                                        $resultado = $cantidadActual - $cantidadEstantes;
-                                        $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
-                                        $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
-                                        $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                               if($stmt->execute())
+                               {   
+                                    $arrayProducto = $stmt->fetch();
+                                    $cantidadActual = $arrayProducto['cantidadProductos'];
+                                    $resultado = $cantidadActual - $cantidadEstantes;
+                                    $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
+                                    $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
+                                    $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                                    if ($stmt->execute()) 
+                                    {
+                                            $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
+                                            $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
                                         if ($stmt->execute()) 
                                         {
-                                                $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
-                                                $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
-                                            if ($stmt->execute()) 
+                                            $arrayProducto = $stmt->fetch();
+                                            $cantidadActual = $arrayProducto['cantidadProductos'];
+                                            $resultado = $cantidadActual - $cantidadBotellones;
+                                            $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
+                                            $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
+                                            $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                                            if($stmt->execute())
                                             {
-                                                $arrayProducto = $stmt->fetch();
-                                                $cantidadActual = $arrayProducto['cantidadProductos'];
-                                                $resultado = $cantidadActual - $cantidadBotellones;
-                                                $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
-                                                $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
-                                                $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
-                                                if($stmt->execute())
-                                                {
-                                                    return "true";
-                                                }else
-                                                {
-                                                    return"error";    
-                                                }
+                                                return "true";
+                                            }else
+                                            {
+                                                return"error";    
                                             }
                                         }
-                                        
                                     }
+                                    
                                 }
-                              }
-                               
                             }
-                        }
+                          }
+                           
+                        }       
                     }
                 }
+            }
+            }else
+            {
+            $pdo = Conexion::conectar();
+            $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
+            VALUES  (:zonaComercio,:sectorCliente)");
+            $stmt->bindParam(":zonaComercio", $zonaCliente, PDO::PARAM_INT);
+            $stmt->bindParam(":sectorCliente", $sectorCliente, PDO::PARAM_STR);
+            if($stmt->execute())
+            {                  
+                $idSectorCliente = $pdo->lastInsertId();
+                $stmt = $pdo->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona, direccionPersona, cedulaPersona , telefonoPersona)
+                    VALUES  ('$idTipoUsuario','$idSectorCliente','$nombre', '$apellido', '$direccionCliente', '$cedula', '$telefono')");
+                
+                if ($stmt->execute()) 
+                {
+                    $idPersona = $pdo->lastInsertId();
+
+                    $stmt = $pdo->prepare("INSERT INTO $tabla(Parroquia_idParroquia, nombreSector)
+                    VALUES  (:zonaComercio,:sectorComercio)");
+                    $stmt->bindParam(":zonaComercio", $zonaComercio, PDO::PARAM_INT);
+                    $stmt->bindParam(":sectorComercio", $sectorComercio, PDO::PARAM_STR);
+                    $stmt->execute();
+                    $idSectorComercio = $pdo->lastInsertId();
+
+                    $stmt = $pdo->prepare("INSERT INTO $tabla3(Persona_idPersona, Sector_idSector, nombreTienda, direccionTienda, telefonoTienda)
+                        VALUES  (:idPersona, :idSectorComercio, :comercio, :direccionComercio, :telefono)");
+                    $stmt->bindParam(":idPersona", $idPersona, PDO::PARAM_INT);
+                    $stmt->bindParam(":idSectorComercio", $idSectorComercio, PDO::PARAM_INT);
+                    $stmt->bindParam(":comercio", $comercio, PDO::PARAM_STR);
+                    $stmt->bindParam(":direccionComercio", $direccionComercio, PDO::PARAM_STR);
+                    $stmt->bindParam(":telefono", $telefono, PDO::PARAM_INT);
+                    if($stmt->execute())
+                    {
+                        $pdo = Conexion::conectar();
+                        $stmt = $pdo->prepare("INSERT INTO contrato (Sucursal_idSucursal,TipoContrato_idTipoContrato,
+                       Persona_idPersona, cantidadProd, fechaContrato, cantidadProd_2, capacidadProd, capacidadProd_2, estadoContrato) VALUES ('$sucursal','$idTipoDeContrato', '$idPersona', '$cantidadEstantes', '$fecha' , '$cantidadBotellones','$capacidadEstantes','$capacidadBotellon','A')");
+
+                    if($stmt->execute())
+                    {
+                           $lastInsertId = $pdo->lastInsertId();
+                           $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+                           $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
+                           $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
+
+                            if ($stmt->execute()) 
+                           {
+                            $stmt = $pdo->prepare("INSERT INTO producto_has_contrato(Producto_idProducto ,Contrato_idContrato) VALUES (:idProducto, :idContrato)");
+                            $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
+                            $stmt->bindParam(":idContrato", $lastInsertId, PDO::PARAM_INT);
+
+                            if ($stmt->execute()) 
+                            {
+                                $lastInsertId = $pdo->lastInsertId();
+                                $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
+                               $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
+
+                               if($stmt->execute())
+                               {   
+                                    $arrayProducto = $stmt->fetch();
+                                    $cantidadActual = $arrayProducto['cantidadProductos'];
+                                    $resultado = $cantidadActual - $cantidadEstantes;
+                                    $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
+                                    $stmt->bindParam(":idProducto", $idEstante, PDO::PARAM_INT);
+                                    $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                                    if ($stmt->execute()) 
+                                    {
+                                            $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto p ON pc.Producto_idProducto = p.idProducto  WHERE pc.Producto_idProducto = :idProducto"); 
+                                            $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
+                                        if ($stmt->execute()) 
+                                        {
+                                            $arrayProducto = $stmt->fetch();
+                                            $cantidadActual = $arrayProducto['cantidadProductos'];
+                                            $resultado = $cantidadActual - $cantidadBotellones;
+                                            $stmt = $pdo->prepare("UPDATE producto SET cantidadProductos = :resultado WHERE idProducto = :idProducto"); 
+                                            $stmt->bindParam(":idProducto", $idBotellon, PDO::PARAM_INT);
+                                            $stmt->bindParam(":resultado", $resultado, PDO::PARAM_INT);
+                                            if($stmt->execute())
+                                            {
+                                                return "true";
+                                            }else
+                                            {
+                                                return"error";    
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                          }
+                           
+                        }       
+                    }
+                }
+            }
             }
         }
     }

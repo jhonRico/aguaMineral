@@ -571,7 +571,7 @@ function modificarProducto(id,serial,cantidad,capacidad,serialDescripcion)
  			}else
  			{
  				Swal.fire({
- 					title: 'Pais Modificado',
+ 					title: 'Producto Modificado',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'

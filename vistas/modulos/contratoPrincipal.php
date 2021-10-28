@@ -269,6 +269,7 @@ VENTANA MODAL PARA EL REGISTRO
       <div class="modal-footer pie">
         <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
         <a href="javascript:imprimirContrato()"><button class="btn btn-primary" type="button">Imprimir</button></a>
+        <button class="btn btn-success" type="button" id="registrarContrato">Registrar</button>
       </div>
     </div>
   </div>

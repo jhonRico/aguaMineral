@@ -1,3 +1,6 @@
+
+
+
 var densityCanvas = document.getElementById("densityChart");
 
 Chart.defaults.global.defaultFontFamily = "Lato";
@@ -43,3 +46,6 @@ var barChart = new Chart(densityCanvas, {
   data: planetData,
   options: chartOptions
 });
+
+//------------------------------------------------------------------------------------------------------------
+

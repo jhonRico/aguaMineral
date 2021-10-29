@@ -24,7 +24,7 @@ function consultarAllCiudades(){
 		contentType: false,
 		processData: false,
 		success: function(respuesta3){
-			
+			alert(respuesta3);			
 			if(respuesta3.length >10 ){
 
 				respuesta3 =respuesta3.replace("[","");

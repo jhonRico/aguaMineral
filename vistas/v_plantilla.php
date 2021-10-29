@@ -7,6 +7,7 @@
     <meta  name="description" content="describir la pagina">
     <meta  name="keyword" content="todas las palabras claves separadas con  comas ,">
     <title>Agua Mineral Ureña</title>
+    <link rel="icon" href="http://localhost/aguaMineral/vistas/img/general/gotica.png">
     <?php
         /** Mantener la ruta fija del proyecto*/
         $url = Ruta::ctrlRuta();

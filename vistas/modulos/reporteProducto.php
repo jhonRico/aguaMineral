@@ -33,8 +33,8 @@
         <div class="card col-md-3 bg-light text-center">
           <div class="card-body p-4">
             <h5 class="card-title fs-3">Disponibles</h5>
-            <p class="card-text text-start fs-5">Estantes <b class="ms-4" id="">150</b></p>
-            <p class="card-text text-start fs-5">Botellones <b class="ms-2" id="">500</b></p>
+            <p class="card-text text-start fs-5">Estantes <b class="ms-4" id="estantesDisponibles">150</b></p>
+            <p class="card-text text-start fs-5">Botellones <b class="ms-2" id="botellonesDisponibles">500</b></p>
           </div>
         </div>
         <div>
@@ -45,7 +45,7 @@
             <label for="" class="ms-3 mb-3 mt-0">Seleccione el producto</label>
             <select name="" id="tipoProductoReporte" class="form-select">
               <?php foreach ($resultadoConsultarTipoProducto as $key): ?>
-                <option value="<?php echo $key['idTipoProducto']?>"><?php echo $key['descripcion']?></option>
+                <option value="<?php echo $key['idTipoProducto'].'-'.$key['descripcion'];?>"><?php echo $key['descripcion']?></option>
               <?php endforeach ?>
             </select>
         </div>

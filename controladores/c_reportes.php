@@ -10,7 +10,24 @@ class ControladorReportes
              "tipoProductoReporte"=>$tipoProductoReporte,
               "fechaReporteProducto"=>$fechaReporteProducto,
          );
-		$respuesta = ModeloReportes::mdlConsultarProductos($tabla,$tabla2,$datos); 
+		$respuesta = ModeloReportes::mdlConsultarProductosReporte($tabla,$tabla2,$datos); 
+        return $respuesta;
+	}
+	public static function ctrlConsultarProductoPrestado($tipoProductoReporte,$fechaReporteProducto)
+	{
+		$tabla = 'contrato';
+		$tabla2 = 'producto_has_contrato';
+		$tabla3 = 'producto';
+		$datos = array(
+             "tipoProductoReporte"=>$tipoProductoReporte,
+              "fechaReporteProducto"=>$fechaReporteProducto,
+         );
+		$respuesta = ModeloReportes::mdlConsultarProductoPrestado($tabla,$tabla2,$tabla3,$datos); 
+        return $respuesta;
+	}
+	public static function ctrlConsultarProductosDisponibles()
+	{
+		$respuesta = ModeloReportes::mdlConsultarProductosDisponibles(); 
         return $respuesta;
 	}
 }

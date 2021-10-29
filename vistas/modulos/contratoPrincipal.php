@@ -109,7 +109,7 @@ $array = $resultadoConsultaSerial;
 
             <div class="form-group col-md-12">
               <label for="inputAddress" class=" mt-3"><b>Direcci&oacute;n del comercio</b></label>
-              <p>&iquest;La direccion del comercio es la misma de la residencia?</p>
+              <p>&iquest;La direcci&oacute;n del comercio es la misma de la residencia?</p>
               <label for="">Si</label>
               <input type="checkbox" class="form-check-input me-5" id="yes">
               <label for="" id="ocultar">No</label>

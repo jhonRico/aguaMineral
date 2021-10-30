@@ -222,7 +222,7 @@ function registrarCampoTipUser(valor)
 function eliminarTipoUser(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "\u00bfSeguro que desea eliminar este país?",
+		text: "\u00bfSeguro que desea eliminar este tipo de usuario?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -265,7 +265,7 @@ function eliminarTipoUser(id){
  			}else
  			{
  				Swal.fire({
- 					title: 'Tipo de usuario Eliminado',
+ 					title: 'Tipo de usuario eliminado',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'

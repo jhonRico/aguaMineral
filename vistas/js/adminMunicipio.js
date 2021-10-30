@@ -311,7 +311,7 @@ function eliminarMunicipio(id){
 			}else
  			{
  				Swal.fire({
- 					title: 'Municipio Eliminada',
+ 					title: 'Municipio Eliminado',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'

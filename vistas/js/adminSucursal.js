@@ -243,6 +243,7 @@ function eliminarSucursal(id){
 		showCancelButton: true,
 		confirmButtonColor: 'red',
 		cancelButtonColor: 'gray',
+		cancelButtonText: 'Cancelar',
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {
 		if (result.isConfirmed){

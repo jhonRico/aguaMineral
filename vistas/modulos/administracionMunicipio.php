@@ -103,11 +103,9 @@
                   <div class="modal-dialog">
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
-                                              <h5  id="staticBackdropLabel"> Modificar Estado</h5>
+                                              <h5  id="staticBackdropLabel"> Modificar Municipio</h5>
                                               <a class="text-white"><i class="fas fa-times cerrar"></i></a>
                                         </div>
- 
-
                                       <div class="modal-body mx-3">
                                          <div class="modal-body">  
                                                 Estado

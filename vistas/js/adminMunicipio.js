@@ -271,6 +271,7 @@ function eliminarMunicipio(id){
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
+		cancelButtonText: 'Cancelar',
 		cancelButtonColor: 'gray',
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {

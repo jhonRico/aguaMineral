@@ -94,7 +94,6 @@ function mostrarContrato(parametro,idTipoUsuario){
     $(".boton1").click(function()
     {
       var resultado =  validarCampos();
-      document.write(resultado);
       /*if (resultado == true)
       {
         alert('El resultado da ok');

@@ -4,9 +4,12 @@ $(document).ready(function() {
   rutaActual = window.location.toString();
 });
 
-$(document).ready(function($){
-  
+$(document).ready(function($){ 
+    var hoy = new Date();
+    var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+    var resultado;
 });
+
 
 //mostrar formulario dependiendo del parametro
 function mostrarContrato(parametro,idTipoUsuario){
@@ -37,13 +40,12 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#divCantidadEstantes').html(input); 
     $('#divCantidadEstantes').show();
     llenarSelectCapacidad(parametro,'capacidadBotellon');
-    $( ".boton1" ).click(function(){
+    $("#modal2").modal("show");
+    $(".boton1").click(function(){
+      resultado =  validarCampos();
       consultarFormatoContrato(parametro);
-      $("#modal2").modal("show");
-      $("#registrarContrato").click(function(){
-         validarCampos(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
-      });
-   });
+    });
+
 
   }else if (parametro == "Ambos") 
   {
@@ -63,9 +65,11 @@ function mostrarContrato(parametro,idTipoUsuario){
     $( ".boton1" ).click(function(){
     consultarFormatoContrato(parametro);
     $("#modal2").modal("show");
-    $("#registrarContrato").click(function(){
-        validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+    $(".boton1").click(function(){
+      resultado =  validarCampos();
+      consultarFormatoContrato(parametro);
     });
+
 
    });
 
@@ -80,9 +84,14 @@ function mostrarContrato(parametro,idTipoUsuario){
     $( ".boton1" ).click(function(){
     consultarFormatoContrato(parametro);
     $("#modal2").modal("show");
-    $("#registrarContrato").click(function(){
-        validarCampos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
-      });
+    $(".boton1").click(function(){
+      resultado =  validarCampos();
+      alert(resultado);
+      if (resultado == true) 
+      {
+        consultarFormatoContrato(parametro);
+      }
+    });
    });
   }
 
@@ -202,11 +211,9 @@ function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro
           }
           var res2 = JSON.parse(auxSplit2[i]);
           plantilla2 += `
-          <option value="${res2[parametro1]}" adicional="${res2[parametro2]}">${res2[parametro2]}</option>
+          <option value="${res2[parametro1]}-${res2[parametro2]}">${res2[parametro2]}</option>
           `;
         }
-
-
         $(`#${selector}`).html(plantilla2); 
         $(`#${selector}`).show();
 
@@ -266,6 +273,7 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
   var direccionComercio = $('#direccionComercio').val();
   var cantidadEstantes = $('#cantidadEstantes').val();
   var sectorComercio = $('#sectorComercio').attr('value');
+
   if (cedula == '') 
   {
    Swal.fire({
@@ -473,15 +481,6 @@ function validarCampos(parametro,idTipoUsuario,selector,selector2)
       timer: 1500
     })        
      return false;
-    }
-    if (parametro == "Ambos") 
-    {
-        consultarProductosAmbos(parametro,idTipoUsuario,selector,selector2);
-        consultarProductosAmbos(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
-    }else
-    {
-        idProducto = $(`#${selector2}`).val();
-        consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector2);
     }
 
     return true;
@@ -692,7 +691,7 @@ function consultarFormatoContrato(parametro)
     processData: false,
     success: function(respuesta3)
     {
-     if(respuesta3.length >10 )
+     if(respuesta3.length >10)
      {
       respuesta3 =respuesta3.replace("[","");
       respuesta3 =respuesta3.replace("]","");
@@ -711,8 +710,8 @@ function consultarFormatoContrato(parametro)
           result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
           result = result.replace("cedulaCliente",$('#cedulaCliente').val());
           result = result.replace("nombreComercio",$('#nobreComercio').val());
-          result = result.replace("MunicipioCliente", $('#municipioCliente').attr('adicional'));
-          result = result.replace("municipioCliente", $('#municipioCliente').attr('adicional'));
+          result = result.replace("MunicipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
+          result = result.replace("municipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
           result = result.replace("telefonoComercio",$('#telefonoComercio').val());
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#cantidadEstantes').val());
@@ -724,6 +723,7 @@ function consultarFormatoContrato(parametro)
         }
       }
       plantilla2 +='</div>'
+      $("#imprimirContrato").hide();
       $("#cuerpoContrato").html(plantilla2);  
       $('#cuerpoContrato').show();
     }else
@@ -744,13 +744,13 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
   var estadoCliente = $('#estadoCliente').val();
-  var municipioCliente = $('#municipioCliente').val();
-  var ciudadCliente =  $('#ciudadCliente').val();
-  var estadoComercio = $('#estadoComercio').val();
-  var municipioComercio = $('#municipioComercio').val();
-  var ciudadComercio =  $('#ciudadComercio').val();
-  var zonaComercio = $('#zonaComercio').val();
-  var zonaCliente = $('#zonaCliente').val();
+  var municipioCliente = (($('#municipioCliente').val()).split("-"))[0];
+  var ciudadCliente =  (($('#ciudadCliente').val()).split("-"))[0];
+  var estadoComercio = (($('#estadoComercio').val()).split("-"))[0];
+  var municipioComercio = (($('#municipioComercio').val()).split("-"))[0];
+  var ciudadComercio =  (($('#ciudadComercio').val()).split("-"))[0];
+  var zonaComercio = (($('#zonaComercio').val()).split("-"))[0];
+  var zonaCliente = (($('#zonaCliente').val()).split("-"))[0];
   var direccionCliente = $('#direccionCliente').val();
   var comercio = $("#nobreComercio").val();
   var cedula = $('#cedulaCliente').val();
@@ -828,8 +828,8 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
         {
           if (result.isConfirmed)
           {
-            $("#modal2").modal("hide");
-            window.location.reload();
+            $("#registrarContrato").hide();
+            $("#imprimirContrato").show();
           }
         })  
       }
@@ -859,13 +859,13 @@ function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
   var estadoCliente = $('#estadoCliente').val();
-  var municipioCliente = $('#municipioCliente').val();
-  var ciudadCliente =  $('#ciudadCliente').val();
-  var estadoComercio = $('#estadoComercio').val();
-  var municipioComercio = $('#municipioComercio').val();
-  var ciudadComercio =  $('#ciudadComercio').val();
-  var zonaComercio = $('#zonaComercio').val();
-  var zonaCliente = $('#zonaCliente').val();
+  var municipioCliente = (($('#municipioCliente').val()).split("-"))[0];
+  var ciudadCliente =  (($('#ciudadCliente').val()).split("-"))[0];
+  var estadoComercio = (($('#estadoComercio').val()).split("-"))[0];
+  var municipioComercio = (($('#municipioComercio').val()).split("-"))[0];
+  var ciudadComercio =  (($('#ciudadComercio').val()).split("-"))[0];
+  var zonaComercio = (($('#zonaComercio').val()).split("-"))[0];
+  var zonaCliente = (($('#zonaCliente').val()).split("-"))[0];
   var direccionCliente = $('#direccionCliente').val();
   var comercio = $("#nobreComercio").val();
   var cedula = $('#cedulaCliente').val();
@@ -944,8 +944,8 @@ function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
         {
           if (result.isConfirmed)
           {
-            $("#modal2").modal("hide");
-            window.location.reload();
+            $("#registrarContrato").hide();
+            $("#imprimirContrato").show();
           }
         })  
       }

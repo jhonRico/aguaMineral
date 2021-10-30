@@ -230,6 +230,7 @@ function eliminarCiudad(id){
 		showCancelButton: true,
 		confirmButtonColor: 'red',
 		cancelButtonColor: 'gray',
+		cancelButtonText: 'Cancelar',
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {
 		if (result.isConfirmed){
@@ -258,7 +259,7 @@ function eliminarCiudadFinal(id)
 			{
 				mensajeError('Error al eliminar la ciudad');
 			}else if(respuesta.includes("relacionado")){
-			   mensajeError('No se puede eliminar la ciudad, se encuentra con sectores asociados');
+			   mensajeError('No se puede eliminar la ciudad, se encuentra con parroquias asociados');
 			}else
 			{
 				Swal.fire({

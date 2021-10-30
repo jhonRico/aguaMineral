@@ -7,7 +7,6 @@ $(document).ready(function() {
 $(document).ready(function($){ 
     var hoy = new Date();
     var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
-    var resultado;
 });
 
 
@@ -42,8 +41,12 @@ function mostrarContrato(parametro,idTipoUsuario){
     llenarSelectCapacidad(parametro,'capacidadBotellon');
     $("#modal2").modal("show");
     $(".boton1").click(function(){
-      resultado =  validarCampos();
-      consultarFormatoContrato(parametro);
+      let resultado =  validarCampos();
+      alert(resultado);
+      if (resultado == true) 
+      {
+        //consultarFormatoContrato(parametro);
+      }
     });
 
 
@@ -66,8 +69,12 @@ function mostrarContrato(parametro,idTipoUsuario){
     consultarFormatoContrato(parametro);
     $("#modal2").modal("show");
     $(".boton1").click(function(){
-      resultado =  validarCampos();
-      consultarFormatoContrato(parametro);
+      let resultado =  validarCampos();
+      alert(resultado);
+      if (resultado == true) 
+      {
+        //consultarFormatoContrato(parametro);
+      }
     });
 
 
@@ -84,13 +91,15 @@ function mostrarContrato(parametro,idTipoUsuario){
     $( ".boton1" ).click(function(){
     consultarFormatoContrato(parametro);
     $("#modal2").modal("show");
-    $(".boton1").click(function(){
-      resultado =  validarCampos();
-      alert(resultado);
-      if (resultado == true) 
+    $(".boton1").click(function()
+    {
+      var resultado =  validarCampos();
+      document.write(resultado);
+      /*if (resultado == true)
       {
-        consultarFormatoContrato(parametro);
-      }
+        alert('El resultado da ok');
+        //consultarFormatoContrato(parametro);
+      }*/
     });
    });
   }
@@ -261,7 +270,7 @@ $("#cedulaCliente").keyup(function(){
 
 //Validar que los campos no sean vacios y compararlos con su respectiva expresion regular
 
-function validarCampos(parametro,idTipoUsuario,selector,selector2)
+function validarCampos()
 {
   var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();

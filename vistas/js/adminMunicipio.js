@@ -13,7 +13,7 @@ function consultarAllMunicipios(){
 
 		
 	var datos = new FormData();
-	datos.append("parametroNeutro", "nulo");
+	datos.append("consultaAllMunicipio", "nulo");
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
@@ -32,7 +32,7 @@ function consultarAllMunicipios(){
 				respuesta3 =respuesta3.replace("]","");
 				var auxSplit2 = respuesta3.split("},");
 
-				plantilla2 +='<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 m-2" id="">'
+				//plantilla2 +='<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 m-2" id="">'
 				for(var i=0;i<auxSplit2.length;i++){
 					if(!auxSplit2[i].includes("}")){
 						auxSplit2[i] = auxSplit2[i]+"}";
@@ -40,14 +40,25 @@ function consultarAllMunicipios(){
 					var res2 = JSON.parse(auxSplit2[i]);
 					var aux = "'"+res2.nombreMunicipio+"'";
 					var aux1 = "'"+res2.capitalMunicipio+"'";
-					plantilla2 +='<div class="p-2">'
+					/*plantilla2 +='<div class="p-2">'
 
 					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreMunicipio+'<a href="javascript:eliminarMunicipio('+res2.idMunicipio+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditMunicipio('+res2.idMunicipio+','+aux+','+aux1+','+res2.Estado_idEstado+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
-					plantilla2 +='   </div>'
+					plantilla2 +='   </div>'*/
+
+					plantilla2 += `
+					<tr>
+					      <b><th scope="row">${res2.nombreEstado}</th></b>
+					      <td></td>
+					      <td></td>
+					      <td>${res2.nombreMunicipio}</td>
+					      <td></td>
+					      <td></td>    
+					     <td><a href="javascript:mostrarModalEditMunicipio('${res2.idMunicipio}','${res2.nombreMunicipio}','${res2.capitalMunicipio}','${res2.Estado_idEstado}')"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:eliminarMunicipio(${res2.idMunicipio})"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
+					</tr><br>`;
 
 				}
-				plantilla2 +='</div>'
+				//plantilla2 +='</div>'
 				$("#verMunicipios").html(plantilla2);  
 				$('#verMunicipios').show();
 			}else{

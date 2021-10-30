@@ -37,10 +37,23 @@
 </table> 
 <div class="bg-light ms-5">
   <div class="ms-5">
-    <div class=" w-100 rounded ms-5">
-       <div class="text-dark m-3 p-2 mb-1 rounded ms-5" id="verMunicipios"></div>
-    </div>
+   
   </div>
+    <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
+  <thead class="cabezaTabla text-white">
+    <tr>
+      <th scope="col">Estado</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">Municipio</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">Acciones</th>   
+    </tr>
+  </thead>
+  <tbody id="verMunicipios">
+  </tbody>
+</table>
 </div>  
 </div>
 </form>

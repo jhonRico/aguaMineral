@@ -6,9 +6,9 @@ require_once "../modelos/m_adminTablasModelo.php";
 class   AjaxAdministracionMunicipio{
 
 
-     public function ajaxConsultaTodosBD($tabla)
+     public function ajaxConsultaTodosBDJoin($tabla1,$tabla2)
     {
-        $respuesta = ControladorRegistroAdminGeneral::consultarTodoRegBD($tabla);
+        $respuesta = ControladorRegistroAdminGeneral::ctrlConsultaTodosBDJoin($tabla1,$tabla2);
         echo  json_encode ($respuesta);
     }
 
@@ -40,10 +40,10 @@ class   AjaxAdministracionMunicipio{
 
  }
 //---------------------------------------------------------------------------------------------------------------
-if(isset($_POST["parametroNeutro"]))
+if(isset($_POST["consultaAllMunicipio"]))
 {  
     $objmunicipio = new AjaxAdministracionMunicipio();
-    $objmunicipio->ajaxConsultaTodosBD("municipio");
+    $objmunicipio->ajaxConsultaTodosBDJoin("municipio","estado");
 }
 
 if(isset($_POST["municipio"]))

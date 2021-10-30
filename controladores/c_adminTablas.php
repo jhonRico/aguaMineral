@@ -193,5 +193,11 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodosContratosSucursal($tabla,$tabla2,$valor,$atributoTabla1,$atributoTabla2);
         return $respuesta;
     }
+
+    public static function ctrlConsultaTodosBDJoin($tabla1,$tabla2)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultaTodosBDJoin($tabla1,$tabla2);
+        return $respuesta;
+    }
 } 
 ?>

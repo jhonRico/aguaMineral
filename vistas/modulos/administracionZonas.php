@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminZonas" class="link-primary">Administración de Ubicación</a></li>
-            <li class="breadcrumb-item active" aria-current="page" class="">Paroroquias</li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Parroquias</li>
           </ol>
         </nav>
   </div> 

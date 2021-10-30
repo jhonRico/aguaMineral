@@ -39,14 +39,14 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#divCantidadEstantes').html(input); 
     $('#divCantidadEstantes').show();
     llenarSelectCapacidad(parametro,'capacidadBotellon');
-    $("#modal2").modal("show");
-    $(".boton1").click(function(){
-      let resultado =  validarCampos();
-      alert(resultado);
-      if (resultado == true) 
-      {
-        //consultarFormatoContrato(parametro);
-      }
+    $(".boton1").click(function()
+    {
+        var respuesta = validarCampos();
+        if (respuesta == true) 
+        {
+            consultarFormatoContrato(parametro);
+            $("#modal2").modal("show");
+        }
     });
 
 
@@ -65,21 +65,15 @@ function mostrarContrato(parametro,idTipoUsuario){
 
     $('#colocarInput').html(input); 
     $('#colocarInput').show();
-    $( ".boton1" ).click(function(){
-    consultarFormatoContrato(parametro);
-    $("#modal2").modal("show");
-    $(".boton1").click(function(){
-      let resultado =  validarCampos();
-      alert(resultado);
-      if (resultado == true) 
-      {
-        //consultarFormatoContrato(parametro);
-      }
+    $(".boton1").click(function()
+    {
+        var respuesta = validarCampos();
+        if (respuesta == true) 
+        {
+            consultarFormatoContrato(parametro);
+            $("#modal2").modal("show");
+        }
     });
-
-
-   });
-
   }else
   {
     $("#labelCapacidadBotellon").hide();
@@ -88,19 +82,15 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#titulo').hide();
     $('#menuCajas').hide();
     llenarSelectCapacidad(parametro,'capacidadEstantes');
-    $( ".boton1" ).click(function(){
-    consultarFormatoContrato(parametro);
-    $("#modal2").modal("show");
     $(".boton1").click(function()
     {
-      var resultado =  validarCampos();
-      /*if (resultado == true)
-      {
-        alert('El resultado da ok');
-        //consultarFormatoContrato(parametro);
-      }*/
+        var respuesta = validarCampos();
+        if (respuesta == true) 
+        {
+            consultarFormatoContrato(parametro);
+            $("#modal2").modal("show");
+        }
     });
-   });
   }
 
 }
@@ -274,6 +264,13 @@ function validarCampos()
   var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
+  var municipioCliente = (($("#municipioCliente").val()).split("-"))[1];
+  var ciudadCliente = (($("#ciudadCliente").val()).split("-"))[1];
+  var zonaCliente = (($("#zonaCliente").val()).split("-"))[1];
+  var municipioComercio = (($("#municipioComercio").val()).split("-"))[1];
+  var ciudadComercio = (($("#ciudadComercio").val()).split("-"))[1];
+  var zonaComercio = (($("#zonaComercio").val()).split("-"))[1];
+
   var direccion = $('#direccionCliente').val();
   var comercio = $("#nobreComercio").val();
   var cedula = $('#cedulaCliente').val();
@@ -354,6 +351,45 @@ function validarCampos()
       icon: 'error',
       toast: true,
       title: 'Ingrese un apellido válido',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+     if (municipioCliente == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un municipio',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+     if (ciudadCliente == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese una ciudad',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (zonaCliente == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un ciudad',
       showConfirmButton: false,
       timerProgressBar: true,
       timer: 1500
@@ -450,6 +486,45 @@ function validarCampos()
         timer: 1500
       })        
       return false;
+    }
+        if (municipioComercio == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese un municipio',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (ciudadComercio == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese una ciudad',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
+    }
+    if (zonaComercio == '') 
+    {
+     Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      toast: true,
+      title: 'Ingrese una parroquia',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      timer: 1500
+    })        
+     return false;
     }
     if (sectorComercio == '') 
     {

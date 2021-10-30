@@ -24,7 +24,7 @@ function consultarAllCiudades(){
 		contentType: false,
 		processData: false,
 		success: function(respuesta3){
-			alert(respuesta3);			
+						
 			if(respuesta3.length >10 ){
 
 				respuesta3 =respuesta3.replace("[","");
@@ -225,7 +225,7 @@ function validarRegistroExistenteCiudad(ciudad,idMunicipioValue)
 function eliminarCiudad(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar la ciudad?",
+		text: "\u00bfSeguro que desea eliminar la ciudad?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -381,7 +381,7 @@ function modificarCiudadValue(id,descripcion,idPais)
 			}else
 			{
 				Swal.fire({
-					title: 'Ciudad Modificado',
+					title: 'Ciudad Modificada',
 					icon: 'success',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'

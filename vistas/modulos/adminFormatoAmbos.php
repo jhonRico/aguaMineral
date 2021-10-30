@@ -8,7 +8,7 @@
   <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminFormatos" class="link-primary">Administración de Ubicación</a></li>
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminFormatos" class="link-primary">Administración de formatos</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Formatos</li>
           </ol>
         </nav>
@@ -63,7 +63,7 @@
                   <div class="modal-dialog modal-lg">
                            <div class="modal-content">
                                        <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
-                                              <h5  id="staticBackdropLabel"> Parametros de ayuda</h5>
+                                              <h5  id="staticBackdropLabel"> Parámetros de ayuda</h5>
                                               <a class="text-white"><i class="fas fa-times cerrar"></i></a>
                                         </div>
                                     
@@ -72,7 +72,7 @@
                                               <div class="col-sm-12">
                                                         <div class="card">
                                                           <div class="card-body">
-                                                            <h5 class="card-title">Ayuda modificación formato</h5>
+                                                            <h5 class="card-title">Gestión para la modificación del formato</h5>
                                                             <p class="card-text">El formato se puede modificar, pero se debe tener en cuenta mantener los parámetros para que se genere el contrato correctamente. A continuación, se describe la lista de parámetros que permiten registrar la información de los clientes y productos en base de datos para cada uno de los formatos de contrato disponible.</p>
                                                             
                                                           </div>

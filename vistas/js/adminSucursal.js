@@ -40,7 +40,7 @@ function consultarAllSucursalesValue(){
 					var aux2 = "'"+res2.direccionSucursal+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreSucursal+'<a href="javascript:eliminarCiudad('+res2.idSucursal+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditSucursal('+res2.idSucursal+','+aux+','+aux2+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreSucursal+'<a href="javascript:eliminarSucursal('+res2.idSucursal+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditSucursal('+res2.idSucursal+','+aux+','+aux2+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -235,10 +235,10 @@ function validarRegistroExistenteSucursal(nameSucursal,direccion)
 
 /*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
-function eliminarCiudad(id){
+function eliminarSucursal(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar la sucursal?",
+		text: "\u00bfSeguro que desea eliminar la sucursal?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -275,7 +275,7 @@ function eliminarSucursalFinal(id)
 			}else
 			{
 				Swal.fire({
-					title: 'sucursal Eliminada',
+					title: 'Sucursal eliminada',
 					icon: 'success',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'

@@ -199,7 +199,7 @@ function actualizarRegistroAmbos(idFormato)
 			}else
 			{
 				Swal.fire({
-					title: 'Se actualiza de forma  Exitosa',
+					title: 'Se actualiza de forma  exitosa',
 					icon: 'success',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'
@@ -240,7 +240,7 @@ function actualizarRegistroBotellon(idFormato)
 			}else
 			{
 				Swal.fire({
-					title: 'Se actualiza de forma  Exitosa',
+					title: 'Se actualiza de forma exitosa',
 					icon: 'success',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'
@@ -282,7 +282,7 @@ function actualizarRegistro(idFormato,descripcion)
 			}else
 			{
 				Swal.fire({
-					title: 'Se actualiza de forma  Exitosa',
+					title: 'Se actualiza de forma exitosa',
 					icon: 'success',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'

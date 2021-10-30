@@ -1,7 +1,7 @@
 <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminZonas" class="link-primary">Ubicación</a></li>
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminZonas" class="link-primary">Administración de Ubicación</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Pais</li>
           </ol>
         </nav>

@@ -207,7 +207,7 @@ function mostrarModalEliminarProducto(id, tabla, parametro)
 {
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar este Producto?",
+		text: "\u00bfSeguro que desea eliminar este Producto?",
 		icon: 'warning',
 		showCancelButton: true,
 		cancelButtonText: 'Cancelar',
@@ -295,6 +295,40 @@ $(document).ready(function()
 });
 
 $('#agregarProducto').click(function(){
+
+   var capacidad = $("#capacidad").val();
+   var cantidad = $("#cantidad").val();
+
+		var idMunicipioValue = $("#municipioAddSelect").val();
+		if (capacidad == "") 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'El campo capacidad esta vacio',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
+
+	   if (cantidad == "") 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'El campo cantidad esta vacio',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
+
+
 	registrarProductoEnBd();
 });
 
@@ -477,7 +511,7 @@ function consultarProducto()
 					      <td>${res2.cantidadProductos}</td>
 					      <td></td>
 					      <td></td>
-					      <td><a href="javascript:mostrarModalModificarProducto('${res2.idProducto}','${result2}','${res2.idSerialProducto}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:mostrarModalEliminarProducto(${res2.idProducto},'producto','idProducto')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
+					      <td><a href="javascript:mostrarModalModificarProducto('${res2.idProducto}','${result2}','${res2.idSerialProducto}','${res2.capacidadProducto}','${res2.cantidadProductos}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:mostrarModalEliminarProducto(${res2.idProducto},'producto','idProducto')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
 					</tr><br>`;
 				}
 
@@ -500,10 +534,12 @@ function consultarProducto()
 		}
 	})
 }
-function mostrarModalModificarProducto(id,serial,idSerial)
+function mostrarModalModificarProducto(id,serial,idSerial,capacidad,cantidad)
 {
 		$("#editProducto").modal("show");
 		$("#serialEditar").val(serial);
+		$("#capacidadEditar").val(capacidad);
+		$("#cantidadEditar").val(cantidad);
 		$("#editarPais").click(function(){
 		serial = $("#serialEditar").val();
 		capacidad = $('#capacidadEditar').val();

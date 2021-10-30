@@ -371,12 +371,13 @@ require_once "conexion.php";
         $stmt -> execute();
         return  $stmt ->fetchAll();
     }
-    public static function mdlConsultarTodosContratosSucursal($tabla,$tabla2,$valor,$atributoTabla,$atributoTabla2)
+    public static function mdlConsultaTodosBDJoin($tabla1,$tabla2)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 WHERE t.Sucursal_idSucursal = :valor ORDER BY t2.cedulaPersona ASC");
-        $stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1 t INNER JOIN (select * from $tabla2) t2 ON t.Estado_idEstado = t2.idEstado order by t2.nombreEstado");
         $stmt -> execute();
         return $stmt -> fetchAll();
     }
+
+
 }
 ?>

@@ -25,9 +25,19 @@ class ControladorReportes
 		$respuesta = ModeloReportes::mdlConsultarProductoPrestado($tabla,$tabla2,$tabla3,$datos); 
         return $respuesta;
 	}
-	public static function ctrlConsultarProductosDisponibles()
+	public static function ctrlConsultarProductosDisponibles($tabla)
 	{
-		$respuesta = ModeloReportes::mdlConsultarProductosDisponibles(); 
+		$respuesta = ModeloReportes::mdlConsultarProductosDisponibles($tabla); 
+        return $respuesta;
+	}
+	public static function ctrlConsultarContratosActivos($fechaReporteContrato,$estadoContrato)
+	{
+		$tabla = 'contrato';
+		$datos = array(
+             "fechaReporteContrato"=>$fechaReporteContrato,
+             "estadoContrato"=>$estadoContrato,
+         );
+		$respuesta = ModeloReportes::mdlConsultarContratosActivos($tabla,$datos); 
         return $respuesta;
 	}
 }

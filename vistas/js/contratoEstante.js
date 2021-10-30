@@ -4,10 +4,11 @@ $(document).ready(function() {
   rutaActual = window.location.toString();
 });
 
-$(document).ready(function($){ 
-    var hoy = new Date();
-    var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
-});
+var hoy = new Date();
+var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+fecha = fecha.replace("-","");
+fecha = fecha.replace("-","");
+
 
 
 //mostrar formulario dependiendo del parametro
@@ -48,6 +49,10 @@ function mostrarContrato(parametro,idTipoUsuario){
             $("#modal2").modal("show");
         }
     });
+    $("#registrarContrato").click(function()
+    {
+        consultarProductosDisponibles(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
+    });
 
 
   }else if (parametro == "Ambos") 
@@ -74,6 +79,11 @@ function mostrarContrato(parametro,idTipoUsuario){
             $("#modal2").modal("show");
         }
     });
+    $("#registrarContrato").click(function()
+    {
+        consultarProductosAmbos(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
+        consultarProductosAmbos(parametro,idTipoUsuario,'cantidadBotellones','capacidadBotellon');
+    });
   }else
   {
     $("#labelCapacidadBotellon").hide();
@@ -90,6 +100,10 @@ function mostrarContrato(parametro,idTipoUsuario){
             consultarFormatoContrato(parametro);
             $("#modal2").modal("show");
         }
+    });
+    $("#registrarContrato").click(function()
+    {
+       consultarProductosDisponibles(parametro,idTipoUsuario,'cantidadEstantes','capacidadEstantes');
     });
   }
 
@@ -244,9 +258,9 @@ $(document).ready(function() {
         //Dar Valor a los inputs
         $("#direccionComercio").val($("#direccionCliente").val())
         $("#estadoComercio").val($("#estadoCliente").val());
-        $("#municipioComercio").val($("#municipioCliente").val());
-        $("#ciudadComercio").val($("#ciudadCliente").val());
-        $("#zonaComercio").attr('value', $("#zonaCliente").val());
+        $("#municipioComercio").val((($('#municipioCliente').val()).split("-"))[0]);
+        $("#ciudadComercio").val((($('#ciudadCliente').val()).split("-"))[0]);
+        $("#zonaComercio").attr('value', (($('#zonaCliente').val()).split("-"))[0]);
         $("#sectorComercio").attr('value', $("#sectorCliente").val());
     });
 
@@ -264,12 +278,6 @@ function validarCampos()
   var nombre = $('#nombreCliente').val();
   var apellido = $('#apellidoCliente').val();
   var sectorCliente = $('#sectorCliente').val();
-  var municipioCliente = (($("#municipioCliente").val()).split("-"))[1];
-  var ciudadCliente = (($("#ciudadCliente").val()).split("-"))[1];
-  var zonaCliente = (($("#zonaCliente").val()).split("-"))[1];
-  var municipioComercio = (($("#municipioComercio").val()).split("-"))[1];
-  var ciudadComercio = (($("#ciudadComercio").val()).split("-"))[1];
-  var zonaComercio = (($("#zonaComercio").val()).split("-"))[1];
 
   var direccion = $('#direccionCliente').val();
   var comercio = $("#nobreComercio").val();
@@ -357,45 +365,7 @@ function validarCampos()
     })        
      return false;
     }
-     if (municipioCliente == '') 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese un municipio',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
-    }
-     if (ciudadCliente == '') 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese una ciudad',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
-    }
-    if (zonaCliente == '') 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese un ciudad',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
-    }
+
     if (sectorCliente == '') 
     {
      Swal.fire({
@@ -428,7 +398,7 @@ function validarCampos()
       position: 'top-end',
       icon: 'error',
       toast: true,
-      title: 'Ingrese un dirección',
+      title: 'Ingrese una dirección',
       showConfirmButton: false,
       timerProgressBar: true,
       timer: 1500
@@ -467,7 +437,7 @@ function validarCampos()
       position: 'top-end',
       icon: 'error',
       toast: true,
-      title: 'Ingrese una telefono',
+      title: 'Ingrese un telefono',
       showConfirmButton: false,
       timerProgressBar: true,
       timer: 1500
@@ -486,45 +456,6 @@ function validarCampos()
         timer: 1500
       })        
       return false;
-    }
-        if (municipioComercio == '') 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese un municipio',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
-    }
-    if (ciudadComercio == '') 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese una ciudad',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
-    }
-    if (zonaComercio == '') 
-    {
-     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      toast: true,
-      title: 'Ingrese una parroquia',
-      showConfirmButton: false,
-      timerProgressBar: true,
-      timer: 1500
-    })        
-     return false;
     }
     if (sectorComercio == '') 
     {
@@ -799,7 +730,7 @@ function consultarFormatoContrato(parametro)
           result = result.replace("direccionComercio",$('#direccionComercio').val());
           result = result.replace("cantidadEstante",$('#cantidadEstantes').val());
           result = result.replace("cantidadBotellones",$('#cantidadEstantes').val());
-          result = result.replace("codigoProducto",'28DFefe75');  
+          result = result.replace("codigoProducto",fecha);  
           result = result.replace("fechaConstruccion",$('#fechaProducto').val());        
 
           plantilla2 += result;
@@ -830,9 +761,9 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
   var municipioCliente = (($('#municipioCliente').val()).split("-"))[0];
   var ciudadCliente =  (($('#ciudadCliente').val()).split("-"))[0];
   var estadoComercio = (($('#estadoComercio').val()).split("-"))[0];
-  var municipioComercio = (($('#municipioComercio').val()).split("-"))[0];
-  var ciudadComercio =  (($('#ciudadComercio').val()).split("-"))[0];
-  var zonaComercio = (($('#zonaComercio').val()).split("-"))[0];
+  var municipioComercio = $('#municipioComercio').val();
+  var ciudadComercio =  $('#ciudadComercio').val();
+  var zonaComercio = $('#zonaComercio').val();
   var zonaCliente = (($('#zonaCliente').val()).split("-"))[0];
   var direccionCliente = $('#direccionCliente').val();
   var comercio = $("#nobreComercio").val();
@@ -891,6 +822,7 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
     async:false,
     success: function(respuesta)
     {
+      alert(respuesta);
       if(respuesta.includes("error"))
       {
         Swal.fire({
@@ -945,10 +877,10 @@ function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
   var municipioCliente = (($('#municipioCliente').val()).split("-"))[0];
   var ciudadCliente =  (($('#ciudadCliente').val()).split("-"))[0];
   var estadoComercio = (($('#estadoComercio').val()).split("-"))[0];
-  var municipioComercio = (($('#municipioComercio').val()).split("-"))[0];
-  var ciudadComercio =  (($('#ciudadComercio').val()).split("-"))[0];
-  var zonaComercio = (($('#zonaComercio').val()).split("-"))[0];
-  var zonaCliente = (($('#zonaCliente').val()).split("-"))[0];
+  var municipioComercio = $('#municipioComercio').val();
+  var ciudadComercio =  $('#ciudadComercio').val();
+  var zonaComercio = $('#zonaComercio').val();
+  var zonaCliente = (($('#zonaCliente').val()).split("-"))[0];  
   var direccionCliente = $('#direccionCliente').val();
   var comercio = $("#nobreComercio").val();
   var cedula = $('#cedulaCliente').val();

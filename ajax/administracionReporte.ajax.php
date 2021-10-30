@@ -14,9 +14,14 @@ class AjaxReportes
 		$respuesta = ControladorReportes::ctrlConsultarProductoPrestado($tipoProductoReporte,$fechaReporteProducto);
         echo  json_encode ($respuesta);
 	}
-	public static function ajaxConsultarProductosDisponibles()
+	public static function ajaxConsultarProductosDisponibles($tabla)
 	{
-		$respuesta = ControladorReportes::ctrlConsultarProductosDisponibles();
+		$respuesta = ControladorReportes::ctrlConsultarProductosDisponibles($tabla);
+        echo  json_encode ($respuesta);
+	}
+	public static function ajaxConsultarContratosActivos($fechaReporteContrato,$estadoContrato)
+	{
+		$respuesta = ControladorReportes::ctrlConsultarContratosActivos($fechaReporteContrato,$estadoContrato);
         echo  json_encode ($respuesta);
 	}
 }
@@ -38,6 +43,25 @@ if(isset($_POST["tipoProductoPrestado"]))
 if(isset($_POST["consultarProductos"]))
 {  
     $allStates = new AjaxReportes();
-    $allStates->ajaxConsultarProductosDisponibles();
+    $allStates->ajaxConsultarProductosDisponibles('producto');
+}
+if(isset($_POST["fechaReporteContrato"]))
+{  
+	$estadoContrato = 'A';
+	$fechaReporteContrato = $_POST['fechaReporteContrato'];
+    $allStates = new AjaxReportes();
+    $allStates->ajaxConsultarContratosActivos($fechaReporteContrato,$estadoContrato);
+}
+if(isset($_POST["fechaReporteContratoDevuelto"]))
+{  
+	$estadoContrato = 'D';
+	$fechaReporteContrato = $_POST['fechaReporteContratoDevuelto'];
+    $allStates = new AjaxReportes();
+    $allStates->ajaxConsultarContratosActivos($fechaReporteContrato,$estadoContrato);
+}
+if(isset($_POST["consultarContratos"]))
+{  
+    $allStates = new AjaxReportes();
+    $allStates->ajaxConsultarProductosDisponibles('contrato');
 }
 ?>

@@ -122,6 +122,7 @@ JAVASCRIPT PERSONALIZADO
 <script src="<?php echo $url ?>vistas/js/plugins/select2.min.js"></script>
 <script src="<?php echo $url ?>vistas/js/contratoEstante.js"></script>
 <script src="<?php echo $url ?>vistas/js/reporte.js"></script>
+<script src="<?php echo $url ?>vistas/js/reporteContrato.js"></script>
 
 <!--=====================================
 INICIO SE SESION CON FACEBOOK 

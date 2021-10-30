@@ -77,8 +77,8 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       <a href="<?php echo $url2?>administracionZonas" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="far fa-compass iconosAdmin"></i>
-          <h3 class="titulosAdmin mb-0">Zonas</h3>
-          <p class="mb-5 mt-0">Administración de zonas</p>
+          <h3 class="titulosAdmin mb-0">Parroquias</h3>
+          <p class="mb-5 mt-0">Administración de Parroquias</p>
         </div>
       </a>
      </div>

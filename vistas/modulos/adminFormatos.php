@@ -16,8 +16,8 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
  <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminContrato" class="link-primary">Administración Contrato</a></li>
-            <li class="breadcrumb-item active" aria-current="page" class="">Administración de Formato</li>
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminContrato" class="link-primary">Administración Contratos</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Administración de Formatos</li>
           </ol>
         </nav>
     </div>

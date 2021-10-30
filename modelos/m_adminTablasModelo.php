@@ -373,7 +373,7 @@ require_once "conexion.php";
     }
     public static function mdlConsultaTodosBDJoin($tabla1,$tabla2)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1 t INNER JOIN (select * from $tabla2) t2 ON t.Estado_idEstado = t2.idEstado ");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1 t INNER JOIN (select * from $tabla2) t2 ON t.Estado_idEstado = t2.idEstado order by t2.nombreEstado");
         $stmt -> execute();
         return $stmt -> fetchAll();
     }

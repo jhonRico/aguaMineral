@@ -275,7 +275,7 @@ function eliminarSucursalFinal(id)
 			}else
 			{
 				Swal.fire({
-					title: 'sucursal Eliminada',
+					title: 'Sucursal eliminada',
 					icon: 'success',
 					showCloseButton: true,
 					confirmButtonText:'Aceptar'

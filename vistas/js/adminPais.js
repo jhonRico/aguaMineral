@@ -26,12 +26,6 @@ function mostrarModalEdit(id, descripcion)
 	})
 	 
 }
-
-/*
-function validarFormularioDeEditar(id)
-{
-	alert(id);
-}*/
 //cerrar modal editar
 
 $(function(){

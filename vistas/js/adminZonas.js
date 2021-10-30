@@ -21,8 +21,8 @@ function consultarAllZonas(){
 		cache: false,
 		contentType: false,
 		processData: false,
-		success: function(respuesta3){
-			
+		success: function(respuesta3)
+		{
 			 if(respuesta3.length >10 ){
 
 				respuesta3 =respuesta3.replace("[","");
@@ -35,10 +35,10 @@ function consultarAllZonas(){
 						auxSplit2[i] = auxSplit2[i]+"}";
 					}
 					var res2 = JSON.parse(auxSplit2[i]);
-					var aux = "'"+res2.descripcion+"'";
+					var aux = "'"+res2.nombreParroquia+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminarZonas('+res2.idZonas+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditZonas('+res2.idZonas+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreParroquia+'<a href="javascript:eliminarZonas('+res2.idParroquia+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditZonas('+res2.idParroquia+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -66,7 +66,7 @@ $(function(){
 //cerrar modal agregar
 
 $(function(){
-	$(".cerrar").click(function(){
+	$(".cerrarModParroquia").click(function(){
 		$("#nameZona").val('');
 		$("#moddaddzonas").modal("hide");
 	})
@@ -74,8 +74,9 @@ $(function(){
 
 $(function(){
 	$("#agregarZonaBtn").click(function(){
-
+		var idCiudad = $("#valorCiudad").val();
 		var descripcion = $("#nameZona").val();
+
 			if (descripcion == "") 
  			{
  				Swal.fire({
@@ -103,28 +104,29 @@ $(function(){
  				return false;
  			}
  			
-			validarRegistro();
+			validarRegistro(idCiudad,descripcion);
 
 			return true;
 		})
 	})
 
-function validarRegistro()
+function validarRegistro(idCiudad,descripcion)
 {
-	var nombre = $("#nameZona").val();
-	var ejecutar = validarRegistroExistenteZona(nombre);
-	if(ejecutar == "No existe"){
-	     registrarCampoZonas(nombre);
+	var ejecutar = validarRegistroExistenteZona(idCiudad,descripcion);
+	if(ejecutar == "No existe")
+	{
+	     registrarCampoZonas(idCiudad,descripcion);
 		 consultarAllZonas();	
 	}
 
 }
 /*Funcion Ajax que registra la zona en BD*/
-function registrarCampoZonas(valor)
+function registrarCampoZonas(idCiudad,descripcion)
 {
 	var datos = new FormData();
 
-	datos.append("descripcionZonaValue", valor);
+	datos.append("descripcionZonaValue", descripcion);
+	datos.append("idCiudadRegistrar", idCiudad);
 
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
@@ -135,8 +137,7 @@ function registrarCampoZonas(valor)
 		processData: false,
 		async:false,
 		success: function(respuesta)
-		{
-			
+		{			
 			if(!respuesta.includes("ok"))
 			{
 				Swal.fire({
@@ -171,11 +172,12 @@ function registrarCampoZonas(valor)
 }
 //Funcion Ajax que valida existente en BD 
 
-function validarRegistroExistenteZona(valor)
+function validarRegistroExistenteZona(idCiudad,descripcion)
 {
 	var datos = new FormData();
 	var returnValue = "Existe";
-	datos.append("validaExisteZonaInBd", valor);
+	datos.append("idCiudad", idCiudad);
+	datos.append("descripcion", descripcion);
 
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
@@ -211,46 +213,6 @@ function validarRegistroExistenteZona(valor)
 
 	return returnValue;
 }
-function validarRegistroExistenteZonaTwo(valor)
-{
-	var datos = new FormData();
-	var returnValue = "Existe";
-	datos.append("validaExisteZonaInBd", valor);
-
-	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
-		method:"POST",
-		data: datos, 
-		cache: false,
-		contentType: false,
-		processData: false,
-		async:false,
-		success: function(respuesta)
-		{  
-			if(respuesta.includes("false"))
-			{
-			   returnValue =  "No existe";
-			}else
-			{
-			  
-				Swal.fire({
-					position: 'top-end',
-					icon: 'error',
-					toast: true,
-					title: 'El registro ya existe ',
-					showConfirmButton: false,
-					timerProgressBar: true,
-					timer: 1500
-				})
-				returnValue =  "Existe";
-			}
-
-		}                 
-
-	})
-
-	return returnValue;
-}
 /*------------------------------------------Finaliza el Espacio de agregar zonas----------------------------------*/
 
 /*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
@@ -258,7 +220,7 @@ function validarRegistroExistenteZonaTwo(valor)
 function eliminarZonas(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "\u00bfSeguro que desea eliminar la zona?",
+		text: "\u00bfSeguro que desea eliminar la Parroquia?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -287,25 +249,20 @@ function eliminarZonas(id){
  		async:false,
  		success: function(respuesta)
  		{
- 			if(!respuesta.includes("ok"))
- 			{
- 				Swal.fire({
- 					title: 'Error',
- 					text: 'Error al eliminar la zona',
- 					icon: 'error',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}); 
-
- 			}else
- 			{
- 				Swal.fire({
- 					title: 'Zona Eliminada',
- 					icon: 'success',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				});
- 			}
+ 			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
+			{
+				mensajeError('Error al eliminar la parroquia');
+			}else if(respuesta.includes("relacionado")){
+			   mensajeError('No se puede eliminar la parroquia, se encuentra con sectores asociados');
+			}else
+			{
+				Swal.fire({
+					title: 'Parroquia Eliminada',
+					icon: 'success',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				});
+			}
 
  		}                 
 
@@ -321,20 +278,24 @@ function eliminarZonas(id){
 function mostrarModalEditZonas(id, descripcion)
 {
 	idTipUser = id;
-	document.getElementById("nameZonaId").value = descripcion;
+	document.getElementById("parroquiModificar").value = descripcion;
 	$("#editZonas").modal("show");
 	
 	
 	$("#editarZonaValue").click(function(){
-	        var existeInTable = validarRegistroExistenteZonaTwo($("#nameZonaId").val());
+			var idCiudad = $("#valorCiudadModificar").val();
+			var descripcion = $("#parroquiModificar").val();
+	        var existeInTable = validarRegistroExistenteZona(idCiudad,descripcion);
 		    if(existeInTable == "No existe"){
-			    modificarZonasFinal(idTipUser);
-				
-			}
-		    
+			    modificarZonasFinal(idTipUser,idCiudad,descripcion);
+			}  
 	})
-	 
 }
+
+$(".cerrarModParroquia").click(function(){
+	$("#nameZonaId").val('');
+	$("#editZonas").modal("hide");
+});
 
 
 function modificarZonasFinal(id)
@@ -375,13 +336,13 @@ function modificarZonasFinal(id)
  	}
 
 
-function modificarZonaValue(id,descripcion)
+function modificarZonasFinal(id,idCiudad,descripcion)
  {
  	var datos = new FormData();
 
  	datos.append("idZonaModificado", id);
- 	datos.append("descripcion", descripcion);
-
+ 	datos.append("idCiudadModificar", idCiudad);
+ 	datos.append("descripcionModificar", descripcion);
 
  	$.ajax({
  		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
@@ -393,12 +354,11 @@ function modificarZonaValue(id,descripcion)
  		async:false,
  		success: function(respuesta)
  		{  
-
  			if(!respuesta.includes("ok"))
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al modificar la zona ',
+ 					text: 'Error al modificar la parroquia',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
@@ -407,19 +367,17 @@ function modificarZonaValue(id,descripcion)
  			}else
  			{
  				Swal.fire({
- 					title: 'Zona Modificada',
+ 					title: 'Parroquia Modificada',
  					icon: 'success',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
  				}).then((result) => 
 				{
-					if (result.isConfirmed)
+					if(result.isConfirmed)
 					{
-						
-						document.getElementById("nameZonaId").value = null;
+						document.getElementById("parroquiModificar").value = null;
 						$("#editZonas").modal("hide");
-						location.reload();
-
+						window.location.reload();
 					}
 				})
  			}

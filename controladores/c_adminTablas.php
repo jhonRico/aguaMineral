@@ -199,5 +199,14 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlConsultaTodosBDJoin($tabla1,$tabla2);
         return $respuesta;
     }
+    public static function ctrlConsultarRegistroExistenteCon1ParametroEntero1String($tabla,$atributo1,$atributo2,$valor1,$valor2)
+    {
+        $datos = array(
+             "valor1"=>$valor1,
+             "valor2"=>$valor2,
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarRegistroExistenteCon1ParametroEntero1String($tabla,$atributo1,$atributo2,$datos);
+        return $respuesta;
+    }
 } 
 ?>

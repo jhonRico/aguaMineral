@@ -52,6 +52,9 @@ require_once "conexion.php";
                     case "sucursal":
                         $returnValue = "contrato-Sucursal_idSucursal"; 
                         break; 
+                    case "parroquia":
+                        $returnValue = "sector-Parroquia_idParroquia"; 
+                        break; 
                 }
         }
         return $returnValue;
@@ -184,7 +187,6 @@ require_once "conexion.php";
      {
 
         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $atributo2 = :parametro2, $atributo3 = :parametro3  WHERE $atributo1 = :parametro1");
-        echo $datos["parametro2"];
         $stmt->bindParam(":parametro1", $datos["parametro1"], PDO::PARAM_INT);
         $stmt->bindParam(":parametro2", $datos["parametros2"], PDO::PARAM_STR);
         $stmt->bindParam(":parametro3", $datos["parametros3"], PDO::PARAM_INT);
@@ -248,6 +250,8 @@ require_once "conexion.php";
 
         $stmt -> execute();
         return  $stmt ->fetch();
+        $stmt->close();
+        $stmt = null;
 
     }
 
@@ -296,12 +300,16 @@ require_once "conexion.php";
             $stmt->bindParam(":valor", $valor, PDO::PARAM_INT);
             $stmt -> execute();
             return  $stmt ->fetchAll();
+            $stmt->close();
+            $stmt = null;
         }else
         {
             $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 WHERE t2.$atributo = :valor ORDER BY t.fechaContrato ASC");
             $stmt->bindParam(":valor", $valor, PDO::PARAM_INT);
             $stmt -> execute();
             return  $stmt ->fetchAll();
+            $stmt->close();
+            $stmt = null;
         }
         
     }
@@ -311,6 +319,8 @@ require_once "conexion.php";
         $stmt->bindParam(":valor", $valor, PDO::PARAM_INT);
         $stmt -> execute();
         return  $stmt ->fetchAll();
+        $stmt->close();
+        $stmt = null;
     }
     public static function consultarCantidadProducto($tabla,$idProducto)
     {
@@ -319,6 +329,8 @@ require_once "conexion.php";
         $stmt->execute();
         $array = $stmt->fetch();
         return $array['cantidadProductos'];
+        $stmt->close();
+        $stmt = null;
 
     }
     public static function agregarProductoContratoDevuelto($tabla,$datos,$idProducto,$resultado)
@@ -335,6 +347,8 @@ require_once "conexion.php";
         {
             return "error";
         }
+        $stmt->close();
+        $stmt = null;
     }
     public static function mdlDevolverContrato($tabla,$datos)
     {
@@ -370,12 +384,27 @@ require_once "conexion.php";
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 ORDER BY t2.cedulaPersona ASC");
         $stmt -> execute();
         return  $stmt ->fetchAll();
+        $stmt->close();
+        $stmt = null;
     }
     public static function mdlConsultaTodosBDJoin($tabla1,$tabla2)
     {
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1 t INNER JOIN (select * from $tabla2) t2 ON t.Estado_idEstado = t2.idEstado order by t2.nombreEstado");
         $stmt -> execute();
         return $stmt -> fetchAll();
+        $stmt->close();
+        $stmt = null;
+    }
+
+    public static function mdlConsultarRegistroExistenteCon1ParametroEntero1String($tabla,$atributo1,$atributo2,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $atributo1 = :parametro1 and $atributo2 = :parametro2");
+        $stmt->bindParam(":parametro1", $datos["valor1"], PDO::PARAM_INT);
+        $stmt->bindParam(":parametro2", $datos["valor2"], PDO::PARAM_STR);
+        $stmt -> execute();
+        return  $stmt ->fetch();
+        $stmt->close();
+        $stmt = null;
     }
 
 

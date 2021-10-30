@@ -11,14 +11,14 @@ class   AjaxAdministracionZonas{
         $respuesta = ControladorRegistroAdminGeneral::consultarTodoRegBD($tabla);
         echo  json_encode ($respuesta);
     }
-    public function ajaxConsultaInDbExisteZonas($registroValue,$tabla)
+    public function ajaxConsultaInDbExisteZonas($tabla,$atributo1,$atributo2,$valor1,$valor2)
     {
-        $respuesta = ControladorRegistroAdminGeneral::consultarRegistroExisteBD($registroValue,$tabla,"descripcion");
+        $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarRegistroExistenteCon1ParametroEntero1String($tabla,$atributo1,$atributo2,$valor1,$valor2);
         echo  json_encode ($respuesta);
     }
-      public function ajaxAddRegistro($nombreValue,$tabla)
+      public function ajaxAddRegistro($parametro1,$parametro2,$parametro3,$tabla,$atributo1,$atributo2,$atributo3)
     {
-        $respuesta = ControladorRegistroAdminGeneral::ctrlAddregistro($nombreValue,$tabla);
+        $respuesta = ControladorRegistroAdminGeneral::ctrlAddRegistroTresParametros($parametro1,$parametro2,$parametro3,$tabla,$atributo1,$atributo2,$atributo3);
         echo  json_encode ($respuesta);
     }
 
@@ -27,9 +27,9 @@ class   AjaxAdministracionZonas{
         $respuesta = ControladorRegistroAdminGeneral::ctrleliminar($idDeleteTipUser,$tabla,$atributo);
         echo  json_encode ($respuesta);
     }
-    public function ajaxModificarOfTable($id,$valueTable,$tabla,$atributoSet,$atributoWhere)
+    public function ajaxModificarOfTable($parametro1Value,$parametros2Value,$parametros3Value,$tabla,$atributo1,$atributo2,$atributo3)
     {
-        $respuesta = ControladorRegistroAdminGeneral::ctrlModificarOfTable($id,$valueTable,$tabla,$atributoSet,$atributoWhere);
+        $respuesta = ControladorRegistroAdminGeneral::ctrlModificarOfTable2Campos($parametro1Value,$parametros2Value,$parametros3Value,$tabla,$atributo1,$atributo2,$atributo3);
         echo  json_encode ($respuesta);
     }
 
@@ -38,34 +38,37 @@ class   AjaxAdministracionZonas{
 if(isset($_POST["parametroNeutro"]))
 {  
     $objZonas = new AjaxAdministracionZonas();
-    $objZonas->ajaxConsultaTodosBD("zonas");
+    $objZonas->ajaxConsultaTodosBD("parroquia");
 }
 
-if(isset($_POST["validaExisteZonaInBd"]))
+if(isset($_POST["idCiudad"]))
 {  
     $objZonas = new AjaxAdministracionZonas();
-    $registroValue = $_POST['validaExisteZonaInBd'];
-    $objZonas->ajaxConsultaInDbExisteZonas($registroValue,"zonas");
+    $idCiudad = $_POST['idCiudad'];
+    $nombreParroquia = $_POST['descripcion'];
+    $objZonas->ajaxConsultaInDbExisteZonas('parroquia','Ciudad_idCiudad','nombreParroquia',$idCiudad,$nombreParroquia);
 }
 
 if(isset($_POST["descripcionZonaValue"]))
 {  
     $allStates = new AjaxAdministracionZonas();
+    $idCiudadRegistrar = $_POST["idCiudadRegistrar"];
     $nombreValue = $_POST["descripcionZonaValue"];
-    $allStates->ajaxAddRegistro($nombreValue,"zonas");
+    $allStates->ajaxAddRegistro($idCiudadRegistrar,$nombreValue,null,'parroquia','Ciudad_idCiudad','nombreParroquia','Descripcion');
 }
 
 if(isset($_POST["idZona"])){
     $objZona = new AjaxAdministracionZonas();
     $idDeleteZona = $_POST['idZona'];
-    $objZona->ajaxEliminarZona($idDeleteZona,"zonas","idZonas");
+    $objZona->ajaxEliminarZona($idDeleteZona,"parroquia","idParroquia");
 }
 
 if(isset($_POST["idZonaModificado"])){
     $objTipoUser = new AjaxAdministracionZonas();
     $idUpdateTipUser = $_POST['idZonaModificado'];
-    $valueUpdate = $_POST['descripcion'];
-    $objTipoUser->ajaxModificarOfTable($idUpdateTipUser,$valueUpdate,"zonas","descripcion","idZonas");
+    $idCiudadModificar = $_POST['idCiudadModificar'];
+    $valueUpdate = $_POST['descripcionModificar'];
+    $objTipoUser->ajaxModificarOfTable($idUpdateTipUser,$valueUpdate,$idCiudadModificar,'parroquia','idParroquia','nombreParroquia','Ciudad_idCiudad');
 }
 
 ?>

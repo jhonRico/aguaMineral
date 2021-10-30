@@ -335,7 +335,7 @@ function validarRegistroExistente(valor)
 function eliminar(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar este país?",
+		text: "\u00bfSeguro que desea eliminar este país?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',

@@ -258,7 +258,7 @@ function validarRegistroExistenteZonaTwo(valor)
 function eliminarZonas(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar la zona?",
+		text: "\u00bfSeguro que desea eliminar la zona?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',

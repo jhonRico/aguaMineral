@@ -256,7 +256,7 @@ function validarRegistroExistenteMunicipio(municipio,capital,idEstadoValue)
 function eliminarMunicipio(id){
 	Swal.fire({
 		title: 'Eliminar',
-		text: "¿Seguro que desea eliminar el municipio?",
+		text: "\u00bfSeguro que desea eliminar el municipio?",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: 'red',
@@ -289,7 +289,7 @@ function eliminarMunicipio(id){
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al eliminar el municipio',
+ 					text: 'Error al eliminar el municipio: '+respuesta,
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'

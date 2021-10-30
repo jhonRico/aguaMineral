@@ -295,6 +295,40 @@ $(document).ready(function()
 });
 
 $('#agregarProducto').click(function(){
+
+   var capacidad = $("#capacidad").val();
+   var cantidad = $("#cantidad").val();
+
+		var idMunicipioValue = $("#municipioAddSelect").val();
+		if (capacidad == "") 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'El campo capacidad esta vacio',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
+
+	   if (cantidad == "") 
+		{
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				toast: true,
+				title: 'El campo cantidad esta vacio',
+				showConfirmButton: false,
+				timerProgressBar: true,
+				timer: 1500
+			})
+			return false;
+		}
+
+
 	registrarProductoEnBd();
 });
 

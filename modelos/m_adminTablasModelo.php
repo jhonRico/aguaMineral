@@ -267,7 +267,7 @@ require_once "conexion.php";
             array('cantidadEstante', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la cantidad del producto que presta el cliente'),
             array('codigoProducto', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe el c&oacutedigo de serial del producto que presta el cliente'),
             array('fechaConstruccion', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la fecha de construcci&oacuten del producto que presta el cliente'),
-            
+            array('cantidadBotellones', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la cantidad de botellones que se presta el cliente'),
 
         );
          return  $datos;

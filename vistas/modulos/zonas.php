@@ -59,8 +59,10 @@
         </div>
       </div>
 
-
-      <table class="table table-sm ms-0 me-5 mt-0 p-5 fs-6" id="tablaCentro">
+<div class="me-3">
+<div class="me-5 "> 
+<div class="me-5 ms-3">                     
+      <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5" id="tablaCentro">
         <thead class="cabezaTabla text-white">
     <tr>
       <th scope="col">Identificación</th>
@@ -74,7 +76,11 @@
   <tbody id="fila">
   </tbody>
       </table>
-  </div>
+      
+</div>
+</div>
+</div>
+</div>
 </section>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="reporte">

@@ -285,17 +285,19 @@ function eliminarMunicipio(id){
  		async:false,
  		success: function(respuesta)
  		{
- 			if(!respuesta.includes("ok"))
+ 			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
  			{
  				Swal.fire({
  					title: 'Error',
- 					text: 'Error al eliminar el municipio: '+respuesta,
+ 					text: 'Error al eliminar el municipio',
  					icon: 'error',
  					showCloseButton: true,
  					confirmButtonText:'Aceptar'
  				}); 
 
- 			}else
+ 			}else if(respuesta.includes("relacionado")){
+			   mensajeError('No se puede eliminar el municipio, se encuentra con ciudades asociadas');
+			}else
  			{
  				Swal.fire({
  					title: 'Municipio Eliminada',

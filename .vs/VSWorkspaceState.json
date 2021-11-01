@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\vistas"
+    "\\ajax",
+    "\\vistas\\js"
   ],
-  "SelectedNode": "\\modelos",
+  "SelectedNode": "\\ajax\\bitacora.ajax.php",
   "PreviewInSolutionExplorer": false
 }

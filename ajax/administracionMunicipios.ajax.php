@@ -2,6 +2,8 @@
 
 require_once "../controladores/c_adminTablas.php";
 require_once "../modelos/m_adminTablasModelo.php";
+require_once "../controladores/c_bitacora.php";
+require_once "../modelos/m_bitacora.php";  
 
 class   AjaxAdministracionMunicipio{
 
@@ -19,9 +21,13 @@ class   AjaxAdministracionMunicipio{
         $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarSiRegistroExisteBD($parametro1,$parametros2,$parametros3,$tabla,$atributo1,$atributo2,$atributo3);
         echo  json_encode ($respuesta);
     }
-   public function ajaxEliminarMunicipio($idDelete,$tabla,$atributo)
+   public function ajaxEliminarMunicipio($idDelete,$tabla,$atributo,$nombreDeleteMunicipio)
     {
         $respuesta = ControladorRegistroAdminGeneral::ctrleliminar($idDelete,$tabla,$atributo);
+        if(strpos($respuesta,"ok")!== false){
+           session_start();  
+           $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario elimina el municipio con nombre: ".$nombreDeleteMunicipio);
+		}
         echo  json_encode ($respuesta);
     }
     public function ajaxModificarOfTable3Campos($parametros1,$parametros2,$parametros3,$parametros4,$tabla,$atributo1,$atributo2,$atributo3,$atributo4)
@@ -65,7 +71,8 @@ if(isset($_POST["addMunicipio"]))
 if(isset($_POST["idMunicipioDelete"])){
     $objMunicipio = new AjaxAdministracionMunicipio();
     $idDeleteMunicipio = $_POST['idMunicipioDelete'];
-    $objMunicipio->ajaxEliminarMunicipio($idDeleteMunicipio,"municipio","idMunicipio");
+    $nombreDeleteMunicipio = $_POST['nombreMunicipioDelete'];
+    $objMunicipio->ajaxEliminarMunicipio($idDeleteMunicipio,"municipio","idMunicipio",$nombreDeleteMunicipio);
 }
 if(isset($_POST["idMunicipioEdit"])){
     $objEstado = new AjaxAdministracionMunicipio();

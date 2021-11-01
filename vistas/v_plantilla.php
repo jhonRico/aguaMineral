@@ -111,6 +111,7 @@ JAVASCRIPT PERSONALIZADO
 <script src="<?php echo $url ?>vistas/js/zonaClientes.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminPais.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminMunicipio.js"></script>
+<script src="<?php echo $url ?>vistas/js/bitacora.js"></script>
 <script src="<?php echo $url ?>vistas/js/usuario.js"></script>
 <script src="<?php echo $url ?>vistas/js/ofertas.js"></script> 
 <script src="<?php echo $url ?>vistas/js/herramienta.js"></script> 

@@ -16,6 +16,7 @@ require_once "controladores/c_registro.php";
 require_once "controladores/c_registroAdmin.php";
 require_once "controladores/c_adminTablas.php";
 require_once "controladores/c_reportes.php";
+require_once "controladores/c_bitacora.php";
 
 /**se incluyen los Modelos */
 require_once "modelos/m_clientes.php";
@@ -32,6 +33,7 @@ require_once "modelos/m_registro.php";
 require_once "modelos/m_registroAdmin.php";
 require_once "modelos/m_adminTablasModelo.php";
 require_once "modelos/m_reportes.php";
+require_once "modelos/m_bitacora.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla ->plantilla();

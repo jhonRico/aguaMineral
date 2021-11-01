@@ -40,7 +40,7 @@ function consultarAllCiudades(){
 					var aux = "'"+res2.nombreCiudad+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreCiudad+'<a href="javascript:eliminarCiudad('+res2.idCiudad+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditCiudad('+res2.idCiudad+','+aux+','+res2.Municipio_idMunicipio+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreCiudad+'<a href="javascript:eliminarCiudad('+res2.idCiudad+','+aux+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditCiudad('+res2.idCiudad+','+aux+','+res2.Municipio_idMunicipio+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -222,7 +222,7 @@ function validarRegistroExistenteCiudad(ciudad,idMunicipioValue)
 
 /*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
-function eliminarCiudad(id){
+function eliminarCiudad(id,nombreCiudadDelete){
 	Swal.fire({
 		title: 'Eliminar',
 		text: "\u00bfSeguro que desea eliminar la ciudad?",
@@ -234,17 +234,18 @@ function eliminarCiudad(id){
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {
 		if (result.isConfirmed){
-			eliminarCiudadFinal(id);
+			eliminarCiudadFinal(id,nombreCiudadDelete);
 			consultarAllCiudades();
 		}
 	})
 }
 //------------------Funcion que elimina un tipo de usuario-----
-function eliminarCiudadFinal(id)
+function eliminarCiudadFinal(id,nombreCiudadDelete)
 {
 	var datos = new FormData();
 
 	datos.append("idCiudadDelete", id);
+	datos.append("nombreCiudadDelete", nombreCiudadDelete);
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
 		method:"POST",

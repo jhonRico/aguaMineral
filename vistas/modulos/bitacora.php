@@ -20,4 +20,23 @@
     <div class="container text-center">
       <h1>Bitácora</h1>
     </div>
+
+   <div class="me-5">
+   <div class="me-5">
+          <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
+          <thead class="cabezaTabla text-white">
+            <tr>
+              <th scope="col">Usuario</th>
+              <th scope="col"></th>
+              <th scope="col">Fecha</th>
+              <th scope="col"></th>
+              <th scope="col">Descripción</th>
+              <th scope="col"></th>   
+            </tr>
+          </thead>
+          <tbody id="verBitacora">
+          </tbody>
+        </table>
+   </div>
+   </div>
 </section>

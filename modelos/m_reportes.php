@@ -46,7 +46,7 @@
 
 			if ($datos['tipoProductoReporte'] == 'Estantes') 
 			{
-				$stmt = Conexion::conectar()->prepare("SELECT SUM(cantidadProd) FROM $tabla WHERE fechaContrato LIKE :resultadoFecha");
+				$stmt = Conexion::conectar()->prepare("SELECT SUM(cantidadProd) FROM $tabla WHERE estadoContrato = 'A' AND fechaContrato LIKE :resultadoFecha");
 
 				$stmt->bindParam(":resultadoFecha", $resultadoFecha, PDO::PARAM_STR);
 				$stmt -> execute();
@@ -55,7 +55,7 @@
 	        	$stmt = null;
 			}else
 			{
-				$stmt = Conexion::conectar()->prepare("SELECT SUM(cantidadProd_2) FROM $tabla WHERE fechaContrato LIKE :resultadoFecha");
+				$stmt = Conexion::conectar()->prepare("SELECT SUM(cantidadProd_2) FROM $tabla WHERE estadoContrato = 'A' AND fechaContrato LIKE :resultadoFecha");
 
 				$stmt->bindParam(":resultadoFecha", $resultadoFecha, PDO::PARAM_STR);
 				$stmt -> execute();

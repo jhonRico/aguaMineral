@@ -61,9 +61,10 @@ function consultarTodosPaises(){
 		cache: false,
 		contentType: false,
 		processData: false,
-		success: function(respuesta3){
-			
-			 if(respuesta3.length >10 ){
+		success: function(respuesta3)
+		{
+			 if(respuesta3.length >10 )
+			 {
 				respuesta3 =respuesta3.replace("[","");
 				respuesta3 =respuesta3.replace("]","");
 				var auxSplit2 = respuesta3.split("},");
@@ -80,7 +81,6 @@ function consultarTodosPaises(){
 					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.descripcion+'<a href="javascript:eliminar('+res2.idPais+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEdit('+res2.idPais+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
-
 				}
 				plantilla2 +='</div>'
 				$("#respuestaCons").html(plantilla2);  

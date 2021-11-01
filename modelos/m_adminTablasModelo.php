@@ -10,6 +10,9 @@ require_once "conexion.php";
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
         $stmt -> execute();
         return  $stmt ->fetchAll();
+        $stmt->close();
+        $stmt=null;
+
 	}
      static public function mdlConsultarRegistroAdd($datos,$tabla,$atributoComparar) 
     {
@@ -18,6 +21,17 @@ require_once "conexion.php";
 
         $stmt -> execute();
         return  $stmt ->fetch();
+        $stmt->close();
+        $stmt=null;
+
+    }
+    static public function mdlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 t.$atributoTabla1 = t2.$atributoTabla2");
+        $stmt -> execute();
+        return  $stmt ->fetch();
+        $stmt->close();
+        $stmt=null;
     }
     static public function mdlAddregistroTipUser($tabla, $datos)
     {
@@ -377,11 +391,10 @@ require_once "conexion.php";
             return "error";
         }
     }
-
-    //Metodo para consultar todos los registros de dos tablas
-    public static function mdlConsultarTodosContratos($tabla,$tabla2,$atributoTabla,$atributoTabla2)
+    public static function mdlConsultarTodosContratosSucursal($tabla,$tabla2,$valor,$atributoTabla1,$atributoTabla2)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla = t2.$atributoTabla2 ORDER BY t2.cedulaPersona ASC");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla c INNER JOIN $tabla2 p ON c.Persona_idPersona = p.idPersona INNER JOIN sucursal s ON c.Sucursal_idSucursal = s.idSucursal WHERE s.idSucursal = :valor ORDER BY p.cedulaPersona ASC");
+        $stmt->bindParam(":valor",  $valor, PDO::PARAM_INT);
         $stmt -> execute();
         return  $stmt ->fetchAll();
         $stmt->close();

@@ -186,7 +186,6 @@ function llenarSelectCapacidad(tipoProductoAConsultar,selector)
 
       }else
       {
-        $(`#${selector}`).hide();  
         $(`#${selector}`).val('');
       }
     }
@@ -231,7 +230,6 @@ function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro
 
       }else
       {
-        $("#fila").hide();  
         $(`#${selector}`).val('');
       }
     }
@@ -822,7 +820,6 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
     async:false,
     success: function(respuesta)
     {
-      alert(respuesta);
       if(respuesta.includes("error"))
       {
         Swal.fire({

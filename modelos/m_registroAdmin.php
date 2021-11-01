@@ -63,11 +63,10 @@ require_once "conexion.php";
     //Productos
     static public function mdlRegistrarProducto($tabla,$tabla2,$datos)
     {
-        $stmt2 = Conexion::conectar()->prepare("SELECT * FROM serialproducto s INNER JOIN producto p ON s.idSerialProducto = p.SerialProducto_idSerialProducto INNER JOIN tipoproducto t ON p.TipoProducto_idTipoProducto = t.idTipoProducto INNER JOIN producto_has_sucursal ps ON p.idProducto = ps.Producto_idProducto  WHERE t.idTipoProducto = :tipoProducto AND p.capacidadProducto = :capacidad AND s.numeroSerial = :seria AND ps.Sucursal_idSucursal = :sucursal");
+        $stmt2 = Conexion::conectar()->prepare("SELECT * FROM serialproducto s INNER JOIN producto p ON s.idSerialProducto = p.SerialProducto_idSerialProducto INNER JOIN tipoproducto t ON p.TipoProducto_idTipoProducto = t.idTipoProducto INNER JOIN producto_has_sucursal ps ON p.idProducto = ps.Producto_idProducto  WHERE t.idTipoProducto = :tipoProducto AND p.capacidadProducto = :capacidad AND ps.Sucursal_idSucursal = :sucursal");
 
         $stmt2->bindParam(":sucursal", $datos["sucursal"], PDO::PARAM_INT);
         $stmt2->bindParam(":tipoProducto", $datos["tipoProducto"], PDO::PARAM_INT);
-        $stmt2->bindParam(":seria", $datos["serial"], PDO::PARAM_STR); 
         $stmt2->bindParam(":capacidad", $datos["capacidad"], PDO::PARAM_INT);
   
         $stmt2 -> execute();
@@ -78,8 +77,7 @@ require_once "conexion.php";
             $idProducto = $prueba['idProducto'];
             $cantidadActual = $prueba['cantidadProductos'];
             $cantidadASumar = $datos["cantidad"];
-            $nombreTipoContrato = $prueba['nombre'];
-            $idTipoContrato = $prueba['idTipoContrato'];
+            $nombreTipoContrato = null;
             $resultado = $cantidadASumar + $cantidadActual;
 
             $stmt = Conexion::conectar()->prepare("UPDATE producto SET cantidadProductos = $resultado WHERE idProducto = $idProducto");
@@ -96,22 +94,19 @@ require_once "conexion.php";
                 $stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
                 if ($stmt->execute()) 
                 {
-                    return "agregado";                
+                    return "agregado";  
+                    $stmt -> close();
+                    $stmt = null;              
+                }else
+                {
+                    return "error";
+                    $stmt -> close();
+                    $stmt = null;
                 }
-            }else
-            {
-                return "error";
             }
         }else
         {   
-            $idProducto = $prueba['idProducto'];
-            $cantidadActual = $prueba['cantidadProductos'];
-            $cantidadASumar = $datos["cantidad"];
-            $nombreTipoContrato = $prueba['nombre'];
-            $idTipoContrato = $prueba['idTipoContrato'];
-            $resultado = $cantidadASumar + $cantidadActual;
             $pdo = Conexion::conectar();
-
             $stmt = $pdo->prepare("INSERT INTO $tabla(numeroSerial, fechaCreacion, estado)
             VALUES  (:seria, :fecha, :estado)");
 
@@ -141,6 +136,7 @@ require_once "conexion.php";
 
                         if ($stmt->execute()) 
                         {
+                            $nombreTipoContrato = null;
                             $stmt = Conexion::conectar()->prepare("INSERT INTO historiaproducto (nombre,fechaIngreso,cantidadTotal,idTipoProducto,idProducto,serial,capacidad) VALUES ('$nombreTipoContrato',:fecha,:cantidad,:idTipoContrato,:idProducto,:seria,:capacidad)");
 
                                 $stmt->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
@@ -152,14 +148,20 @@ require_once "conexion.php";
                                  if ($stmt->execute()) 
                                 {
                                     return "ok";
+                                    $stmt -> close();
+                                    $stmt = null;
                                 }else
                                 {
                                     return "error";
+                                    $stmt -> close();
+                                    $stmt = null;
                                 }
                         }
                     }
             }
         }
+        $stmt2 -> close();
+        $stmt2 = null;
     }
     static public function mdlConsultarProducto($parametro)
     {

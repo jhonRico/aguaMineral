@@ -13,6 +13,21 @@ $(document).ready(function(){
 	}
 });
 
+$(document).ready(function($) {
+	$("#tipoProducto").change(function()
+	{
+		if((($("#tipoProducto").val()).split("-"))[1] == 'Botellones') 
+		{
+			$("#labelSerial").hide();
+			$("#serial").hide();
+		}else
+		{
+			$("#labelSerial").show();
+			$("#serial").show();
+		}
+	});
+});
+
 
 $('#agregarTipoProducto').click(function() 
 {

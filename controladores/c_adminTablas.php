@@ -18,6 +18,12 @@ class ControladorRegistroAdminGeneral
         return $respuesta;
     }
 
+    static public function ctrlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2);
+        return $respuesta;
+    }
+
    static public function ctrlAddregistro($nombreValue,$tabla)
     {
  
@@ -180,12 +186,6 @@ class ControladorRegistroAdminGeneral
              "capacidad2"=>$capacidad2,
          );
         $respuesta = ModeloRegistroAdminGeneral::mdlDevolverContrato($tabla,$datos);
-        return $respuesta;
-    }
-    //Consultar todos los registros de dos tablas
-    public static function ctrlConsultarTodosContratos($tabla,$tabla2,$atributoTabla,$atributoTabla2)
-    {
-        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodosContratos($tabla,$tabla2,$atributoTabla,$atributoTabla2);
         return $respuesta;
     }
     public static function ctrlConsultarTodosContratosSucursal($tabla,$tabla2,$valor,$atributoTabla1,$atributoTabla2)

@@ -23,7 +23,6 @@ class   AjaxUser
 
 if(isset($_POST["nombre"]))
 {  
-    //echo "<script>alert('ingresa al post')</script>";
     $allStates = new AjaxUser();
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];

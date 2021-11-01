@@ -1,21 +1,15 @@
-|/*------Cuando carga la pagina, consulta los  registrados de ciudades*/
+/*------Cuando carga la pagina, consulta los  registrados de ciudades*/
 $(document).ready(function(){ 
-	rutaActual = window.location.toString();
-	
+	rutaActual = window.location.toString();	
 	if(rutaActual.includes("adminSucursal")){ 
-	alert("alerta");
-	    //consultarAllSucursalesValue();		
+	     consultarAllSucursalesValue();		
 	}
-});
-$(document).ready(function(){ 
-	alert("Otro");
 });
 /*------------------------------------------Inicia el Espacio de consultar ciudades----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllSucursalesValue(){
-alert("Entra");
 
-/*	var datos = new FormData();
+	var datos = new FormData();
 	datos.append("parametroNeutro", "nulo");
 	let plantilla2 = " ";
 	let obj
@@ -59,7 +53,7 @@ alert("Entra");
 			
 
 		}
-	})*/
+	})
 }
 /*------------------------------------------Inicia el Espacio de agregar Ciudades----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/

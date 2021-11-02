@@ -246,7 +246,7 @@ function consultarPersonas()
 					      <b><th scope="row">${res2.cedulaPersona}</th></b>
 					      <td>${res2.nombrePersona}</td>
 					      <td>${res2.apellidoPersona}</td>
-					      <td><a href="javascript:mostrarModalModificarComercio('${res2.idPersona}','${res2.nombreTienda}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></td>
+					      <td><a href="javascript:mostrarModalModificarComercio('${res2.idPersona}','${res2.nombreTienda}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span><a href="javascript:mostrarModalModificarComercio('${res2.idPersona}');"><span title="Eliminar"><i class="fas fa-trash-alt text"></i></span></td>
 					</tr><br>`;
 				}
 

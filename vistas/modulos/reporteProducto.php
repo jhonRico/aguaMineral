@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/reportePrincipal" class="link-primary" id="anterior">Reportes</a></li>
-            <li class="breadcrumb-item active" aria-current="page" class="">Reporte de producto</li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Reporte de Producto</li>
           </ol>
         </nav>
     </div>
@@ -22,7 +22,7 @@
         <h1 class="mt-5 mb-5" id="tituloClientes"></h1>
     </div>
     <div class="container-fluid blogs text-center" id="contenedorZonasClientes">
-    	  <h1 class="mt-5 mb-5">Reporte de producto</h1>
+    	  <h1 class="mt-5 mb-5">Reporte de Producto</h1>
         <div class="row g-3">
         <div class="col-md-2">
         </div>

@@ -180,7 +180,7 @@ function llenarSelectCapacidad(tipoProductoAConsultar,selector)
           }
           var res2 = JSON.parse(auxSplit2[i]);
           plantilla2 += `
-          <option value="${res2.idProducto}">${res2.capacidadProducto}</option>
+          <option value="${res2.idProducto}-${res2.capacidadProducto}">${res2.capacidadProducto}</option>
           `;
         }
 
@@ -723,19 +723,20 @@ function consultarFormatoContrato(parametro)
         var res2 = JSON.parse(auxSplit2[i]);
         if (res2.descripcion.includes("NombreCliente")) 
         {
-          result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
-          result = result.replace("cedulaCliente",$('#cedulaCliente').val());
-          result = result.replace("nombreComercio",$('#nobreComercio').val());
-          result = result.replace("MunicipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
-          result = result.replace("municipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
-          result = result.replace("telefonoComercio",$('#telefonoComercio').val());
-          result = result.replace("direccionComercio",$('#direccionComercio').val());
-          result = result.replace("cantidadEstante",$('#cantidadEstantes').val());
-          result = result.replace("cantidadBotellones",$('#cantidadEstantes').val());
-          result = result.replace("codigoProducto",fecha);  
-          result = result.replace("fechaConstruccion",$('#fechaProducto').val());        
-
-          plantilla2 += result;
+          
+              result = res2.descripcion.replace("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
+              result = result.replace("cedulaCliente",$('#cedulaCliente').val());
+              result = result.replace("nombreComercio",$('#nobreComercio').val());
+              result = result.replace("MunicipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
+              result = result.replace("municipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
+              result = result.replace("telefonoComercio",$('#telefonoComercio').val());
+              result = result.replace("direccionComercio",$('#direccionComercio').val());
+              result = result.replace("cantidadEstante",$('#cantidadEstantes').val());
+              if (result.includes("cantidadBotellones")){result = result.replace("cantidadBotellones",(($('#capacidadEstantes').val()).split("-"))[1]);}
+              if (result.includes("cantidadBotellon")){result = result.replace("cantidadBotellon",$('#cantidadBotellones').val());}
+              result = result.replace("codigoProducto",fecha);  
+              result = result.replace("fechaConstruccion",$('#fechaProducto').val());        
+              plantilla2 += result;
         }
       }
       plantilla2 +='</div>'
@@ -775,8 +776,8 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
   var sectorComercio = $('#sectorComercio').val();
   var cantidadEstantes = $('#cantidadEstantes').val();
   var cantidadBotellones = $('#cantidadBotellones').val();
-  var capacidadEstantes = $('#capacidadEstantes').val();
-  var capacidadBotellon = $('#capacidadBotellon').val();
+  var capacidadEstantes = (($('#capacidadEstantes').val()).split("-"))[0];
+  var capacidadBotellon = (($('#capacidadBotellon').val()).split("-"))[0];
 
 
   var datos = new FormData();
@@ -890,8 +891,8 @@ function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
   var sectorComercio = $('#sectorComercio').val();
   var cantidadEstantes = $('#cantidadEstantes').val();
   var cantidadBotellones = $('#cantidadBotellones').val();
-  var capacidadEstantes = $('#capacidadEstantes').val();
-  var capacidadBotellon = $('#capacidadBotellon').val();
+  var capacidadEstantes = (($('#capacidadEstantes').val()).split("-"))[0];
+  var capacidadBotellon = (($('#capacidadBotellon').val()).split("-"))[0];
 
 
   var datos = new FormData();

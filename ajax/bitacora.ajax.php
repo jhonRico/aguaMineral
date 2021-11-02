@@ -20,7 +20,7 @@ class   AjaxABitacora{
 if(isset($_POST["consultaAllBitacora"]))
 {  
     $objCiudad = new AjaxABitacora();
-    $objCiudad->ajaxConsultaTodosBD("bitacora");
+    $objCiudad->ajaxConsultaTodosBD("bitacorasistema");
 }
 
 

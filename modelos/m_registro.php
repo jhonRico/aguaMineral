@@ -5,7 +5,8 @@ require_once "conexion.php";
  class ModeloRegistro
  {
 
-    static public function mdlRegistroUsuario($tabla,$tabla2,$datos){
+    static public function mdlRegistroUsuario($tabla,$tabla2,$datos)
+    {
 
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla2 WHERE correoUsuario = :correo");
         $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
@@ -17,7 +18,7 @@ require_once "conexion.php";
             return "ya existe";
         }else
         {
-            $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona,direccionPersona, cedulaPersona, telefonoPersona)
+            /*$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(TipoUsuario_idTipoUsuario, Sector_idSector, nombrePersona, apellidoPersona,direccionPersona, cedulaPersona, telefonoPersona)
                  VALUES  (:tipoUsuario, :sector, :nombre, :apellido, :direccion, :cedula, :telefono)");
 
                 $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
@@ -26,28 +27,27 @@ require_once "conexion.php";
                 $stmt->bindParam(":apellido", $datos["apellido"], PDO::PARAM_STR);
                 $stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
                 $stmt->bindParam(":cedula", $datos["cedula"], PDO::PARAM_INT);
-                $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_INT);
+                $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_INT);*/
 
-                if ($stmt->execute()) 
-                {
+                $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario,correoUsuario,clave,fechaRegistro,nombUsuario,apeUsuario)
+                             VALUES  (:tipoUsuario , :correo ,:contrasena, :vacio, :nombre, :apellido)");
+                $contrasena = md5($datos["contrasena"]);
 
-                       $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla2(TipoUsuario_idTipoUsuario,correoUsuario,clave,fechaRegistro)
-                             VALUES  (:tipoUsuario , :correo ,:contrasena, :vacio)");
-
-
-                        $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
-                        $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
-                        $stmt->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
-                        $stmt->bindParam(":vacio", $datos["vacio"], PDO::PARAM_STR);
+                $stmt->bindParam(":apellido", $datos["apellido"], PDO::PARAM_STR);
+                $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+                $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
+                $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
+                $stmt->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
+                $stmt->bindParam(":vacio", $datos["vacio"], PDO::PARAM_STR);
                    
-                        if($stmt->execute())
-                        {
-                            return "ok";
-                        }else
-                        {
-                            return "error";
-                        }
-                } 
+                if($stmt->execute())
+                {
+                    return "ok";
+                }else
+                {
+                    return "error";
+                }
+            
         }
 
         

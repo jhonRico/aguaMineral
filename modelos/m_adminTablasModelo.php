@@ -27,9 +27,17 @@ require_once "conexion.php";
     }
     static public function mdlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla1 = t2.$atributoTabla2");
+        $stmt = Conexion::conectar()->prepare("SELECT* FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla1 = t2.$atributoTabla2");
         $stmt -> execute();
-        return  $stmt ->fetch();
+        return  $stmt ->fetchAll();
+        $stmt->close();
+        $stmt=null;
+    }
+    static public function mdlConsultarTodoEnTresTablas($tabla,$tabla2,$tabla3,$atributoTabla1,$atributoTabla2,$atributoTabla,$atributoTabla3)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla1 = t2.$atributoTabla2 INNER JOIN $tabla3 t3 ON t.$atributoTabla = t3.$atributoTabla3");
+        $stmt -> execute();
+        return  $stmt ->fetchAll();
         $stmt->close();
         $stmt=null;
     }
@@ -416,6 +424,26 @@ require_once "conexion.php";
         $stmt->bindParam(":parametro2", $datos["valor2"], PDO::PARAM_STR);
         $stmt -> execute();
         return  $stmt ->fetch();
+        $stmt->close();
+        $stmt = null;
+    }
+
+    public static function mdlModificarUsuario($tabla,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombUsuario = :nombre, apeUsuario = :apellido, correoUsuario = :nombreUsuario, TipoUsuario_idTipoUsuario = :tipoUsuario WHERE idUsuario = :idUsuarioModificar");
+
+        $stmt->bindParam(":idUsuarioModificar", $datos["idUsuarioModificar"], PDO::PARAM_STR);
+        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":apellido", $datos["apellido"], PDO::PARAM_STR);
+        $stmt->bindParam(":nombreUsuario", $datos["nombreUsuario"], PDO::PARAM_STR);
+        $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
+        if ($stmt -> execute()) 
+        {
+            return "ok";
+        }else
+        {
+            return "error";
+        }
         $stmt->close();
         $stmt = null;
     }

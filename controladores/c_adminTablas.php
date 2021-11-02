@@ -8,6 +8,19 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodosRegBD($tabla); 
         return $respuesta;
 	}
+    static public function ctrlModificarUsuario($idUsuarioModificar,$nombre,$apellido,$nombreUsuario,$tipoUsuario)
+    {
+        $tabla = 'usuario';
+        $datos = array(
+             "idUsuarioModificar"=>$idUsuarioModificar,
+             "nombre"=>$nombre,
+             "apellido"=>$apellido,
+             "nombreUsuario"=>$nombreUsuario,
+             "tipoUsuario" => $tipoUsuario
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlModificarUsuario($tabla,$datos);
+        return $respuesta;
+    }
 
     static public function consultarRegistroExisteBD($registroValue,$tabla,$atributoComparar)
     {     
@@ -21,6 +34,12 @@ class ControladorRegistroAdminGeneral
     static public function ctrlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2)
     {
         $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2);
+        return $respuesta;
+    }
+
+    static public function ctrlConsultarTodoEnTresTablas($tabla,$tabla2,$tabla3,$atributoTabla1,$atributoTabla2,$atributoTabla,$atributoTabla3)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTodoEnTresTablas($tabla,$tabla2,$tabla3,$atributoTabla1,$atributoTabla2,$atributoTabla,$atributoTabla3);
         return $respuesta;
     }
 

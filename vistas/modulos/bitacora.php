@@ -18,25 +18,28 @@
         </nav>
     </div>
     <div class="container text-center">
-      <h1>Bitácora</h1>
+      <h1 class="me-5">Bitácora</h1>
     </div>
-
-   <div class="me-5">
-   <div class="me-5">
-          <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
-          <thead class="cabezaTabla text-white">
-            <tr>
-              <th scope="col">Usuario</th>
-              <th scope="col"></th>
-              <th scope="col">Fecha</th>
-              <th scope="col"></th>
-              <th scope="col">Descripción</th>
-              <th scope="col"></th>   
-            </tr>
-          </thead>
-          <tbody id="verBitacora">
-          </tbody>
-        </table>
-   </div>
-   </div>
+    <div class="ms-5">
+      <div class="ms-5">
+        <div class="ms-3">
+          <div class="me-5 ms-5 mt-5 text-center">
+           <div class="me-5 ms-5">
+                  <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal w-75">
+                  <thead class="cabezaTabla text-white">
+                    <tr>
+                      <th scope="col">Usuario</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Descripción</th>
+                    </tr>
+                  </thead>
+                  <tbody id="verBitacora">
+                  </tbody>
+                </table>
+           </div>
+           </div>
+        </div>
+      </div>
+    </div>
+   
 </section>

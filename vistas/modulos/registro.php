@@ -1,5 +1,7 @@
 <?php
-$url2 = Ruta::ctrlRuta();  
+$url2 = Ruta::ctrlRuta(); 
+$resultadoConsulta = ControladorFormatoContrato::ctrlConsultarTotalProductosPrestados("tipousuario");
+
 ?>		
 
 <div class="container mt-3 fs-5">
@@ -63,9 +65,18 @@ $url2 = Ruta::ctrlRuta();
 				<div class="form-group col-md-6">
 					<label for="" class="ms-5 mt-3 form-label">Perfil de Usuario</label>
 					<select class="form-select w-75 ms-5 mt-3" id="tipoUsuario">
-						<option value="1">Administrador</option>
-						<option value="2">Empleado</option>
-						<option value="3">Cliente</option>
+						<?php foreach ($resultadoConsulta as $key): ?>
+							<?php if ($key['descripcion'] == 'Cliente') 
+							{
+								
+							}else
+							{
+							?>
+								<option value="><?php echo $key['idTipoUsuario'];?>"><?php echo $key['descripcion'];?></option>
+							<?php  
+							}							
+							?>
+						<?php endforeach ?>
 					</select>
 				</div>
 			</div>

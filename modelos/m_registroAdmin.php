@@ -291,6 +291,13 @@ require_once "conexion.php";
         $stmt -> execute();
         return  $stmt ->fetchAll();
     }
+    static public function mdlModificarUsuario($tabla,$datos)
+    {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET numeroSerial = :serialDescripcion WHERE idSerialProducto = :serialEditar");
+
+        $stmt->bindParam(":serialEditar", $datos["serialEditar"], PDO::PARAM_STR);
+        $stmt->bindParam(":serialDescripcion", $datos["serialDescripcion"], PDO::PARAM_STR); 
+    }
 
 }
 

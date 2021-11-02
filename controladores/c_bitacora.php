@@ -13,7 +13,7 @@ class ControladorBitacora
     {     
         date_default_timezone_set("America/Bogota");
         $fecha = date("Y-m-d H:i:s");
-        $tabla = "bitacora";
+        $tabla = "bitacorasistema";
         $respuesta = ModeloBitacora::mdlRegistroBitacora($tabla,$usuario,$descripcion,$fecha);
         return $respuesta;
     }

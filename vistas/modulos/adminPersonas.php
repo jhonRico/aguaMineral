@@ -29,7 +29,6 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
     BLOG EN CUADRICULA
     ===========================================-->
     <ul class="grid0" id="">
-
     <div class="row">
      <div class="col">
       <a href="http://localhost/aguaMineral/adminUsuarios" class="link-dark">
@@ -46,6 +45,17 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
           <i class="fas fa-user-shield iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Tipo Usuario</h3>
           <p class="mb-5 mt-0">Administración perfiles de acceso</p>
+        </div>
+      </a>
+     </div>
+    </div>
+    <div class="row">
+     <div class="col-md-6">
+      <a href="http://localhost/aguaMineral/adminClientes" class="link-dark">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+          <i class="fas fa-users iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Personas</h3>
+          <p class="mb-5 mt-0">Administraci&oacute;n de clientes del Sistema</p>
         </div>
       </a>
      </div>

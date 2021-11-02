@@ -54,7 +54,7 @@ function consultarAllMunicipios(){
 					      <td>${res2.nombreMunicipio}</td>
 					      <td></td>
 					      <td></td>    
-					     <td><a href="javascript:mostrarModalEditMunicipio('${res2.idMunicipio}','${res2.nombreMunicipio}','${res2.capitalMunicipio}','${res2.Estado_idEstado}')"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:eliminarMunicipio(${res2.idMunicipio})"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
+					     <td><a href="javascript:mostrarModalEditMunicipio('${res2.idMunicipio}','${res2.nombreMunicipio}','${res2.capitalMunicipio}','${res2.Estado_idEstado}')"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:eliminarMunicipio('${res2.idMunicipio}','${res2.nombreMunicipio}')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
 					</tr><br>`;
 
 				}
@@ -264,7 +264,7 @@ function validarRegistroExistenteMunicipio(municipio,capital,idEstadoValue)
 
 /*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
-function eliminarMunicipio(id){
+function eliminarMunicipio(id,nombreMunicipioDelete){
 	Swal.fire({
 		title: 'Eliminar',
 		text: "\u00bfSeguro que desea eliminar el municipio?",
@@ -276,17 +276,18 @@ function eliminarMunicipio(id){
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {
 		if (result.isConfirmed){
-			eliminaMunicipio(id);
+			eliminaMunicipio(id,nombreMunicipioDelete);
 			consultarAllMunicipios();
 		}
 	})
 }
 //------------------Funcion que elimina un tipo de usuario-----
- function eliminaMunicipio(id)
+ function eliminaMunicipio(id,nombreMunicipioDelete)
  {
  	var datos = new FormData();
 
  	datos.append("idMunicipioDelete", id);
+	datos.append("nombreMunicipioDelete", nombreMunicipioDelete);
  	$.ajax({
  		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
  		method:"POST",

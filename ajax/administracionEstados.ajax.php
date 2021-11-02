@@ -1,6 +1,8 @@
 <?php
 
 require_once "../controladores/c_adminTablas.php";
+require_once "../controladores/c_bitacora.php";
+require_once "../modelos/m_bitacora.php";
 require_once "../modelos/m_adminTablasModelo.php";
 
 class   AjaxAdministracionEstados{
@@ -22,9 +24,15 @@ class   AjaxAdministracionEstados{
         echo  json_encode ($respuesta);
     }
 
-   public function ajaxEliminarEstado($idDelete,$tabla,$atributo)
+   public function ajaxEliminarEstado($idDelete,$tabla,$atributo,$nombreDeleteEstado)
     {
-        $respuesta = ControladorRegistroAdminGeneral::ctrleliminar($idDelete,$tabla,$atributo);
+
+         $respuesta = ControladorRegistroAdminGeneral::ctrleliminar($idDelete,$tabla,$atributo);
+
+       if(strpos($respuesta,"ok")!== false){
+           session_start();  
+           $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario elimina el estado con nombre: ".$nombreDeleteEstado);
+		}
         echo  json_encode ($respuesta);
     }
     public function ajaxModificarOfTable2Campos($parametro1,$parametros2,$parametros3,$tabla,$atributo1,$atributo2,$atributo3)
@@ -65,7 +73,8 @@ if(isset($_POST["nombreEstadoAdd"]))
 if(isset($_POST["idEstadoDelete"])){
     $objEstado = new AjaxAdministracionEstados();
     $idDeleteEstado = $_POST['idEstadoDelete'];
-    $objEstado->ajaxEliminarEstado($idDeleteEstado,"estado","idEstado");
+    $nombreDeleteEstado = $_POST['nombreEstadoDelete'];
+    $objEstado->ajaxEliminarEstado($idDeleteEstado,"estado","idEstado",$nombreDeleteEstado);
 }
 if(isset($_POST["idEstadoModificado"])){
     $objEstado = new AjaxAdministracionEstados();

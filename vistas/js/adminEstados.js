@@ -38,7 +38,7 @@ function consultarAllEstados(){
 					var aux = "'"+res2.nombreEstado+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreEstado+'<a href="javascript:eliminarEstados('+res2.idEstado+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditEstados('+res2.idEstado+','+aux+','+res2.Pais_idPais+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreEstado+'<a href="javascript:eliminarEstados('+res2.idEstado+','+aux+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditEstados('+res2.idEstado+','+aux+','+res2.Pais_idPais+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -219,7 +219,7 @@ function validarRegistroExistenteEstado(valor,idPaisValue)
 
 /*------------------------------------------Inicia el Espacio de eliminar----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
-function eliminarEstados(id){
+function eliminarEstados(id,nombreEstado){
 	Swal.fire({
 		title: 'Eliminar',
 		text: "\u00bfSeguro que desea eliminar el estado?",
@@ -231,17 +231,18 @@ function eliminarEstados(id){
 		confirmButtonText: 'Eliminar'
 	}).then((result) => {
 		if (result.isConfirmed){
-			eliminarEstado(id);
+			eliminarEstado(id,nombreEstado);
 			consultarAllEstados();
 		}
 	})
 }
 //------------------Funcion que elimina un tipo de usuario-----
- function eliminarEstado(id)
+ function eliminarEstado(id,nombreEstado)
  {
  	var datos = new FormData();
 
  	datos.append("idEstadoDelete", id);
+	datos.append("nombreEstadoDelete", nombreEstado);
  	$.ajax({
  		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
  		method:"POST",
@@ -254,7 +255,7 @@ function eliminarEstados(id){
  		{
  			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
  			{
-			    mensajeError("Error al eliminar el estado ");
+			    mensajeError("Error al eliminar el estado "+respuesta);
  			}else if(respuesta.includes("relacionado")){
 			   mensajeError('No se puede eliminar el Estado, se encuentra con municipios');
 			}else

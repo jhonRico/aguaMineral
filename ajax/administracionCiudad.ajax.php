@@ -2,6 +2,8 @@
 
 require_once "../controladores/c_adminTablas.php";
 require_once "../modelos/m_adminTablasModelo.php";
+require_once "../controladores/c_bitacora.php";
+require_once "../modelos/m_bitacora.php";
 
 class   AjaxAdministracionCiudad{
 
@@ -22,9 +24,13 @@ class   AjaxAdministracionCiudad{
         echo  json_encode ($respuesta);
     }
 
-   public function ajaxEliminarEstado($idDelete,$tabla,$atributo)
+   public function ajaxEliminarEstado($idDelete,$tabla,$atributo,$nombreDeleteCiudad)
     {
         $respuesta = ControladorRegistroAdminGeneral::ctrleliminar($idDelete,$tabla,$atributo);
+        if(strpos($respuesta,"ok")!== false){
+           session_start();  
+           $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario elimina la ciudad con nombre: ".$nombreDeleteCiudad);
+		}
         echo  json_encode ($respuesta);
     }
     public function ajaxModificarOfTable2Campos($parametro1,$parametros2,$parametros3,$tabla,$atributo1,$atributo2,$atributo3)
@@ -64,7 +70,8 @@ if(isset($_POST["nombreciudadAdd"]))
 if(isset($_POST["idCiudadDelete"])){
     $objCiudad = new AjaxAdministracionCiudad();
     $idDeleteCiudadEstado = $_POST['idCiudadDelete'];
-    $objCiudad->ajaxEliminarEstado($idDeleteCiudadEstado,"ciudad","idCiudad");
+    $nombreCiudadDelete = $_POST['nombreCiudadDelete'];
+    $objCiudad->ajaxEliminarEstado($idDeleteCiudadEstado,"ciudad","idCiudad",$nombreCiudadDelete);
 }
 if(isset($_POST["idCiudadModificado"])){
     $objEstado = new AjaxAdministracionCiudad();

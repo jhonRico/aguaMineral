@@ -106,10 +106,11 @@ JAVASCRIPT PERSONALIZADO
 <script src="<?php echo $url ?>vistas/js/adminEstados.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminCiudad.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminFormatoContratos.js"></script>   
-<script src="<?php echo $url ?>vistas/js/adminSucursal.js"></script> 
+<script src="<?php echo $url ?>vistas/js/administracionSucursal.js"></script> 
 <script src="<?php echo $url ?>vistas/js/zonaClientes.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminPais.js"></script>
 <script src="<?php echo $url ?>vistas/js/adminMunicipio.js"></script>
+<script src="<?php echo $url ?>vistas/js/bitacora.js"></script>
 <script src="<?php echo $url ?>vistas/js/usuario.js"></script>
 <script src="<?php echo $url ?>vistas/js/plugins/select2.min.js"></script>
 <script src="<?php echo $url ?>vistas/js/contratoEstante.js"></script>

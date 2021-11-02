@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\vistas"
+    "\\vistas",
+    "\\vistas\\js"
   ],
-  "SelectedNode": "\\modelos",
+  "SelectedNode": "\\vistas\\js\\reporte.js",
   "PreviewInSolutionExplorer": false
 }

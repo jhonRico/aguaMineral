@@ -1,15 +1,13 @@
 /*------Cuando carga la pagina, consulta los  registrados de ciudades*/
 $(document).ready(function(){ 
-	rutaActual = window.location.toString();
+	rutaActual = window.location.toString();	
 	if(rutaActual.includes("adminSucursal")){ 
-	    consultarAllSucursalesValue();
+	     consultarAllSucursalesValue();		
 	}
 });
-
 /*------------------------------------------Inicia el Espacio de consultar ciudades----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllSucursalesValue(){
-
 
 	var datos = new FormData();
 	datos.append("parametroNeutro", "nulo");
@@ -256,8 +254,9 @@ function eliminarSucursal(id){
 function eliminarSucursalFinal(id)
 {
 	var datos = new FormData();
-
+	//alert(nombreDeleteSucursal);
 	datos.append("idSucursalDelete", id);
+	
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
 		method:"POST",

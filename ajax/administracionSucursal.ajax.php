@@ -2,6 +2,8 @@
 
 require_once "../controladores/c_adminTablas.php";
 require_once "../modelos/m_adminTablasModelo.php";
+require_once "../controladores/c_bitacora.php";
+require_once "../modelos/m_bitacora.php";   
 
 class   AjaxAdministracionSucursal{
 

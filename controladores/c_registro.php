@@ -18,7 +18,7 @@ class ControladorRegistro
         session_start();
 
         $_SESSION['usuarioAuditoria'] = $respuesta[2];
-        $_SESSION['username'] = $respuesta[1];
+        $_SESSION['username'] = $respuesta[8];
         return $respuesta;
 
     }

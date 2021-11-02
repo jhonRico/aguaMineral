@@ -12,7 +12,7 @@ $rutas = explode("/", $_GET["ruta"]);
     {
        header("location: http://localhost/aguaMineral/");
     }
-    if ($usuario == 2 && $rutas[0] == "administracion" || $usuario == 2 && $rutas[0] == "adminPais" || $usuario == 2 && $rutas[0] == "adminZonas" || $usuario == 2 && $rutas[0] == "adminContrato" || $usuario == 2 && $rutas[0] == "adminProductos") 
+    if ($usuario == 'Empleado' && $rutas[0] == "administracion" || $usuario == 'Empleado' && $rutas[0] == "adminPais" || $usuario == 'Empleado' && $rutas[0] == "adminZonas" || $usuario == 'Empleado' && $rutas[0] == "adminContrato" || $usuario == 'Empleado' && $rutas[0] == "adminProductos" || $usuario == 'Empleado' && $rutas[0] == "adminCiudad" || $usuario == 'Empleado' && $rutas[0] == "adminPersonas" || $usuario == 'Empleado' && $rutas[0] == "adminComercio" || $usuario == 'Empleado' && $rutas[0] == "adminEstado" || $usuario == 'Empleado' && $rutas[0] == "adminFormatos" || $usuario == 'Empleado' && $rutas[0] == "administracionMunicipio" || $usuario == 'Empleado' && $rutas[0] == "adminFormatoEstantes" || $usuario == 'Empleado' && $rutas[0] == "adminFormatoBotellones" || $usuario == 'Empleado' && $rutas[0] == "adminFormatoAmbos" || $usuario == 'Empleado' && $rutas[0] == "adminTipoUsuario" || $usuario == 'Empleado' && $rutas[0] == "administracionTipoProducto" || $usuario == 'Empleado' && $rutas[0] == "bitacora" || $usuario == 'Empleado' && $rutas[0] == "registro") 
     {
          header("location: http://localhost/aguaMineral/principal");
     }
@@ -27,7 +27,7 @@ $rutas = explode("/", $_GET["ruta"]);
 ?>
     <!-- TOP -->
     <?php 
-    if ($usuario == 1)
+    if ($usuario == 'Administrador')
         {
        
             ?>
@@ -36,7 +36,7 @@ $rutas = explode("/", $_GET["ruta"]);
                 </div>
             <?php
         }
-    if ($usuario == 2)
+    if ($usuario == 'Empleado')
         {
        
             ?>

@@ -72,19 +72,25 @@ require_once "conexion.php";
         $respuesta = $stmt ->fetch();
         if ($respuesta != false) 
         {
-            $stmt2 = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE clave = :contrasena");
-            $stmt2->bindParam(":contrasena", md5($datos["contrasena"]), PDO::PARAM_STR);
+            $stmt2 = Conexion::conectar()->prepare("SELECT * FROM usuario t INNER JOIN tipousuario t2 ON t.TipoUsuario_idTipoUsuario = t2.idTipoUsuario WHERE t.clave = :contrasena");
+            $contrasena = md5($datos["contrasena"]);
+            $stmt2->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
             $stmt2->execute();
-            if ($stmt2 ->fetch() != false) 
+            $respuesta = $stmt2 ->fetch();
+            if ($respuesta != false) 
             {
                 return $respuesta;
             }else
             {
                 return "falsePassword";
             }
+            $stmt2 -> close();
+            $stmt2 = null;
         }else
         {
             return "falseUser";
+            $stmt -> close();
+            $stmt = null;
         }  
          
 

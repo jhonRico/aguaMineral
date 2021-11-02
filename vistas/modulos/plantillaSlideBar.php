@@ -46,7 +46,7 @@
          <span class="tooltip">Clientes</span>
       </li>
      <?php 
-       if($usuario == 1) 
+       if($usuario == 'Administrador') 
        {
          ?>
              <li>

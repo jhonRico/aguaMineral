@@ -82,10 +82,8 @@
                             <input type="password" class="form-control" id="password" placeholder="Contraseña">
                             <label for="floatingPassword">Contraseña</label>
                           </div>
-
                           <div class="checkbox mb-3">
                             <label>
-                              <input type="checkbox" value="remember-me" class="me-1">Recuerdame
                             </label>
                           </div>
                           <button class="w-100 btn btn-lg btn-primary" type="button" id="ingresar">Entrar</button>

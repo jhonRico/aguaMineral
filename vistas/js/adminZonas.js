@@ -5,6 +5,7 @@ $(document).ready(function(){
 		consultarAllZonas();
 	}
 });
+var rutaOculta = $("#rutaOculta").val();
 /*------------------------------------------Inicia el Espacio de consultar zonas----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllZonas(){
@@ -15,7 +16,7 @@ function consultarAllZonas(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+		url:rutaOculta+"ajax/administracionZonas.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -129,7 +130,7 @@ function registrarCampoZonas(idCiudad,descripcion)
 	datos.append("idCiudadRegistrar", idCiudad);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+		url:rutaOculta+"ajax/administracionZonas.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -180,7 +181,7 @@ function validarRegistroExistenteZona(idCiudad,descripcion)
 	datos.append("descripcion", descripcion);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+		url:rutaOculta+"ajax/administracionZonas.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -241,7 +242,7 @@ function eliminarZonas(id){
 
  	datos.append("idZona", id);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+ 		url:rutaOculta+"ajax/administracionZonas.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -346,7 +347,7 @@ function modificarZonasFinal(id,idCiudad,descripcion)
  	datos.append("descripcionModificar", descripcion);
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionZonas.ajax.php",
+ 		url:rutaOculta+"ajax/administracionZonas.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,

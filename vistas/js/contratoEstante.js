@@ -3,7 +3,7 @@ $(document).ready(function() {
   $('.contratoEstante').hide();
   rutaActual = window.location.toString();
 });
-
+var rutaOculta = $("#rutaOculta").val();
 var hoy = new Date();
 var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
 fecha = fecha.replace("-","");
@@ -159,7 +159,7 @@ function llenarSelectCapacidad(tipoProductoAConsultar,selector)
 
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -205,7 +205,7 @@ function llenarSelect(valorAnterior,selector,tabla,atributo,parametro1,parametro
 
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -516,7 +516,7 @@ function consultarProductosAmbos(parametro,idTipoUsuario,selector,selector2)
   datos.append("idSucursalProductosDisponiblesAmbos", sucursal);
 
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -567,7 +567,7 @@ function consultarClienteEnBd()
   datos.append("nombreCliente", nombre);
 
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -620,7 +620,7 @@ function consultarCamposDeTienda(id)
   var datos = new FormData();
   datos.append("idCliente", id);
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -664,7 +664,7 @@ function consultarProductosDisponibles(parametro,idTipoUsuario,selector,selector
   datos.append("idSucursalProductosDisponibles", sucursal);
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -699,7 +699,7 @@ function consultarFormatoContrato(parametro)
   let plantilla2 = " ";
   let obj
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -816,7 +816,7 @@ function registrarPersonas(parametro,idTipoUsuario,idProducto)
 
 
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -932,7 +932,7 @@ function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
 
 
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/formatoContrato.ajax.php",
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,

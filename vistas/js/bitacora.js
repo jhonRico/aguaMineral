@@ -8,6 +8,7 @@ $(document).ready(function(){
 	}
 
 });
+var rutaOculta = $("#rutaOculta").val();
 /*------------------------------------------Inicia el Espacio de consultar bitacora----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarBitacora(){
@@ -18,7 +19,7 @@ function consultarBitacora(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/bitacora.ajax.php",
+		url:rutaOculta+"ajax/bitacora.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,

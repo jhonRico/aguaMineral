@@ -5,6 +5,7 @@ $(document).ready(function($){
       consultarContratosActivos();
       consultarContratosDevueltos();
   }
+  var rutaOculta = $("#rutaOculta").val();
   var today = new Date();
   var year = today.getFullYear();
   var plantilla = `<option selected>Seleccione</option>
@@ -35,7 +36,7 @@ function consultarContratosActivos()
   datos.append("fechaReporteContrato", fechaReporteContrato);
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/administracionReporte.ajax.php",
+    url:rutaOculta+"ajax/administracionReporte.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -86,7 +87,7 @@ function consultarContratosDevueltos()
   datos.append("fechaReporteContratoDevuelto", fechaReporteContrato);
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/administracionReporte.ajax.php",
+    url:rutaOculta+"ajax/administracionReporte.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -186,7 +187,7 @@ function consultarContratos()
   datos.append("consultarContratos", 'valor');
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/administracionReporte.ajax.php",
+    url:rutaOculta+"ajax/administracionReporte.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,

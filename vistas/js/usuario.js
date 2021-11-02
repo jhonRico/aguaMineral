@@ -8,7 +8,7 @@ const expresiones =
   telefono: /^\d{7,14}$/ // 7 a 14 numeros.
 }
 
-
+var rutaOculta = $("#rutaOculta").val();
 //Validar Registro de Usuario
 
 $(function(){
@@ -255,7 +255,7 @@ function IniciarSesion()
   datos.append("password", $("#password").val());
 
             $.ajax({
-                    url:"//localhost/aguaMineral/ajax/registro.ajax.php",
+                    url:rutaOculta+"ajax/registro.ajax.php",
                     method:"POST",
                     data: datos, 
                     cache: false,
@@ -291,7 +291,7 @@ function IniciarSesion()
                             return false;
                           }else
                           {
-                            window.location.replace('http://localhost/aguaMineral/principal');
+                            window.location.replace(rutaOculta+'principal');
                           }
                      }                 
               })
@@ -313,7 +313,7 @@ function RegistrarUsuario()
       datos.append("tipoUsuario", tipoUsuario);
       datos.append("contrasena", $("#contrasena").val());
             $.ajax({
-                    url:"//localhost/aguaMineral/ajax/registro.ajax.php",
+                    url:rutaOculta+"ajax/registro.ajax.php",
                     method:"POST",
                     data: datos, 
                     cache: false,
@@ -322,7 +322,7 @@ function RegistrarUsuario()
                     async:false,
                     success: function(respuesta)
                     {
-                      alert(respuesta);
+                      
                           if(respuesta.includes("ok"))
                           {
                               Swal.fire({
@@ -333,7 +333,7 @@ function RegistrarUsuario()
                                 }).then((result) => {
                                   if (result.isConfirmed) 
                                   {
-                                    window.location.replace('http://localhost/aguaMineral/adminPersonas');
+                                    window.location.replace(rutaOculta+'adminPersonas');
                                   }                                
                                 });             
                           }else if (respuesta.includes("ya existe"))
@@ -357,7 +357,7 @@ function RegistrarUsuario()
                                 }).then((result) => {
                                   if (result.isConfirmed) 
                                   {
-                                    window.location.replace('http://localhost/aguaMineral/adminPersonas');
+                                    window.location.replace(rutaOculta+'adminPersonas');
                                   }                                
                                 });
                           }

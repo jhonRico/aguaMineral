@@ -7,6 +7,8 @@ $(document).ready(function(){
 		consultarAllCiudades();
 	}
 });
+
+var rutaOculta = $("#rutaOculta").val();
 /*------------------------------------------Inicia el Espacio de consultar ciudades----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllCiudades(){
@@ -17,7 +19,7 @@ function consultarAllCiudades(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
+		url:rutaOculta+"ajax/administracionCiudad.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -132,7 +134,7 @@ function registrarCampoCiudad(valor,idMunicipioValue)
 	datos.append("nombreciudadAdd", valor);
 	datos.append("idMunicipioValue", idMunicipioValue);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
+		url:rutaOculta+"ajax/administracionCiudad.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -185,7 +187,7 @@ function validarRegistroExistenteCiudad(ciudad,idMunicipioValue)
 	datos.append("idMunicipioValue", idMunicipioValue);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
+		url:rutaOculta+"ajax/administracionCiudad.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -247,7 +249,7 @@ function eliminarCiudadFinal(id,nombreCiudadDelete)
 	datos.append("idCiudadDelete", id);
 	datos.append("nombreCiudadDelete", nombreCiudadDelete);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
+		url:rutaOculta+"/ajax/administracionCiudad.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -361,7 +363,7 @@ function modificarCiudadValue(id,descripcion,idPais)
 
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionCiudad.ajax.php",
+		url:rutaOculta+"ajax/administracionCiudad.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,

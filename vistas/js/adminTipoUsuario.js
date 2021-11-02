@@ -7,6 +7,7 @@ $(document).ready(function(){
 
 	}
 });
+var rutaOculta = $("#rutaOculta").val();
 /*consulta todos*/
 
 function consultarTodosTU(){
@@ -18,7 +19,7 @@ function consultarTodosTU(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+		url:rutaOculta+"ajax/registroAdminTU.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -133,7 +134,7 @@ function validarRegistroExistenteTipUser(valor)
 	datos.append("validaExisteTipUsuInBd", valor);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+		url:rutaOculta+"ajax/registroAdminTU.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -174,7 +175,7 @@ function registrarCampoTipUser(valor)
 	datos.append("descripcionTipUserValue", valor);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+		url:rutaOculta+"ajax/registroAdminTU.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -243,7 +244,7 @@ function eliminarTipoUser(id){
 
  	datos.append("idTipUser", id);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+ 		url:rutaOculta+"ajax/registroAdminTU.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -344,7 +345,7 @@ function modificarTipUserValue(id,descripcion)
 
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdminTU.ajax.php",
+ 		url:rutaOculta+"ajax/registroAdminTU.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,

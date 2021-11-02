@@ -62,7 +62,7 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#titulo').hide();
     $('#menuCajas').hide();
     $("#tituloLink").text('Contrato Ambos')
-    $('#TituloPrincipalContrato').text('Crear Contrato Botellon Y Estante');    
+    $('#TituloPrincipalContrato').text('Crear Contrato Botellon y Estante');    
     var input =  `
     <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de Botellones</label>
     <input type="number" min="1" class="form-control mt-3" id="cantidadBotellones" placeholder="Cantidad de botellones">

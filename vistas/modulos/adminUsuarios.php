@@ -1,7 +1,7 @@
 <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/administracion" class="link-primary">Administración</a></li>
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminPersonas" class="link-primary">Administración</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Personas</li>
           </ol>
         </nav>
@@ -18,20 +18,19 @@
       <div class="me-5">
         <div class="me-0">
           <div class="me-0">
-            <a href=""></a><button class="btn btn-primary w-100 me-5">Agregar</button>
+            <a href="http://localhost/aguaMineral/registro"><button class="btn btn-primary w-100 me-5">Agregar</button></a>
           </div>
         </div>
       </div>
     </div>
   </div>
     <div class="ms-5 me-5 mt-0 p-5">
-          <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
+          <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal text-center">
             <thead class="cabezaTabla text-white">
               <tr>
                 <th scope="col">Identificación</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
-                <th scope="col">Comercio</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>

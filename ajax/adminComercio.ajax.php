@@ -19,6 +19,11 @@ class   AjaxAdministracionComercio
     	$respuesta = ControladorRegistroAdminGeneral::ctrlModificarOfTable($id,$valueTable,$tabla,$atributoSet,$atributoWhere);
         echo  json_encode ($respuesta);
     }
+    public static function ajaxConsultarPersonas($tabla)
+    {
+        $respuesta = ControladorRegistroAdminGeneral::consultarTodoRegBD($tabla);
+        echo  json_encode ($respuesta);
+    }
 }
 //----------------------------------------------------------------------------------------------------
 
@@ -39,6 +44,10 @@ if(isset($_POST["idModificarComercio"]))
 	$nombreComercio = $_POST['nombreComercio'];
     $objFormato = new AjaxAdministracionComercio();
     $objFormato->ajaxModificarComercio($id,$nombreComercio,'comercios','nombreTienda','idComercios');
+}
+if(isset($_POST["consultarPersona"]))
+{      $objFormato = new AjaxAdministracionComercio();
+    $objFormato->ajaxConsultarPersonas('persona');
 }
 
 ?>

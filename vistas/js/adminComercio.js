@@ -5,6 +5,10 @@ $(document).ready(function()
 	{   
 		consultarComercios();
 	}
+	if(rutaActual.includes("adminUsuarios"))
+	{   
+		consultarPersonas();
+	}
 });
 $(function(){
 	$(".mostrarModalAgregarComercio").click(function(){
@@ -205,4 +209,52 @@ function modificarComercioFinal(id)
 		    }
 		}                 
 	});
+}
+
+
+//---------------------------------------------------------------------------------------------------
+//Administracion de Personas
+
+function consultarPersonas()
+{
+	var datos = new FormData();
+	datos.append("consultarPersona", "nulo");
+	let plantilla2 = " ";
+	$.ajax({
+		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta3)
+		{
+			 if(respuesta3.length >10 )
+			 {
+				respuesta3 =respuesta3.replace("[","");
+				respuesta3 =respuesta3.replace("]","");
+				var auxSplit2 = respuesta3.split("},");
+
+				plantilla2 +='<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 m-2" id="">'
+				for(var i=0;i<auxSplit2.length;i++){
+					if(!auxSplit2[i].includes("}")){
+						auxSplit2[i] = auxSplit2[i]+"}";
+					}
+					var res2 = JSON.parse(auxSplit2[i]);
+					plantilla2 += `
+					<tr>
+					      <b><th scope="row">${res2.cedulaPersona}</th></b>
+					      <td>${res2.nombrePersona}</td>
+					      <td>${res2.apellidoPersona}</td>
+					      <td><a href="javascript:mostrarModalModificarComercio('${res2.idPersona}','${res2.nombreTienda}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></td>
+					</tr><br>`;
+				}
+
+				$("#cuerpoTablaComercio").html(plantilla2);  
+				$('#cuerpoTablaComercio').show();
+			}else{
+				$("#cuerpoTablaComercio").hide(); 
+			}
+		}
+	})
 }

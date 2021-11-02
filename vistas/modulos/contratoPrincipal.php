@@ -25,7 +25,7 @@ $array = $resultadoConsultaSerial;
           <nav aria-label="breadcrumb" class="fs-5">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/contratoPrincipal" class="link-primary">Contratos</a></li>
-              <li class="breadcrumb-item active" aria-current="page" class="">Contrato Estante</li>
+              <li class="breadcrumb-item active" aria-current="page" class="" id="tituloLink">Contrato Estante</li>
             </ol>
           </nav>
 

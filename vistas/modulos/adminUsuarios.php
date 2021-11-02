@@ -15,7 +15,13 @@
     <div class="row">
     <div class="col-md-10"></div>
     <div class="col-md-2">
-      <button class="btn btn-primary w-100">Agregar</button>
+      <div class="me-5">
+        <div class="me-0">
+          <div class="me-0">
+            <a href=""></a><button class="btn btn-primary w-100 me-5">Agregar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
     <div class="ms-5 me-5 mt-0 p-5">
@@ -34,32 +40,6 @@
           </table>
     </div>
   </div>  
-<!-- Modal para agregar nuevo pais  -->
-<form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
-        <div class="modal fade" id="moddaddStore" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                           <div class="modal-content">
-                                       <div class="modal-header " style ="background-color: #006C9E;color:#FFFFFF;" >
-                                              <h5  id="staticBackdropLabel"> Agregar Comercio</h5>
-                                              <a class="link-white "><button type="button" class="btn"><i class="fas fa-times text-white cerrarModalComercio"></i></button></a>
-                                        </div>
-                                      
-                                      <div class="modal-body mx-3">
-                                             <div class="modal-body">                       
-                                                   <input   type="text" class="form-control" id="nombreComercio" placeholder="Por favor ingrese el nombre del comercio" required>  
-                                             </div>
-                                      </div>
-                                       <div class="form-group">  
-                                               <div class="modal-footer">         
-                                                     <button type="button" class="btn btn-secondary cerrarModalComercio" style ="width:48%;">Cancelar</button>                                                                 
-                                                     <a style ="width:48%;" id = "agregarComercio"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Agregar</span></a>
-                                                </div>
-                                         </div>
-                            </div>
-                  </div>   
-        </div>
-  </form>
-    <!-- Modal para editar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="editStore" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">

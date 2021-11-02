@@ -19,7 +19,8 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#cajasContrato').hide();
     $('#titulo').hide();
     $('#menuCajas').hide();
-    $('#TituloPrincipalContrato').text('Crear contrato botellon');
+    $("#tituloLink").text('Contrato Botellones')
+    $('#TituloPrincipalContrato').text('Crear Contrato Botellones');
     $('#cantidadBotellones').hide();
     $('#capacidadEstantes').hide();
     $('#labelDescripcion').hide();
@@ -60,7 +61,8 @@ function mostrarContrato(parametro,idTipoUsuario){
     $('#cajasContrato').hide();
     $('#titulo').hide();
     $('#menuCajas').hide();
-    $('#TituloPrincipalContrato').text('Crear contrato de botellon y estante');
+    $("#tituloLink").text('Contrato Ambos')
+    $('#TituloPrincipalContrato').text('Crear Contrato Botellon Y Estante');    
     var input =  `
     <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de Botellones</label>
     <input type="number" min="1" class="form-control mt-3" id="cantidadBotellones" placeholder="Cantidad de botellones">
@@ -86,6 +88,8 @@ function mostrarContrato(parametro,idTipoUsuario){
     });
   }else
   {
+    $("#tituloLink").text('Contrato Estantes')
+    $('#TituloPrincipalContrato').text('Crear Contrato Estantes');
     $("#labelCapacidadBotellon").hide();
     $("#capacidadBotellon").hide();
     $('#cajasContrato').hide();

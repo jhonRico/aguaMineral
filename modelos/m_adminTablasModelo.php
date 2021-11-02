@@ -27,7 +27,7 @@ require_once "conexion.php";
     }
     static public function mdlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 t.$atributoTabla1 = t2.$atributoTabla2");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla t INNER JOIN $tabla2 t2 ON t.$atributoTabla1 = t2.$atributoTabla2");
         $stmt -> execute();
         return  $stmt ->fetch();
         $stmt->close();

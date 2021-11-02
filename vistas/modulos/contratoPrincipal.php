@@ -58,7 +58,7 @@ $array = $resultadoConsultaSerial;
               <input type="text" class="form-control mt-3" id="apellidoCliente" placeholder="Apellido">
             </div>
             <div class="form-group col-md-6">
-              <label for="inputAddress" class="mt-3">Estado del cliente</label>
+              <label for="inputAddress" class="mt-3">Estado de residencia</label>
               <select id="estadoCliente" class="form-select mt-3">
               <?php foreach ($resultadoConsultarEstado as $key): ?>  
                 <option value="<?php echo $key['idEstado'];?>"><?php echo $key['nombreEstado'];?></option>
@@ -118,7 +118,7 @@ $array = $resultadoConsultaSerial;
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="" class="form-label mt-3" id="labelComercio">Estado del Comercio</label>
+              <label for="" class="form-label mt-3" id="labelComercio">Estado del comercio</label>
               <select id="estadoComercio" class="form-select mt-3">
               <?php foreach ($resultadoConsultarEstado as $key): ?>  
                 <option value="<?php echo $key['idEstado'];?>"><?php echo $key['nombreEstado'];?></option>
@@ -126,7 +126,7 @@ $array = $resultadoConsultaSerial;
               </select>
             </div>
             <div class="form-group col-md-6">
-              <label for="" class="form-label mt-3" id="labelMunicipioComercio">Municipio del Comercio</label>
+              <label for="" class="form-label mt-3" id="labelMunicipioComercio">Municipio del comercio</label>
               <select id="municipioComercio" class="form-select mt-3">                          
               </select>
             </div>   
@@ -144,7 +144,7 @@ $array = $resultadoConsultaSerial;
           </div>    
           <div class="row">
             <div class="form-group col-md-3">
-              <label for="inputAddress" class="mt-3" id="labelSectorComercio">Sector Comercio</label>
+              <label for="inputAddress" class="mt-3" id="labelSectorComercio">Sector comercio</label>
               <input type="text" class="form-control mt-3" id="sectorComercio" placeholder="Ej: Las lomas, El lobo...">
             </div>
             <div class="form-group col-md-9">

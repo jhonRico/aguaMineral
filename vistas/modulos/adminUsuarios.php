@@ -2,31 +2,39 @@
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/administracion" class="link-primary">Administración</a></li>
-            <li class="breadcrumb-item active" aria-current="page" class="">Comercio</li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Personas</li>
           </ol>
         </nav>
     </div> 
 <div class="ms-5 me-5 mt-0 p-5 text-center">
   <div class="ms-5">
-    <h1 class="ms-3 mb-5">Comercios</h1>
+    <h1 class="ms-3 mb-5">Personas</h1>
   </div>
+</div>
   <div class="ms-5 me-5 mt-0 p-5">
-  <div class="ms-5">
+    <div class="row">
+    <div class="col-md-10"></div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100">Agregar</button>
+    </div>
   </div>
-  <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
-  <thead class="cabezaTabla text-white">
-    <tr>
-      <th scope="col">Identificación</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Comercio</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="cuerpoTablaComercio">
-  </tbody>
-</table>
-  <!-- Modal para agregar nuevo pais  -->
+    <div class="ms-5 me-5 mt-0 p-5">
+          <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
+            <thead class="cabezaTabla text-white">
+              <tr>
+                <th scope="col">Identificación</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Comercio</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpoTablaComercio">
+            </tbody>
+          </table>
+    </div>
+  </div>  
+<!-- Modal para agregar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="moddaddStore" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">

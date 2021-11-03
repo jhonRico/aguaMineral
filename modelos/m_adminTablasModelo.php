@@ -464,6 +464,15 @@ require_once "conexion.php";
         $stmt->close();
         $stmt = null;
     }
+    public static function mdlConsultarClienteContratoActivo($id)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM contrato c INNER JOIN persona p ON c.Persona_idPersona = p.idPersona WHERE p.idPersona = :id AND c.estadoContrato");
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->fetch();
+        $stmt->close();
+        $stmt = null;
+    }
 
 
 }

@@ -1,6 +1,5 @@
 <?php 
   $url2 = Ruta::ctrlRuta();  
-
 ?>
 
 <div class="container mt-3 fs-5">

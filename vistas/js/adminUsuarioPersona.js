@@ -119,7 +119,7 @@ function consultarconsultarClientesAdminEnBd(tabla,tabla2,atributo,atributo2)
 					      <td>${res2.nombrePersona}</td>
 					      <td>${res2.apellidoPersona}</td>
 						  <td>${res2.nombreTienda}</td>
-					      <td><a href="javascript:mostrarModalModificarCliente('${res2.idPersona}','${res2.nombrePersona}','${res2.apellidoPersona}',${res2.cedulaPersona});"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span><a href="javascript:mostrarModalModificarComercio('${res2.idComercios}','${res2.nombreTienda}');"><span title="Modificar"><i class="fas fa-trash-alt text-danger me-3"></i></span></td>
+					      <td><a href="javascript:mostrarModalModificarCliente('${res2.idPersona}','${res2.nombrePersona}','${res2.apellidoPersona}',${res2.cedulaPersona});"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span><a href="javascript:mostrarModalEliminarCliente('${res2.idPersona}','${res2.nombrePersona}');"><span title="Modificar"><i class="fas fa-trash-alt text-danger me-3"></i></span></td>
 					</tr><br>`;
 				}
 				$("#cuerpoTablaAdminClientes").html(plantilla2);  
@@ -283,8 +283,6 @@ function modificarCliente()
 		processData: false,
 		success: function(respuesta3)
 		{
-			alert(id);
-			alert(respuesta3);
 			if(respuesta3.includes('ok'))
 			{
 				Swal.fire({
@@ -315,4 +313,101 @@ function modificarCliente()
 			}
 		}
 	})
+}
+
+function mostrarModalEliminarCliente(id, nombre)
+{
+	Swal.fire({
+	  icon: 'info',
+	  title: '\u00bfSeguro que desea eliminar este cliente?',
+	  showCancelButton: true,
+	  confirmButtonText: 'Eliminar',
+	  cancelButtonText: `Cancelar`,
+	  confirmButtonColor: 'red'
+	}).then((result) => {
+		if (result.isConfirmed)
+		{
+			var resultado = consultarClienteContratoActivo(id);
+			eliminarCliente(id,nombre);
+		}
+	})
+}
+
+function eliminarCliente(id,nombreCliente)
+{
+	var datos = new FormData();
+ 	datos.append("idClienteEliminar", id);
+ 	datos.append("nombreClienteEliminar", nombreCliente);
+ 	$.ajax({
+ 		url:rutaOculta+"ajax/adminComercio.ajax.php",
+ 		method:"POST",
+ 		data: datos, 
+ 		cache: false,
+ 		contentType: false,
+ 		processData: false,
+ 		async:false,
+ 		success: function(respuesta)
+ 		{
+ 			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
+ 			{
+			    mensajeError("Error al eliminar el estado "+respuesta);
+ 			}else if(respuesta.includes("relacionado")){
+			   mensajeError('No se puede eliminar el Estado, se encuentra con municipios');
+			}else
+ 			{
+ 				Swal.fire({
+ 					title: 'Registro Eliminado',
+ 					icon: 'success',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				}).then((result) => {
+					if (result.isConfirmed)
+					{
+						consultarconsultarUsuariosAdminEnBd('tipousuario','usuario','idTipoUsuario','TipoUsuario_idTipoUsuario');
+					}
+				})
+ 			}
+
+ 		}                 
+
+ 	})
+}
+
+function consultarClienteContratoActivo(id)
+{
+	var datos = new FormData();
+ 	datos.append("consultarClienteContratoActivo", id);
+ 	$.ajax({
+ 		url:rutaOculta+"ajax/adminComercio.ajax.php",
+ 		method:"POST",
+ 		data: datos, 
+ 		cache: false,
+ 		contentType: false,
+ 		processData: false,
+ 		async:false,
+ 		success: function(respuesta)
+ 		{
+ 			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
+ 			{
+			    mensajeError("Error al eliminar el estado "+respuesta);
+ 			}else if(respuesta.includes("relacionado")){
+			   mensajeError('No se puede eliminar el Estado, se encuentra con municipios');
+			}else
+ 			{
+ 				Swal.fire({
+ 					title: 'Registro Eliminado',
+ 					icon: 'success',
+ 					showCloseButton: true,
+ 					confirmButtonText:'Aceptar'
+ 				}).then((result) => {
+					if (result.isConfirmed)
+					{
+						consultarconsultarUsuariosAdminEnBd('tipousuario','usuario','idTipoUsuario','TipoUsuario_idTipoUsuario');
+					}
+				})
+ 			}
+
+ 		}                 
+
+ 	})
 }

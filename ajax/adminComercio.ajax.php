@@ -51,6 +51,16 @@ class   AjaxAdministracionComercio
         $respuesta = ControladorRegistroAdminGeneral::ctrlModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar);
         echo  json_encode ($respuesta);
     }
+    public static function ajaxConsultarClienteContratoActivo($id)
+    {
+        $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarClienteContratoActivo($id);
+        echo  json_encode ($respuesta);
+    }
+
+    /*public static function ajaxEliminarCliente($idClienteEliminar,$tabla,$atributoEliminar,$nombreClienteEliminar)
+    {
+
+    }*/
 }
 //----------------------------------------------------------------------------------------------------
 
@@ -116,4 +126,18 @@ if(isset($_POST["nombreClienteModificar"]))
     $objFormato = new AjaxAdministracionComercio();
     $objFormato->ajaxModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar);
 }
+if(isset($_POST["consultarClienteContratoActivo"]))
+{  
+    $id = $_POST['consultarClienteContratoActivo'];
+    $objFormato = new AjaxAdministracionComercio();
+    $objFormato->ajaxConsultarClienteContratoActivo($id);
+}/*
+if(isset($_POST["idClienteEliminar"]))
+{  
+    $idClienteEliminar = $_POST['idClienteEliminar'];
+    $nombreClienteEliminar = $_POST['nombreClienteEliminar'];
+    $objFormato = new AjaxAdministracionComercio();
+    $objFormato->ajaxEliminarCliente($idClienteEliminar,'persona','idUsuario',$nombreClienteEliminar);
+}*/
+
 ?>

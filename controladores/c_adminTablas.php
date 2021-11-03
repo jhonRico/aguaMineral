@@ -33,6 +33,11 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlModificarCliente($tabla,$datos);
         return $respuesta;
     }
+    static public function ctrlConsultarClienteContratoActivo($id)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarClienteContratoActivo($id);
+        return $respuesta;
+    }
     static public function consultarRegistroExisteBD($registroValue,$tabla,$atributoComparar)
     {     
          $datos = array(

@@ -625,8 +625,8 @@ function consultarReporte(id)
           plantilla2 = `
               <tr>
                     <td><b>${array[0]}</b></td>
-                    <td><b>${res2.cantidadProd}</b></td>
-                    <td><b>${res2.cantidadProd_2}</b></td>
+                    <td><b id="cantidadEstante">${res2.cantidadProd}</b></td>
+                    <td><b id="cantidadBotellon">${res2.cantidadProd_2}</b></td>
               </tr><br>`;
           if (res2.estadoContrato == "D") 
           {
@@ -714,6 +714,8 @@ function devolverContrato(id,cantidad,cantidad2,capacidad,capacidad2)
 						$("#reporte").modal("hide");
 						consultarContrato();
 						consultarTodosContratos();
+						consultarFormatoContratoDevolucion('Recibo');
+						$("#modalDevolucion").modal("show");
 					}
 
 				})
@@ -789,3 +791,66 @@ function consultarTodosContratos()
 		}
 	})
 }
+
+function consultarFormatoContratoDevolucion(parametro)
+{
+  var nombreCliente = $("#cliente").text();
+  var cedulaCliente = $("#cedula").text();
+  var cantidadEstante = $("#cantidadEstante").text();
+  var cantidadBotellones = $("#cantidadBotellon").text();
+  var hoy = new Date();
+  var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+  var datos = new FormData();
+  datos.append("parametro", parametro);
+
+  let plantilla2 = " ";
+  let obj
+  $.ajax({
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+     if(respuesta3.length >10)
+     {
+      respuesta3 =respuesta3.replace("[","");
+      respuesta3 =respuesta3.replace("]","");
+      var auxSplit2 = respuesta3.split("},");
+
+      plantilla2 +='<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-2" id="">'
+      for(var i=0;i<auxSplit2.length;i++)
+      {
+        if(!auxSplit2[i].includes("}"))
+        {
+          auxSplit2[i] = auxSplit2[i]+"}";
+        }
+        var res2 = JSON.parse(auxSplit2[i]);
+        if (res2.descripcion.includes("NombreCliente")) 
+        {
+          
+              result = res2.descripcion.replace("NombreCliente",nombreCliente);
+              result = result.replace("cedulaCliente", cedulaCliente);
+              result = result.replace("cantidadEstante", cantidadEstante);   
+              result = result.replace("cantidadBotellones", cantidadBotellones);  
+              result = result.replace("fechaSistema", fecha);    
+   
+              plantilla2 += result;
+        }
+      }
+      $("#cuerpoModalDevolucion").html(plantilla2);  
+      $('#cuerpoModalDevolucion').show();
+    }else
+    {
+      $("#cuerpoModalDevolucion").hide();     
+    }
+  }
+})
+}
+
+
+$(".cerrarModalDevolucion").click(function(){
+	$("#modalDevolucion").modal("hide");
+});

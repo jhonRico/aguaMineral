@@ -45,8 +45,8 @@ $array = $resultadoConsultaSerial;
       </div>  
       </br>
     <div class="card">
-  <h5 class="card-header">Información del cliente</h5>
-  <div class="card-body">
+  <h5 class="card-header bg-primary text-white">Información del cliente</h5>
+  <div class="card-body bg-light">
           <div class="row">
 
             <div class="form-group col-md-6">
@@ -108,8 +108,8 @@ $array = $resultadoConsultaSerial;
   </div>  
   </br>
     <div class="card">
-  <h5 class="card-header">Información del comercio</h5>
-  <div class="card-body"> 
+  <h5 class="card-header bg-primary text-white">Información del comercio</h5>
+  <div class="card-body bg-light"> 
           <div class="row">
             <div class="form-group col-md-6">
               <label for="inputPassword" class="mt-3">Nombre del comercio</label>
@@ -170,8 +170,8 @@ $array = $resultadoConsultaSerial;
  </div>   
 </br> 
  <div class="card">
- <h5 class="card-header text-center">Información del producto</h5>
- <div class="card-body">   
+ <h5 class="card-header text-center bg-primary text-white">Información del producto</h5>
+ <div class="card-body bg-light">   
           <div class="row">
             <div class="form-group col-md-4 text-center" id="divCantidadEstantes">
               <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de estantes</label>

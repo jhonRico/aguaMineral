@@ -32,9 +32,9 @@ $array = $resultadoConsultaSerial;
           <div class="container-fluid well well-sm barraProductos p-5 text-center col-md-12 ms-2 me-4">
             <h1 class="tituloContratos text-dark ms-0 me-5" id="TituloPrincipalContrato">Crear contrato estante</h1>
           </div>
-
-          <div class="row">
-            <div class="form-group col-md-4">
+      
+      <div class="row">
+       <div class="form-group col-md-4">
               <label for="inputEmail4" class="mb-3">Sucursal</label>
               <select name="" id="sucursal" class="form-select">
                 <?php foreach ($resultadoConsultarSucursales as $key): ?>  
@@ -42,12 +42,19 @@ $array = $resultadoConsultaSerial;
               <?php endforeach ?>  
               </select>
             </div>
-            <div class="form-group col-md-4">
-              <label for="inputEmail4" class="mb-3">C&eacute;dula del cliente</label>
-              <input type="text" class="form-control mb-3" id="cedulaCliente" placeholder="C&eacute;dula">
+      </div>  
+      </br>
+    <div class="card">
+  <h5 class="card-header">Información del cliente</h5>
+  <div class="card-body">
+          <div class="row">
+
+            <div class="form-group col-md-6">
+              <label for="inputEmail4" class="mt-3">C&eacute;dula del cliente</label>
+              <input type="text" class="form-control mt-3" id="cedulaCliente" placeholder="C&eacute;dula">
             </div>
-            <div class="form-group col-md-4">
-              <label for="inputEmail4">Nombre del cliente</label>
+            <div class="form-group col-md-6">
+              <label for="inputEmail4" class="mt-3">Nombre del cliente</label>
               <input type="text" class="form-control mt-3" id="nombreCliente" placeholder="Nombre">
             </div>
           </div>
@@ -97,6 +104,12 @@ $array = $resultadoConsultaSerial;
               <input type="text" class="form-control mt-3" id="direccionCliente" placeholder="Direcci&oacute;n del cliente">
             </div>
           </div>
+    </div>    
+  </div>  
+  </br>
+    <div class="card">
+  <h5 class="card-header">Información del comercio</h5>
+  <div class="card-body"> 
           <div class="row">
             <div class="form-group col-md-6">
               <label for="inputPassword" class="mt-3">Nombre del comercio</label>
@@ -153,6 +166,12 @@ $array = $resultadoConsultaSerial;
             </div>
           </div>
           </div>
+ </div>   
+ </div>   
+</br> 
+ <div class="card">
+ <h5 class="card-header text-center">Información del producto</h5>
+ <div class="card-body">   
           <div class="row">
             <div class="form-group col-md-4 text-center" id="divCantidadEstantes">
               <label for="inputCity" class="mt-4" id="labelCantidadEstantes">Cantidad de estantes</label>
@@ -172,7 +191,9 @@ $array = $resultadoConsultaSerial;
               <label for="inputState" id="labelCapacidadBotellon" class="mt-4" id="labelDescripcion">Capacidad Botellon</label>
               <select class="form-select" id="capacidadBotellon">
               </select>
-            </div>  
+            </div> 
+ </div>   
+ </div>       
             <div class="form-group col-md-4 text-center">
             </div>
             <div class="col-md-4 text-center">

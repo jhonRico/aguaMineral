@@ -351,7 +351,6 @@ function eliminarCliente(id,nombreCliente)
  		async:false,
  		success: function(respuesta)
  		{
- 			alert(respuesta);
  			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
  			{
 			    mensajeError("Error al eliminar el cliente");

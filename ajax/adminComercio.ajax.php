@@ -60,6 +60,10 @@ class   AjaxAdministracionComercio
     public static function ajaxEliminarCliente($idClienteEliminar,$nombreClienteEliminar)
     {
         $respuesta = ControladorRegistroAdminGeneral::ctrlEliminarCliente($idClienteEliminar);
+        if(strpos($respuesta,"ok")!== false){
+           session_start();  
+           $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario elimina el cliente con nombre: ".$nombreClienteEliminar);
+        }
         echo  json_encode ($respuesta);
     }
 }

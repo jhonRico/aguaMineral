@@ -1,5 +1,5 @@
 <?php 
-  $url2 = Ruta::ctrlRuta();  
+  $url = Ruta::ctrlRuta();  
     $respuesta = ControladorRegistroAdminGeneral::consultarRegistroExisteBD("Estantes","tipocontrato","nombre");
   $parametros = ControladorRegistroAdminGeneral::ctrlConsultarParametros();
 ?>
@@ -8,7 +8,7 @@
   <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminFormatos" class="link-primary">Administración de formatos</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $url;?>adminFormatos" class="link-primary">Administración de formatos</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Formatos</li>
           </ol>
         </nav>

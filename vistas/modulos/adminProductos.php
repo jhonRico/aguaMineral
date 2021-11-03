@@ -16,7 +16,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
  <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/administracion" class="link-primary">Administración</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $url2;?>administracion" class="link-primary">Administración</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Productos</li>
           </ol>
         </nav>
@@ -31,7 +31,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
 
     <div class="row">
      <div class="col">
-      <a href="http://localhost/aguaMineral/administracionTipoProducto" class="link-dark">
+      <a href="<?php echo $url2;?>administracionTipoProducto" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-hand-holding-water iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Tipo producto</h3>
@@ -40,7 +40,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       </a>
      </div>
      <div class="col">
-      <a href="http://localhost/aguaMineral/administracionProductos" class="link-dark">
+      <a href="<?php echo $url2;?>administracionProductos" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
            <i class="fas fa-tint iconosAdmin"></i>
           <h3 class="titulosAdmin mb-0">Productos</h3>

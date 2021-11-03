@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php  
+$url2 = Ruta::ctrlRuta();
+?>
 <!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
 <html lang="en" dir="ltr">
   <head>
@@ -18,28 +21,28 @@
       </div>
     <ul class="nav-list">
       <li>
-       <a href="http://localhost/aguaMineral/principal">
+       <a href="<?php echo $url2;?>principal">
          <i class="fas fa-home text-white"></i>
          <span class="links_name">Principal</span>
        </a>
        <span class="tooltip">Principal</span>
      </li>
      <li>
-       <a href="http://localhost/aguaMineral/contratoPrincipal">
+       <a href="<?php echo $url2;?>contratoPrincipal">
          <i class="fas fa-file-signature"></i>
          <span class="links_name">Contratos</span>       
        </a>
        <span class="tooltip">Contratos</span>
      </li>
      <li>
-       <a href="http://localhost/aguaMineral/reportePrincipal"> 
+       <a href="<?php echo $url2;?>reportePrincipal"> 
          <i class="fas fa-file-alt"></i>
          <span class="links_name">Reportes</span>
        </a>
        <span class="tooltip">Reportes</span>
      </li>
       <li>
-        <a href="http://localhost/aguaMineral/zonas">
+        <a href="<?php echo $url2;?>zonas">
           <i class="fas fa-user-alt"></i>
           <span class="links_name">Clientes</span>
         </a>
@@ -50,7 +53,7 @@
        {
          ?>
              <li>
-               <a href="http://localhost/aguaMineral/administracion">
+               <a href="<?php echo $url2;?>administracion">
                  <i class="fas fa-users-cog"></i>
                  <span class="links_name">Administración</span>
                </a>

@@ -1,7 +1,10 @@
+<?php    
+    $url = Ruta::ctrlRuta();
+?>
 <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminProductos" class="link-primary">Administración Producto</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $url;?>adminProductos" class="link-primary">Administración Producto</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Tipo Producto</li>
           </ol>
         </nav>

@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\vistas",
-    "\\vistas\\js"
+    "\\vistas\\modulos"
   ],
-  "SelectedNode": "\\vistas\\js\\reporte.js",
+  "SelectedNode": "\\vistas\\modulos\\administracion.php",
   "PreviewInSolutionExplorer": false
 }

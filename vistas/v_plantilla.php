@@ -7,11 +7,12 @@
     <meta  name="description" content="describir la pagina">
     <meta  name="keyword" content="todas las palabras claves separadas con  comas ,">
     <title>Agua Mineral Ureña</title>
-    <link rel="icon" href="http://localhost/aguaMineral/vistas/img/general/gotica.png">
-    <?php
+        <?php
         /** Mantener la ruta fija del proyecto*/
         $url = Ruta::ctrlRuta();
     ?>
+    <link rel="icon" href="<?php echo $url;?>vistas/img/general/gotica.png">
+
 
     <!---   PLUGINS DE CSS-->
     <link rel="stylesheet" href="<?php echo $url ?>vistas/bootstrap-5.1.1-dist/css/bootstrap.css">

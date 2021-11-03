@@ -1,8 +1,12 @@
+<?php    
+    $url = Ruta::ctrlRuta();
+?>
+
 <body class="bg-light">
 <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminPersonas" class="link-primary">Personas</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $url;?>adminPersonas" class="link-primary">Personas</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Tipo Usuario</li>
           </ol>
         </nav>

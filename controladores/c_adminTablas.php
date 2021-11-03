@@ -21,7 +21,18 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlModificarUsuario($tabla,$datos);
         return $respuesta;
     }
-
+    static public function ctrlModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar)
+    {
+        $tabla = 'persona';
+        $datos = array(
+             "idClienteModificar"=>$idClienteModificar,
+             "nombre"=>$nombreClienteModificar,
+             "apellido"=>$apellido,
+             "cedula"=>$cedulaCliente,
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlModificarCliente($tabla,$datos);
+        return $respuesta;
+    }
     static public function consultarRegistroExisteBD($registroValue,$tabla,$atributoComparar)
     {     
          $datos = array(

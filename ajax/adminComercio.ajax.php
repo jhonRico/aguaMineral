@@ -26,6 +26,11 @@ class   AjaxAdministracionComercio
         $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2);
         echo  json_encode ($respuesta);
     }
+    public static function ajaxConsultarClientes($tabla,$tabla2,$atributoTabla1,$atributoTabla2)
+    {
+        $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2);
+        echo  json_encode ($respuesta);
+    }
     public static function ajaxModificarUsuario($idUsuarioModificar,$nombre,$apellido,$nombreUsuario,$tipoUsuario)
     {
         $respuesta = ControladorRegistroAdminGeneral::ctrlModificarUsuario($idUsuarioModificar,$nombre,$apellido,$nombreUsuario,$tipoUsuario);
@@ -39,6 +44,11 @@ class   AjaxAdministracionComercio
            $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario elimina el usuario con nombre: ".$nombre);
         }
 
+        echo  json_encode ($respuesta);
+    }
+    public static function ajaxModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar)
+    {
+        $respuesta = ControladorRegistroAdminGeneral::ctrlModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar);
         echo  json_encode ($respuesta);
     }
 }
@@ -87,5 +97,23 @@ if(isset($_POST["idUsuarioEliminar"]))
     $nombreUsuarioEliminar = $_POST['nombreUsuarioEliminar'];
     $objFormato = new AjaxAdministracionComercio();
     $objFormato->ajaxEliminarUsuario($idUsuarioEliminar,'usuario','idUsuario',$nombreUsuarioEliminar);
+}
+if(isset($_POST["consultarCliente"]))
+{  
+    $tabla = $_POST['tablaCliente'];
+    $tabla2 = $_POST['tabla2Cliente'];
+    $atributo = $_POST['atributoCliente'];
+    $atributo2 = $_POST['atributo2Cliente'];
+    $objFormato = new AjaxAdministracionComercio();
+    $objFormato->ajaxConsultarClientes($tabla,$tabla2,$atributo,$atributo2);
+}
+if(isset($_POST["nombreClienteModificar"]))
+{  
+    $nombreClienteModificar = $_POST['nombreClienteModificar'];
+    $apellido = $_POST['apellido'];
+    $cedulaCliente = $_POST['cedulaCliente'];
+    $idClienteModificar = $_POST['idClienteModificar'];
+    $objFormato = new AjaxAdministracionComercio();
+    $objFormato->ajaxModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar);
 }
 ?>

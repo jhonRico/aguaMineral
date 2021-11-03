@@ -432,11 +432,28 @@ require_once "conexion.php";
     {
         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombUsuario = :nombre, apeUsuario = :apellido, correoUsuario = :nombreUsuario, TipoUsuario_idTipoUsuario = :tipoUsuario WHERE idUsuario = :idUsuarioModificar");
 
-        $stmt->bindParam(":idUsuarioModificar", $datos["idUsuarioModificar"], PDO::PARAM_STR);
+        $stmt->bindParam(":idUsuarioModificar", $datos["idUsuarioModificar"], PDO::PARAM_INT);
         $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
         $stmt->bindParam(":apellido", $datos["apellido"], PDO::PARAM_STR);
         $stmt->bindParam(":nombreUsuario", $datos["nombreUsuario"], PDO::PARAM_STR);
         $stmt->bindParam(":tipoUsuario", $datos["tipoUsuario"], PDO::PARAM_INT);
+        if ($stmt -> execute()) 
+        {
+            return "ok";
+        }else
+        {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+    public static function mdlModificarCliente($tabla,$datos)
+    {
+         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombrePersona = :nombre, apellidoPersona = :apellido, cedulaPersona = :cedula WHERE idPersona  = :idClienteModificar");
+        $stmt->bindParam(":idClienteModificar", $datos["idClienteModificar"], PDO::PARAM_INT);
+        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":apellido", $datos["apellido"], PDO::PARAM_STR);
+        $stmt->bindParam(":cedula", $datos["cedula"], PDO::PARAM_STR);
         if ($stmt -> execute()) 
         {
             return "ok";

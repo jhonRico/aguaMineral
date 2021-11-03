@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-    <div class="ms-5 me-5 mt-0 p-5">
+    <div class="ms-5 me-5 mt-0 p-5 scrollComentario">
           <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal text-center">
             <thead class="cabezaTabla text-white">
               <tr>

@@ -39,7 +39,7 @@
 <div class="ms-5">
   <div class="ms-5">
     <div class=" w-100 rounded ms-5">
-       <div class="text-dark m-3 p-2 mb-1 rounded ms-5" id="respuestaCons"></div>
+       <div class="text-dark m-3 p-2 mb-1 rounded ms-5 scrollComentario" id="respuestaCons"></div>
     </div>
   </div>
 </div>  

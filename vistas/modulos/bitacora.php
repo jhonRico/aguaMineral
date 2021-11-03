@@ -24,7 +24,7 @@
       <div class="ms-5">
         <div class="ms-3">
           <div class="me-5 ms-5 mt-5 text-center">
-           <div class="me-5 ms-5">
+           <div class="me-5 ms-5 scrollComentario">
                   <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal w-75">
                   <thead class="cabezaTabla text-white">
                     <tr>

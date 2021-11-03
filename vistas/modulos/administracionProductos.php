@@ -38,6 +38,7 @@
   <div class="ms-5">
       
   </div>
+  <div class="scrollComentario">
   <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
   <thead class="cabezaTabla text-white">
     <tr>
@@ -54,6 +55,7 @@
   <tbody id="fila">
   </tbody>
 </table>
+  </div>
 <div class="ms-5">
   <div class="ms-5">
     <div class=" w-100 rounded ms-5">

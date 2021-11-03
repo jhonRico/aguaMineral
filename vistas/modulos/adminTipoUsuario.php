@@ -6,13 +6,8 @@
 <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-<<<<<<< HEAD
             <li class="breadcrumb-item"><a href="<?php echo $url;?>adminPersonas" class="link-primary">Personas</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Tipo Usuario</li>
-=======
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminPersonas" class="link-primary">Administración Personas</a></li>
-            <li class="breadcrumb-item active" aria-current="page" class="">Administración de Tipo Usuario</li>
->>>>>>> 7192f6b868014578246f78b4ae411c0dc26e0bea
           </ol>
         </nav>
     </div>
@@ -45,7 +40,7 @@
 <div class="bg-light ms-5">
   <div class="ms-5">
     <div class=" w-100 rounded ms-5">
-       <div class="text-dark m-3 p-2 mb-1 rounded ms-5" id="respuestaCons1"></div>
+       <div class="text-dark m-3 p-2 mb-1 rounded ms-5 scrollComentario" id="respuestaCons1"></div>
     </div>
   </div>
 </div>  

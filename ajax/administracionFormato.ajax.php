@@ -61,6 +61,13 @@ if(isset($_POST["estante"]))
     $idFormato = $_POST["idFormato"];
     $objFormato->ajaxModificarinBD($idFormato,$estante,"tipocontrato","descripcion","idTipoContrato");    
 }
+if(isset($_POST["recibo"]))
+{  
+    $objFormato = new AjaxAdministracionFormato();
+    $recibo = $_POST["recibo"];
+    $idFormato = $_POST["idFormato"];
+    $objFormato->ajaxModificarinBD($idFormato,$recibo,"tipocontrato","descripcion","idTipoContrato");    
+}
 
 if(isset($_POST["consultarBotellon"]))
 {  
@@ -76,7 +83,12 @@ if(isset($_POST["botellon"]))
     $idFormato = $_POST["idFormato"];
     $objFormato->ajaxModificarinBD($idFormato,$estante,"tipocontrato","descripcion","idTipoContrato");    
 }
-
+if(isset($_POST["consultarRecibo"]))
+{  
+    $objFormato = new AjaxAdministracionFormato();
+    $recibo = $_POST["consultarRecibo"];
+    $objFormato->ajaxConsultarBD($recibo,"tipocontrato","nombre");    
+}
 if(isset($_POST["consultarAmbos"]))
 {  
     $objFormato = new AjaxAdministracionFormato();

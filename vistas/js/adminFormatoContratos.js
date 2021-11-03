@@ -8,12 +8,54 @@ $(document).ready(function(){
 	    consultarFormatoAmbos();
 	}else if(rutaActual.includes("todosContratos")){
 	    consultarTodosContratos();
+	}else if(rutaActual.includes("adminFormatoRecibo")){
+	    consultarFormatoRecibo();
 	}
 });
 var rutaOculta = $("#rutaOculta").val();
 $("#sucursalContrato").change(function(){
 	consultarTodosContratos();
 });
+function consultarFormatoRecibo(){
+	
+	var datos = new FormData();
+	datos.append("consultarRecibo", "Recibo");
+	let plantilla2 = " ";
+	let obj
+	$.ajax({
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta3){
+			
+			if(respuesta3.length >10 ){
+
+				respuesta3 =respuesta3.replace("[","");
+				respuesta3 =respuesta3.replace("]","");
+				var auxSplit2 = respuesta3.split("},");
+
+				
+				for(var i=0;i<auxSplit2.length;i++){
+					if(!auxSplit2[i].includes("}")){
+						auxSplit2[i] = auxSplit2[i]+"}";
+					}
+					var res2 = JSON.parse(auxSplit2[i]);
+					
+					plantilla2 +=res2.descripcion;
+
+				}		
+				$("#formateRecibo").html(plantilla2);  
+				$('#formateRecibo').show();
+			}else{
+				$("#formateRecibo").hide(); 
+
+			}
+		}
+	})
+}
 
 function consultarFormatoAmbos(){
 	
@@ -165,7 +207,16 @@ function consultarFormatoBotellon(){
 			 actualizarRegistroBotellon(idFormato);
 		
 	}
-	
+	function miFuncionRecibo(idFormato){
+	       var descripcion = $("#formateRecibo").val();		
+			if (descripcion == "") 
+ 			{
+ 				mensajeError('El campo esta vacio');
+ 				return false;
+ 			}
+			 actualizarRegistroRecibo(idFormato);
+		
+	}
 		function miFuncionAmbos(idFormato){
 	       var descripcion = $("#formateAmbos").val();		
 			if (descripcion == "") 
@@ -176,6 +227,47 @@ function consultarFormatoBotellon(){
 			 actualizarRegistroAmbos(idFormato);
 		
 	}
+
+function actualizarRegistroRecibo(idFormato)
+{
+	var datos = new FormData();
+	datos.append("recibo", $("#formateRecibo").val());
+	datos.append("idFormato", idFormato);
+	$.ajax({
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		async:false,
+		success: function(respuesta)
+		{     
+			
+			if(!respuesta.includes("ok"))
+			{
+				mensajeError('Error al actualizar el formato de ambos');
+			}else
+			{
+				Swal.fire({
+					title: 'Se actualiza de forma  exitosa',
+					icon: 'success',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				}).then((result) => 
+				{
+					if (result.isConfirmed)
+					{
+						window.location.href =  rutaOculta+'adminFormatos';
+					}
+
+				})
+			}
+
+		}                 
+
+	})
+}
 
 function actualizarRegistroAmbos(idFormato)
 {
@@ -340,6 +432,14 @@ function mostrarModalVistaPreviaBotellon(){
 		$("#verPrevioBotellon").html($("#formateBotellon").val()); 
 		$('#verPrevioBotellon').show();
 		$("#modalVistaPreviaBotellon").modal("show");
+		
+}
+function mostrarModalVistaPreviaRecibo(){
+
+
+		$("#verPrevioRecibo").html($("#formateRecibo").val()); 
+		$('#verPrevioRecibo').show();
+		$("#modalVistaPreviaRecibo").modal("show");
 		
 }
 

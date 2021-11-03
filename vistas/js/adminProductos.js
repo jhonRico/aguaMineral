@@ -6,6 +6,7 @@ $(document).ready(function(){
 		consultarTipoProducto("tipoproducto");
 	}
 });
+var rutaOculta = $("#rutaOculta").val();
 $(document).ready(function(){ 
 	rutaActual = window.location.toString();
 	if(rutaActual.includes("administracionProductos")){   
@@ -75,7 +76,7 @@ function registrarTipoProducto()
 	datos.append("descripcion", descripcion);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -122,7 +123,7 @@ function consultarTipoProducto(tabla)
 	datos.append("tabla", tabla);
 	let plantilla2 = " ";
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -176,7 +177,7 @@ function modificarTipoProducto(idTipoProducto,descripcionTipoProducto)
  	datos.append("idTipoProducto", idTipoProducto);
  	datos.append("descripcionTipoProducto", descripcionTipoProducto);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+ 		url:rutaOculta+"ajax/registroAdmin.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -252,7 +253,7 @@ function eliminarRegistroEnTabla(id, tabla, parametro)
  	datos.append("parametroEliminar", parametro);
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+ 		url:rutaOculta+"ajax/registroAdmin.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -358,7 +359,7 @@ function consultarProductoExistente()
 	datos.append("tipoProductoExistente", arrayTipoProducto[0]);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -412,7 +413,7 @@ function registrarProductoEnBd()
 	datos.append("cantidad", cantidad);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -492,7 +493,7 @@ function consultarProducto()
 	datos.append("consultar", selectSucursales);
 	let plantilla2 = " ";
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -600,7 +601,7 @@ function modificarProducto(id,serial,cantidad,capacidad,serialDescripcion)
  	datos.append("serialDescripcion", serialDescripcion);
 
 	 $.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+ 		url:rutaOculta+"ajax/registroAdmin.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,

@@ -5,6 +5,7 @@ $(document).ready(function(){
 	     consultarAllSucursalesValue();		
 	}
 });
+var rutaOculta = $("#rutaOculta").val();
 /*------------------------------------------Inicia el Espacio de consultar ciudades----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllSucursalesValue(){
@@ -14,7 +15,7 @@ function consultarAllSucursalesValue(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
+		url:rutaOculta+"ajax/administracionSucursal.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -142,7 +143,7 @@ function registrarCampoSucursal(nameSucursal,direccion)
 	datos.append("nombreSucursalAdd", nameSucursal);
 	datos.append("direccionAdd", direccion);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
+		url:rutaOculta+"ajax/administracionSucursal.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -196,7 +197,7 @@ function validarRegistroExistenteSucursal(nameSucursal,direccion)
 	datos.append("direccion", direccion);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
+		url:rutaOculta+"ajax/administracionSucursal.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -258,7 +259,7 @@ function eliminarSucursalFinal(id)
 	datos.append("idSucursalDelete", id);
 	
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
+		url:rutaOculta+"ajax/administracionSucursal.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -385,7 +386,7 @@ function modificarSucursalValue(id, sucursalupdate, direccionUpdate)
 
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionSucursal.ajax.php",
+		url:rutaOculta+"ajax/administracionSucursal.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,

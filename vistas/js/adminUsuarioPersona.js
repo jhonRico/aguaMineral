@@ -11,6 +11,7 @@ $(document).ready(function()
 		consultarconsultarClientesAdminEnBd('persona','comercios','idPersona','Persona_idPersona');
 	}
 });
+var rutaOculta = $("#rutaOculta").val();
 
 function mostrarModalModificarUsuario(id,nombre,apellido,nombreUsuario)
 {
@@ -43,7 +44,7 @@ function consultarconsultarUsuariosAdminEnBd(tabla,tabla2,atributo,atributo2)
 	var respuestaFinal = "esta vacia";
 	var plantilla2 = "";
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+		url:rutaOculta+"ajax/adminComercio.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -91,7 +92,7 @@ function consultarconsultarClientesAdminEnBd(tabla,tabla2,atributo,atributo2)
 	datos.append("atributo2Cliente", atributo2);
 	var plantilla2 = "";
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+		url:rutaOculta+"ajax/adminComercio.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -145,7 +146,7 @@ function modificarUsuario(id)
 	datos.append("nombreUsuario", nombreUsuario);
 	datos.append("tipoUsuario", tipoUsuario);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+		url:rutaOculta+"ajax/adminComercio.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -208,7 +209,7 @@ function eliminarUsuario(id,nombreUsuario)
  	datos.append("idUsuarioEliminar", id);
  	datos.append("nombreUsuarioEliminar", nombreUsuario);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+ 		url:rutaOculta+"ajax/adminComercio.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,

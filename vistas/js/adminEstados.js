@@ -5,6 +5,7 @@ $(document).ready(function(){
 		consultarAllEstados();
 	}
 });
+var rutaOculta = $("#rutaOculta").val();
 /*------------------------------------------Inicia el Espacio de consultar zonas----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllEstados(){
@@ -15,7 +16,7 @@ function consultarAllEstados(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
+		url:rutaOculta+"ajax/administracionEstados.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -130,7 +131,7 @@ function registrarCampoEstados(valor,idPaisValue)
 	datos.append("nombreEstadoAdd", valor);
 	datos.append("idPaisValue", idPaisValue);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
+		url:rutaOculta+"ajax/administracionEstados.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -182,7 +183,7 @@ function validarRegistroExistenteEstado(valor,idPaisValue)
 	datos.append("idPaisValue", idPaisValue);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
+		url:rutaOculta+"ajax/administracionEstados.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -244,7 +245,7 @@ function eliminarEstados(id,nombreEstado){
  	datos.append("idEstadoDelete", id);
 	datos.append("nombreEstadoDelete", nombreEstado);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
+ 		url:rutaOculta+"ajax/administracionEstados.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -356,7 +357,7 @@ function modificarEstadoValue(id,descripcion,idPais)
 
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionEstados.ajax.php",
+ 		url:rutaOculta+"ajax/administracionEstados.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,

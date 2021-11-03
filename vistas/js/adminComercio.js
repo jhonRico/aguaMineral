@@ -1,3 +1,5 @@
+
+var rutaOculta = $("#rutaOculta").val();
 $(document).ready(function()
 { 
 	rutaActual = window.location.toString();
@@ -38,7 +40,7 @@ function consultarComercios()
 	datos.append("consultar", "nulo");
 	let plantilla2 = " ";
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+		url:rutaOculta+"ajax/adminComercio.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -138,7 +140,7 @@ function consultarComerciosEnBd()
 	var resultado = "";
 	datos.append("comercioConsultar", descripcion);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+		url:rutaOculta+"ajax/adminComercio.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -176,7 +178,7 @@ function modificarComercioFinal(id)
 	datos.append("nombreComercio", nombreComercio);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
+		url:rutaOculta+"ajax/adminComercio.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,

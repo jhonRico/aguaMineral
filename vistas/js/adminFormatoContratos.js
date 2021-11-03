@@ -10,7 +10,7 @@ $(document).ready(function(){
 	    consultarTodosContratos();
 	}
 });
-
+var rutaOculta = $("#rutaOculta").val();
 $("#sucursalContrato").change(function(){
 	consultarTodosContratos();
 });
@@ -22,7 +22,7 @@ function consultarFormatoAmbos(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -63,7 +63,7 @@ function consultarFormatoEstante(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -107,7 +107,7 @@ function consultarFormatoBotellon(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -183,7 +183,7 @@ function actualizarRegistroAmbos(idFormato)
 	datos.append("ambos", $("#formateAmbos").val());
 	datos.append("idFormato", idFormato);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -207,7 +207,7 @@ function actualizarRegistroAmbos(idFormato)
 				{
 					if (result.isConfirmed)
 					{
-						window.location.href =  '//localhost/aguaMineral/adminFormatos';
+						window.location.href =  rutaOculta+'adminFormatos';
 					}
 
 				})
@@ -224,7 +224,7 @@ function actualizarRegistroBotellon(idFormato)
 	datos.append("botellon", $("#formateBotellon").val());
 	datos.append("idFormato", idFormato);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -248,7 +248,7 @@ function actualizarRegistroBotellon(idFormato)
 				{
 					if (result.isConfirmed)
 					{
-						window.location.href =  '//localhost/aguaMineral/adminFormatos';
+						window.location.href =  rutaOculta+'adminFormatos';
 					}
 
 				})
@@ -266,7 +266,7 @@ function actualizarRegistro(idFormato,descripcion)
 	datos.append("estante", descripcion);
 	datos.append("idFormato", idFormato);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -290,7 +290,7 @@ function actualizarRegistro(idFormato,descripcion)
 				{
 					if (result.isConfirmed)
 					{
-						window.location.href =  '//localhost/aguaMineral/adminFormatos';
+						window.location.href =  rutaOculta+'adminFormatos';
 					}
 
 				})
@@ -421,7 +421,7 @@ function consultarContrato()
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -496,7 +496,7 @@ function consultarReporte(id)
   var datos = new FormData();
   datos.append("idContrato", id);
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+    url:rutaOculta+"ajax/administracionFormato.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -590,7 +590,7 @@ function devolverContrato(id,cantidad,cantidad2,capacidad,capacidad2)
 	datos.append("capacidad2", capacidad2);
 	let plantilla2 = " ";
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -632,7 +632,7 @@ function consultarTodosContratos()
 	datos.append("sucursal", sucursal);
 	let plantilla2 = " ";
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionFormato.ajax.php",
+		url:rutaOculta+"ajax/administracionFormato.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,

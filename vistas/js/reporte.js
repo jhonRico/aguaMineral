@@ -5,6 +5,7 @@ $(document).ready(function($){
       consultarProductosReporte();
       consultarProductosDisponiblesEnBd();
   }
+  var rutaOculta = $("#rutaOculta").val();
   var today = new Date();
   var year = today.getFullYear();
   var plantilla = `<option selected>Seleccione</option>
@@ -43,7 +44,7 @@ function consultarProductosReporte()
   datos.append("fechaReporteProducto", fechaReporteProducto);
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/administracionReporte.ajax.php",
+    url:rutaOculta+"ajax/administracionReporte.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -96,7 +97,7 @@ function consultarProductosPrestados()
   datos.append("fechaProductoPrestado", fechaReporteProducto);
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/administracionReporte.ajax.php",
+    url:rutaOculta+"ajax/administracionReporte.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -217,7 +218,7 @@ function consultarProductosDisponiblesEnBd()
   datos.append("consultarProductos", 'valor');
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/administracionReporte.ajax.php",
+    url:rutaOculta+"ajax/administracionReporte.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,

@@ -11,7 +11,7 @@ $(document).ready(function(){
     consultarClientesEnBd();
   }
 });
-
+var rutaOculta = $("#rutaOculta").val();
 $(document).ready(function() 
 {
     $('#tablaEsconder').hide();
@@ -29,7 +29,7 @@ function consultarParroquias(ciudad)
   datos.append("ciudadAConsultar", ciudad);
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/clientes.ajax.php",
+    url:rutaOculta+"ajax/clientes.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -86,7 +86,7 @@ function ejecutarFuncion(id,descripcion)
 {
   $('#contenedorZonasClientes').hide();
   $('#anterior').text('Clientes');
-  $('#anterior').attr('href', 'http://localhost/aguaMineral/zonas');
+  $('#anterior').attr('href', rutaOculta+'zonas');
   $('#tituloClientes').text('Clientes de '+descripcion);
   $('#contenedorClientes').show();
   $('#tablaEsconder').show();
@@ -102,7 +102,7 @@ function consultarClientesEnBd(id,descripcion)
   datos.append("tipoUsuario", tipoUsuario);
   let plantilla2 = " ";
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/clientes.ajax.php",
+    url:rutaOculta+"ajax/clientes.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,
@@ -192,7 +192,7 @@ function consultarCliente(idPersona,descripcion)
   datos.append("ciudad", ciudad);
   datos.append("tipoUsuario", tipoUsuario);
   $.ajax({
-    url:"//localhost/aguaMineral/ajax/clientes.ajax.php",
+    url:rutaOculta+"ajax/clientes.ajax.php",
     method:"POST",
     data: datos, 
     cache: false,

@@ -7,6 +7,7 @@ $(document).ready(function(){
 	}
 
 });
+var rutaOculta = $("#rutaOculta").val();
 /*------------------------------------------Inicia el Espacio de consultar Municipios----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------*/
 function consultarAllMunicipios(){
@@ -17,7 +18,7 @@ function consultarAllMunicipios(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
+		url:rutaOculta+"ajax/administracionMunicipios.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -174,7 +175,7 @@ function registrarCampoMunicipio(municipio,capital,idEstadoValue)
 	datos.append("addCapital", capital);
 	datos.append("addidEstadoValue", idEstadoValue);
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
+		url:rutaOculta+"ajax/administracionMunicipios.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -227,7 +228,7 @@ function validarRegistroExistenteMunicipio(municipio,capital,idEstadoValue)
 	datos.append("capital", capital);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
+		url:rutaOculta+"ajax/administracionMunicipios.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -289,7 +290,7 @@ function eliminarMunicipio(id,nombreMunicipioDelete){
  	datos.append("idMunicipioDelete", id);
 	datos.append("nombreMunicipioDelete", nombreMunicipioDelete);
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
+ 		url:rutaOculta+"ajax/administracionMunicipios.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -428,7 +429,7 @@ function modificarMunicipioValue(idMunicipio,nombreMunicipio,capitalMunicipio,id
 
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/administracionMunicipios.ajax.php",
+ 		url:rutaOculta+"ajax/administracionMunicipios.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,

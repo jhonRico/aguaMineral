@@ -6,6 +6,7 @@ $(document).ready(function(){
 
 	}
 });
+var rutaOculta = $("#rutaOculta").val();
 
 //Mostramos el modal agregar
 
@@ -55,7 +56,7 @@ function consultarTodosPaises(){
 	let plantilla2 = " ";
 	let obj
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -102,7 +103,7 @@ function registrarPais(valor)
 	datos.append("nombrePais", valor);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -153,7 +154,7 @@ function registrarPais(valor)
  	datos.append("idPais", id);
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+ 		url:rutaOculta+"ajax/registroAdmin.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -203,7 +204,7 @@ function registrarPais(valor)
 
 
  	$.ajax({
- 		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+ 		url:rutaOculta+"ajax/registroAdmin.ajax.php",
  		method:"POST",
  		data: datos, 
  		cache: false,
@@ -245,42 +246,6 @@ function registrarPais(valor)
  	})
  }
 
-/* function validarRegistroExistenteDeModificar(id, descripcion)
-{
-	var datos = new FormData();
-
-	datos.append("registroPais", id);
-
-	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
-		method:"POST",
-		data: datos, 
-		cache: false,
-		contentType: false,
-		processData: false,
-		async:false,
-		success: function(respuesta)
-		{
-			if(respuesta.includes("false"))
-			{
-				
-			}else
-			{
-				Swal.fire({
-					position: 'top-end',
-					icon: 'error',
-					toast: true,
-					title: 'El pais ya existe',
-					showConfirmButton: false,
-					timerProgressBar: true,
-					timer: 1500
-				})
-			}
-
-		}                 
-
-	})
-}*/
 //Funcion Ajax que valida pais existente en BD 
 
 function validarRegistroExistente(valor)
@@ -290,7 +255,7 @@ function validarRegistroExistente(valor)
 	datos.append("registroPais", valor);
 
 	$.ajax({
-		url:"//localhost/aguaMineral/ajax/registroAdmin.ajax.php",
+		url:rutaOculta+"ajax/registroAdmin.ajax.php",
 		method:"POST",
 		data: datos, 
 		cache: false,
@@ -431,11 +396,4 @@ function validarRegistroPais()
 
 }
 
-//Capturar valor del campo de texto de modificar Pais
-/*function validarModificacionPais(id)
-{
-	
-	//const ejecutar =  validarRegistroExistenteDeModificar(id,descripcion);
- 	//consultarTodosPaises();
 
-}*/

@@ -4,7 +4,7 @@ $resultadoConsulta = ControladorFormatoContrato::ctrlConsultarTotalProductosPres
 <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminPersonas" class="link-primary">Administración</a></li>
+            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/adminPersonas" class="link-primary">Administración Personas</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Administración Usuarios</li>
           </ol>
         </nav>

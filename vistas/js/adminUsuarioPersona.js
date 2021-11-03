@@ -7,7 +7,8 @@ $(document).ready(function()
 	}
 	if(rutaActual.includes("adminClientes"))
 	{   
-		consultarconsultarClientesAdminEnBd('tipousuario','persona','idTipoUsuario','TipoUsuario_idTipoUsuario');
+		consultarconsultarClientesAdminEnBd('persona','comercios','idPersona','Persona_idPersona');
+		consultarconsultarClientesAdminEnBd('persona','comercios','idPersona','Persona_idPersona');
 	}
 });
 
@@ -83,12 +84,11 @@ function consultarconsultarUsuariosAdminEnBd(tabla,tabla2,atributo,atributo2)
 function consultarconsultarClientesAdminEnBd(tabla,tabla2,atributo,atributo2)
 {
 	var datos = new FormData();
-	datos.append("consultarPersona", "nulo");
-	datos.append("tabla", tabla);
-	datos.append("tabla2", tabla2);
-	datos.append("atributo", atributo);
-	datos.append("atributo2", atributo2);
-	var respuestaFinal = "esta vacia";
+	datos.append("consultarCliente", "nulo");
+	datos.append("tablaCliente", tabla);
+	datos.append("tabla2Cliente", tabla2);
+	datos.append("atributoCliente", atributo);
+	datos.append("atributo2Cliente", atributo2);
 	var plantilla2 = "";
 	$.ajax({
 		url:"//localhost/aguaMineral/ajax/adminComercio.ajax.php",
@@ -117,8 +117,8 @@ function consultarconsultarClientesAdminEnBd(tabla,tabla2,atributo,atributo2)
 					      <td>${res2.cedulaPersona}</td>
 					      <td>${res2.nombrePersona}</td>
 					      <td>${res2.apellidoPersona}</td>
-						  <td>${res2.descripcion}</td>
-					      <td><a href="javascript:mostrarModalModificarComercio('${res2.idComercios}','${res2.nombreTienda}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span><a href="javascript:mostrarModalModificarComercio('${res2.idComercios}','${res2.nombreTienda}');"><span title="Modificar"><i class="fas fa-trash-alt text-danger me-3"></i></span></td>
+						  <td>${res2.nombreTienda}</td>
+					      <td><a href="javascript:mostrarModalModificarCliente('${res2.idPersona}','${res2.nombrePersona}','${res2.apellidoPersona}',${res2.cedulaPersona});"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span><a href="javascript:mostrarModalModificarComercio('${res2.idComercios}','${res2.nombreTienda}');"><span title="Modificar"><i class="fas fa-trash-alt text-danger me-3"></i></span></td>
 					</tr><br>`;
 				}
 				$("#cuerpoTablaAdminClientes").html(plantilla2);  
@@ -240,4 +240,29 @@ function eliminarUsuario(id,nombreUsuario)
  		}                 
 
  	})
+}
+function mostrarModalModificarCliente(id,nombre,apellido,cedula)
+{
+	$("#idClienteModificar").val(id);
+	$("#nombreCliente").val(nombre);
+	$("#apellidoCliente").val(apellido);
+	$("#cedulaCliente").val(cedula);
+	$("#editUser").modal("show");
+	$("#editarCliente").click(function(){
+		modificarCliente($("#idClienteModificar").val());
+	});
+	$("#editarCliente").modal("show");
+}
+$(".cerrarModalCliente").click(function(){
+	$("#idClienteModificar").val(null);
+	$("#nombreCliente").val(null);
+	$("#apellidoCliente").val(null);
+	$("#cedulaCliente").val(null);
+	$("#editarCliente").modal("hide");
+});
+
+
+function modificarCliente(id)
+{
+	
 }

@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/administracion" class="link-primary">Administración</a></li>
-            <li class="breadcrumb-item active" aria-current="page" class="">Personas</li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Administración Personas</li>
           </ol>
         </nav>
     </div>
@@ -54,7 +54,7 @@ MOSTRAR UNA LISTA DE 6 BLOGS POR CADA PAGINA
       <a href="http://localhost/aguaMineral/adminClientes" class="link-dark">
         <div class="border m-3 p-3 bg-light div-admin rounded">
           <i class="fas fa-users iconosAdmin"></i>
-          <h3 class="titulosAdmin mb-0">Personas</h3>
+          <h3 class="titulosAdmin mb-0">Clientes</h3>
           <p class="mb-5 mt-0">Administraci&oacute;n de clientes del Sistema</p>
         </div>
       </a>

@@ -302,6 +302,7 @@ function IniciarSesion()
 function RegistrarUsuario()
 {
       var tipoUsuario = $("#tipoUsuario").val();
+      tipoUsuario = tipoUsuario.replace('>','');
       var datos = new FormData();
       datos.append("nombre", $("#nombre").val());
       datos.append("apellido", $("#apellido").val());
@@ -322,7 +323,6 @@ function RegistrarUsuario()
                     async:false,
                     success: function(respuesta)
                     {
-                      alert(respuesta);
                           if(respuesta.includes("ok"))
                           {
                               Swal.fire({

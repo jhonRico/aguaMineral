@@ -26,6 +26,11 @@ class   AjaxAdministracionComercio
         $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2);
         echo  json_encode ($respuesta);
     }
+    public static function ajaxConsultarClientes($tabla,$tabla2,$atributoTabla1,$atributoTabla2)
+    {
+        $respuesta = ControladorRegistroAdminGeneral::ctrlConsultarTodoEnDosTablas($tabla,$tabla2,$atributoTabla1,$atributoTabla2);
+        echo  json_encode ($respuesta);
+    }
     public static function ajaxModificarUsuario($idUsuarioModificar,$nombre,$apellido,$nombreUsuario,$tipoUsuario)
     {
         $respuesta = ControladorRegistroAdminGeneral::ctrlModificarUsuario($idUsuarioModificar,$nombre,$apellido,$nombreUsuario,$tipoUsuario);
@@ -87,5 +92,14 @@ if(isset($_POST["idUsuarioEliminar"]))
     $nombreUsuarioEliminar = $_POST['nombreUsuarioEliminar'];
     $objFormato = new AjaxAdministracionComercio();
     $objFormato->ajaxEliminarUsuario($idUsuarioEliminar,'usuario','idUsuario',$nombreUsuarioEliminar);
+}
+if(isset($_POST["consultarCliente"]))
+{  
+    $tabla = $_POST['tablaCliente'];
+    $tabla2 = $_POST['tabla2Cliente'];
+    $atributo = $_POST['atributoCliente'];
+    $atributo2 = $_POST['atributo2Cliente'];
+    $objFormato = new AjaxAdministracionComercio();
+    $objFormato->ajaxConsultarClientes($tabla,$tabla2,$atributo,$atributo2);
 }
 ?>

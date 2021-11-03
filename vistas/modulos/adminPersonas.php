@@ -5,8 +5,13 @@
 <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
+<<<<<<< HEAD
+            <li class="breadcrumb-item"><a href="<?php echo $url2;?>administracion" class="link-primary">Administración</a></li>
+            <li class="breadcrumb-item active" aria-current="page" class="">Personas</li>
+=======
             <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/administracion" class="link-primary">Administración</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Administración Personas</li>
+>>>>>>> 7192f6b868014578246f78b4ae411c0dc26e0bea
           </ol>
         </nav>
     </div>

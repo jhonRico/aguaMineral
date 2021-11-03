@@ -1,3 +1,8 @@
+<?php    
+    $url = Ruta::ctrlRuta();
+?>
+
+
 <div class="container-fluid" >
 	
 	<div class="fondo">

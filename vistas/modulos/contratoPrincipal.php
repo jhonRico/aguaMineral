@@ -24,7 +24,7 @@ $array = $resultadoConsultaSerial;
           <!-- inicio datos del cliente -->
           <nav aria-label="breadcrumb" class="fs-5">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/contratoPrincipal" class="link-primary">Contratos</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo $url2;?>contratoPrincipal" class="link-primary">Contratos</a></li>
               <li class="breadcrumb-item active" aria-current="page" class="" id="tituloLink">Contrato Estante</li>
             </ol>
           </nav>
@@ -200,7 +200,7 @@ $array = $resultadoConsultaSerial;
   <div class="container mt-3 fs-5">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/principal" class="link-primary">Principal</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo $url2;?>principal" class="link-primary">Principal</a></li>
               <li class="breadcrumb-item active" aria-current="page" class="">Contratos</li>
             </ol>
           </nav>

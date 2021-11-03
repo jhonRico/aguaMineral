@@ -11,7 +11,7 @@
     <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/principal" class="link-primary" id="anterior">Principal</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $url2;?>principal" class="link-primary" id="anterior">Principal</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Clientes por zonas</li>
           </ol>
         </nav>

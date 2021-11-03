@@ -4,6 +4,7 @@
     $resultadoFinal2 = 0;
     $consultarCiudades = controladorZonas::ctrlconsultarCiudades($consultar);
     $resultado = ControladorClientes::ctrlConsultarTipoUsuario("Cliente");
+    $url = Ruta::ctrlRuta();
 ?>
 <section class="home-section"> 
 <input type="hidden" id="informacion" value="<?php echo $rutas[0];?>">
@@ -12,7 +13,7 @@
     <div class="container mt-3 fs-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://localhost/aguaMineral/zonas" class="link-primary">Zonas</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $url;?>zonas" class="link-primary">Zonas</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Este</li>
           </ol>
         </nav>

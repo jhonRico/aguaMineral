@@ -2,6 +2,8 @@
 
 require_once "../controladores/c_adminTablas.php";
 require_once "../modelos/m_adminTablasModelo.php";
+require_once "../controladores/c_bitacora.php";
+require_once "../modelos/m_bitacora.php";
 
 class   AjaxAdministracionFormato{
 
@@ -29,9 +31,13 @@ class AjaxAdministracionContrato
         $respuesta = ControladorRegistroAdminGeneral::ctrlConsultar2TablasAtributoEntero($tabla,$tabla2,$valor,$atributo,$atributoTabla,$atributoTabla2);
         echo  json_encode ($respuesta);
     }
-    public function ajaxDevolverContrato($tabla,$idContratoDevolucion,$cantidad,$cantidad2,$capacidad,$capacidad2)
+    public function ajaxDevolverContrato($tabla,$idContratoDevolucion,$cantidad,$cantidad2,$capacidad,$capacidad2,$dataCliente)
     {
         $respuesta = ControladorRegistroAdminGeneral::ctrlDevolverContrato($tabla,$idContratoDevolucion,$cantidad,$cantidad2,$capacidad,$capacidad2);
+        if(strpos($respuesta,"ok")!== false){
+           session_start();  
+           $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario Devolvio un contrato de: ".$dataCliente);
+        }
         echo  json_encode ($respuesta);
     }
     public static function ajaxConsultarTodosContratos($tabla,$tabla2,$valor,$atributoTabla1,$atributoTabla2)
@@ -116,9 +122,10 @@ if(isset($_POST["idContratoDevolucion"]))
     $cantidad2 = $_POST['cantidad2'];
     $capacidad = $_POST['capacidad'];
     $capacidad2 = $_POST['capacidad2'];
+    $dataCliente = $_POST['dataCliente'];
 
     $objFormato = new AjaxAdministracionContrato();
-    $objFormato->ajaxDevolverContrato($tabla,$idContratoDevolucion,$cantidad,$cantidad2,$capacidad,$capacidad2);       
+    $objFormato->ajaxDevolverContrato($tabla,$idContratoDevolucion,$cantidad,$cantidad2,$capacidad,$capacidad2,$dataCliente);       
 }
 if(isset($_POST["valorConsultar"]))
 {  

@@ -582,12 +582,14 @@ function mostrarMensajeDevolucion(id,cantidad,cantidad2,capacidad,capacidad2)
 
 function devolverContrato(id,cantidad,cantidad2,capacidad,capacidad2)
 {
+	var dataCliente = $("#cliente").text();
 	var datos = new FormData();
 	datos.append("idContratoDevolucion", id);
 	datos.append("cantidad", cantidad);
 	datos.append("cantidad2", cantidad2);
 	datos.append("capacidad", capacidad);
 	datos.append("capacidad2", capacidad2);
+	datos.append("dataCliente", dataCliente);
 	let plantilla2 = " ";
 	$.ajax({
 		url:rutaOculta+"ajax/administracionFormato.ajax.php",

@@ -255,7 +255,6 @@ function eliminarSucursal(id){
 function eliminarSucursalFinal(id)
 {
 	var datos = new FormData();
-	//alert(nombreDeleteSucursal);
 	datos.append("idSucursalDelete", id);
 	
 	$.ajax({

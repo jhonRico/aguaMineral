@@ -219,7 +219,7 @@ function modificarTipoProducto(idTipoProducto,descripcionTipoProducto)
  	})
 }
 
-function mostrarModalEliminarProducto(id, tabla, parametro)
+function mostrarModalEliminarProducto(id, tabla, parametro, descripcion)
 {
 	Swal.fire({
 		title: 'Eliminar',
@@ -233,7 +233,7 @@ function mostrarModalEliminarProducto(id, tabla, parametro)
 	}).then((result) => {
 		if (result.isConfirmed)
 		{
-			eliminarRegistroEnTabla(id, tabla, parametro);
+			eliminarRegistroEnTabla(id, tabla, parametro, descripcion);
 			if (tabla == "tipoproducto") 
 			{
 				consultarTipoProducto("tipoproducto");
@@ -245,12 +245,13 @@ function mostrarModalEliminarProducto(id, tabla, parametro)
 		}
 	})
 }
-function eliminarRegistroEnTabla(id, tabla, parametro)
+function eliminarRegistroEnTabla(id, tabla, parametro, descripcion)
 {
 	var datos = new FormData();
  	datos.append("idEliminar", id);
  	datos.append("tablaEliminar", tabla);
  	datos.append("parametroEliminar", parametro);
+ 	datos.append("descripcionEliminar", descripcion);
 
  	$.ajax({
  		url:rutaOculta+"ajax/registroAdmin.ajax.php",
@@ -398,6 +399,7 @@ function registrarProductoEnBd()
 {
 	var array = $('#tipoProducto').val().split("-");
 	var tipoProducto = array[0];
+	var stringTipoProducto = array[1];
 	var serial = $('#serial').val();
 	var capacidad = $('#capacidad').val();
 	var cantidad = $('#cantidad').val();
@@ -411,6 +413,7 @@ function registrarProductoEnBd()
 	datos.append("serial", serial);
 	datos.append("capacidad", capacidad);
 	datos.append("cantidad", cantidad);
+	datos.append("stringTipoProducto", stringTipoProducto);
 
 	$.ajax({
 		url:rutaOculta+"ajax/registroAdmin.ajax.php",
@@ -527,7 +530,7 @@ function consultarProducto()
 					      <td>${res2.cantidadProductos}</td>
 					      <td></td>
 					      <td></td>
-					      <td><a href="javascript:mostrarModalModificarProducto('${res2.idProducto}','${result2}','${res2.idSerialProducto}','${res2.capacidadProducto}','${res2.cantidadProductos}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:mostrarModalEliminarProducto(${res2.idProducto},'producto','idProducto')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
+					      <td><a href="javascript:mostrarModalModificarProducto('${res2.idProducto}','${result2}','${res2.idSerialProducto}','${res2.capacidadProducto}','${res2.cantidadProductos}');"><span title="Modificar"><i class="fas fa-pencil-alt text-primary me-3"></i></span></a><a href="javascript:mostrarModalEliminarProducto(${res2.idProducto},'producto','idProducto','${res2.descripcion}')"><span title="Eliminar"><i class="fas fa-trash-alt text-danger"></i></span></a></td>
 					</tr><br>`;
 				}
 

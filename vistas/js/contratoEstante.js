@@ -709,7 +709,6 @@ function consultarFormatoContrato(parametro)
     {
      if(respuesta3.length >10)
      {
-      alert(respuesta3);
       respuesta3 =respuesta3.replace("[","");
       respuesta3 =respuesta3.replace("]","");
       var auxSplit2 = respuesta3.split("},");

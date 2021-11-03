@@ -1,6 +1,8 @@
 <?php
 require_once "../controladores/c_registroAdmin.php";
 require_once "../modelos/m_registroAdmin.php";
+require_once "../controladores/c_bitacora.php";
+require_once "../modelos/m_bitacora.php";
 
 
 class   AjaxRegistroAdmin{
@@ -51,15 +53,23 @@ class   AjaxRegistroAdmin{
         $respuesta = ControladorRegistroAdmin::ctrlModificarTipoProducto($idTipoProducto,$descripcion);
         echo  json_encode ($respuesta);
     }
-    public function ajaxEliminarRegistroTabla($id,$tabla,$parametro)
+    public function ajaxEliminarRegistroTabla($id,$tabla,$parametro,$descripcionEliminar)
     {
         $respuesta = ControladorRegistroAdmin::ctrlEliminarRegistroTabla($id,$tabla,$parametro);
+        if(strpos($respuesta,"ok")!== false){
+           session_start();  
+           $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario elimino un producto de tipo: ".$descripcionEliminar);
+        }
         echo  json_encode ($respuesta);
     }
     //Producto
-    public function ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal)
+    public function ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal,$stringTipoProducto)
     {
         $respuesta = ControladorRegistroAdmin::ctrlRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal);
+        if(strpos($respuesta,"ok")!== false){
+           session_start();  
+           $audit = ControladorBitacora::ctrlRegistroBitacora($_SESSION['usuarioAuditoria'],"El usuario registro un: ".$stringTipoProducto);
+        }
         echo  json_encode ($respuesta);
     }
 
@@ -138,8 +148,9 @@ if(isset($_POST["idEliminar"]))
     $id = $_POST["idEliminar"];
     $tabla = $_POST["tablaEliminar"];
     $parametro = $_POST["parametroEliminar"];
+    $descripcionEliminar = $_POST["descripcionEliminar"];
     $allStates = new AjaxRegistroAdmin();
-    $allStates->ajaxEliminarRegistroTabla($id,$tabla,$parametro);
+    $allStates->ajaxEliminarRegistroTabla($id,$tabla,$parametro,$descripcionEliminar);
 }
 
 //Ajax para productos
@@ -163,9 +174,17 @@ if(isset($_POST["tipoProducto"]))
     $serial = $_POST["serial"];
     $capacidad = $_POST["capacidad"];
     $cantidad = $_POST["cantidad"];
+    $stringTipoProducto = $_POST["stringTipoProducto"];
+    if ($stringTipoProducto == 'Estantes') 
+    {
+       $stringTipoProducto = 'Estante';
+    }else if ($stringTipoProducto == 'Botellones') 
+    {
+       $stringTipoProducto = 'Botellon';
+    }
 
     $allStates = new AjaxRegistroAdmin();
-    $allStates->ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal);
+    $allStates->ajaxRegistrarProducto($tipoProducto,$serial,$capacidad,$cantidad,$sucursal,$stringTipoProducto);
 }
 if(isset($_POST["consultar"]))
 {  

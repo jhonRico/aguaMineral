@@ -208,7 +208,9 @@ $array = $resultadoConsultaSerial;
         <h1 class="mb-3 mt-3">Contratos</h1>
         <ul class="grid0">
           <div class="row">
-          <?php foreach ($resultadoConsultarTipoContrato as $key):?>
+          <?php foreach ($resultadoConsultarTipoContrato as $key):
+               if($key['nombre']!="Recibo"){
+            ?>
            <div class="col-md-4">
             <a href="javascript:mostrarContrato('<?php echo $key['nombre'];?>',<?php   echo $resultadoConsultaIdTipoUsuario['idTipoUsuario']; ?>)" class="link-dark">
               <div class="border m-3 p-3 bg-light div-admin rounded">
@@ -218,7 +220,9 @@ $array = $resultadoConsultaSerial;
               </div>
             </a>
           </div>
-          <?php endforeach ?>
+          <?php 
+             }
+        endforeach ?>
         </div>
       </ul>  
     </div>

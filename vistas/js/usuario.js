@@ -323,10 +323,7 @@ function RegistrarUsuario()
                     async:false,
                     success: function(respuesta)
                     {
-<<<<<<< HEAD
-=======
-                      
->>>>>>> da109357b92b655ec85ef8737ade38be0f537667
+
                           if(respuesta.includes("ok"))
                           {
                               Swal.fire({

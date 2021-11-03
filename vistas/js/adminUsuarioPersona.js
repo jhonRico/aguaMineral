@@ -249,8 +249,8 @@ function mostrarModalModificarCliente(id,nombre,apellido,cedula)
 	$("#apellidoCliente").val(apellido);
 	$("#cedulaCliente").val(cedula);
 	$("#editUser").modal("show");
-	$("#editarCliente").click(function(){
-		modificarCliente($("#idClienteModificar").val());
+	$("#btnEditarCliente").click(function(){
+		modificarCliente();
 	});
 	$("#editarCliente").modal("show");
 }
@@ -263,7 +263,56 @@ $(".cerrarModalCliente").click(function(){
 });
 
 
-function modificarCliente(id)
+function modificarCliente()
 {
-	
+	var id = $("#idClienteModificar").val();
+	var nombre = $("#nombreCliente").val();
+	var apellido = $("#apellidoCliente").val();
+	var cedula = $("#cedulaCliente").val();
+	var datos = new FormData();
+	datos.append("nombreClienteModificar", nombre);
+	datos.append("apellido", apellido);
+	datos.append("idClienteModificar", id);
+	datos.append("cedulaCliente", cedula);
+	$.ajax({
+		url:rutaOculta+"ajax/adminComercio.ajax.php",
+		method:"POST",
+		data: datos, 
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta3)
+		{
+			alert(id);
+			alert(respuesta3);
+			if(respuesta3.includes('ok'))
+			{
+				Swal.fire({
+ 					icon: 'success',
+ 					title: 'Registro Modificado',
+ 					confirmButtonText: 'Aceptar'
+ 				}).then((result) => 
+				{
+					if (result.isConfirmed)
+					{
+						consultarconsultarClientesAdminEnBd('persona','comercios','idPersona','Persona_idPersona');
+						consultarconsultarClientesAdminEnBd('persona','comercios','idPersona','Persona_idPersona');
+						$("#idClienteModificar").val(null);
+						$("#nombreCliente").val(null);
+						$("#apellidoCliente").val(null);
+						$("#cedulaCliente").val(null);
+						$("#editarCliente").modal("hide");
+					}
+
+				})
+			}else
+			{
+				Swal.fire({
+ 					icon: 'Error',
+ 					title: 'Error al modificar registro',
+ 					confirmButtonText: 'Aceptar'
+ 				})
+			}
+		}
+	})
 }

@@ -46,6 +46,11 @@ class   AjaxAdministracionComercio
 
         echo  json_encode ($respuesta);
     }
+    public static function ajaxModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar)
+    {
+        $respuesta = ControladorRegistroAdminGeneral::ctrlModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar);
+        echo  json_encode ($respuesta);
+    }
 }
 //----------------------------------------------------------------------------------------------------
 
@@ -101,5 +106,14 @@ if(isset($_POST["consultarCliente"]))
     $atributo2 = $_POST['atributo2Cliente'];
     $objFormato = new AjaxAdministracionComercio();
     $objFormato->ajaxConsultarClientes($tabla,$tabla2,$atributo,$atributo2);
+}
+if(isset($_POST["nombreClienteModificar"]))
+{  
+    $nombreClienteModificar = $_POST['nombreClienteModificar'];
+    $apellido = $_POST['apellido'];
+    $cedulaCliente = $_POST['cedulaCliente'];
+    $idClienteModificar = $_POST['idClienteModificar'];
+    $objFormato = new AjaxAdministracionComercio();
+    $objFormato->ajaxModificarCliente($nombreClienteModificar,$apellido,$cedulaCliente,$idClienteModificar);
 }
 ?>

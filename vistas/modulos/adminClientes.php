@@ -68,7 +68,7 @@ $resultadoConsulta = ControladorFormatoContrato::ctrlConsultarTotalProductosPres
                                        <div class="form-group">  
                                                <div class="modal-footer">         
                                                      <button type="button" class="btn btn-secondary cerrarModalCliente" style ="width:48%;">Cancelar</button>                                                                 
-                                                     <a style ="width:48%;" id = "editarCliente"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
+                                                     <a style ="width:48%;" id = "btnEditarCliente"  class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> <span id = "1" class="">Modificar</span></a>
                                                 </div>
                                          </div>
                             </div>

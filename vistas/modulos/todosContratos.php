@@ -31,7 +31,7 @@
 				<div class="ms-3 me-5 mt-5">
 					<div class="ms-5 me-5 mt-5">
 						<div class="ms-5 me-5 mt-5">
-							<div class="ms-3 me-5 mt-5">
+							<div class="ms-3 me-5 mt-5 scrollComentario">
 										<table class="table" id="tablaContratoTodo">
 										  <thead class="bg-primary text-white">
 										    <tr>

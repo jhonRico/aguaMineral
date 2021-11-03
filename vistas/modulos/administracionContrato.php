@@ -33,7 +33,7 @@
 						<div class="ms-5 me-5 mt-5">
 							<div class="ms-5 me-5 mt-5">
 								<div class="ms-5 me-5 mt-5">
-									<div class="ms-3 me-5 mt-5">
+									<div class="ms-3 me-5 mt-5 scrollComentario">
 										<table class="table table-sm ms-5 mt-5 p-5 me-5 fondoModal">
 										  <thead class="bg-primary text-white">
 										    <tr>

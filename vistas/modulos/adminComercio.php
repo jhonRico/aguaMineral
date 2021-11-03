@@ -17,6 +17,7 @@
   <div class="ms-5 me-5 mt-0 p-5">
   <div class="ms-5">
   </div>
+  <div class="scrollComentario">
   <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
   <thead class="cabezaTabla text-white">
     <tr>
@@ -30,6 +31,7 @@
   <tbody id="cuerpoTablaComercio">
   </tbody>
 </table>
+</div>
   <!-- Modal para agregar nuevo pais  -->
 <form class="form needs-validation" method="post"  enctype="multipart/form-data" novalidate>
         <div class="modal fade" id="moddaddStore" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -57,3 +57,10 @@
 	transform: scale(1.05);
     transition: 0.5s;
 }
+
+.scrollComentario{
+    height: 350px;
+    overflow-y: scroll;
+    width: auto;
+    /*border: solid 1px rgba(211, 210, 210, 0.897);*/
+}

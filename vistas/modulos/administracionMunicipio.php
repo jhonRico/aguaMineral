@@ -40,7 +40,8 @@
   <div class="ms-5">
    
   </div>
-    <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal">
+  <div class="scrollComentario">
+    <table class="table table-sm ms-5 me-5 mt-0 p-5 fs-5 fondoModal ">
   <thead class="cabezaTabla text-white">
     <tr>
       <th scope="col">Estado</th>
@@ -52,9 +53,10 @@
       <th scope="col">Acciones</th>   
     </tr>
   </thead>
-  <tbody id="verMunicipios">
+  <tbody  id="verMunicipios">
   </tbody>
 </table>
+</div>
 </div>  
 </div>
 </form>

@@ -39,7 +39,7 @@ function consultarAllZonas(){
 					var aux = "'"+res2.nombreParroquia+"'";
 					plantilla2 +='<div class="p-2">'
 
-					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreParroquia+'<a href="javascript:eliminarZonas('+res2.idParroquia+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditZonas('+res2.idParroquia+','+aux+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
+					plantilla2 +='                      <h3 class="div-pais p-3 rounded">'+res2.nombreParroquia+'<a href="javascript:eliminarZonas('+res2.idParroquia+')" class=""><button class="btn eliminarPais eliminar text-danger" type="button"><i class="fas fa-trash-alt"></i></button></a><a href="javascript:mostrarModalEditZonas('+res2.idParroquia+','+aux+','+res2.Ciudad_idCiudad+');" class=""><button class="btn eliminarPais eliminar text-primary" type="button"><i class="fas fa-pencil-alt"></i></button></a></h3>'
 
 					plantilla2 +='   </div>'
 
@@ -277,11 +277,11 @@ function eliminarZonas(id){
 /*------------------------------------------Inicia el Espacio de Editar zonas----------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
 
-function mostrarModalEditZonas(id, descripcion)
+function mostrarModalEditZonas(id, descripcion,idCiudadValue)
 {
 	idTipUser = id;
 	document.getElementById("parroquiModificar").value = descripcion;
-	document.getElementById("valorCiudadModificar").value = id;
+	document.getElementById("valorCiudadModificar").value = idCiudadValue;
 	$("#editZonas").modal("show");
 	
 	

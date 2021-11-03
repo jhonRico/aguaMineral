@@ -281,6 +281,7 @@ function mostrarModalEditZonas(id, descripcion)
 {
 	idTipUser = id;
 	document.getElementById("parroquiModificar").value = descripcion;
+	document.getElementById("valorCiudadModificar").value = id;
 	$("#editZonas").modal("show");
 	
 	

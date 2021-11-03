@@ -243,5 +243,13 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlConsultarRegistroExistenteCon1ParametroEntero1String($tabla,$atributo1,$atributo2,$datos);
         return $respuesta;
     }
+    public static function ctrlEliminarCliente($idClienteEliminar)
+    {
+         $datos = array(
+             "id"=>$idClienteEliminar,
+         );
+        $respuesta = ModeloRegistroAdminGeneral::mdlEliminarCliente($datos);
+        return $respuesta;
+    }
 } 
 ?>

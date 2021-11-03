@@ -466,10 +466,42 @@ require_once "conexion.php";
     }
     public static function mdlConsultarClienteContratoActivo($id)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM contrato c INNER JOIN persona p ON c.Persona_idPersona = p.idPersona WHERE p.idPersona = :id AND c.estadoContrato");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM contrato c INNER JOIN persona p ON c.Persona_idPersona = p.idPersona WHERE p.idPersona = :id AND c.estadoContrato = 'A'");
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch();
+        return $stmt->fetch();
+        $stmt->close();
+        $stmt = null;
+    }
+    public static function mdlEliminarCliente($datos)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM persona p INNER JOIN comercios co ON p.idPersona = co.Persona_idPersona INNER JOIN sector s ON p.Sector_idSector = s.idSector WHERE p.idPersona = :id");
+        $stmt->bindParam(":id", $datos['id'], PDO::PARAM_INT);
+        if ($stmt->execute()) 
+        {
+            $resultado = $stmt->fetch();
+            $idComercio = $resultado['idComercios'];
+            $idSector = $resultado['idSector'];
+            $stmt = Conexion::conectar()->prepare("DELETE FROM sector WHERE idSector = :id");
+            $stmt->bindParam(":id", $idSector, PDO::PARAM_INT);
+            if ($stmt->execute()) 
+            {
+                $stmt = Conexion::conectar()->prepare("DELETE FROM comercios WHERE idComercios = :id");
+                $stmt->bindParam(":id", $idComercio, PDO::PARAM_INT);
+                if ($stmt->execute()) 
+                {
+                     $stmt = Conexion::conectar()->prepare("DELETE FROM persona WHERE idPersona = :id");
+                    $stmt->bindParam(":id", $datos['id'], PDO::PARAM_INT);
+                    if ($stmt->execute()) 
+                    {
+                        return "ok";
+                    }else
+                    {
+                        return "error";
+                    }
+                }
+            }
+        }
         $stmt->close();
         $stmt = null;
     }

@@ -328,7 +328,10 @@ function mostrarModalEliminarCliente(id, nombre)
 		if (result.isConfirmed)
 		{
 			var resultado = consultarClienteContratoActivo(id);
-			eliminarCliente(id,nombre);
+			if (resultado != 'ya existe') 
+			{
+				eliminarCliente(id,nombre);
+			}
 		}
 	})
 }
@@ -348,11 +351,10 @@ function eliminarCliente(id,nombreCliente)
  		async:false,
  		success: function(respuesta)
  		{
+ 			alert(respuesta);
  			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
  			{
-			    mensajeError("Error al eliminar el estado "+respuesta);
- 			}else if(respuesta.includes("relacionado")){
-			   mensajeError('No se puede eliminar el Estado, se encuentra con municipios');
+			    mensajeError("Error al eliminar el cliente");
 			}else
  			{
  				Swal.fire({
@@ -375,6 +377,7 @@ function eliminarCliente(id,nombreCliente)
 
 function consultarClienteContratoActivo(id)
 {
+	var variableRetornar = "";
 	var datos = new FormData();
  	datos.append("consultarClienteContratoActivo", id);
  	$.ajax({
@@ -387,27 +390,21 @@ function consultarClienteContratoActivo(id)
  		async:false,
  		success: function(respuesta)
  		{
- 			if(!respuesta.includes("ok") && !respuesta.includes("relacionado"))
+ 			if (respuesta.includes("false")) 
  			{
-			    mensajeError("Error al eliminar el estado "+respuesta);
- 			}else if(respuesta.includes("relacionado")){
-			   mensajeError('No se puede eliminar el Estado, se encuentra con municipios');
-			}else
+ 			}else
  			{
  				Swal.fire({
- 					title: 'Registro Eliminado',
- 					icon: 'success',
- 					showCloseButton: true,
- 					confirmButtonText:'Aceptar'
- 				}).then((result) => {
-					if (result.isConfirmed)
-					{
-						consultarconsultarUsuariosAdminEnBd('tipousuario','usuario','idTipoUsuario','TipoUsuario_idTipoUsuario');
-					}
-				})
+					title: 'Error',
+					icon: 'error',
+					text: 'No se puede eliminar por que el cliente tiene un contrato activo asociado',
+					showCloseButton: true,
+					confirmButtonText:'Aceptar'
+				});		
+				variableRetornar = 'ya existe';
  			}
-
  		}                 
 
  	})
+ 	return variableRetornar;
 }

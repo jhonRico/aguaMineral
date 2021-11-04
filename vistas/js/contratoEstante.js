@@ -8,8 +8,8 @@ var hoy = new Date();
 var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
 fecha = fecha.replace("-","");
 fecha = fecha.replace("-","");
-
-
+$("#printEstante").hide();
+$("#printBotellon").hide();
 
 //mostrar formulario dependiendo del parametro
 function mostrarContrato(parametro,idTipoUsuario){
@@ -77,7 +77,7 @@ function mostrarContrato(parametro,idTipoUsuario){
         var respuesta = validarCampos();
         if (respuesta == true) 
         {
-            consultarFormatoContrato(parametro);
+            consultarFormatoContratoAmbos(parametro);
             $("#modal2").modal("show");
         }
     });
@@ -750,6 +750,66 @@ function consultarFormatoContrato(parametro)
 })
 }
 
+function consultarFormatoContratoAmbos(parametro)
+{
+  var datos = new FormData();
+  datos.append("parametro", parametro);
+
+  let plantilla2 = " ";
+  let obj
+  $.ajax({
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+     if(respuesta3.length >10)
+     {
+      respuesta3 =respuesta3.replace("[","");
+      respuesta3 =respuesta3.replace("]","");
+      var auxSplit2 = respuesta3.split("},");
+
+      plantilla2 +='<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-2" id="">'
+      for(var i=0;i<auxSplit2.length;i++)
+      {
+        if(!auxSplit2[i].includes("}"))
+        {
+          auxSplit2[i] = auxSplit2[i]+"}";
+        }
+        var res2 = JSON.parse(auxSplit2[i]);
+        if (res2.descripcion.includes("NombreCliente")) 
+        {
+          
+              result = res2.descripcion.replaceAll("NombreCliente",$('#nombreCliente').val()+' '+$('#apellidoCliente').val());
+              result = result.replaceAll("cedulaCliente",$('#cedulaCliente').val());
+              result = result.replaceAll("nombreComercio",$('#nobreComercio').val());
+              result = result.replaceAll("MunicipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
+              result = result.replaceAll("municipioCliente", (($('#municipioCliente').val()).split("-"))[1]);
+              result = result.replaceAll("telefonoComercio",$('#telefonoComercio').val());
+              result = result.replaceAll("direccionComercio",$('#direccionComercio').val());
+              result = result.replaceAll("cantidadEstante",$('#cantidadEstantes').val());
+              if (result.includes("cantidadBotellones")){result = result.replaceAll("cantidadBotellones",(($('#capacidadEstantes').val()).split("-"))[1]);}
+              if (result.includes("cantidadBotellon")){result = result.replaceAll("cantidadBotellon",$('#cantidadBotellones').val());}
+              result = result.replaceAll("codigoProducto",fecha);  
+              result = result.replaceAll("fechaConstruccion",$('#fechaProducto').val());        
+              plantilla2 += result;
+        }
+      }
+      $("#registrarContrato").show();
+      $("#imprimirContrato").hide();
+      $("#cuerpoContrato").html(plantilla2);  
+      $('#cuerpoContrato').show();
+    }else
+    {
+      $("#cuerpoContrato").hide();     
+    }
+  }
+})
+}
+
 //registrar persona, tienda y contrato en BD despues de haber generado contrato
 function registrarPersonas(parametro,idTipoUsuario,idProducto)
 {
@@ -973,10 +1033,25 @@ function registrarContratoAmbos(parametro,idTipoUsuario,idEstante,idBotellon)
           if (result.isConfirmed)
           {
             $("#registrarContrato").hide();
-            $("#imprimirContrato").show();
+            $("#sucursal").hide();
+            $("#labelSucursal").hide();
+            $("#TituloPrincipalContrato").hide();
+            $(".card").hide();
+            $(".boton1").hide();
+            $("#printEstante").show();
+            $("#printBotellon").show();
+            $("#modal2").modal("hide");
           }
         })  
       }
     }                 
   })
+}
+
+
+function  mostrarModalEspecifico(parametro)
+{
+  consultarFormatoContrato(parametro);
+  $("#modal2").modal("show");
+  setTimeout(function(){$("#imprimirContrato").show();}, 500);
 }

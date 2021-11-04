@@ -17,6 +17,7 @@ $array = $resultadoConsultaSerial;
 <input type="hidden" value= "<?php echo $array['idSerialProducto']; ?>" id="serial"> 
 <input type="hidden" value= "<?php echo $array['fechaCreacion']; ?>" id="fechaProducto"> 
 <section class="home-section">
+  <div id="todo">
   <div class="contratoEstante">
        <ul class="listasfullC ms-5 p-5" >
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center me-0" > 
@@ -32,10 +33,30 @@ $array = $resultadoConsultaSerial;
           <div class="container-fluid well well-sm barraProductos p-5 text-center col-md-12 ms-2 me-4">
             <h1 class="tituloContratos text-dark ms-0 me-5" id="TituloPrincipalContrato">Crear contrato estante</h1>
           </div>
+          <div class="row">
+     <div class="col">
+      <a href="javascript:mostrarModalEspecifico('Estantes')" class="link-dark" id="printEstante">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+          <i class="fas fa-print iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Estante</h3>
+          <p class="mb-5 mt-0">Imprima el contrato de estante</p>
+        </div>
+      </a>
+     </div>
+     <div class="col">
+      <a href="javascript:mostrarModalEspecifico('Botellones')" class="link-dark" id="printBotellon">
+        <div class="border m-3 p-3 bg-light div-admin rounded">
+          <i class="fas fa-print iconosAdmin"></i>
+          <h3 class="titulosAdmin mb-0">Botellon</h3>
+          <p class="mb-5 mt-0">Imprima el contrato de botellon</p>
+        </div>
+      </a>
+     </div>
+    </div>
       
       <div class="row">
        <div class="form-group col-md-4">
-              <label for="inputEmail4" class="mb-3">Sucursal</label>
+              <label for="inputEmail4" class="mb-3" id="labelSucursal">Sucursal</label>
               <select name="" id="sucursal" class="form-select">
                 <?php foreach ($resultadoConsultarSucursales as $key): ?>  
                 <option value="<?php echo $key['idSucursal'];?>"><?php echo $key['nombreSucursal'];?></option>
@@ -248,8 +269,8 @@ $array = $resultadoConsultaSerial;
       </ul>  
     </div>
     </div>
+    </div>
   </section>
-
 
 
 
@@ -299,3 +320,4 @@ VENTANA MODAL PARA EL REGISTRO
     </div>
   </div>
 </div>
+

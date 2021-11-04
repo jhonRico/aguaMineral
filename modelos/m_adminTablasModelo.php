@@ -291,6 +291,7 @@ require_once "conexion.php";
             array('fechaConstruccion', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la fecha de construcci&oacuten del producto que presta el cliente'),
             array('cantidadBotellones', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la cantidad de botellones que se presta el cliente'),
             array('fechaSistema', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la la fecha del sistema'),
+            array('capacidadEstante', 'Se debe agregar este par&aacutemetro en la posici&oacuten donde se transcribe la capacidad de un estante'),
 
         );
          return  $datos;

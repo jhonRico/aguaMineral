@@ -140,7 +140,7 @@
       date_default_timezone_set("America/Argentina/Buenos_Aires");
                           //Dia-Mes-A�o Hora:Minutos:Segundos
       $fecha = date("d-m-Y H:i:s");
-      echo '<div id="content"><div id="cuerpoModalDevolucion"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div></div>
+      echo '<div id="content"><div id="cuerpoModalDevolucion"></div><div class="estiloDiv"><h class="justificadoTotal" id="fechaContratoDevuelto">'.fechaCastellano($fecha).'</h></div></div>
 
       <div id="elementH"></div>';
 

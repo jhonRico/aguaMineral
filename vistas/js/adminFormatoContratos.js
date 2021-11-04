@@ -798,8 +798,7 @@ function consultarFormatoContratoDevolucion(parametro)
   var cedulaCliente = $("#cedula").text();
   var cantidadEstante = $("#cantidadEstante").text();
   var cantidadBotellones = $("#cantidadBotellon").text();
-  var hoy = new Date();
-  var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+  var fecha = $("#fechaContratoDevuelto").text();
   var datos = new FormData();
   datos.append("parametro", parametro);
 

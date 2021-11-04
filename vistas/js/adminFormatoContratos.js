@@ -551,7 +551,7 @@ function consultarContrato()
 			                    <b><th scope="row">${resultadoId}</th></b>
 			                    <td>${resultFecha[0]}</td>
 			                    <td>${resultadoEstado}</td>
-			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search"></i></a></td>
+			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search"></i></a><a href="javascript:mostrarModalContratoCliente(${res2.idContrato})"><i class="fas fa-print"></i></a></td>
 			              </tr><br>`;	
 					}else
 					{
@@ -561,7 +561,7 @@ function consultarContrato()
 			                    <b><th scope="row">${resultadoId}</th></b>
 			                    <td>${resultFecha[0]}</td>
 			                    <td>${resultadoEstado}</td>
-			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search text-white"></i></a></td>
+			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search text-white"></i></a><a href="javascript:mostrarModalContratoCliente(${res2.idContrato})"><i class="fas fa-print text-white"></i></a></td>
 			              </tr><br>`;
 					}
 				}
@@ -767,7 +767,7 @@ function consultarTodosContratos()
 			                    <td>${res2.cedulaPersona}</td>	
 			                    <td>${resultFecha[0]}</td>
 			                    <td>${resultadoEstado}</td>
-			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search"></i></a></td>
+			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search"></i></a></a><a href="javascript:mostrarModalContratoCliente(${res2.idContrato})"><i class="fas fa-print"></i></a></td>
 			              </tr><br>`;	
 					}else
 					{
@@ -778,7 +778,7 @@ function consultarTodosContratos()
 			                    <td>${res2.cedulaPersona}</td>
 			                    <td>${resultFecha[0]}</td>
 			                    <td>${resultadoEstado}</td>
-			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search text-white"></i></a></td>
+			                    <td><a href="javascript:mostrarDetalleContrato(${res2.idContrato})"><i class="fas fa-search text-white"></i></a></a><a href="javascript:mostrarModalContratoCliente(${res2.idContrato})"><i class="fas fa-print text-white"></i></a></td>
 			              </tr><br>`;
 					}
 				}
@@ -854,3 +854,113 @@ function consultarFormatoContratoDevolucion(parametro)
 $(".cerrarModalDevolucion").click(function(){
 	$("#modalDevolucion").modal("hide");
 });
+
+function mostrarModalContratoCliente(id)
+{
+  var datos = new FormData();
+  datos.append("idParaConsultarFormatoContratoCliente", id);
+
+  let plantilla2 = " ";
+  let obj
+  $.ajax({
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+     if(respuesta3.length >10)
+	{
+			respuesta3 =respuesta3.replace("[","");
+			respuesta3 =respuesta3.replace("]","");
+			var auxSplit2 = respuesta3.split("},");
+
+			for(var i=0;i<auxSplit2.length;i++)
+			{
+					if(!auxSplit2[i].includes("}"))
+					{
+						auxSplit2[i] = auxSplit2[i]+"}";
+					}
+					var res2 = JSON.parse(auxSplit2[i]);
+					var nombrePersona = res2.nombrePersona+' '+res2.apellidoPersona;
+					var municipio = res2.nombreMunicipio;
+					var cedula = res2.cedulaPersona;
+					var comercio = res2.nombreTienda;
+					var direccion = res2.direccionTienda;
+					var telComercio = res2.telefonoTienda;
+					var cantidadEstante = res2.cantidadProd;
+					var capacidadEstante = res2.capacidadProd;
+					var cantidadBotellon = res2.cantidadProd_2;
+					var capacidadBotellon = res2.capacidadProd_2;
+					consultarFormatoContratoCliente(res2.nombre,nombrePersona,municipio,cedula,comercio,direccion,telComercio,cantidadEstante,capacidadEstante,cantidadBotellon,capacidadBotellon)
+					$("#modal2").modal("show");
+			}
+		}
+	}
+	})
+}
+
+
+function consultarFormatoContratoCliente(parametro,nombrePersona,municipio,cedula,comercio,direccion,telComercio,cantidadEstante,capacidadEstante,cantidadBotellon,capacidadBotellon)
+{
+  var datos = new FormData();
+  datos.append("parametro", parametro);
+
+  let plantilla2 = " ";
+  let obj
+  $.ajax({
+    url:rutaOculta+"ajax/formatoContrato.ajax.php",
+    method:"POST",
+    data: datos, 
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta3)
+    {
+     if(respuesta3.length >10)
+     {
+      respuesta3 =respuesta3.replace("[","");
+      respuesta3 =respuesta3.replace("]","");
+      var auxSplit2 = respuesta3.split("},");
+
+      plantilla2 +='<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-2" id="">'
+      for(var i=0;i<auxSplit2.length;i++)
+      {
+        if(!auxSplit2[i].includes("}"))
+        {
+          auxSplit2[i] = auxSplit2[i]+"}";
+        }
+        var res2 = JSON.parse(auxSplit2[i]);
+        if (res2.descripcion.includes("NombreCliente")) 
+        {
+          
+              result = res2.descripcion.replaceAll("NombreCliente",nombrePersona);
+              result = result.replaceAll("cedulaCliente",cedula);
+              result = result.replaceAll("nombreComercio",comercio);
+              result = result.replaceAll("MunicipioCliente", municipio);
+              result = result.replaceAll("municipioCliente", municipio);
+              result = result.replaceAll("telefonoComercio",telComercio);
+              result = result.replaceAll("direccionComercio",direccion);
+              result = result.replaceAll("cantidadEstante",cantidadEstante);
+              if (result.includes("cantidadBotellones")){result = result.replaceAll("cantidadBotellones",capacidadEstante);}
+              if (result.includes("cantidadBotellon")){result = result.replaceAll("cantidadBotellon",cantidadBotellon);}
+              result = result.replaceAll("codigoProducto",fecha);  
+              result = result.replaceAll("fechaConstruccion",$('#fechaProducto').val());        
+              plantilla2 += result;
+        }
+      }
+      $("#registrarContrato").hide();
+      $("#imprimirContrato").show();
+      $("#cuerpoContrato").html(plantilla2);  
+      $('#cuerpoContrato').show();
+    }else
+    {
+      $("#cuerpoContrato").hide();     
+    }
+  }
+})
+}
+
+

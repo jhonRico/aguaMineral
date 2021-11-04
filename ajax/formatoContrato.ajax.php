@@ -67,6 +67,11 @@ class   AjaxFormatoContrato
         }
         echo  json_encode ($respuesta);
     }
+    public static function ajaxConsultarFormatoContratoCliente($id)
+    {
+        $respuesta = ControladorFormatoContrato::ctrlConsultarFormatoContratoCliente($id);
+        echo  json_encode ($respuesta);
+    }
 }
 
 
@@ -196,6 +201,12 @@ if(isset($_POST["nombreContratoAmbos"]))
     $idBotellon = $_POST['idBotellon'];
     $allStates = new AjaxFormatoContrato();
     $allStates->ajaxRegistrarContratoAmbos($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idEstante,$idBotellon);
+}
+if(isset($_POST["idParaConsultarFormatoContratoCliente"]))
+{  
+    $id = $_POST["idParaConsultarFormatoContratoCliente"];
+    $allStates = new AjaxFormatoContrato();
+    $allStates->ajaxConsultarFormatoContratoCliente($id);
 }
 
 

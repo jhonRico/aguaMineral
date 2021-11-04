@@ -1,6 +1,14 @@
 <?php 
-	$url = Ruta::ctrlRuta();   
+  $url = Ruta::ctrlRuta(); 
+  $respuesta = ControladorRegistroAdminGeneral::consultarTodoRegBD("sucursal"); 
+  $tabla = "serialproducto";
+  $resultadoConsultaSerial = ControladorFormatoContrato::ctrlConsultarSerial($tabla);
+  $array = $resultadoConsultaSerial;
 ?>
+
+<input type="hidden" value= "<?php echo $array['idSerialProducto']; ?>" id="serial"> 
+<input type="hidden" value= "<?php echo $array['fechaCreacion']; ?>" id="fechaProducto">  
+
 <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
@@ -158,6 +166,45 @@
       <div class="modal-footer pie">
         <button type="button" class="btn btn-secondary cerrarModalDevolucion">Cerrar</button>
         <a href="javascript:imprimirContrato()"><button class="btn btn-primary" type="button">Imprimir</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg bg-white" id="modalDevolucion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg w-100 h-100">
+    <div class="bg-white modal-content border-0">
+      <?php 
+      date_default_timezone_set("America/Argentina/Buenos_Aires");
+                          //Dia-Mes-A�o Hora:Minutos:Segundos
+      $fecha = date("d-m-Y H:i:s");
+      echo '<div id="content"><div id="cuerpoModalDevolucion"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div></div>
+
+      <div id="elementH"></div>';
+      ?>
+      <div class="modal-footer pie">
+        <button type="button" class="btn btn-secondary cerrarModalDevolucion">Cerrar</button>
+        <a href="javascript:imprimirContrato()"><button class="btn btn-primary" type="button">Imprimir</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg bg-white" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg w-100 h-100">
+    <div class="bg-white modal-content border-0">
+      <?php 
+      date_default_timezone_set("America/Argentina/Buenos_Aires");
+                          //Dia-Mes-A�o Hora:Minutos:Segundos
+      $fecha = date("d-m-Y H:i:s");
+      echo '<div id="content"><div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div></div>
+
+<div id="elementH"></div>';
+      ?>
+      <div class="modal-footer pie">
+        <button type="button" class="btn btn-secondary cerrar">Cerrar</button>
+        <a href="javascript:imprimirContrato()" id="imprimirContrato"><button class="btn btn-primary" type="button">Imprimir</button></a>
+        <button class="btn btn-success" type="button" id="registrarContrato">Registrar</button>
       </div>
     </div>
   </div>

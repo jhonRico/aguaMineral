@@ -110,5 +110,10 @@ class ControladorFormatoContrato
         $respuesta = ModeloFormatoContrato::mdlRegistrarContratoAmbos($tabla,$tabla2,$tabla3,$nombre,$idTipoUsuario,$apellido,$cedula,$estadoCliente,$municipioCliente,$ciudadCliente,$zonaCliente,$sectorCliente,$direccionCliente,$comercio,$telefono,$estadoComercio,$municipioComercio,$ciudadComercio,$zonaComercio,$sectorComercio,$direccionComercio,$cantidadEstantes,$idTipoContrato,$cantidadBotellones,$sucursal,$capacidadEstantes,$capacidadBotellon,$idEstante,$idBotellon,$fecha);
         return $respuesta;
     }
+        static public function ctrlConsultarFormatoContratoCliente($id)
+    {
+        $respuesta = ModeloFormatoContrato::mdlConsultarFormatoContratoCliente($id);
+        return $respuesta;
+    }
 
 }

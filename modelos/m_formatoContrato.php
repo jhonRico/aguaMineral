@@ -584,6 +584,17 @@ static public function mdlRegistrarContratoAmbos($tabla,$tabla2,$tabla3,$nombre,
         }
     }
 }
+public static function mdlConsultarFormatoContratoCliente($id)
+{
+    $pdo = Conexion::conectar();
+    $stmt = $pdo->prepare("SELECT * FROM contrato c INNER JOIN tipocontrato tc ON c.TipoContrato_idTipoContrato = tc.idTipoContrato INNER JOIN producto_has_contrato pc ON c.idContrato  = pc.Contrato_idContrato INNER JOIN producto pd ON pc.Producto_idProducto = pd.idProducto INNER JOIN tipoproducto t ON pd.TipoProducto_idTipoProducto = t.idTipoProducto INNER JOIN persona p ON c.Persona_idPersona = p.idPersona INNER JOIN comercios co ON p.idPersona = co.Persona_idPersona INNER JOIN sector s ON co.Sector_idSector = s.idSector INNER JOIN parroquia prq ON s.Parroquia_idParroquia = prq.idParroquia INNER JOIN ciudad cudad ON prq.Ciudad_idCiudad  = cudad.idCiudad INNER JOIN municipio mcipio ON cudad.Municipio_idMunicipio = mcipio.idMunicipio  WHERE c.idContrato = :id"); 
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+    $stmt = null;
+}
+
 
 }
 

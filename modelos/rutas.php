@@ -3,7 +3,7 @@ class Ruta{
 
     /**ruta lado del cliente */
     public static function ctrlRuta(){
-        return "http://192.168.1.21/aguaMineral/";
+        return "http://localhost/aguaMineral/";
     }
 
     /**ruta lado del Servidor */

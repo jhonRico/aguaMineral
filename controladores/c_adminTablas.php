@@ -209,6 +209,11 @@ class ControladorRegistroAdminGeneral
         $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTablaAtributoEntero($tabla,$atributo,$valor);
         return $respuesta;
     }
+    public static function ctrlConsultarTablaAtributoEnteroV($tabla,$atributo,$valor)
+    {
+        $respuesta = ModeloRegistroAdminGeneral::mdlConsultarTablaAtributoEnteroV($tabla,$atributo,$valor);
+        return $respuesta;
+    }
     public static function ctrlDevolverContrato($tabla,$idContratoDevolucion,$cantidad,$cantidad2,$capacidad,$capacidad2)
     {
         $estadoAModificar = 'D';

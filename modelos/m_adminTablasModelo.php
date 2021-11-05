@@ -346,6 +346,15 @@ require_once "conexion.php";
         $stmt->close();
         $stmt = null;
     }
+        public static function mdlConsultarTablaAtributoEnteroV($tabla,$atributo,$valor)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $atributo = :valor");
+        $stmt->bindParam(":valor", $valor, PDO::PARAM_INT);
+        $stmt -> execute();
+        return  $stmt ->fetch();
+        $stmt->close();
+        $stmt = null;
+    }
     public static function consultarCantidadProducto($tabla,$idProducto)
     {
         $stmt = Conexion::conectar()->prepare("SELECT cantidadProductos FROM $tabla t INNER JOIN producto_has_contrato pc ON t.idContrato = pc.Contrato_idContrato INNER JOIN producto p ON p.idProducto = pc.Producto_idProducto WHERE p.idProducto = :id");

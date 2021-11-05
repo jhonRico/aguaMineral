@@ -171,12 +171,9 @@
   <div class="modal-dialog modal-lg w-100 h-100">
     <div class="bg-white modal-content border-0">
       <?php 
-      date_default_timezone_set("America/Argentina/Buenos_Aires");
-                          //Dia-Mes-A�o Hora:Minutos:Segundos
-      $fecha = date("d-m-Y H:i:s");
-      echo '<div id="content"><div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal">'.fechaCastellano($fecha).'</h></div></div>
+      echo '<div id="content"><div id="cuerpoContrato"></div><div class="estiloDiv"><h class="justificadoTotal"></h></div></div>
 
-<div id="elementH"></div>';
+          <div id="elementH"></div>';
       ?>
       <div class="modal-footer pie">
         <button type="button" class="btn btn-secondary cerrar">Cerrar</button>

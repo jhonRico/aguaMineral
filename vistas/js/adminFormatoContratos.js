@@ -13,6 +13,7 @@ $(document).ready(function(){
 	}
 });
 var rutaOculta = $("#rutaOculta").val();
+var retornaUnValor = "0";
 $("#sucursalContrato").change(function(){
 	consultarTodosContratos();
 });
@@ -714,7 +715,8 @@ function devolverContrato(id,cantidad,cantidad2,capacidad,capacidad2)
 						$("#reporte").modal("hide");
 						consultarContrato();
 						consultarTodosContratos();
-						consultarFormatoContratoDevolucion('Recibo');
+						//var capacidadEstanteValue =  returnCapacidad(capacidad);	
+						consultarFormatoContratoDevolucion('Recibo',capacidad);
 						$("#modalDevolucion").modal("show");
 					}
 
@@ -792,8 +794,10 @@ function consultarTodosContratos()
 	})
 }
 
-function consultarFormatoContratoDevolucion(parametro)
+function consultarFormatoContratoDevolucion(parametro,capacidad)
 {
+  returnCapacidad(capacidad);
+  
   var nombreCliente = $("#cliente").text();
   var cedulaCliente = $("#cedula").text();
   var cantidadEstante = $("#cantidadEstante").text();
@@ -834,7 +838,8 @@ function consultarFormatoContratoDevolucion(parametro)
               result = result.replace("cedulaCliente", cedulaCliente);
               result = result.replace("cantidadEstante", cantidadEstante);   
               result = result.replace("cantidadBotellones", cantidadBotellones);  
-              result = result.replace("fechaSistema", fecha);    
+              result = result.replace("fechaSistema", fecha);  
+              result = result.replace("capacidadEstante", retornaUnValor);    
    
               plantilla2 += result;
         }
@@ -849,7 +854,52 @@ function consultarFormatoContratoDevolucion(parametro)
 })
 }
 
+//------------------------------------------------------------------------------------
+  function returnCapacidad(capacidad){
+  	
+  	
 
+  	var datos = new FormData();
+    datos.append("capacidadContrato", capacidad);
+
+		  let plantilla2 = " ";
+		  let obj
+		  $.ajax({
+					    url:rutaOculta+"ajax/bitacora.ajax.php",
+					    method:"POST",
+					    data: datos, 
+					    cache: false,
+					    contentType: false,
+					    processData: false,
+					    async:false,
+					    success: function(respuesta3)
+					    {    
+					    	 
+						     if(respuesta3.length >10)
+						     {        
+								      respuesta3 =respuesta3.replace("[","");
+								      respuesta3 =respuesta3.replace("]","");
+								      var auxSplit2 = respuesta3.split("},");
+								     
+								      for(var i=0;i<auxSplit2.length;i++)
+								      {
+									        if(!auxSplit2[i].includes("}"))
+									        {
+									          auxSplit2[i] = auxSplit2[i]+"}";
+									        }
+									        var res2 = JSON.parse(auxSplit2[i]);
+									        retornaUnValor = res2.capacidadProducto;
+								      }
+
+						    }else{
+						             retornaUnValor = "0";
+						    }
+					   }	
+		        })
+
+  	return retornaUnValor;
+  }
+//------------------------------------------------------------------------------------
 $(".cerrarModalDevolucion").click(function(){
 	$("#modalDevolucion").modal("hide");
 });
@@ -893,7 +943,8 @@ function mostrarModalContratoCliente(id)
 					var capacidadEstante = res2.capacidadProd;
 					var cantidadBotellon = res2.cantidadProd_2;
 					var capacidadBotellon = res2.capacidadProd_2;
-					consultarFormatoContratoCliente(res2.nombre,nombrePersona,municipio,cedula,comercio,direccion,telComercio,cantidadEstante,capacidadEstante,cantidadBotellon,capacidadBotellon)
+					var fechaContrato = res2.fechaContrato;
+					consultarFormatoContratoCliente(res2.nombre,nombrePersona,municipio,cedula,comercio,direccion,telComercio,cantidadEstante,capacidadEstante,cantidadBotellon,capacidadBotellon,fechaContrato)
 					$("#modal2").modal("show");
 			}
 		}
@@ -902,7 +953,7 @@ function mostrarModalContratoCliente(id)
 }
 
 
-function consultarFormatoContratoCliente(parametro,nombrePersona,municipio,cedula,comercio,direccion,telComercio,cantidadEstante,capacidadEstante,cantidadBotellon,capacidadBotellon)
+function consultarFormatoContratoCliente(parametro,nombrePersona,municipio,cedula,comercio,direccion,telComercio,cantidadEstante,capacidadEstante,cantidadBotellon,capacidadBotellon,fechaContrato)
 {
   var datos = new FormData();
   datos.append("parametro", parametro);
@@ -945,7 +996,8 @@ function consultarFormatoContratoCliente(parametro,nombrePersona,municipio,cedul
               result = result.replaceAll("cantidadEstante",cantidadEstante);
               if (result.includes("cantidadBotellones")){result = result.replaceAll("cantidadBotellones",capacidadEstante);}
               if (result.includes("cantidadBotellon")){result = result.replaceAll("cantidadBotellon",cantidadBotellon);}
-              result = result.replaceAll("codigoProducto",fecha);  
+              $(".justificadoTotal").html(`<b>Fecha de creación del contrato: ${fechaContrato}<b>`);
+              $(".justificadoTotal").show();
               result = result.replaceAll("fechaConstruccion",$('#fechaProducto').val());        
               plantilla2 += result;
         }

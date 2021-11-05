@@ -6,7 +6,7 @@
 <div class="container mt-3 fs-5 ms-5">
         <nav aria-label="breadcrumb" class="ms-5">
           <ol class="breadcrumb" class="ms-5">
-            <li class="breadcrumb-item"><a href="<?php echo $url;?>adminPersonas" class="link-primary">Administración</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $url;?>adminPersonas" class="link-primary">Administración de personas</a></li>
             <li class="breadcrumb-item active" aria-current="page" class="">Administración Clientes</li>
           </ol>
         </nav>
